@@ -130,6 +130,41 @@
     </svg>
   </a>
 
+  <!-- Botón flotante de Calculadora -->
+  <button type="button"
+          class="calc-float"
+          id="calcFloatBtn"
+          data-cursor="hover"
+          aria-label="Abrir calculadora"
+          title="Calculadora">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <rect x="4" y="2" width="16" height="20" rx="2"/>
+      <line x1="8" y1="6" x2="16" y2="6"/>
+      <line x1="8" y1="11" x2="8" y2="11"/>
+      <line x1="12" y1="11" x2="12" y2="11"/>
+      <line x1="16" y1="11" x2="16" y2="11"/>
+      <line x1="8" y1="15" x2="8" y2="15"/>
+      <line x1="12" y1="15" x2="12" y2="15"/>
+      <line x1="16" y1="15" x2="16" y2="15"/>
+      <line x1="8" y1="19" x2="16" y2="19"/>
+    </svg>
+  </button>
+
+  <!-- Botón flotante de Datos del dispositivo -->
+  <button type="button"
+          class="device-float"
+          id="deviceFloatBtn"
+          data-cursor="hover"
+          aria-label="Ver datos de tu dispositivo"
+          title="Datos de tu dispositivo">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <rect x="2" y="4" width="20" height="14" rx="2"/>
+      <line x1="8" y1="20" x2="16" y2="20"/>
+      <line x1="12" y1="18" x2="12" y2="20"/>
+      <circle cx="12" cy="11" r="3"/>
+    </svg>
+  </button>
+
   <!-- Botón flotante de Jira Service Management -->
   <button type="button"
           class="jira-float"
@@ -141,6 +176,89 @@
       <path d="M11.571 11.513H0a5.218 5.218 0 0 0 5.232 5.215h2.13v2.057A5.215 5.215 0 0 0 12.575 24V12.518a1.005 1.005 0 0 0-1.005-1.005zm5.723-5.756H5.736a5.215 5.215 0 0 0 5.215 5.214h2.129v2.058a5.218 5.218 0 0 0 5.215 5.214V6.758a1.001 1.001 0 0 0-1.001-1.001zM23.013 0H11.455a5.215 5.215 0 0 0 5.215 5.215h2.129v2.057A5.215 5.215 0 0 0 24 12.483V1.005A1.001 1.001 0 0 0 23.013 0z"/>
     </svg>
   </button>
+
+  <!-- Panel de datos del dispositivo -->
+  <div class="widget-panel" id="devicePanel" aria-hidden="true">
+    <div class="widget-header">
+      <h3>📡 Tu dispositivo</h3>
+      <button class="widget-close" data-close-widget aria-label="Cerrar">✕</button>
+    </div>
+    <div class="widget-body" id="deviceBody">
+      <div class="device-row">
+        <span class="device-label">🌐 IP</span>
+        <span class="device-value" id="dIP">Cargando…</span>
+      </div>
+      <div class="device-row">
+        <span class="device-label">🏢 ISP</span>
+        <span class="device-value" id="dISP">Cargando…</span>
+      </div>
+      <div class="device-row">
+        <span class="device-label">🏙️ Ciudad</span>
+        <span class="device-value" id="dCity">Cargando…</span>
+      </div>
+      <div class="device-row">
+        <span class="device-label">🌎 País</span>
+        <span class="device-value" id="dCountry">Cargando…</span>
+      </div>
+      <div class="device-row">
+        <span class="device-label">💻 Sistema</span>
+        <span class="device-value" id="dOS">—</span>
+      </div>
+      <div class="device-row">
+        <span class="device-label">🌐 Navegador</span>
+        <span class="device-value" id="dBrowser">—</span>
+      </div>
+      <div class="device-row">
+        <span class="device-label">🕐 Hora local</span>
+        <span class="device-value" id="dTime">—</span>
+      </div>
+      <button class="widget-refresh" id="deviceRefresh" data-cursor="hover">
+        🔄 Actualizar
+      </button>
+    </div>
+  </div>
+
+  <!-- Panel de calculadora -->
+  <div class="widget-panel calc-panel" id="calcPanel" aria-hidden="true">
+    <div class="widget-header">
+      <h3>🧮 Calculadora</h3>
+      <button class="widget-close" data-close-widget aria-label="Cerrar">✕</button>
+    </div>
+    <div class="widget-body">
+      <div class="calc-display">
+        <div class="calc-history" id="calcHistory"></div>
+        <div class="calc-current" id="calcDisplay">0</div>
+      </div>
+      <div class="calc-grid">
+        <button class="calc-btn calc-fn" data-calc="clear">C</button>
+        <button class="calc-btn calc-fn" data-calc="sign">±</button>
+        <button class="calc-btn calc-fn" data-calc="percent">%</button>
+        <button class="calc-btn calc-op" data-calc="/">÷</button>
+
+        <button class="calc-btn" data-calc="7">7</button>
+        <button class="calc-btn" data-calc="8">8</button>
+        <button class="calc-btn" data-calc="9">9</button>
+        <button class="calc-btn calc-op" data-calc="*">×</button>
+
+        <button class="calc-btn" data-calc="4">4</button>
+        <button class="calc-btn" data-calc="5">5</button>
+        <button class="calc-btn" data-calc="6">6</button>
+        <button class="calc-btn calc-op" data-calc="-">−</button>
+
+        <button class="calc-btn" data-calc="1">1</button>
+        <button class="calc-btn" data-calc="2">2</button>
+        <button class="calc-btn" data-calc="3">3</button>
+        <button class="calc-btn calc-op" data-calc="+">+</button>
+
+        <button class="calc-btn calc-zero" data-calc="0">0</button>
+        <button class="calc-btn" data-calc=".">.</button>
+        <button class="calc-btn calc-equal" data-calc="=">=</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Overlay para cerrar paneles -->
+  <div class="widget-overlay" id="widgetOverlay" data-close-widget></div>
 
   <!-- Header -->
   <header class="header">
@@ -410,9 +528,8 @@
       </p>
     </div>
   </section>
-  <!-- ============================================
-       APP DESTACADA: SALDO
-       ============================================ -->
+
+  <!-- App destacada: Saldo -->
   <section class="featured-app" id="saldo">
     <div class="container">
       <h2 class="section-title">📱 App destacada</h2>
@@ -422,7 +539,6 @@
 
       <div class="featured-app-card">
         <div class="featured-app-visual">
-          <!-- Mockup del teléfono con el ícono de la app -->
           <div class="featured-app-phone">
             <div class="featured-app-phone-notch"></div>
             <div class="featured-app-phone-screen">
@@ -472,6 +588,7 @@
       </div>
     </div>
   </section>
+
   <!-- FAQ -->
   <section class="faq" id="faq">
     <div class="container">

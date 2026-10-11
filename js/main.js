@@ -598,7 +598,6 @@ document.addEventListener('DOMContentLoaded', function () {
   (function initHeroRadar() {
     const canvas = document.getElementById('heroRadar');
     if (!canvas) return;
-
     if (prefersReducedMotion) return;
     if (document.documentElement.classList.contains('low-power')) return;
 
@@ -658,7 +657,6 @@ document.addEventListener('DOMContentLoaded', function () {
       const cy = H / 2;
       const maxR = Math.max(W, H) * 0.6;
 
-      // Anillos concéntricos
       ctx.strokeStyle = colors.ring;
       ctx.lineWidth = 1;
       const ringCount = 5;
@@ -669,7 +667,6 @@ document.addEventListener('DOMContentLoaded', function () {
         ctx.stroke();
       }
 
-      // Barrido cónico tipo radar
       const sweepAngle = (t * 0.008) % (Math.PI * 2);
       if (ctx.createConicGradient) {
         const grad = ctx.createConicGradient(sweepAngle, cx, cy);
@@ -682,7 +679,6 @@ document.addEventListener('DOMContentLoaded', function () {
         ctx.fill();
       }
 
-      // Líneas entre partículas cercanas
       const linkDist = 150;
       for (let i = 0; i < particles.length; i++) {
         const p1 = particles[i];
@@ -703,7 +699,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       }
 
-      // Partículas
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
         p.x += p.vx;
@@ -713,7 +708,6 @@ document.addEventListener('DOMContentLoaded', function () {
         if (p.y < 0) p.y = H;
         if (p.y > H) p.y = 0;
 
-        // Interacción con mouse
         const dx = mouse.x - p.x;
         const dy = mouse.y - p.y;
         const distM = Math.sqrt(dx * dx + dy * dy);
@@ -727,12 +721,10 @@ document.addEventListener('DOMContentLoaded', function () {
           ctx.stroke();
         }
 
-        // Pulso
         p.phase += 0.025;
         const pulse = 1 + Math.sin(p.phase) * 0.35;
         const r = Math.max(0.6, p.baseR * pulse);
 
-        // Glow
         ctx.shadowBlur = 10;
         ctx.shadowColor = colors.glow;
         ctx.fillStyle = colors.dot;
@@ -740,7 +732,6 @@ document.addEventListener('DOMContentLoaded', function () {
         ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
         ctx.fill();
 
-        // Núcleo interior
         ctx.shadowBlur = 0;
         ctx.fillStyle = colors.dotCore;
         ctx.beginPath();
@@ -770,7 +761,6 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
 
-    // Pausar cuando no está visible
     if ('IntersectionObserver' in window) {
       const io = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
@@ -780,31 +770,26 @@ document.addEventListener('DOMContentLoaded', function () {
       io.observe(canvas);
     }
   })();
-    /* ============================================
-     14. CURSOR PERSONALIZADO (Apple style)
+
+  /* ============================================
+     14. CURSOR PERSONALIZADO
      ============================================ */
   (function initCustomCursor() {
     const cursorRing = document.getElementById('cursorRing');
     const cursorDot = document.getElementById('cursorDot');
     if (!cursorRing || !cursorDot) return;
 
-    // Desactivar en móviles/táctiles
     const isTouch = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
     if (isTouch) return;
-
     if (prefersReducedMotion) return;
     if (document.documentElement.classList.contains('low-power')) return;
 
-    let mouseX = -100;
-    let mouseY = -100;
-    let ringX = -100;
-    let ringY = -100;
-    let dotX = -100;
-    let dotY = -100;
+    let mouseX = -100, mouseY = -100;
+    let ringX = -100, ringY = -100;
+    let dotX = -100, dotY = -100;
     let rafId = null;
     let isReady = false;
 
-    // Velocidades: anillo va más lento (suavidad Apple), dot va casi instantáneo
     const RING_LERP = 0.14;
     const DOT_LERP = 0.55;
 
@@ -812,7 +797,6 @@ document.addEventListener('DOMContentLoaded', function () {
       mouseX = e.clientX;
       mouseY = e.clientY;
       if (!isReady) {
-        // Posicionar directo la primera vez, sin animación
         ringX = dotX = mouseX;
         ringY = dotY = mouseY;
         isReady = true;
@@ -820,21 +804,10 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
 
-    function onMouseLeaveWindow() {
-      document.body.classList.add('cursor-leaving');
-    }
-
-    function onMouseEnterWindow() {
-      document.body.classList.remove('cursor-leaving');
-    }
-
-    function onMouseDown() {
-      document.body.classList.add('cursor-down');
-    }
-
-    function onMouseUp() {
-      document.body.classList.remove('cursor-down');
-    }
+    function onMouseLeaveWindow() { document.body.classList.add('cursor-leaving'); }
+    function onMouseEnterWindow() { document.body.classList.remove('cursor-leaving'); }
+    function onMouseDown() { document.body.classList.add('cursor-down'); }
+    function onMouseUp() { document.body.classList.remove('cursor-down'); }
 
     function animate() {
       ringX += (mouseX - ringX) * RING_LERP;
@@ -848,36 +821,24 @@ document.addEventListener('DOMContentLoaded', function () {
       rafId = requestAnimationFrame(animate);
     }
 
-    // Listeners
     window.addEventListener('mousemove', onMouseMove, { passive: true });
     window.addEventListener('mousedown', onMouseDown);
     window.addEventListener('mouseup', onMouseUp);
     document.addEventListener('mouseleave', onMouseLeaveWindow);
     document.addEventListener('mouseenter', onMouseEnterWindow);
 
-    // Estados hover / view
     document.querySelectorAll('[data-cursor="hover"]').forEach(function (el) {
-      el.addEventListener('mouseenter', function () {
-        document.body.classList.add('cursor-hover');
-      });
-      el.addEventListener('mouseleave', function () {
-        document.body.classList.remove('cursor-hover');
-      });
+      el.addEventListener('mouseenter', function () { document.body.classList.add('cursor-hover'); });
+      el.addEventListener('mouseleave', function () { document.body.classList.remove('cursor-hover'); });
     });
 
     document.querySelectorAll('[data-cursor="view"]').forEach(function (el) {
-      el.addEventListener('mouseenter', function () {
-        document.body.classList.add('cursor-view');
-      });
-      el.addEventListener('mouseleave', function () {
-        document.body.classList.remove('cursor-view');
-      });
+      el.addEventListener('mouseenter', function () { document.body.classList.add('cursor-view'); });
+      el.addEventListener('mouseleave', function () { document.body.classList.remove('cursor-view'); });
     });
 
-    // Arrancar el bucle
     animate();
 
-    // Pausar cuando la pestaña no está visible (performance)
     document.addEventListener('visibilitychange', function () {
       if (document.hidden) {
         if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
@@ -885,6 +846,324 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!rafId) animate();
       }
     });
+  })();
+
+  /* ============================================
+     15. WIDGET: PANELES (Datos + Calculadora)
+     ============================================ */
+  (function initWidgets() {
+    const overlay = document.getElementById('widgetOverlay');
+    const devicePanel = document.getElementById('devicePanel');
+    const calcPanel = document.getElementById('calcPanel');
+    const deviceBtn = document.getElementById('deviceFloatBtn');
+    const calcBtn = document.getElementById('calcFloatBtn');
+
+    let activePanel = null;
+
+    function openPanel(panel) {
+      if (!panel) return;
+      if (activePanel && activePanel !== panel) {
+        activePanel.classList.remove('open');
+        activePanel.setAttribute('aria-hidden', 'true');
+      }
+      panel.classList.add('open');
+      panel.setAttribute('aria-hidden', 'false');
+      activePanel = panel;
+      if (overlay) overlay.classList.add('open');
+      document.body.classList.add('widget-open');
+
+      // Cargar datos del dispositivo al abrir
+      if (panel === devicePanel) loadDeviceData();
+    }
+
+    function closePanels() {
+      if (activePanel) {
+        activePanel.classList.remove('open');
+        activePanel.setAttribute('aria-hidden', 'true');
+        activePanel = null;
+      }
+      if (overlay) overlay.classList.remove('open');
+      document.body.classList.remove('widget-open');
+    }
+
+    if (deviceBtn) {
+      deviceBtn.addEventListener('click', function () {
+        if (devicePanel.classList.contains('open')) closePanels();
+        else openPanel(devicePanel);
+      });
+    }
+
+    if (calcBtn) {
+      calcBtn.addEventListener('click', function () {
+        if (calcPanel.classList.contains('open')) closePanels();
+        else openPanel(calcPanel);
+      });
+    }
+
+    if (overlay) overlay.addEventListener('click', closePanels);
+    document.querySelectorAll('[data-close-widget]').forEach(function (el) {
+      el.addEventListener('click', closePanels);
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && activePanel) closePanels();
+    });
+
+    /* --------- Datos del dispositivo --------- */
+    const dIP = document.getElementById('dIP');
+    const dISP = document.getElementById('dISP');
+    const dCity = document.getElementById('dCity');
+    const dCountry = document.getElementById('dCountry');
+    const dOS = document.getElementById('dOS');
+    const dBrowser = document.getElementById('dBrowser');
+    const dTime = document.getElementById('dTime');
+    const deviceRefresh = document.getElementById('deviceRefresh');
+
+    function detectOS() {
+      const ua = navigator.userAgent;
+      if (/Windows NT 10/.test(ua)) return 'Windows 10/11';
+      if (/Windows NT/.test(ua)) return 'Windows';
+      if (/Mac OS X/.test(ua)) return 'macOS';
+      if (/Android/.test(ua)) return 'Android';
+      if (/iPhone|iPad|iPod/.test(ua)) return 'iOS';
+      if (/Linux/.test(ua)) return 'Linux';
+      return 'Desconocido';
+    }
+
+    function detectBrowser() {
+      const ua = navigator.userAgent;
+      if (/Edg\//.test(ua)) return 'Edge';
+      if (/OPR\/|Opera/.test(ua)) return 'Opera';
+      if (/Chrome\//.test(ua) && !/Edg|OPR/.test(ua)) return 'Chrome';
+      if (/Safari\//.test(ua) && !/Chrome/.test(ua)) return 'Safari';
+      if (/Firefox\//.test(ua)) return 'Firefox';
+      return 'Desconocido';
+    }
+
+    function updateTime() {
+      if (!dTime) return;
+      const now = new Date();
+      const hh = String(now.getHours()).padStart(2, '0');
+      const mm = String(now.getMinutes()).padStart(2, '0');
+      dTime.textContent = hh + ':' + mm;
+    }
+
+    function loadDeviceData() {
+      if (dOS) dOS.textContent = detectOS();
+      if (dBrowser) dBrowser.textContent = detectBrowser();
+      updateTime();
+
+      // IP y geolocalización
+      if (dIP) dIP.textContent = 'Cargando…';
+      if (dISP) dISP.textContent = 'Cargando…';
+      if (dCity) dCity.textContent = 'Cargando…';
+      if (dCountry) dCountry.textContent = 'Cargando…';
+
+      fetch('https://ipapi.co/json/')
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          if (dIP) dIP.textContent = data.ip || '—';
+          if (dISP) dISP.textContent = data.org || '—';
+          if (dCity) dCity.textContent = data.city || '—';
+          if (dCountry) dCountry.textContent = data.country_name || '—';
+        })
+        .catch(function () {
+          if (dIP) dIP.textContent = 'No disponible';
+          if (dISP) dISP.textContent = 'No disponible';
+          if (dCity) dCity.textContent = 'No disponible';
+          if (dCountry) dCountry.textContent = 'No disponible';
+        });
+    }
+
+    if (deviceRefresh) {
+      deviceRefresh.addEventListener('click', loadDeviceData);
+    }
+
+    // Actualizar la hora cada minuto si el panel está abierto
+    setInterval(function () {
+      if (devicePanel && devicePanel.classList.contains('open')) updateTime();
+    }, 60000);
+
+    /* --------- Calculadora --------- */
+    const calcDisplay = document.getElementById('calcDisplay');
+    const calcHistory = document.getElementById('calcHistory');
+    const calcButtons = document.querySelectorAll('.calc-btn');
+
+    let currentInput = '0';
+    let previousValue = null;
+    let currentOperator = null;
+    let waitingForOperand = false;
+
+    function updateDisplay() {
+      if (!calcDisplay) return;
+      let displayValue = currentInput;
+      if (displayValue.length > 12) {
+        const num = parseFloat(displayValue);
+        if (!isNaN(num)) displayValue = num.toExponential(6);
+      }
+      calcDisplay.textContent = displayValue;
+
+      if (calcHistory) {
+        calcHistory.textContent = previousValue !== null && currentOperator !== null
+          ? previousValue + ' ' + currentOperator
+          : '';
+      }
+    }
+
+    function inputDigit(digit) {
+      if (waitingForOperand) {
+        currentInput = digit;
+        waitingForOperand = false;
+      } else {
+        currentInput = currentInput === '0' ? digit : currentInput + digit;
+      }
+    }
+
+    function inputDecimal() {
+      if (waitingForOperand) {
+        currentInput = '0.';
+        waitingForOperand = false;
+        return;
+      }
+      if (!currentInput.includes('.')) currentInput += '.';
+    }
+
+    function clearAll() {
+      currentInput = '0';
+      previousValue = null;
+      currentOperator = null;
+      waitingForOperand = false;
+    }
+
+    function toggleSign() {
+      if (currentInput === '0') return;
+      currentInput = currentInput.startsWith('-')
+        ? currentInput.slice(1)
+        : '-' + currentInput;
+    }
+
+    function applyPercent() {
+      const value = parseFloat(currentInput);
+      if (isNaN(value)) return;
+      currentInput = String(value / 100);
+    }
+
+    function performOperation() {
+      const inputValue = parseFloat(currentInput);
+      if (isNaN(inputValue)) return null;
+      if (previousValue === null) return inputValue;
+
+      let result = previousValue;
+      switch (currentOperator) {
+        case '+': result += inputValue; break;
+        case '-': result -= inputValue; break;
+        case '*': result *= inputValue; break;
+        case '/':
+          if (inputValue === 0) return 'Error';
+          result /= inputValue;
+          break;
+      }
+      return Math.round(result * 1e10) / 1e10;
+    }
+
+    function handleOperator(op) {
+      const inputValue = parseFloat(currentInput);
+      if (currentOperator && !waitingForOperand) {
+        const result = performOperation();
+        if (result === 'Error') {
+          currentInput = 'Error';
+          previousValue = null;
+          currentOperator = null;
+          waitingForOperand = true;
+          updateDisplay();
+          return;
+        }
+        currentInput = String(result);
+        previousValue = result;
+      } else {
+        previousValue = inputValue;
+      }
+      currentOperator = op;
+      waitingForOperand = true;
+      updateDisplay();
+    }
+
+    function handleEquals() {
+      if (currentOperator === null) return;
+      const result = performOperation();
+      if (result === 'Error') {
+        currentInput = 'Error';
+        previousValue = null;
+        currentOperator = null;
+        waitingForOperand = true;
+        updateDisplay();
+        return;
+      }
+      currentInput = String(result);
+      previousValue = null;
+      currentOperator = null;
+      waitingForOperand = true;
+      updateDisplay();
+    }
+
+    calcButtons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        const action = btn.dataset.calc;
+        if (currentInput === 'Error' && action !== 'clear') clearAll();
+
+        if (/^[0-9]$/.test(action)) {
+          inputDigit(action);
+        } else {
+          switch (action) {
+            case '.': inputDecimal(); break;
+            case 'clear': clearAll(); break;
+            case 'sign': toggleSign(); break;
+            case 'percent': applyPercent(); break;
+            case '+':
+            case '-':
+            case '*':
+            case '/': handleOperator(action); break;
+            case '=': handleEquals(); return;
+          }
+        }
+        updateDisplay();
+      });
+    });
+
+    // Soporte de teclado
+    document.addEventListener('keydown', function (e) {
+      if (!calcPanel || !calcPanel.classList.contains('open')) return;
+
+      const key = e.key;
+      if (/^[0-9]$/.test(key)) {
+        if (currentInput === 'Error') clearAll();
+        inputDigit(key);
+        updateDisplay();
+      } else if (key === '.' || key === ',') {
+        if (currentInput === 'Error') clearAll();
+        inputDecimal();
+        updateDisplay();
+      } else if (key === '+' || key === '-' || key === '*' || key === '/') {
+        if (currentInput === 'Error') clearAll();
+        handleOperator(key);
+      } else if (key === 'Enter' || key === '=') {
+        e.preventDefault();
+        handleEquals();
+      } else if (key === 'Escape' || key === 'c' || key === 'C') {
+        clearAll();
+        updateDisplay();
+      } else if (key === 'Backspace') {
+        if (currentInput === 'Error') { clearAll(); }
+        else if (currentInput.length <= 1 || (currentInput.length === 2 && currentInput.startsWith('-'))) {
+          currentInput = '0';
+        } else {
+          currentInput = currentInput.slice(0, -1);
+        }
+        updateDisplay();
+      }
+    });
+
+    updateDisplay();
   })();
 
 });

@@ -8,7 +8,7 @@
 }
 
 /* ============================================
-   VARIABLES — MODO CLARO (futurista azul/gris)
+   VARIABLES — MODO CLARO
    ============================================ */
 :root {
   --md-primary: #0B1220;
@@ -60,8 +60,6 @@
   --radius-full: 999px;
 
   --max-width: 1100px;
-
-  /* Curvas de easing tipo Apple */
   --transition: cubic-bezier(0.4, 0, 0.2, 1);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
@@ -72,9 +70,7 @@
   --whatsapp-pulse: pulseScale 3s ease-in-out infinite;
 }
 
-/* ============================================
-   VARIABLES — MODO OSCURO (futurista)
-   ============================================ */
+/* MODO OSCURO */
 [data-theme="dark"] {
   --md-primary: #E6ECF5;
   --md-primary-container: #1A2740;
@@ -143,9 +139,9 @@ body {
 }
 
 body.modal-open,
-body.nav-open { overflow: hidden; }
+body.nav-open,
+body.widget-open { overflow: hidden; }
 
-/* Revertir cursor nativo en móvil y dispositivos táctiles */
 @media (hover: none) and (pointer: coarse) {
   body { cursor: auto; }
 }
@@ -199,7 +195,7 @@ body::after {
 }
 
 /* ============================================
-   CURSOR PERSONALIZADO (estilo Apple)
+   CURSOR PERSONALIZADO
    ============================================ */
 .cursor-ring {
   position: fixed;
@@ -246,11 +242,8 @@ body::after {
 }
 
 body.cursor-ready .cursor-ring,
-body.cursor-ready .cursor-dot {
-  opacity: 1;
-}
+body.cursor-ready .cursor-dot { opacity: 1; }
 
-/* Estado hover: sobre botones, links, etc. */
 body.cursor-hover .cursor-ring {
   width: 56px;
   height: 56px;
@@ -268,7 +261,6 @@ body.cursor-hover .cursor-dot {
   background: var(--color-accent-glow);
 }
 
-/* Estado view: sobre tarjetas de servicio / proyectos */
 body.cursor-view .cursor-ring {
   width: 84px;
   height: 84px;
@@ -293,14 +285,10 @@ body.cursor-view .cursor-ring::after {
   letter-spacing: 0.15em;
   color: #ffffff;
   opacity: 1;
-  transition: opacity 0.3s var(--ease-apple);
 }
 
-body.cursor-view .cursor-dot {
-  opacity: 0;
-}
+body.cursor-view .cursor-dot { opacity: 0; }
 
-/* Estado pressed */
 body.cursor-down .cursor-ring {
   width: 30px;
   height: 30px;
@@ -311,19 +299,12 @@ body.cursor-down .cursor-dot {
   height: 8px;
 }
 
-/* Ocultar cursor cuando sale de la ventana */
 body.cursor-leaving .cursor-ring,
-body.cursor-leaving .cursor-dot {
-  opacity: 0;
-}
+body.cursor-leaving .cursor-dot { opacity: 0; }
 
 /* ============================================
    KEYFRAMES
    ============================================ */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
 @keyframes floatY {
   0%, 100% { transform: translateY(0); }
   50%      { transform: translateY(-8px); }
@@ -335,10 +316,6 @@ body.cursor-leaving .cursor-dot {
 @keyframes gradientMove {
   0%   { background-position: 0% 50%; }
   100% { background-position: 100% 50%; }
-}
-@keyframes shimmer {
-  0%   { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
 }
 @keyframes glowPulse {
   0%, 100% { opacity: 0.4; }
@@ -370,7 +347,7 @@ body.cursor-leaving .cursor-dot {
 }
 
 /* ============================================
-   REVEAL ON SCROLL (con blur y escala — Apple style)
+   REVEAL ON SCROLL
    ============================================ */
 .reveal {
   opacity: 0;
@@ -397,111 +374,315 @@ body.cursor-leaving .cursor-dot {
 .reveal-delay-8 { transition-delay: 0.64s; }
 
 /* ============================================
-   WHATSAPP / JIRA FLOTANTES
+   BOTONES FLOTANTES
    ============================================ */
-.whatsapp-float {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  width: 60px;
-  height: 60px;
-  background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
-  color: #fff;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow:
-    0 8px 24px rgba(37,211,102,0.4),
-    0 4px 8px rgba(0,0,0,0.12),
-    inset 0 1px 1px rgba(255,255,255,0.3);
-  z-index: 9999;
-  text-decoration: none;
-  transition:
-    box-shadow 0.4s var(--ease-apple),
-    transform 0.4s var(--ease-apple);
-  animation: var(--whatsapp-pulse);
-  will-change: transform;
-  transform: translateZ(0);
-}
-.whatsapp-float::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  border: 2px solid #25d366;
-  pointer-events: none;
-  animation: ringExpand 3s ease-out infinite;
-}
-.whatsapp-float:hover {
-  box-shadow: 0 12px 32px rgba(37,211,102,0.55), 0 6px 12px rgba(0,0,0,0.18);
-  animation-play-state: paused;
-  transform: translateZ(0) scale(1.08);
-}
-.whatsapp-float:active { transform: translateZ(0) scale(0.95); }
-.whatsapp-float svg { width: 32px; height: 32px; display: block; position: relative; z-index: 1; }
-
+.whatsapp-float,
+.calc-float,
+.device-float,
 .jira-float {
   position: fixed;
-  bottom: 96px;
   right: 24px;
   width: 60px;
   height: 60px;
-  background: linear-gradient(135deg, #2563EB 0%, #1E3A8A 100%);
-  color: #fff;
   border: none;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: none;
-  box-shadow:
-    0 8px 24px rgba(37,99,235,0.45),
-    0 4px 8px rgba(0,0,0,0.12),
-    inset 0 1px 1px rgba(255,255,255,0.3);
-  z-index: 9998;
+  z-index: 9999;
   transition:
     box-shadow 0.4s var(--ease-apple),
     transform 0.4s var(--ease-apple);
-  animation: pulseScale 3s ease-in-out infinite;
   transform: translateZ(0);
   padding: 0;
   margin: 0;
   font: inherit;
+  animation: pulseScale 3s ease-in-out infinite;
 }
+
+.whatsapp-float { bottom: 24px; background: linear-gradient(135deg, #25d366 0%, #128c7e 100%); color: #fff; text-decoration: none; box-shadow: 0 8px 24px rgba(37,211,102,0.4), 0 4px 8px rgba(0,0,0,0.12), inset 0 1px 1px rgba(255,255,255,0.3); }
+.calc-float     { bottom: 96px;  background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%); color: #fff; box-shadow: 0 8px 24px rgba(124,58,237,0.45), 0 4px 8px rgba(0,0,0,0.12), inset 0 1px 1px rgba(255,255,255,0.3); }
+.device-float   { bottom: 168px; background: linear-gradient(135deg, #0891b2 0%, #155e75 100%); color: #fff; box-shadow: 0 8px 24px rgba(8,145,178,0.45), 0 4px 8px rgba(0,0,0,0.12), inset 0 1px 1px rgba(255,255,255,0.3); }
+.jira-float     { bottom: 240px; background: linear-gradient(135deg, #2563EB 0%, #1E3A8A 100%); color: #fff; box-shadow: 0 8px 24px rgba(37,99,235,0.45), 0 4px 8px rgba(0,0,0,0.12), inset 0 1px 1px rgba(255,255,255,0.3); }
+
+.whatsapp-float::before,
+.calc-float::before,
+.device-float::before,
 .jira-float::before {
   content: "";
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  border: 2px solid #2563EB;
   pointer-events: none;
   animation: ringExpand 3s ease-out infinite;
 }
-.jira-float:hover {
-  box-shadow: 0 12px 32px rgba(37,99,235,0.6), 0 6px 12px rgba(0,0,0,0.18);
-  animation-play-state: paused;
-  transform: translateZ(0) scale(1.08);
-}
+.whatsapp-float::before { border: 2px solid #25d366; }
+.calc-float::before     { border: 2px solid #7c3aed; }
+.device-float::before   { border: 2px solid #0891b2; }
+.jira-float::before     { border: 2px solid #2563EB; }
+
+.whatsapp-float:hover { box-shadow: 0 12px 32px rgba(37,211,102,0.55); animation-play-state: paused; transform: translateZ(0) scale(1.08); }
+.calc-float:hover     { box-shadow: 0 12px 32px rgba(124,58,237,0.6); animation-play-state: paused; transform: translateZ(0) scale(1.08); }
+.device-float:hover   { box-shadow: 0 12px 32px rgba(8,145,178,0.6); animation-play-state: paused; transform: translateZ(0) scale(1.08); }
+.jira-float:hover     { box-shadow: 0 12px 32px rgba(37,99,235,0.6); animation-play-state: paused; transform: translateZ(0) scale(1.08); }
+
+.whatsapp-float:active,
+.calc-float:active,
+.device-float:active,
 .jira-float:active { transform: translateZ(0) scale(0.95); }
-.jira-float svg { width: 30px; height: 30px; display: block; position: relative; z-index: 1; pointer-events: none; }
+
+.whatsapp-float svg { width: 32px; height: 32px; display: block; position: relative; z-index: 1; }
+.calc-float svg,
+.device-float svg   { width: 26px; height: 26px; display: block; position: relative; z-index: 1; pointer-events: none; }
+.jira-float svg     { width: 30px; height: 30px; display: block; position: relative; z-index: 1; pointer-events: none; }
 
 @media (hover: none) and (pointer: coarse) {
-  .whatsapp-float, .jira-float { cursor: pointer; }
+  .whatsapp-float, .calc-float, .device-float, .jira-float { cursor: pointer; }
 }
 
-#jsd-widget,
-iframe[title="Jira Service Management Widget"],
-iframe[id*="jsd"],
-iframe[src*="jsd-widget"] {
-  position: fixed !important;
-  bottom: -9999px !important;
-  right: -9999px !important;
-  width: 60px !important;
-  height: 60px !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-  z-index: -1 !important;
+/* ============================================
+   WIDGET PANELS (Datos + Calculadora)
+   ============================================ */
+.widget-panel {
+  position: fixed;
+  bottom: 24px;
+  right: 100px;
+  width: 340px;
+  max-width: calc(100vw - 120px);
+  max-height: calc(100vh - 48px);
+  background: var(--color-card-bg);
+  backdrop-filter: var(--acrylic-blur);
+  -webkit-backdrop-filter: var(--acrylic-blur);
+  border: 1px solid var(--acrylic-border);
+  border-radius: var(--radius-lg);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), var(--elev-4);
+  z-index: 9997;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px) scale(0.96);
+  transform-origin: bottom right;
+  transition:
+    opacity 0.35s var(--ease-apple),
+    transform 0.35s var(--ease-apple),
+    visibility 0.35s var(--ease-apple);
+}
+
+.widget-panel.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+.widget-panel::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 20%; right: 20%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(77,216,255,0.7), transparent);
+  pointer-events: none;
+}
+
+.widget-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.widget-header h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0;
+}
+
+.widget-close {
+  background: transparent;
+  border: none;
+  font-size: 1rem;
+  cursor: none;
+  color: var(--color-text-light);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s var(--ease-apple), color 0.3s var(--ease-apple), transform 0.3s var(--ease-apple);
+}
+.widget-close:hover {
+  background: var(--color-bg-alt);
+  color: var(--color-text);
+  transform: rotate(90deg);
+}
+
+.widget-body {
+  padding: 18px 20px;
+  overflow-y: auto;
+  flex-grow: 1;
+}
+
+/* Datos del dispositivo */
+.device-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  border-bottom: 1px solid var(--color-border);
+}
+.device-row:last-of-type { border-bottom: none; }
+
+.device-label {
+  color: var(--color-text-light);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.device-value {
+  color: var(--color-text);
+  font-weight: 600;
+  text-align: right;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 60%;
+}
+
+.widget-refresh {
+  margin-top: 14px;
+  width: 100%;
+  background: var(--acrylic-bg);
+  border: 1px solid var(--acrylic-border);
+  color: var(--color-text);
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 10px 16px;
+  border-radius: var(--radius-full);
+  cursor: none;
+  transition: background-color 0.3s var(--ease-apple), border-color 0.3s var(--ease-apple), transform 0.3s var(--ease-apple);
+}
+.widget-refresh:hover {
+  background: var(--md-secondary-container);
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+}
+
+/* Calculadora */
+.calc-panel { width: 320px; }
+
+.calc-display {
+  background: rgba(11,18,32,0.06);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  margin-bottom: 14px;
+  text-align: right;
+  overflow: hidden;
+}
+[data-theme="dark"] .calc-display {
+  background: rgba(0,0,0,0.25);
+}
+
+.calc-history {
+  font-size: 0.78rem;
+  color: var(--color-text-light);
+  min-height: 1em;
+  font-family: 'JetBrains Mono', monospace;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.calc-current {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  font-family: 'JetBrains Mono', monospace;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.calc-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.calc-btn {
+  aspect-ratio: 1 / 1;
+  background: var(--color-bg-alt);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--color-text);
+  cursor: none;
+  transition: background-color 0.2s var(--ease-apple), transform 0.15s var(--ease-apple), border-color 0.2s var(--ease-apple);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+.calc-btn:hover {
+  background: var(--md-secondary-container);
+  border-color: var(--color-accent);
+}
+.calc-btn:active { transform: scale(0.94); }
+
+.calc-fn {
+  background: rgba(11,18,32,0.08);
+  color: var(--color-text);
+  font-weight: 700;
+}
+[data-theme="dark"] .calc-fn { background: rgba(255,255,255,0.06); }
+
+.calc-op {
+  background: var(--md-secondary-container);
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+.calc-equal {
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-glow) 100%);
+  color: #fff;
+  border-color: var(--color-accent);
+  box-shadow: 0 4px 12px rgba(77,216,255,0.35);
+}
+.calc-equal:hover {
+  background: linear-gradient(135deg, var(--color-accent-glow) 0%, var(--color-accent) 100%);
+  box-shadow: 0 6px 18px rgba(77,216,255,0.5);
+}
+
+.calc-zero { grid-column: span 2; aspect-ratio: auto; }
+
+/* Overlay */
+.widget-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(11,18,32,0.45);
+  z-index: 9996;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s var(--ease-apple), visibility 0.3s var(--ease-apple);
+}
+.widget-overlay.open {
+  opacity: 1;
+  visibility: visible;
 }
 
 /* ============================================
@@ -524,8 +705,7 @@ iframe[src*="jsd-widget"] {
   content: "";
   position: absolute;
   bottom: -1px;
-  left: 15%;
-  right: 15%;
+  left: 15%; right: 15%;
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--color-accent-glow), transparent);
   opacity: 0.5;
@@ -561,24 +741,6 @@ iframe[src*="jsd-widget"] {
   transition: transform 0.5s var(--ease-apple);
 }
 .logo:hover { transform: scale(1.03); }
-.logo span {
-  color: var(--color-accent);
-  position: relative;
-  display: inline-block;
-}
-.logo span::after {
-  content: "";
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-glow));
-  border-radius: var(--radius-full);
-  transform-origin: center;
-  animation: logoPulse 3s ease-in-out infinite;
-  opacity: 0.8;
-}
 
 .nav { display: flex; align-items: center; flex-wrap: wrap; }
 .nav a {
@@ -650,7 +812,7 @@ iframe[src*="jsd-widget"] {
 }
 
 /* ============================================
-   HERO — con canvas radar
+   HERO
    ============================================ */
 .hero {
   padding: 100px 0 90px;
@@ -675,7 +837,6 @@ iframe[src*="jsd-widget"] {
   pointer-events: none;
   opacity: 0.95;
 }
-
 [data-theme="dark"] #heroRadar { opacity: 1; }
 
 .hero .container { position: relative; z-index: 2; }
@@ -711,7 +872,6 @@ iframe[src*="jsd-widget"] {
   animation: heroLineIn 1.1s var(--ease-apple) 0.35s forwards,
              heroGradient 8s ease-in-out infinite alternate;
 }
-
 [data-theme="dark"] .hero-line-accent {
   filter: drop-shadow(0 0 30px rgba(77,216,255,0.35));
 }
@@ -957,10 +1117,9 @@ section {
 }
 .modal.open { opacity: 1; visibility: visible; }
 .modal-overlay {
-  position: absolute; inset: 0;
-  background: rgba(11,18,32,0.6);
-  backdrop-filter: blur(12px) saturate(180%);
-  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  position: absolute;
+  inset: 0;
+  background: rgba(11,18,32,0.65);
 }
 .modal-box {
   position: relative;
@@ -1560,6 +1719,172 @@ section {
 }
 
 /* ============================================
+   APP DESTACADA: SALDO
+   ============================================ */
+.featured-app { background: transparent; }
+.featured-app-card {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 48px;
+  align-items: center;
+  background: var(--color-card-bg);
+  backdrop-filter: var(--acrylic-blur);
+  -webkit-backdrop-filter: var(--acrylic-blur);
+  border: 1px solid var(--acrylic-border);
+  border-radius: var(--radius-lg);
+  padding: 48px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), var(--elev-3);
+  max-width: 1000px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+.featured-app-card::before {
+  content: "";
+  position: absolute; top: 0; left: 20%; right: 20%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,184,212,0.7), transparent);
+}
+.featured-app-visual { display: flex; justify-content: center; align-items: center; }
+.featured-app-phone {
+  width: 220px; height: 440px;
+  background: var(--color-primary);
+  border-radius: 36px;
+  padding: 12px;
+  box-shadow:
+    0 20px 40px rgba(11,31,58,0.35),
+    0 8px 16px rgba(0,0,0,0.15),
+    inset 0 1px 0 rgba(255,255,255,0.15);
+  position: relative;
+  transition: transform 0.4s var(--ease-apple), box-shadow 0.4s var(--ease-apple);
+}
+.featured-app-phone:hover {
+  transform: translateY(-8px) rotate(-2deg);
+  box-shadow:
+    0 28px 56px rgba(11,31,58,0.45),
+    0 12px 20px rgba(0,0,0,0.2),
+    inset 0 1px 0 rgba(255,255,255,0.15);
+}
+.featured-app-phone-notch {
+  position: absolute;
+  top: 8px; left: 50%;
+  transform: translateX(-50%);
+  width: 80px; height: 20px;
+  background: var(--color-primary);
+  border-radius: 0 0 12px 12px;
+  z-index: 2;
+}
+.featured-app-phone-screen {
+  width: 100%; height: 100%;
+  background: linear-gradient(160deg, #0d2547 0%, #0B1F3A 100%);
+  border-radius: 26px;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  padding: 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.featured-app-phone-screen::before {
+  content: "";
+  position: absolute;
+  top: -30%; right: -30%;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(0,184,212,0.25), transparent 65%);
+  filter: blur(40px);
+}
+.featured-app-icon {
+  font-size: 4rem;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 8px 16px rgba(0,184,212,0.4));
+}
+.featured-app-icon-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 4px;
+  position: relative;
+  z-index: 1;
+  letter-spacing: -0.02em;
+}
+.featured-app-icon-subtitle {
+  font-size: 0.85rem;
+  color: var(--color-accent);
+  font-weight: 500;
+  position: relative;
+  z-index: 1;
+}
+.featured-app-info { display: flex; flex-direction: column; }
+.featured-app-badge {
+  display: inline-flex;
+  align-self: flex-start;
+  background: var(--md-secondary-container);
+  color: var(--color-accent);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  margin-bottom: 18px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.5);
+}
+.featured-app-info h3 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 800;
+  color: var(--color-primary);
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+}
+.featured-app-description {
+  color: var(--color-text-light);
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+.featured-app-features {
+  list-style: none;
+  padding: 0; margin: 0 0 32px 0;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.featured-app-features li {
+  font-size: 0.95rem;
+  color: var(--color-text);
+  line-height: 1.5;
+  padding-left: 4px;
+}
+.featured-app-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn-play-store {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: #000;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: var(--radius);
+  text-decoration: none;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.1);
+  transition: transform 0.3s var(--ease-apple), box-shadow 0.3s var(--ease-apple);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.btn-play-store:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.1);
+}
+.btn-play-store svg { flex-shrink: 0; width: 28px; height: 28px; }
+.btn-play-store-text {
+  display: flex; flex-direction: column;
+  line-height: 1.15;
+  text-align: left;
+}
+.btn-play-store-text span {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  opacity: 0.85;
+}
+.btn-play-store-text strong { font-size: 1rem; font-weight: 600; }
+
+/* ============================================
    FAQ
    ============================================ */
 .faq { background: transparent; }
@@ -1675,15 +2000,6 @@ section {
 }
 .grwidget-embed * { max-width: 100%; }
 .grwidget-embed img { border-radius: var(--radius-sm); }
-.grwidget-embed:empty::before {
-  content: "";
-  display: block;
-  height: 180px;
-  border-radius: var(--radius);
-  background: linear-gradient(90deg, transparent, var(--acrylic-border), transparent);
-  background-size: 200% 100%;
-  animation: shimmer 1.6s infinite;
-}
 .reviews-cta-inner {
   max-width: 800px;
   margin: 0 auto;
@@ -1856,292 +2172,8 @@ section {
 .footer a:hover { text-decoration: underline; }
 
 /* ============================================
-   APP DESTACADA: SALDO
-   ============================================ */
-.featured-app {
-  background: transparent;
-}
-
-.featured-app-card {
-  display: grid;
-  grid-template-columns: 280px 1fr;
-  gap: 48px;
-  align-items: center;
-  background: var(--color-card-bg);
-  backdrop-filter: var(--acrylic-blur);
-  -webkit-backdrop-filter: var(--acrylic-blur);
-  border: 1px solid var(--acrylic-border);
-  border-radius: var(--radius-lg);
-  padding: 48px;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.3),
-    var(--elev-3);
-  max-width: 1000px;
-  margin: 0 auto;
-  position: relative;
-  overflow: hidden;
-}
-
-.featured-app-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 20%;
-  right: 20%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(0,184,212,0.7), transparent);
-}
-
-/* Mockup del teléfono */
-.featured-app-visual {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.featured-app-phone {
-  width: 220px;
-  height: 440px;
-  background: var(--color-primary);
-  border-radius: 36px;
-  padding: 12px;
-  box-shadow:
-    0 20px 40px rgba(11,31,58,0.35),
-    0 8px 16px rgba(0,0,0,0.15),
-    inset 0 1px 0 rgba(255,255,255,0.15);
-  position: relative;
-  transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
-}
-
-.featured-app-phone:hover {
-  transform: translateY(-8px) rotate(-2deg);
-  box-shadow:
-    0 28px 56px rgba(11,31,58,0.45),
-    0 12px 20px rgba(0,0,0,0.2),
-    inset 0 1px 0 rgba(255,255,255,0.15);
-}
-
-.featured-app-phone-notch {
-  position: absolute;
-  top: 8px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
-  height: 20px;
-  background: var(--color-primary);
-  border-radius: 0 0 12px 12px;
-  z-index: 2;
-}
-
-.featured-app-phone-screen {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(160deg, #0d2547 0%, #0B1F3A 100%);
-  border-radius: 26px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 24px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.featured-app-phone-screen::before {
-  content: "";
-  position: absolute;
-  top: -30%;
-  right: -30%;
-  width: 200px;
-  height: 200px;
-  background: radial-gradient(circle, rgba(0,184,212,0.25), transparent 65%);
-  filter: blur(40px);
-}
-
-.featured-app-icon {
-  font-size: 4rem;
-  margin-bottom: 16px;
-  position: relative;
-  z-index: 1;
-  filter: drop-shadow(0 8px 16px rgba(0,184,212,0.4));
-}
-
-.featured-app-icon-title {
-  font-size: 1.8rem;
-  font-weight: 800;
-  color: #fff;
-  margin-bottom: 4px;
-  position: relative;
-  z-index: 1;
-  letter-spacing: -0.02em;
-}
-
-.featured-app-icon-subtitle {
-  font-size: 0.85rem;
-  color: var(--color-accent);
-  font-weight: 500;
-  position: relative;
-  z-index: 1;
-}
-
-/* Info de la app */
-.featured-app-info {
-  display: flex;
-  flex-direction: column;
-}
-
-.featured-app-badge {
-  display: inline-flex;
-  align-self: flex-start;
-  background: var(--md-secondary-container);
-  color: var(--color-accent);
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  padding: 6px 14px;
-  border-radius: var(--radius-full);
-  margin-bottom: 18px;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.5);
-}
-
-.featured-app-info h3 {
-  font-size: clamp(1.5rem, 3vw, 2rem);
-  font-weight: 800;
-  color: var(--color-primary);
-  margin-bottom: 16px;
-  letter-spacing: -0.02em;
-}
-
-.featured-app-description {
-  color: var(--color-text-light);
-  font-size: 1rem;
-  line-height: 1.7;
-  margin-bottom: 24px;
-}
-
-.featured-app-features {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 32px 0;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.featured-app-features li {
-  font-size: 0.95rem;
-  color: var(--color-text);
-  line-height: 1.5;
-  padding-left: 4px;
-}
-
-.featured-app-actions {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-/* Botón de Google Play */
-.btn-play-store {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  background: #000;
-  color: #fff;
-  padding: 12px 24px;
-  border-radius: var(--radius);
-  text-decoration: none;
-  box-shadow:
-    0 6px 20px rgba(0,0,0,0.25),
-    inset 0 1px 0 rgba(255,255,255,0.1);
-  transition: transform 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out);
-  border: 1px solid rgba(255,255,255,0.1);
-}
-
-.btn-play-store:hover {
-  transform: translateY(-3px);
-  box-shadow:
-    0 12px 28px rgba(0,0,0,0.35),
-    inset 0 1px 0 rgba(255,255,255,0.1);
-}
-
-.btn-play-store svg {
-  flex-shrink: 0;
-  width: 28px;
-  height: 28px;
-}
-
-.btn-play-store-text {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.15;
-  text-align: left;
-}
-
-.btn-play-store-text span {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  opacity: 0.85;
-}
-
-.btn-play-store-text strong {
-  font-size: 1rem;
-  font-weight: 600;
-}
-
-/* Responsive */
-@media (max-width: 640px) {
-  .featured-app-card {
-    grid-template-columns: 1fr;
-    padding: 32px 22px;
-    gap: 32px;
-  }
-  .featured-app-phone {
-    width: 180px;
-    height: 360px;
-  }
-  .featured-app-icon {
-    font-size: 3.2rem;
-  }
-  .featured-app-icon-title {
-    font-size: 1.5rem;
-  }
-  .featured-app-info h3 {
-    font-size: 1.4rem;
-  }
-  .featured-app-features li {
-    font-size: 0.9rem;
-  }
-  .btn-play-store {
-    width: 100%;
-    justify-content: center;
-  }
-}
-
-/* Modo oscuro: ajustes sutiles */
-[data-theme="dark"] .featured-app-phone {
-  box-shadow:
-    0 20px 40px rgba(0,0,0,0.5),
-    0 8px 16px rgba(0,0,0,0.3),
-    inset 0 1px 0 rgba(255,255,255,0.1);
-}
-
-[data-theme="dark"] .featured-app-phone:hover {
-  box-shadow:
-    0 28px 56px rgba(0,0,0,0.6),
-    0 12px 20px rgba(0,0,0,0.35),
-    inset 0 1px 0 rgba(255,255,255,0.1);
-}
-
-/* ============================================
    RESPONSIVE
    ============================================ */
-@media (max-width: 1024px) {
-  .nav a { margin-left: 12px; font-size: 0.82rem; }
-}
 @media (max-width: 900px) {
   .nav a { margin-left: 10px; font-size: 0.78rem; }
 }
@@ -2161,11 +2193,11 @@ section {
   body::after { opacity: 0.3; animation-duration: 10s; }
 
   #heroRadar { opacity: 0.7; }
-
   .hero { animation-duration: 20s; min-height: 560px; }
   .hero-badges span { animation-duration: 5s; }
-  .logo span::after { animation-duration: 4s; }
-  .whatsapp-float::before { animation-duration: 4s; }
+  .whatsapp-float::before,
+  .calc-float::before,
+  .device-float::before,
   .jira-float::before { animation-duration: 4s; }
 
   .service-card:active,
@@ -2199,7 +2231,8 @@ section {
   .apps-filter,
   .form-field input,
   .form-field select,
-  .form-field textarea {
+  .form-field textarea,
+  .widget-panel {
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
   }
@@ -2222,7 +2255,8 @@ section {
   .app-card,
   .grwidget-wrapper,
   .founder-card,
-  .contact-form-wrapper {
+  .contact-form-wrapper,
+  .widget-panel {
     background: var(--color-card-solid);
     border: 1px solid var(--color-border);
     box-shadow: var(--elev-2);
@@ -2241,7 +2275,8 @@ section {
   .tip-card::before,
   .founder-card::before,
   .grwidget-wrapper::before,
-  .contact-form-wrapper::before { display: none; }
+  .contact-form-wrapper::before,
+  .widget-panel::before { display: none; }
   .founder-skills span,
   .hero-badges span {
     background: var(--color-bg-alt);
@@ -2311,17 +2346,45 @@ section {
   .cert-embed { width: 130px; height: 130px; }
   .cert-name { max-width: 130px; }
 
+  /* Botones flotantes apilados en móvil */
   .whatsapp-float {
     width: 54px; height: 54px;
     bottom: 18px; right: 18px;
   }
   .whatsapp-float svg { width: 28px; height: 28px; }
 
-  .jira-float {
+  .calc-float {
     width: 54px; height: 54px;
     bottom: 84px; right: 18px;
   }
+  .calc-float svg { width: 24px; height: 24px; }
+
+  .device-float {
+    width: 54px; height: 54px;
+    bottom: 150px; right: 18px;
+  }
+  .device-float svg { width: 24px; height: 24px; }
+
+  .jira-float {
+    width: 54px; height: 54px;
+    bottom: 216px; right: 18px;
+  }
   .jira-float svg { width: 26px; height: 26px; }
+
+  /* Paneles en móvil: bottom sheet */
+  .widget-panel {
+    right: 12px;
+    left: 12px;
+    bottom: 90px;
+    width: auto;
+    max-width: none;
+    max-height: calc(100vh - 120px);
+    transform-origin: bottom center;
+    transform: translateY(30px) scale(0.98);
+  }
+  .widget-panel.open { transform: translateY(0) scale(1); }
+
+  .calc-panel { width: auto; }
 
   .modal-box { padding: 30px 22px 24px; border-radius: var(--radius); }
   .modal-title { font-size: 1.2rem; }
@@ -2355,6 +2418,19 @@ section {
   .form-field input,
   .form-field select,
   .form-field textarea { background: var(--color-card-solid); }
+
+  /* App destacada en móvil */
+  .featured-app-card {
+    grid-template-columns: 1fr;
+    padding: 32px 22px;
+    gap: 32px;
+  }
+  .featured-app-phone { width: 180px; height: 360px; }
+  .featured-app-icon { font-size: 3.2rem; }
+  .featured-app-icon-title { font-size: 1.5rem; }
+  .featured-app-info h3 { font-size: 1.4rem; }
+  .featured-app-features li { font-size: 0.9rem; }
+  .btn-play-store { width: 100%; justify-content: center; }
 }
 
 /* ============================================
@@ -2364,7 +2440,11 @@ section {
   .cursor-ring,
   .cursor-dot { display: none !important; }
   body { cursor: auto; }
-  a, button, summary, input, select, textarea, .service-card, .app-card, .contact-card, .cert-badge, .tip-nav, .apps-filter, .theme-toggle, .modal-close {
+  a, button, summary, input, select, textarea,
+  .service-card, .app-card, .contact-card, .cert-badge,
+  .tip-nav, .apps-filter, .theme-toggle, .modal-close,
+  .whatsapp-float, .calc-float, .device-float, .jira-float,
+  .widget-close, .widget-refresh, .calc-btn {
     cursor: pointer;
   }
 }
@@ -2372,17 +2452,19 @@ section {
 /* ============================================
    DISPOSITIVOS DE GAMA BAJA
    ============================================ */
-.low-power .logo span::after,
 .low-power .hero-badges span,
 .low-power .whatsapp-float::before,
+.low-power .calc-float::before,
+.low-power .device-float::before,
 .low-power .jira-float::before,
 .low-power body::before,
 .low-power body::after {
   animation: none !important;
 }
 .low-power .hero-badges span { transform: none !important; }
-.low-power .logo span::after { opacity: 0.7; transform: scaleX(1); }
 .low-power .whatsapp-float::before,
+.low-power .calc-float::before,
+.low-power .device-float::before,
 .low-power .jira-float::before { display: none; }
 .low-power #heroRadar { display: none; }
 .low-power .cursor-ring,
@@ -2399,10 +2481,13 @@ section {
   }
   .reveal { opacity: 1; transform: none; filter: none; }
   .whatsapp-float,
+  .calc-float,
+  .device-float,
   .jira-float { animation: none !important; }
-  .logo span::after,
   .hero-badges span,
   .whatsapp-float::before,
+  .calc-float::before,
+  .device-float::before,
   .jira-float::before,
   body::before,
   body::after { animation: none !important; }
