@@ -1165,5 +1165,107 @@ document.addEventListener('DOMContentLoaded', function () {
 
     updateDisplay();
   })();
+    /* ============================================
+     16. PANEL DE MINI-CHAT PARA WHATSAPP
+     ============================================ */
+  (function initWhatsAppPanel() {
+    const whatsappBtn = document.getElementById('whatsappFloatBtn');
+    const waPanel = document.getElementById('waModal');
+    const waForm = document.getElementById('waForm');
+    const overlay = document.getElementById('widgetOverlay');
+    if (!whatsappBtn || !waPanel || !waForm) return;
 
+    const WHATSAPP_NUMBER = '573158505020';
+
+    // Reutilizamos el sistema de widgets existente
+    // El panel se abre igual que calculadora y datos
+    let activeWidget = null;
+    const devicePanel = document.getElementById('devicePanel');
+    const calcPanel = document.getElementById('calcPanel');
+
+    function closeAllWidgets() {
+      [devicePanel, calcPanel, waPanel].forEach(function (p) {
+        if (p) {
+          p.classList.remove('open');
+          p.setAttribute('aria-hidden', 'true');
+        }
+      });
+      if (overlay) overlay.classList.remove('open');
+      document.body.classList.remove('widget-open');
+      activeWidget = null;
+    }
+
+    function openWaPanel() {
+      closeAllWidgets();
+      waPanel.classList.add('open');
+      waPanel.setAttribute('aria-hidden', 'false');
+      if (overlay) overlay.classList.add('open');
+      document.body.classList.add('widget-open');
+      activeWidget = waPanel;
+      const firstInput = waForm.querySelector('input');
+      if (firstInput) setTimeout(function () { firstInput.focus(); }, 300);
+    }
+
+    whatsappBtn.addEventListener('click', function () {
+      if (waPanel.classList.contains('open')) closeAllWidgets();
+      else openWaPanel();
+    });
+
+    waPanel.querySelectorAll('[data-close-wa]').forEach(function (el) {
+      el.addEventListener('click', closeAllWidgets);
+    });
+
+    if (overlay) overlay.addEventListener('click', closeAllWidgets);
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && activeWidget) closeAllWidgets();
+    });
+
+    waForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const name = (document.getElementById('wa-name').value || '').trim();
+      const address = (document.getElementById('wa-address').value || '').trim();
+      const contact = (document.getElementById('wa-contact').value || '').trim();
+      const service = (document.getElementById('wa-service').value || '').trim();
+      const detail = (document.getElementById('wa-detail').value || '').trim();
+
+      if (!name || !address || !contact || !service) {
+        waForm.querySelectorAll('[required]').forEach(function (input) {
+          if (!input.value.trim()) {
+            input.style.borderColor = '#dc3545';
+            input.style.boxShadow = '0 0 0 3px rgba(220,53,69,0.15)';
+          } else {
+            input.style.borderColor = '';
+            input.style.boxShadow = '';
+          }
+        });
+        return;
+      }
+
+      let message = '🔧 Nueva solicitud de servicio\n\n';
+      message += '👤 Nombre: ' + name + '\n';
+      message += '📍 Dirección: ' + address + '\n';
+      message += '📞 Contacto: ' + contact + '\n';
+      message += '🛠️ Servicio: ' + service + '\n';
+      if (detail) message += '📝 Detalle: ' + detail + '\n';
+      message += '\n---\nEnviado desde servitecbaq.com';
+
+      const waUrl = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(message);
+
+      window.open(waUrl, '_blank', 'noopener,noreferrer');
+
+      setTimeout(function () {
+        closeAllWidgets();
+        waForm.reset();
+      }, 500);
+    });
+
+    waForm.querySelectorAll('input, select, textarea').forEach(function (input) {
+      input.addEventListener('input', function () {
+        this.style.borderColor = '';
+        this.style.boxShadow = '';
+      });
+    });
+  })();
 });

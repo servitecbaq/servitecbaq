@@ -2568,4 +2568,195 @@ section {
   border-radius: var(--radius-full);
   transition: background-color 0.4s var(--ease-apple);
 }
+/* ============================================
+   PANEL DE MINI-CHAT PARA WHATSAPP
+   Mismo tamaño y estilo que los otros widgets
+   ============================================ */
+.wa-panel {
+  width: 340px;
+  max-width: calc(100vw - 120px);
+  max-height: calc(100vh - 48px);
+}
+
+.wa-panel .widget-header.wa-header {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--color-border);
+  background: linear-gradient(135deg, rgba(37,211,102,0.08) 0%, transparent 100%);
+}
+
+.wa-header-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.wa-header-info h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.wa-header-status {
+  font-size: 0.72rem;
+  color: #25d366;
+  font-weight: 500;
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.wa-header-status::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #25d366;
+  box-shadow: 0 0 0 2px rgba(37,211,102,0.25);
+  animation: waPulse 2s ease-in-out infinite;
+}
+
+@keyframes waPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.7; transform: scale(0.85); }
+}
+
+.wa-body {
+  padding: 14px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
+}
+
+.wa-bubble {
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  max-width: 92%;
+  animation: waBubbleIn 0.35s var(--ease-apple) both;
+}
+
+.wa-bubble.bot {
+  background: var(--color-bg-alt);
+  color: var(--color-text);
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+}
+
+@keyframes waBubbleIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.wa-form {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.wa-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.wa-field label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--color-text-light);
+  letter-spacing: 0.02em;
+}
+
+.wa-field input,
+.wa-field select,
+.wa-field textarea {
+  font-family: inherit;
+  font-size: 0.85rem;
+  color: var(--color-text);
+  background: var(--color-card-solid);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  outline: none;
+  transition: border-color 0.25s var(--ease-apple), box-shadow 0.25s var(--ease-apple);
+  width: 100%;
+}
+
+.wa-field textarea {
+  resize: vertical;
+  min-height: 44px;
+}
+
+.wa-field input:focus,
+.wa-field select:focus,
+.wa-field textarea:focus {
+  border-color: #25d366;
+  box-shadow: 0 0 0 3px rgba(37,211,102,0.15);
+}
+
+.wa-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.wa-submit {
+  width: 100%;
+  padding: 10px 16px;
+  background: linear-gradient(135deg, #25d366 0%, #1da851 100%);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-full);
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: none;
+  box-shadow: 0 4px 14px rgba(37,211,102,0.35);
+  transition: transform 0.3s var(--ease-apple), box-shadow 0.3s var(--ease-apple);
+}
+
+.wa-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(37,211,102,0.5);
+}
+
+.wa-submit:active { transform: scale(0.98); }
+
+.wa-direct {
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--color-text-light);
+  text-decoration: none;
+  padding: 6px;
+  border-radius: var(--radius-sm);
+  transition: color 0.3s var(--ease-apple), background 0.3s var(--ease-apple);
+}
+
+.wa-direct:hover {
+  color: #25d366;
+  background: rgba(37,211,102,0.08);
+}
+
+/* Responsive: mismo comportamiento que los otros widgets */
+@media (max-width: 640px) {
+  .wa-panel {
+    right: 12px;
+    left: 12px;
+    bottom: 90px;
+    width: auto;
+    max-width: none;
+    max-height: calc(100vh - 120px);
+    transform-origin: bottom center;
+    transform: translateY(30px) scale(0.98);
+  }
+  .wa-panel.open { transform: translateY(0) scale(1); }
+}
 ::-webkit-scrollbar-thumb:hover { background: var(--color-accent); }
