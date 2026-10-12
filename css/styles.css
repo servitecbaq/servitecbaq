@@ -742,6 +742,30 @@ body.cursor-leaving .cursor-dot { opacity: 0; }
 }
 .logo:hover { transform: scale(1.03); }
 
+/* Solo en modo oscuro: gradiente con los colores de la bandera de Barranquilla */
+[data-theme="dark"] .logo {
+  background: linear-gradient(
+    90deg,
+    #FF5C7A 0%, #FF5C7A 15%,
+    #FFE066 30%, #FFE066 45%,
+    #4ADE80 60%, #4ADE80 75%,
+    #E6ECF5 90%, #E6ECF5 100%
+  );
+  background-size: 300% 100%;
+  background-position: 0% 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: logoBarranquilla 10s ease-in-out infinite alternate;
+  filter: drop-shadow(0 0 12px rgba(255, 224, 102, 0.15));
+}
+
+@keyframes logoBarranquilla {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
 .nav { display: flex; align-items: center; flex-wrap: wrap; }
 .nav a {
   margin-left: 16px;
@@ -839,6 +863,36 @@ body.cursor-leaving .cursor-dot { opacity: 0; }
 }
 [data-theme="dark"] #heroRadar { opacity: 1; }
 
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url('../img/hero-fondo.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  filter: blur(2px) saturate(0.8);
+  mix-blend-mode: luminosity;
+}
+
+[data-theme="dark"] .hero::after {
+  opacity: 0.10;
+  filter: blur(0px) saturate(1);
+  mix-blend-mode: screen;
+}
+
+@media (max-width: 640px) {
+  .hero::after {
+    opacity: 0.08;
+  }
+  [data-theme="dark"] .hero::after {
+    opacity: 0.12;
+  }
+}
+
 .hero .container { position: relative; z-index: 2; }
 
 .hero h1 {
@@ -906,8 +960,6 @@ body.cursor-leaving .cursor-dot { opacity: 0; }
   padding: 6px 14px;
   border-radius: var(--radius-full);
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), var(--elev-1);
-  animation: heroBadgeFloat 4s ease-in-out infinite;
-  will-change: transform;
   transition:
     transform 0.4s var(--ease-apple),
     box-shadow 0.4s var(--ease-apple);
@@ -2148,6 +2200,14 @@ section {
 /* ============================================
    FOOTER
    ============================================ */
+.footer-credits {
+  font-size: 0.72rem;
+  opacity: 0.6;
+  margin-top: 8px;
+}
+.footer-credits a {
+  color: var(--color-accent);
+}
 .footer {
   background: var(--color-bg-alt);
   color: var(--color-text-light);
