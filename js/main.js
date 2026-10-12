@@ -1251,7 +1251,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (detail) message += '📝 Detalle: ' + detail + '\n';
       message += '\n---\nEnviado desde servitecbaq.com';
 
-      const waUrl = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(message);
+      const waUrl = 'https://api.whatsapp.com/send?phone=' + WHATSAPP_NUMBER + '&text=' + encodeURIComponent(message);
 
       window.open(waUrl, '_blank', 'noopener,noreferrer');
 
