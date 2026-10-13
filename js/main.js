@@ -151,14 +151,122 @@ document.addEventListener('DOMContentLoaded', function () {
      6. MODAL DE SERVICIOS
      ============================================ */
   const servicesData = {
-    reparacion: { icon: '💻', title: 'Reparación de computadores', description: 'Diagnosticamos y solucionamos problemas de hardware y software, tanto en equipos de escritorio como portátiles.', items: ['Diagnóstico completo del equipo','Cambio de piezas (disco, RAM, batería, teclado)','Reinstalación de sistema operativo','Eliminación de virus y malware','Recuperación de datos cuando sea posible'] },
-    mantenimiento: { icon: '⚡', title: 'Mantenimiento preventivo y correctivo', description: 'Prolongamos la vida útil de tus equipos con limpieza, optimización y revisiones periódicas.', items: ['Limpieza interna de polvo y ventiladores','Cambio de pasta térmica','Optimización del sistema operativo','Actualización de controladores y software','Revisión de temperaturas y rendimiento'] },
-    redes: { icon: '🌐', title: 'Redes e Internet', description: 'Configuramos y solucionamos problemas de conectividad en hogares y pequeñas empresas.', items: ['Configuración de routers y módems','Instalación de redes Wi-Fi y cableadas','Ampliación de cobertura con repetidores','Solución de cortes o lentitud de internet','Configuración de red para pequeñas oficinas'] },
-    impresoras: { icon: '🖨️', title: 'Impresoras', description: 'Instalamos, configuramos y reparamos impresoras de todas las marcas.', items: ['Instalación en Windows y Mac','Configuración en red o Wi-Fi','Solución de atascos y errores','Cambio de cartuchos y tóner','Impresión desde celular o tablet'] },
-    instalacion: { icon: '🔧', title: 'Instalación y configuración', description: 'Dejamos tus equipos listos para trabajar, estudiar o disfrutar, con todo lo necesario configurado.', items: ['Instalación de computadores nuevos','Configuración inicial de Windows, macOS o Linux','Instalación de programas esenciales','Configuración de cuentas y correo','Puesta a punto de equipos para oficina'] },
-    seguridad: { icon: '🔒', title: 'Seguridad y respaldo', description: 'Protegemos tu información y te enseñamos buenas prácticas para evitar pérdidas de datos.', items: ['Instalación de antivirus y firewall','Configuración de copias de seguridad automáticas','Respaldo en la nube o discos externos','Protección contra ransomware','Asesoría en contraseñas seguras'] },
-    aplicativos: { icon: '🧩', title: 'Soporte de aplicativos', description: 'Te ayudamos con la instalación, configuración y solución de problemas de los programas que usas a diario.', items: ['Instalación y configuración de programas','Actualización o reinstalación de aplicaciones','Solución de errores de programas (Office, sistemas contables, navegadores, etc.)','Configuración de correo y aplicaciones corporativas'] },
-    desarrollo: { icon: '👨‍💻', title: 'Desarrollo de software', description: 'Creamos soluciones a la medida para automatizar procesos y mejorar la operación de tu negocio.', items: ['Páginas web y landing pages','Automatización de tareas repetitivas','Scripts en PowerShell y Python','Integración de sistemas y APIs','Bases de datos SQL y reportes personalizados'] }
+    mantenimiento: {
+      icon: '⚡',
+      title: 'Mantenimiento y reparación',
+      description: 'Prolongamos la vida útil de tus equipos y solucionamos fallas de hardware y software, tanto en computadores de escritorio como portátiles.',
+      items: [
+        'Limpieza interna de polvo y ventiladores',
+        'Cambio de pasta térmica',
+        'Optimización del sistema operativo',
+        'Diagnóstico completo del equipo',
+        'Cambio de piezas (disco, RAM, batería, teclado)',
+        'Reinstalación de sistema operativo',
+        'Eliminación de virus y malware',
+        'Recuperación de datos cuando sea posible'
+      ]
+    },
+    redes: {
+      icon: '🌐',
+      title: 'Redes e Internet',
+      description: 'Configuramos y solucionamos problemas de conectividad en hogares, oficinas y pequeñas empresas.',
+      items: [
+        'Configuración de routers y módems',
+        'Instalación de redes Wi-Fi y cableadas',
+        'Ampliación de cobertura con repetidores o mesh',
+        'Segmentación con VLAN para invitados o CCTV',
+        'Reservas DHCP y direccionamiento IP estable',
+        'Solución de cortes o lentitud de internet',
+        'Configuración de red para pequeñas oficinas'
+      ]
+    },
+    impresoras: {
+      icon: '🖨️',
+      title: 'Impresoras',
+      description: 'Instalamos, configuramos y reparamos impresoras de todas las marcas, en hogares y oficinas.',
+      items: [
+        'Instalación en Windows y Mac',
+        'Configuración en red o Wi-Fi',
+        'Solución de atascos y errores',
+        'Cambio de cartuchos y tóner',
+        'Impresión desde celular o tablet',
+        'Configuración de impresora compartida en red'
+      ]
+    },
+    instalacion: {
+      icon: '🧩',
+      title: 'Instalación, configuración y soporte de aplicativos',
+      description: 'Dejamos tus equipos listos para trabajar, estudiar o disfrutar, y te ayudamos con los programas que usas a diario.',
+      items: [
+        'Instalación de computadores nuevos',
+        'Configuración inicial de Windows, macOS o Linux',
+        'Instalación de programas esenciales',
+        'Configuración de cuentas y correo',
+        'Instalación y configuración de programas',
+        'Solución de errores en Office, sistemas contables y navegadores',
+        'Configuración de correo y aplicaciones corporativas',
+        'Actualización o reinstalación de aplicaciones'
+      ]
+    },
+    seguridad: {
+      icon: '🔒',
+      title: 'Seguridad, respaldo y administración de usuarios',
+      description: 'Protegemos tu información, configuramos copias de seguridad y gestionamos cuentas, permisos y accesos.',
+      items: [
+        'Instalación de antivirus y firewall',
+        'Configuración de copias de seguridad automáticas',
+        'Respaldo en la nube o discos externos',
+        'Protección contra ransomware',
+        'Asesoría en contraseñas seguras',
+        'Altas, bajas y modificaciones de usuarios',
+        'Grupos, roles y permisos por área',
+        'Políticas de contraseñas y expiración',
+        'Integración con Active Directory y Microsoft 365',
+        'Configuración de MFA y auditoría de accesos'
+      ]
+    },
+    camaras: {
+      icon: '📹',
+      title: 'Videovigilancia (CCTV)',
+      description: 'Instalamos, configuramos y administramos sistemas de cámaras de seguridad para hogares y negocios.',
+      items: [
+        'Instalación de cámaras IP y análogas (interior/exterior)',
+        'Configuración de DVR/NVR y almacenamiento',
+        'Acceso remoto desde celular (app o navegador)',
+        'Grabación por movimiento y horarios',
+        'Integración con la red existente y VLAN de CCTV',
+        'Mantenimiento, limpieza y revisión de cableado',
+        'Configuración de respaldo de video'
+      ]
+    },
+    desarrollo: {
+      icon: '👨‍💻',
+      title: 'Desarrollo de software',
+      description: 'Creamos soluciones a la medida para automatizar procesos y mejorar la operación de tu negocio.',
+      items: [
+        'Páginas web y landing pages',
+        'Automatización de tareas repetitivas',
+        'Scripts en PowerShell y Python',
+        'Integración de sistemas y APIs',
+        'Bases de datos SQL y reportes personalizados',
+        'Aplicaciones web a la medida'
+      ]
+    },
+    empresariales: {
+      icon: '☁️',
+      title: 'Soluciones empresariales',
+      description: 'Infraestructura, servidores y servicios en la nube para pequeñas y medianas empresas.',
+      items: [
+        'Administración de servidores Windows y Linux',
+        'Virtualización con VMware',
+        'Microsoft 365 y Azure',
+        'Active Directory y políticas de grupo (GPO)',
+        'Respaldos empresariales y plan de recuperación',
+        'Automatización con PowerShell',
+        'Monitoreo de red y servidores',
+        'Asesoría en seguridad informática'
+      ]
+    }
   };
 
   const modal = document.getElementById('serviceModal');
@@ -872,7 +980,6 @@ document.addEventListener('DOMContentLoaded', function () {
       if (overlay) overlay.classList.add('open');
       document.body.classList.add('widget-open');
 
-      // Cargar datos del dispositivo al abrir
       if (panel === devicePanel) loadDeviceData();
     }
 
@@ -953,7 +1060,6 @@ document.addEventListener('DOMContentLoaded', function () {
       if (dBrowser) dBrowser.textContent = detectBrowser();
       updateTime();
 
-      // IP y geolocalización
       if (dIP) dIP.textContent = 'Cargando…';
       if (dISP) dISP.textContent = 'Cargando…';
       if (dCity) dCity.textContent = 'Cargando…';
@@ -979,7 +1085,6 @@ document.addEventListener('DOMContentLoaded', function () {
       deviceRefresh.addEventListener('click', loadDeviceData);
     }
 
-    // Actualizar la hora cada minuto si el panel está abierto
     setInterval(function () {
       if (devicePanel && devicePanel.classList.contains('open')) updateTime();
     }, 60000);
@@ -1130,7 +1235,6 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     });
 
-    // Soporte de teclado
     document.addEventListener('keydown', function (e) {
       if (!calcPanel || !calcPanel.classList.contains('open')) return;
 
@@ -1165,7 +1269,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     updateDisplay();
   })();
-    /* ============================================
+
+  /* ============================================
      16. PANEL DE MINI-CHAT PARA WHATSAPP
      ============================================ */
   (function initWhatsAppPanel() {
@@ -1177,8 +1282,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const WHATSAPP_NUMBER = '573158505020';
 
-    // Reutilizamos el sistema de widgets existente
-    // El panel se abre igual que calculadora y datos
     let activeWidget = null;
     const devicePanel = document.getElementById('devicePanel');
     const calcPanel = document.getElementById('calcPanel');
