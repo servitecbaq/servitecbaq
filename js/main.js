@@ -1371,4 +1371,163 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     });
   })();
+
+  /* ============================================
+     17. MATRIX EN PANEL "TU DISPOSITIVO" (SOLO DARK)
+     - Canvas con lluvia Matrix dentro del panel
+     - Se activa solo cuando: data-theme="dark" Y panel abierto
+     - Se detiene y limpia al cerrar el panel o cambiar a modo claro
+     - Cursor cambia a verde Matrix solo cuando pasa sobre el panel
+     ============================================ */
+  (function initMatrixPanel() {
+    const panel = document.getElementById('devicePanel');
+    const canvas = document.getElementById('matrixPanelRain');
+    if (!panel || !canvas) return;
+
+    const disabled =
+      prefersReducedMotion ||
+      document.documentElement.classList.contains('low-power');
+
+    const ctx = canvas.getContext('2d');
+    const chars = 'アカサタナハマヤラワｱｲｳｴｵｶｷｸｹｺ0123456789ABCDEF<>{}[]/*-+=;:·'.split('');
+
+    const fontSize = 12;
+    let columns = 0;
+    let drops = [];
+    let rafId = null;
+    let running = false;
+    let lastTime = 0;
+    const frameInterval = 65;
+
+    function resize() {
+      if (!panel) return;
+      const rect = panel.getBoundingClientRect();
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.max(1, rect.width) * dpr;
+      canvas.height = Math.max(1, rect.height) * dpr;
+      canvas.style.width = rect.width + 'px';
+      canvas.style.height = rect.height + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      columns = Math.max(1, Math.floor(rect.width / fontSize));
+      drops = new Array(columns).fill(1).map(function () {
+        return Math.random() * -80;
+      });
+    }
+
+    function drawFrame() {
+      if (!running) return;
+
+      const now = performance.now();
+      if (now - lastTime < frameInterval) {
+        rafId = requestAnimationFrame(drawFrame);
+        return;
+      }
+      lastTime = now;
+
+      const w = canvas.width / (Math.min(window.devicePixelRatio || 1, 2));
+      const h = canvas.height / (Math.min(window.devicePixelRatio || 1, 2));
+
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.10)';
+      ctx.fillRect(0, 0, w, h);
+
+      ctx.font = fontSize + 'px "JetBrains Mono", monospace';
+      ctx.textBaseline = 'top';
+
+      for (let i = 0; i < columns; i++) {
+        const text = chars[Math.floor(Math.random() * chars.length)];
+        const x = i * fontSize;
+        const y = drops[i] * fontSize;
+
+        ctx.fillStyle = '#CCFFCC';
+        ctx.shadowColor = '#00FF41';
+        ctx.shadowBlur = 8;
+        ctx.fillText(text, x, y);
+
+        ctx.shadowBlur = 0;
+        ctx.fillStyle = '#00FF41';
+        ctx.fillText(chars[Math.floor(Math.random() * chars.length)], x, y + fontSize);
+
+        if (y > h && Math.random() > 0.96) drops[i] = 0;
+        drops[i]++;
+      }
+
+      rafId = requestAnimationFrame(drawFrame);
+    }
+
+    function start() {
+      if (disabled) return;
+      if (running) return;
+      running = true;
+      resize();
+      rafId = requestAnimationFrame(drawFrame);
+    }
+
+    function stop() {
+      running = false;
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+      if (canvas) {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        ctx.clearRect(0, 0, canvas.width / dpr, canvas.height / dpr);
+      }
+    }
+
+    function isDark() {
+      return document.documentElement.getAttribute('data-theme') === 'dark';
+    }
+
+    function shouldRun() {
+      return isDark() && panel.classList.contains('open') && !disabled;
+    }
+
+    function sync() {
+      if (shouldRun()) start();
+      else stop();
+    }
+
+    // Observar cambios en el atributo class del panel (open/close)
+    const classObserver = new MutationObserver(function () {
+      sync();
+    });
+    classObserver.observe(panel, { attributes: true, attributeFilter: ['class'] });
+
+    // Observar cambios de tema en <html>
+    const themeObserver = new MutationObserver(function () {
+      sync();
+    });
+    themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+    // Redimensionar el canvas si cambia el tamaño del panel
+    let resizeTimer;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () {
+        if (running) resize();
+      }, 200);
+    }, { passive: true });
+
+    // Pausar cuando la pestaña no está visible
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) {
+        if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+      } else if (running) {
+        rafId = requestAnimationFrame(drawFrame);
+      }
+    });
+
+    /* --------- Cursor Matrix solo al pasar sobre el panel --------- */
+    panel.addEventListener('mouseenter', function () {
+      if (isDark()) document.body.classList.add('cursor-device');
+    });
+    panel.addEventListener('mouseleave', function () {
+      document.body.classList.remove('cursor-device');
+    });
+
+    // Estado inicial
+    sync();
+  })();
+
 });

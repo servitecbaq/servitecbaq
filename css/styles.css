@@ -2568,9 +2568,10 @@ section {
   border-radius: var(--radius-full);
   transition: background-color 0.4s var(--ease-apple);
 }
+::-webkit-scrollbar-thumb:hover { background: var(--color-accent); }
+
 /* ============================================
    PANEL DE MINI-CHAT PARA WHATSAPP
-   Mismo tamaño y estilo que los otros widgets
    ============================================ */
 .wa-panel {
   width: 340px;
@@ -2745,7 +2746,6 @@ section {
   background: rgba(37,211,102,0.08);
 }
 
-/* Responsive: mismo comportamiento que los otros widgets */
 @media (max-width: 640px) {
   .wa-panel {
     right: 12px;
@@ -2759,4 +2759,124 @@ section {
   }
   .wa-panel.open { transform: translateY(0) scale(1); }
 }
-::-webkit-scrollbar-thumb:hover { background: var(--color-accent); }
+
+/* ============================================
+   ============================================
+   MATRIX — SOLO DENTRO DEL PANEL "TU DISPOSITIVO"
+   Todo lo de aquí aplica solo cuando:
+   - El documento está en [data-theme="dark"]
+   - El selector es #devicePanel o sus hijos
+   Si borras este bloque, todo vuelve a la normalidad.
+   ============================================
+   ============================================ */
+
+/* --- Canvas Matrix dentro del panel --- */
+#matrixPanelRain {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: var(--radius-lg);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+[data-theme="dark"] #devicePanel.open #matrixPanelRain {
+  opacity: 0.55;
+}
+
+/* --- El contenido del panel va por encima del canvas --- */
+[data-theme="dark"] #devicePanel .widget-header,
+[data-theme="dark"] #devicePanel .widget-body {
+  position: relative;
+  z-index: 1;
+}
+
+/* --- Fondo negro del panel en modo oscuro --- */
+[data-theme="dark"] #devicePanel {
+  background: #000000;
+  border-color: rgba(0, 255, 65, 0.35);
+  box-shadow:
+    inset 0 1px 0 rgba(0, 255, 65, 0.15),
+    0 0 32px rgba(0, 255, 65, 0.25),
+    var(--elev-4);
+}
+
+/* Reemplaza la línea superior azul por verde Matrix */
+[data-theme="dark"] #devicePanel::before {
+  background: linear-gradient(90deg, transparent, #00FF41, transparent);
+  box-shadow: 0 0 12px rgba(0, 255, 65, 0.6);
+}
+
+/* --- Header del panel en modo Matrix --- */
+[data-theme="dark"] #devicePanel .widget-header {
+  border-bottom: 1px solid rgba(0, 255, 65, 0.25);
+  background: rgba(0, 0, 0, 0.4);
+}
+[data-theme="dark"] #devicePanel .widget-header h3 {
+  color: #C8FFD4;
+  font-family: 'JetBrains Mono', monospace;
+  text-shadow: 0 0 10px rgba(0, 255, 65, 0.55);
+  letter-spacing: 0.02em;
+}
+[data-theme="dark"] #devicePanel .widget-close {
+  color: #00FF41;
+}
+[data-theme="dark"] #devicePanel .widget-close:hover {
+  background: rgba(0, 255, 65, 0.15);
+  color: #000;
+}
+
+/* --- Filas de datos --- */
+[data-theme="dark"] #devicePanel .device-row {
+  border-bottom: 1px solid rgba(0, 255, 65, 0.10);
+}
+[data-theme="dark"] #devicePanel .device-label {
+  color: #4FBF6B;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+}
+[data-theme="dark"] #devicePanel .device-value {
+  color: #C8FFD4;
+  font-family: 'JetBrains Mono', monospace;
+  text-shadow: 0 0 8px rgba(0, 255, 65, 0.45);
+}
+
+/* --- Botón Actualizar en verde Matrix --- */
+[data-theme="dark"] #devicePanel .widget-refresh {
+  background: rgba(0, 255, 65, 0.06);
+  border-color: rgba(0, 255, 65, 0.35);
+  color: #00FF41;
+  font-family: 'JetBrains Mono', monospace;
+}
+[data-theme="dark"] #devicePanel .widget-refresh:hover {
+  background: rgba(0, 255, 65, 0.15);
+  border-color: #00FF41;
+  box-shadow: 0 0 18px rgba(0, 255, 65, 0.45);
+  transform: translateY(-2px);
+}
+
+/* --- Prompt terminal en el título --- */
+[data-theme="dark"] #devicePanel .widget-header h3::before {
+  content: ">_ ";
+  color: #00FF41;
+  text-shadow: 0 0 8px rgba(0, 255, 65, 0.8);
+}
+
+/* ============================================
+   CURSOR MATRIX — Solo cuando pasa por encima del panel
+   ============================================ */
+[data-theme="dark"] body.cursor-device .cursor-ring {
+  border-color: #00FF41;
+  box-shadow: 0 0 18px rgba(0, 255, 65, 0.6);
+}
+[data-theme="dark"] body.cursor-device .cursor-dot {
+  background: #00FF41;
+  box-shadow: 0 0 16px rgba(0, 255, 65, 1), 0 0 6px #fff;
+}
+[data-theme="dark"] body.cursor-device.cursor-hover .cursor-ring {
+  background: rgba(0, 255, 65, 0.12);
+  border-color: #00FF41;
+  box-shadow: 0 0 24px rgba(0, 255, 65, 0.7);
+}
