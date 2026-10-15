@@ -2,14 +2,15 @@
 <html lang="es" data-theme="light">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
   <title>Reparación de Computadores en Barranquilla | Servitecbaq</title>
   <meta name="description" content="Servicio técnico a domicilio en Barranquilla. Mantenimiento y reparación de computadores, redes, impresoras, cámaras de seguridad CCTV, administración de usuarios, soporte de aplicativos y desarrollo de software para hogares y negocios.">
   <meta name="keywords" content="reparación de computadores Barranquilla, mantenimiento computadores Barranquilla, servicio técnico a domicilio, soporte técnico Barranquilla, redes, impresoras, cámaras de seguridad Barranquilla, CCTV, videovigilancia, administración de usuarios, Active Directory, Microsoft 365, soporte aplicativos, desarrollo de software, soluciones empresariales, tips windows corporativo">
   <meta name="author" content="Servitecbaq">
   <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#0A0D1F">
+  <meta name="theme-color" content="#0A0D1F" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#F7F8FB" media="(prefers-color-scheme: light)">
 
   <meta name="google-site-verification" content="UroQP0TYR1nk7Vt3Ws_MzWo_x_mi3C6uYbYdDphph58" />
 
@@ -19,17 +20,26 @@
   <meta property="og:url" content="https://servitecbaq.com/">
   <meta property="og:locale" content="es_CO">
   <meta property="og:image" content="https://servitecbaq.com/img/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Servitecbaq - Reparación de Computadores en Barranquilla">
+  <meta name="twitter:description" content="Servicio técnico a domicilio en Barranquilla y área metropolitana.">
+  <meta name="twitter:image" content="https://servitecbaq.com/img/og-image.png">
 
   <link rel="canonical" href="https://servitecbaq.com/" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" media="print" onload="this.media='all'">
   <noscript>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
   </noscript>
+
   <script>
     (function() {
       try {
@@ -43,8 +53,7 @@
     })();
   </script>
 
-  <link rel="preload" href="css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="css/styles.css"></noscript>
+  <link rel="stylesheet" href="css/styles.css">
 
   <script type="application/ld+json">
   {
@@ -62,14 +71,35 @@
       { "@type": "City", "name": "Soledad" },
       { "@type": "City", "name": "Puerto Colombia" }
     ],
+    "openingHoursSpecification": [
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"], "opens": "09:00", "closes": "18:00" }
+    ],
     "sameAs": ["https://www.instagram.com/servitecbaq","https://wa.me/573158505020","https://www.linkedin.com/in/davidfragozo"],
-    "priceRange": "$$"
+    "priceRange": "$$",
+    "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5.0", "reviewCount": "3", "bestRating": "5", "worstRating": "1" }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "¿Atienden a domicilio en Barranquilla?", "acceptedAnswer": { "@type": "Answer", "text": "Sí, trabajamos a domicilio en Barranquilla, Soledad, Puerto Colombia y municipios cercanos del área metropolitana." } },
+      { "@type": "Question", "name": "¿Cómo puedo pedir una cotización?", "acceptedAnswer": { "@type": "Answer", "text": "Puedes escribirnos por WhatsApp al +57 315 850 5020 y enviarnos una foto o descripción del problema. Te damos una idea del precio sin compromiso." } },
+      { "@type": "Question", "name": "¿Qué garantía tienen los servicios?", "acceptedAnswer": { "@type": "Answer", "text": "Te explicamos qué encontramos, qué vamos a hacer y qué incluye el servicio antes de realizarlo. Si algo no queda bien, lo revisamos." } },
+      { "@type": "Question", "name": "¿Cuánto tarda una reparación típica?", "acceptedAnswer": { "@type": "Answer", "text": "La mayoría de servicios se resuelven el mismo día o en un plazo de 24 a 48 horas, según la complejidad y la disponibilidad de repuestos." } },
+      { "@type": "Question", "name": "¿Trabajan con empresas o solo con hogares?", "acceptedAnswer": { "@type": "Answer", "text": "Atendemos ambos. Tenemos experiencia en soporte a hogares y también en infraestructura, redes, servidores y mantenimiento para pequeñas y medianas empresas de Barranquilla." } },
+      { "@type": "Question", "name": "¿Instalan cámaras de seguridad en Barranquilla?", "acceptedAnswer": { "@type": "Answer", "text": "Sí. Instalamos y configuramos cámaras de seguridad IP y análogas, DVR/NVR, almacenamiento y acceso remoto desde el celular." } },
+      { "@type": "Question", "name": "¿Administran usuarios y permisos en empresas?", "acceptedAnswer": { "@type": "Answer", "text": "Sí. Gestionamos altas, bajas y permisos de usuarios en Windows, Linux, Microsoft 365 y Active Directory, incluyendo políticas de contraseñas, MFA y auditoría de accesos." } },
+      { "@type": "Question", "name": "¿Ofrecen soporte para servidores y soluciones empresariales?", "acceptedAnswer": { "@type": "Answer", "text": "Sí. Administramos servidores Windows y Linux, virtualización con VMware, Microsoft 365, Azure, redes empresariales, respaldos y automatización con PowerShell." } }
+    ]
   }
   </script>
 </head>
 <body>
 
-  <!-- Cursor -->
+  <!-- Cursor personalizado -->
   <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
   <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
 
@@ -184,7 +214,7 @@
             <span class="pulse-dot" aria-hidden="true"></span>
             Cotizar ahora
           </a>
-          <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">☰</button>
+          <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">☰</button>
         </div>
       </div>
     </div>
@@ -196,7 +226,7 @@
        HERO
        ============================================ -->
   <section class="hero" id="inicio">
-    <canvas id="heroRadar"></canvas>
+    <canvas id="heroRadar" aria-hidden="true"></canvas>
     <div class="hero__bg" aria-hidden="true">
       <div class="hero__grid"></div>
       <div class="hero__noise"></div>
@@ -281,7 +311,7 @@
   </section>
 
   <!-- ============================================
-       COBERTURA — Mapa + KPIs
+       COBERTURA
        ============================================ -->
   <section class="coverage-section">
     <div class="container">
@@ -308,18 +338,9 @@
         </div>
 
         <div class="coverage-kpis">
-          <div class="kpi">
-            <span class="kpi__num">9-6</span>
-            <span class="kpi__label">Lun–Sáb</span>
-          </div>
-          <div class="kpi">
-            <span class="kpi__num">24h</span>
-            <span class="kpi__label">Respuesta promedio</span>
-          </div>
-          <div class="kpi">
-            <span class="kpi__num">100%</span>
-            <span class="kpi__label">A domicilio</span>
-          </div>
+          <div class="kpi"><span class="kpi__num">9-6</span><span class="kpi__label">Lun–Sáb</span></div>
+          <div class="kpi"><span class="kpi__num">24h</span><span class="kpi__label">Respuesta promedio</span></div>
+          <div class="kpi"><span class="kpi__num">100%</span><span class="kpi__label">A domicilio</span></div>
         </div>
       </div>
 
@@ -333,7 +354,7 @@
   </section>
 
   <!-- ============================================
-       SERVICIOS — Bento asimétrico
+       SERVICIOS
        ============================================ -->
   <section class="services" id="servicios">
     <div class="container">
@@ -346,33 +367,22 @@
       </header>
 
       <div class="services-bento">
-        <!-- Card grande 1 -->
-        <article class="svc svc--large svc--dark" data-service="mantenimiento" data-cursor="view" tabindex="0" role="button">
-          <div class="svc__badge">
-            <span class="svc__badge-dot"></span>Más solicitado
-          </div>
-          <div class="svc__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/><path d="m6 11 2 2 4-4 2 2 3-3"/></svg>
-          </div>
+        <article class="svc svc--large svc--dark" data-service="mantenimiento" data-cursor="view" tabindex="0" role="button" aria-label="Ver detalle de Mantenimiento y reparación">
+          <div class="svc__badge"><span class="svc__badge-dot"></span>Más solicitado</div>
+          <div class="svc__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/><path d="m6 11 2 2 4-4 2 2 3-3"/></svg></div>
           <h3 class="svc__title">Mantenimiento y reparación</h3>
           <p class="svc__desc">Limpieza, optimización, diagnóstico y reparación de computadores de escritorio y portátiles. Cambio de SSD, RAM, pasta térmica.</p>
           <span class="svc__more">Ver detalles <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
         </article>
 
-        <!-- Card grande 2 -->
-        <article class="svc svc--large svc--accent" data-service="empresariales" data-cursor="view" tabindex="0" role="button">
-          <div class="svc__badge">
-            <span class="svc__badge-dot"></span>Empresarial
-          </div>
-          <div class="svc__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10Z"/></svg>
-          </div>
+        <article class="svc svc--large svc--accent" data-service="empresariales" data-cursor="view" tabindex="0" role="button" aria-label="Ver detalle de Soluciones empresariales">
+          <div class="svc__badge"><span class="svc__badge-dot"></span>Empresarial</div>
+          <div class="svc__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10Z"/></svg></div>
           <h3 class="svc__title">Soluciones empresariales</h3>
           <p class="svc__desc">Servidores Windows y Linux, Microsoft 365, Azure, virtualización con VMware, respaldos y automatización con PowerShell.</p>
           <span class="svc__more">Ver detalles <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
         </article>
 
-        <!-- Cards mini -->
         <article class="svc svc--mini" data-service="redes" data-cursor="view" tabindex="0" role="button">
           <div class="svc__icon svc__icon--sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg></div>
           <h3 class="svc__title-sm">Redes e Internet</h3>
@@ -413,7 +423,7 @@
   </section>
 
   <!-- ============================================
-       NOSOTROS — Editorial con número gigante
+       NOSOTROS
        ============================================ -->
   <section class="about" id="nosotros">
     <div class="container">
@@ -429,9 +439,7 @@
 
           <div class="about__features">
             <article class="about-feature">
-              <div class="about-feature__icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-              </div>
+              <div class="about-feature__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
               <div>
                 <h3>Rápido</h3>
                 <p>Resolvemos tu problema en el menor tiempo posible y te mantenemos informado.</p>
@@ -439,9 +447,7 @@
             </article>
 
             <article class="about-feature">
-              <div class="about-feature__icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-              </div>
+              <div class="about-feature__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg></div>
               <div>
                 <h3>Local</h3>
                 <p>Estamos en Barranquilla y conocemos las necesidades de hogares y negocios locales.</p>
@@ -449,9 +455,7 @@
             </article>
 
             <article class="about-feature">
-              <div class="about-feature__icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-              </div>
+              <div class="about-feature__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></div>
               <div>
                 <h3>Con garantía</h3>
                 <p>Te explicamos qué encontramos, qué vamos a hacer y qué incluye el servicio.</p>
@@ -464,7 +468,7 @@
   </section>
 
   <!-- ============================================
-       FUNDADOR — Split editorial
+       FUNDADOR
        ============================================ -->
   <section class="founder" id="fundador">
     <div class="container">
@@ -478,11 +482,8 @@
 
       <div class="founder-split">
         <div class="founder-split__photo">
-          <img src="img/Profile.jpg" alt="David Fragozo, fundador de Servitecbaq" loading="lazy" decoding="async">
-          <div class="founder-split__badge">
-            <span class="pulse-dot"></span>
-            Disponible
-          </div>
+          <img src="img/david.jpg" alt="David Fragozo, fundador de Servitecbaq" loading="lazy" decoding="async" width="800" height="1000">
+          <div class="founder-split__badge"><span class="pulse-dot"></span>Disponible</div>
         </div>
 
         <div class="founder-split__info">
@@ -492,14 +493,8 @@
           <p class="founder-split__bio">Sysadmin con experiencia en administración de sistemas Linux y Windows, gestión de redes, seguridad informática con Fortinet y Cisco, virtualización con VMware y automatización con PowerShell. Al frente de Servitecbaq aplico esa experiencia para dar soluciones claras, rápidas y confiables a hogares y negocios en Barranquilla.</p>
 
           <div class="founder-split__stats">
-            <div class="stat-block">
-              <span class="stat-block__num">+5</span>
-              <span class="stat-block__label">Años de experiencia</span>
-            </div>
-            <div class="stat-block">
-              <span class="stat-block__num">+500</span>
-              <span class="stat-block__label">Equipos reparados</span>
-            </div>
+            <div class="stat-block"><span class="stat-block__num">+5</span><span class="stat-block__label">Años de experiencia</span></div>
+            <div class="stat-block"><span class="stat-block__num">+500</span><span class="stat-block__label">Equipos reparados</span></div>
           </div>
 
           <div class="founder-skills">
@@ -511,9 +506,9 @@
           <div class="founder-certs">
             <h4 class="founder-certs-title"><span aria-hidden="true">🏅</span> Certificaciones verificadas</h4>
             <div class="founder-certs-grid">
-              <a href="https://www.credly.com/badges/c98f5dc1-7de0-4c18-96d7-27d513a103b8" class="cert-badge" data-cursor="hover" target="_blank" rel="noopener">
+              <a href="https://www.credly.com/badges/c98f5dc1-7de0-4c18-96d7-27d513a103b8" class="cert-badge" data-cursor="hover" target="_blank" rel="noopener" aria-label="Ver certificación Google IT Support Professional Certificate en Credly">
                 <div class="cert-embed">
-                  <img src="img/google-it-support.png" alt="Google IT Support Professional Certificate" loading="lazy" decoding="async">
+                  <img src="img/google-it-support.png" alt="Google IT Support Professional Certificate" loading="lazy" decoding="async" width="1000" height="1000">
                 </div>
                 <p class="cert-name">Google IT Support Professional</p>
               </a>
@@ -530,7 +525,7 @@
   </section>
 
   <!-- ============================================
-       TIPS — Split título + carrusel
+       TIPS
        ============================================ -->
   <section class="tips" id="tips">
     <div class="container">
@@ -561,7 +556,7 @@
   </section>
 
   <!-- ============================================
-       APPS — Split título + search
+       APPS
        ============================================ -->
   <section class="apps" id="apps">
     <div class="container">
@@ -589,7 +584,7 @@
   </section>
 
   <!-- ============================================
-       SALDO — Split con mockup
+       SALDO
        ============================================ -->
   <section class="featured-app" id="saldo">
     <div class="container">
@@ -626,7 +621,7 @@
           </ul>
 
           <div class="featured-app-actions">
-            <a href="https://play.google.com/store/apps/details?id=com.fragozo.saldo&hl=es_CO" class="btn-play-store" target="_blank" rel="noopener">
+            <a href="https://play.google.com/store/apps/details?id=com.fragozo.saldo&hl=es_CO" class="btn-play-store" target="_blank" rel="noopener" aria-label="Descargar Saldo en Google Play">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c18-14.3 18-46.5-1.2-60.8zM104.6 499l280.8-161.2-60.1-60.1L104.6 499z"/></svg>
               <div class="btn-play-store-text"><span>Descargar en</span><strong>Google Play</strong></div>
             </a>
@@ -637,7 +632,7 @@
   </section>
 
   <!-- ============================================
-       FAQ — Split título sticky + acordeón
+       FAQ
        ============================================ -->
   <section class="faq" id="faq">
     <div class="container">
@@ -646,9 +641,7 @@
           <span class="section-kicker">❓ Preguntas frecuentes</span>
           <h2 class="section-title section-title--left">Resolvemos tus dudas</h2>
           <p class="section-lead">Las preguntas más comunes que nos llegan por WhatsApp.</p>
-          <a href="https://wa.me/573158505020?text=Hola%2C%20tengo%20una%20duda" class="btn btn--accent" data-cursor="hover" target="_blank" rel="noopener">
-            💬 Pregúntanos directamente
-          </a>
+          <a href="https://wa.me/573158505020?text=Hola%2C%20tengo%20una%20duda" class="btn btn--accent" data-cursor="hover" target="_blank" rel="noopener">💬 Pregúntanos directamente</a>
         </div>
 
         <div class="faq-list">
@@ -690,7 +683,7 @@
   </section>
 
   <!-- ============================================
-       RESEÑAS — Split rating + widget
+       RESEÑAS
        ============================================ -->
   <section class="reviews" id="resenas">
     <div class="container">
@@ -711,15 +704,11 @@
             <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
           </div>
           <p class="reviews-rating__label">Basado en reseñas reales de Google</p>
-          <a href="https://g.page/r/CRBuazdosaVREAE/review" class="btn btn--accent" data-cursor="hover" target="_blank" rel="noopener">
-            ⭐ Escribir reseña
-          </a>
-          <a href="https://maps.app.goo.gl/bVDcFfRkvRaywEDJ7" class="btn btn--ghost" data-cursor="hover" target="_blank" rel="noopener">
-            📍 Ver en Maps
-          </a>
+          <a href="https://g.page/r/CRBuazdosaVREAE/review" class="btn btn--accent" data-cursor="hover" target="_blank" rel="noopener">⭐ Escribir reseña</a>
+          <a href="https://maps.app.goo.gl/bVDcFfRkvRaywEDJ7" class="btn btn--ghost" data-cursor="hover" target="_blank" rel="noopener">📍 Ver en Maps</a>
         </div>
 
-        <div class="grwidget-wrapper" style="min-height: 340px; contain: layout style paint;">
+        <div class="grwidget-wrapper">
           <div class="grwidget-embed" data-grwidget-key="G0gOrv6WNkt5ry1ARyK4NQHH" id="grWidgetContainer"></div>
         </div>
       </div>
@@ -727,7 +716,7 @@
   </section>
 
   <!-- ============================================
-       CONTACTO — Split form + cards
+       CONTACTO
        ============================================ -->
   <section class="contact" id="contacto">
     <div class="container">
@@ -768,10 +757,10 @@
           <h3 class="contact-form-title">O escríbenos directamente</h3>
           <p class="contact-form-subtitle">Cuéntanos qué necesitas y te responderemos lo antes posible.</p>
 
-          <form action="https://api.web3forms.com/submit" method="POST" class="contact-form" id="contactForm">
+          <form action="https://api.web3forms.com/submit" method="POST" class="contact-form" id="contactForm" novalidate>
             <input type="hidden" name="access_key" value="59cca39b-b622-4efd-a919-7bc2be70da10">
             <input type="hidden" name="subject" value="Nuevo mensaje desde servitecbaq">
-            <input type="checkbox" name="botcheck" style="display: none !important;" tabindex="-1" autocomplete="off">
+            <input type="checkbox" name="botcheck" style="display:none !important;" tabindex="-1" autocomplete="off">
 
             <div class="form-row">
               <div class="form-field">
@@ -805,11 +794,9 @@
               <textarea id="form-message" name="message" required rows="5" placeholder="Describe el problema o lo que necesitas…"></textarea>
             </div>
 
-            <button type="submit" class="btn btn--accent btn--lg form-submit" id="formSubmit" data-cursor="hover">
-              ✉️ Enviar mensaje
-            </button>
+            <button type="submit" class="btn btn--accent btn--lg form-submit" id="formSubmit" data-cursor="hover">✉️ Enviar mensaje</button>
 
-            <p class="form-status" id="formStatus" hidden></p>
+            <p class="form-status" id="formStatus" hidden role="status" aria-live="polite"></p>
           </form>
         </div>
       </div>
@@ -819,7 +806,7 @@
   </main>
 
   <!-- ============================================
-       FOOTER 4 columnas
+       FOOTER
        ============================================ -->
   <footer class="footer">
     <div class="container">
