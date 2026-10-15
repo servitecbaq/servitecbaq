@@ -2052,3 +2052,19 @@ section { padding: clamp(4rem, 8vw, 6rem) 0; position: relative; z-index: 1; }
     animation: none;
   }
 }
+
+/* ============================================
+   FALLBACK DE CURSOR — seguridad
+   ============================================ */
+body { cursor: auto; }
+body.cursor-ready { cursor: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  body, body.cursor-ready { cursor: auto; }
+  .cursor-ring, .cursor-dot { display: none !important; }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  body, body.cursor-ready { cursor: auto; }
+  .cursor-ring, .cursor-dot { display: none !important; }
+}

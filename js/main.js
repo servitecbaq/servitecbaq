@@ -42,11 +42,9 @@ document.addEventListener('DOMContentLoaded', function () {
       toggle.textContent = isOpen ? '✕' : '☰';
       toggle.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
     });
-
     nav.querySelectorAll('a').forEach(function (link) {
       link.addEventListener('click', closeNav);
     });
-
     document.addEventListener('click', function (e) {
       if (!nav.classList.contains('open')) return;
       if (nav.contains(e.target) || toggle.contains(e.target)) return;
@@ -120,7 +118,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       });
     }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
-
     document.querySelectorAll('.reveal').forEach(function (el) {
       revealObserver.observe(el);
     });
@@ -157,120 +154,44 @@ document.addEventListener('DOMContentLoaded', function () {
      ============================================ */
   const servicesData = {
     mantenimiento: {
-      icon: '⚡',
-      title: 'Mantenimiento y reparación',
+      icon: '⚡', title: 'Mantenimiento y reparación',
       description: 'Prolongamos la vida útil de tus equipos y solucionamos fallas de hardware y software, tanto en computadores de escritorio como portátiles.',
-      items: [
-        'Limpieza interna de polvo y ventiladores',
-        'Cambio de pasta térmica',
-        'Optimización del sistema operativo',
-        'Diagnóstico completo del equipo',
-        'Cambio de piezas (disco, RAM, batería, teclado)',
-        'Reinstalación de sistema operativo',
-        'Eliminación de virus y malware',
-        'Recuperación de datos cuando sea posible'
-      ]
+      items: ['Limpieza interna de polvo y ventiladores','Cambio de pasta térmica','Optimización del sistema operativo','Diagnóstico completo del equipo','Cambio de piezas (disco, RAM, batería, teclado)','Reinstalación de sistema operativo','Eliminación de virus y malware','Recuperación de datos cuando sea posible']
     },
     redes: {
-      icon: '🌐',
-      title: 'Redes e Internet',
+      icon: '🌐', title: 'Redes e Internet',
       description: 'Configuramos y solucionamos problemas de conectividad en hogares, oficinas y pequeñas empresas.',
-      items: [
-        'Configuración de routers y módems',
-        'Instalación de redes Wi-Fi y cableadas',
-        'Ampliación de cobertura con repetidores o mesh',
-        'Segmentación con VLAN para invitados o CCTV',
-        'Reservas DHCP y direccionamiento IP estable',
-        'Solución de cortes o lentitud de internet',
-        'Configuración de red para pequeñas oficinas'
-      ]
+      items: ['Configuración de routers y módems','Instalación de redes Wi-Fi y cableadas','Ampliación de cobertura con repetidores o mesh','Segmentación con VLAN para invitados o CCTV','Reservas DHCP y direccionamiento IP estable','Solución de cortes o lentitud de internet','Configuración de red para pequeñas oficinas']
     },
     impresoras: {
-      icon: '🖨️',
-      title: 'Impresoras',
+      icon: '🖨️', title: 'Impresoras',
       description: 'Instalamos, configuramos y reparamos impresoras de todas las marcas, en hogares y oficinas.',
-      items: [
-        'Instalación en Windows y Mac',
-        'Configuración en red o Wi-Fi',
-        'Solución de atascos y errores',
-        'Cambio de cartuchos y tóner',
-        'Impresión desde celular o tablet',
-        'Configuración de impresora compartida en red'
-      ]
+      items: ['Instalación en Windows y Mac','Configuración en red o Wi-Fi','Solución de atascos y errores','Cambio de cartuchos y tóner','Impresión desde celular o tablet','Configuración de impresora compartida en red']
     },
     instalacion: {
-      icon: '🧩',
-      title: 'Instalación, configuración y soporte de aplicativos',
+      icon: '🧩', title: 'Instalación, configuración y soporte de aplicativos',
       description: 'Dejamos tus equipos listos para trabajar, estudiar o disfrutar, y te ayudamos con los programas que usas a diario.',
-      items: [
-        'Instalación de computadores nuevos',
-        'Configuración inicial de Windows, macOS o Linux',
-        'Instalación de programas esenciales',
-        'Configuración de cuentas y correo',
-        'Instalación y configuración de programas',
-        'Solución de errores en Office, sistemas contables y navegadores',
-        'Configuración de correo y aplicaciones corporativas',
-        'Actualización o reinstalación de aplicaciones'
-      ]
+      items: ['Instalación de computadores nuevos','Configuración inicial de Windows, macOS o Linux','Instalación de programas esenciales','Configuración de cuentas y correo','Instalación y configuración de programas','Solución de errores en Office, sistemas contables y navegadores','Configuración de correo y aplicaciones corporativas','Actualización o reinstalación de aplicaciones']
     },
     seguridad: {
-      icon: '🔒',
-      title: 'Seguridad, respaldo y administración de usuarios',
+      icon: '🔒', title: 'Seguridad, respaldo y administración de usuarios',
       description: 'Protegemos tu información, configuramos copias de seguridad y gestionamos cuentas, permisos y accesos.',
-      items: [
-        'Instalación de antivirus y firewall',
-        'Configuración de copias de seguridad automáticas',
-        'Respaldo en la nube o discos externos',
-        'Protección contra ransomware',
-        'Asesoría en contraseñas seguras',
-        'Altas, bajas y modificaciones de usuarios',
-        'Grupos, roles y permisos por área',
-        'Políticas de contraseñas y expiración',
-        'Integración con Active Directory y Microsoft 365',
-        'Configuración de MFA y auditoría de accesos'
-      ]
+      items: ['Instalación de antivirus y firewall','Configuración de copias de seguridad automáticas','Respaldo en la nube o discos externos','Protección contra ransomware','Asesoría en contraseñas seguras','Altas, bajas y modificaciones de usuarios','Grupos, roles y permisos por área','Políticas de contraseñas y expiración','Integración con Active Directory y Microsoft 365','Configuración de MFA y auditoría de accesos']
     },
     camaras: {
-      icon: '📹',
-      title: 'Videovigilancia (CCTV)',
+      icon: '📹', title: 'Videovigilancia (CCTV)',
       description: 'Instalamos, configuramos y administramos sistemas de cámaras de seguridad para hogares y negocios.',
-      items: [
-        'Instalación de cámaras IP y análogas (interior/exterior)',
-        'Configuración de DVR/NVR y almacenamiento',
-        'Acceso remoto desde celular (app o navegador)',
-        'Grabación por movimiento y horarios',
-        'Integración con la red existente y VLAN de CCTV',
-        'Mantenimiento, limpieza y revisión de cableado',
-        'Configuración de respaldo de video'
-      ]
+      items: ['Instalación de cámaras IP y análogas (interior/exterior)','Configuración de DVR/NVR y almacenamiento','Acceso remoto desde celular (app o navegador)','Grabación por movimiento y horarios','Integración con la red existente y VLAN de CCTV','Mantenimiento, limpieza y revisión de cableado','Configuración de respaldo de video']
     },
     desarrollo: {
-      icon: '👨‍💻',
-      title: 'Desarrollo de software',
+      icon: '👨‍💻', title: 'Desarrollo de software',
       description: 'Creamos soluciones a la medida para automatizar procesos y mejorar la operación de tu negocio.',
-      items: [
-        'Páginas web y landing pages',
-        'Automatización de tareas repetitivas',
-        'Scripts en PowerShell y Python',
-        'Integración de sistemas y APIs',
-        'Bases de datos SQL y reportes personalizados',
-        'Aplicaciones web a la medida'
-      ]
+      items: ['Páginas web y landing pages','Automatización de tareas repetitivas','Scripts en PowerShell y Python','Integración de sistemas y APIs','Bases de datos SQL y reportes personalizados','Aplicaciones web a la medida']
     },
     empresariales: {
-      icon: '☁️',
-      title: 'Soluciones empresariales',
+      icon: '☁️', title: 'Soluciones empresariales',
       description: 'Infraestructura, servidores y servicios en la nube para pequeñas y medianas empresas.',
-      items: [
-        'Administración de servidores Windows y Linux',
-        'Virtualización con VMware',
-        'Microsoft 365 y Azure',
-        'Active Directory y políticas de grupo (GPO)',
-        'Respaldos empresariales y plan de recuperación',
-        'Automatización con PowerShell',
-        'Monitoreo de red y servidores',
-        'Asesoría en seguridad informática'
-      ]
+      items: ['Administración de servidores Windows y Linux','Virtualización con VMware','Microsoft 365 y Azure','Active Directory y políticas de grupo (GPO)','Respaldos empresariales y plan de recuperación','Automatización con PowerShell','Monitoreo de red y servidores','Asesoría en seguridad informática']
     }
   };
 
@@ -310,7 +231,6 @@ document.addEventListener('DOMContentLoaded', function () {
     document.body.classList.remove('modal-open');
   }
 
-  // ⚡ FIX: acepta tanto .service-card como .svc[data-service]
   document.querySelectorAll('.service-card, .svc[data-service]').forEach(function (card) {
     const key = card.getAttribute('data-service');
     if (!key) return;
@@ -494,12 +414,10 @@ document.addEventListener('DOMContentLoaded', function () {
       .then(function (data) {
         if (!Array.isArray(data) || data.length === 0) return;
         allApps = data;
-
         const categories = ['all'];
         data.forEach(function (app) {
           if (!categories.includes(app.category)) categories.push(app.category);
         });
-
         const frag = document.createDocumentFragment();
         categories.forEach(function (cat) {
           const btn = document.createElement('button');
@@ -516,7 +434,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
         appsFilters.innerHTML = '';
         appsFilters.appendChild(frag);
-
         renderApps();
       })
       .catch(function (error) {
@@ -526,7 +443,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function renderApps() {
       if (!appsGrid) return;
-
       const term = searchTerm.toLowerCase().trim();
       const filtered = allApps.filter(function (app) {
         const cat = activeCategory === 'all' || app.category === activeCategory;
@@ -536,15 +452,12 @@ document.addEventListener('DOMContentLoaded', function () {
           app.category.toLowerCase().includes(term);
         return cat && s;
       });
-
       appsGrid.innerHTML = '';
-
       if (filtered.length === 0) {
         if (appsEmpty) appsEmpty.hidden = false;
         return;
       }
       if (appsEmpty) appsEmpty.hidden = true;
-
       const frag = document.createDocumentFragment();
       filtered.forEach(function (app) {
         const card = document.createElement('a');
@@ -552,19 +465,16 @@ document.addEventListener('DOMContentLoaded', function () {
         card.href = app.url;
         card.target = '_blank';
         card.rel = 'noopener';
-
         const badgesHTML = (app.badges || []).map(function (b) {
           const isFree = b.toLowerCase() === 'gratis' || b.toLowerCase() === 'free';
           return '<span class="app-badge' + (isFree ? ' free' : '') + '">' + b + '</span>';
         }).join('');
-
         card.innerHTML =
           '<div class="app-logo">' + app.icon + '</div>' +
           '<h3 class="app-name">' + app.name + '</h3>' +
           '<p class="app-desc">' + app.desc + '</p>' +
           '<div class="app-meta">' + badgesHTML + '</div>' +
           '<span class="app-link">Sitio oficial →</span>';
-
         frag.appendChild(card);
       });
       appsGrid.appendChild(frag);
@@ -585,12 +495,10 @@ document.addEventListener('DOMContentLoaded', function () {
   /* ============================================
      9. FAQ
      ============================================ */
-  const faqItems = document.querySelectorAll('.faq-item');
-  faqItems.forEach(function (item) {
+  document.querySelectorAll('.faq-item').forEach(function (item) {
     const answer = item.querySelector('.faq-answer');
     if (!answer) return;
     if (answer.parentElement.classList.contains('faq-content')) return;
-
     const wrapper = document.createElement('div');
     wrapper.className = 'faq-content';
     const inner = document.createElement('div');
@@ -599,10 +507,8 @@ document.addEventListener('DOMContentLoaded', function () {
     inner.appendChild(answer);
   });
 
-    /* ============================================
-     10. LAZY LOAD: GR WIDGET (OPTIMIZADO)
-     - Carga solo cuando el usuario se acerca 200px
-     - Con timeout de respaldo por si el observer no dispara
+  /* ============================================
+     10. LAZY LOAD: GR WIDGET
      ============================================ */
   const reviewsSection = document.getElementById('resenas');
   let grWidgetLoaded = false;
@@ -614,7 +520,6 @@ document.addEventListener('DOMContentLoaded', function () {
     script.src = 'https://grwidget.com/v1/grwidget.js';
     script.async = true;
     script.defer = true;
-    script.crossOrigin = 'anonymous';
     document.body.appendChild(script);
   }
 
@@ -630,13 +535,12 @@ document.addEventListener('DOMContentLoaded', function () {
       }, { rootMargin: '200px 0px' });
       grObserver.observe(reviewsSection);
     } else {
-      // Fallback: cargar tras 4s si no hay IO
       setTimeout(loadGrWidget, 4000);
     }
   }
 
   /* ============================================
-     11. FORMULARIO DE CONTACTO (Web3Forms)
+     11. FORMULARIO DE CONTACTO
      ============================================ */
   const contactForm = document.getElementById('contactForm');
   const formStatus = document.getElementById('formStatus');
@@ -645,7 +549,6 @@ document.addEventListener('DOMContentLoaded', function () {
   if (contactForm) {
     contactForm.addEventListener('submit', function (e) {
       e.preventDefault();
-
       formSubmit.disabled = true;
       formSubmit.textContent = '⏳ Enviando…';
       if (formStatus) {
@@ -653,9 +556,7 @@ document.addEventListener('DOMContentLoaded', function () {
         formStatus.className = 'form-status';
         formStatus.textContent = '';
       }
-
       const formData = new FormData(contactForm);
-
       fetch(contactForm.action, {
         method: 'POST',
         body: formData,
@@ -684,7 +585,7 @@ document.addEventListener('DOMContentLoaded', function () {
           if (formStatus) {
             formStatus.hidden = false;
             formStatus.className = 'form-status error';
-            formStatus.textContent = 'Hubo un problema al enviar. Intenta de nuevo o escríbenos por WhatsApp al +57 315 850 5020.';
+            formStatus.textContent = 'Hubo un problema al enviar. Intenta de nuevo o escríbenos por WhatsApp.';
           }
           formSubmit.disabled = false;
           formSubmit.textContent = '✉️ Enviar mensaje';
@@ -698,27 +599,18 @@ document.addEventListener('DOMContentLoaded', function () {
   const jiraFloatBtn = document.getElementById('jiraFloatBtn');
   if (jiraFloatBtn) {
     jiraFloatBtn.addEventListener('click', function () {
-      window.open(
-        'https://servitecbaq.atlassian.net/servicedesk/customer/portal/3',
-        '_blank',
-        'noopener,noreferrer'
-      );
+      window.open('https://servitecbaq.atlassian.net/servicedesk/customer/portal/3', '_blank', 'noopener,noreferrer');
     });
   }
 
-  /*  /* ============================================
+  /* ============================================
      13. RADAR CANVAS EN HERO (OPTIMIZADO)
-     - Deshabilitado en mobile
-     - Reducido en desktop
-     - Pausado al no estar visible
      ============================================ */
   (function initHeroRadar() {
     const canvas = document.getElementById('heroRadar');
     if (!canvas) return;
     if (prefersReducedMotion) return;
     if (document.documentElement.classList.contains('low-power')) return;
-
-    // ⚡ DESHABILITADO EN MOBILE — la causa #1 del score bajo
     if (window.matchMedia('(max-width: 900px)').matches) {
       canvas.style.display = 'none';
       return;
@@ -734,16 +626,10 @@ document.addEventListener('DOMContentLoaded', function () {
     let rafId = null;
     const mouse = { x: -9999, y: -9999, radius: 140 };
 
-    // Colores cacheados por tema (evitar getComputedStyle en cada frame)
     let cachedColors = null;
     let cachedTheme = null;
-    const themeObserver = new MutationObserver(function () {
-      cachedColors = null; // invalidar cache
-    });
-    themeObserver.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['data-theme']
-    });
+    const themeObserver = new MutationObserver(function () { cachedColors = null; });
+    themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
     function getColors() {
       const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
@@ -760,107 +646,76 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function resize() {
-      dpr = Math.min(window.devicePixelRatio || 1, 1.5); // ⚡ tope a 1.5 en lugar de 2
+      dpr = Math.min(window.devicePixelRatio || 1, 1.5);
       const rect = canvas.getBoundingClientRect();
-      W = rect.width;
-      H = rect.height;
+      W = rect.width; H = rect.height;
       canvas.width = W * dpr;
       canvas.height = H * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-      // ⚡ menos partículas: entre 20 y 40
       const targetCount = Math.max(20, Math.min(40, Math.floor((W * H) / 22000)));
       particles.length = 0;
       for (let i = 0; i < targetCount; i++) {
         particles.push({
-          x: Math.random() * W,
-          y: Math.random() * H,
-          vx: (Math.random() - 0.5) * 0.22,
-          vy: (Math.random() - 0.5) * 0.22,
-          baseR: 1 + Math.random() * 1.5,
-          phase: Math.random() * Math.PI * 2
+          x: Math.random() * W, y: Math.random() * H,
+          vx: (Math.random() - 0.5) * 0.22, vy: (Math.random() - 0.5) * 0.22,
+          baseR: 1 + Math.random() * 1.5, phase: Math.random() * Math.PI * 2
         });
       }
     }
 
     function draw() {
-      if (!isVisible) {
-        rafId = null;
-        return;
-      }
-
+      if (!isVisible) { rafId = null; return; }
       const colors = getColors();
       ctx.clearRect(0, 0, W, H);
-
-      const cx = W / 2;
-      const cy = H / 2;
+      const cx = W / 2, cy = H / 2;
       const maxR = Math.max(W, H) * 0.6;
-
       ctx.strokeStyle = colors.ring;
       ctx.lineWidth = 1;
-      // ⚡ menos anillos: 3 en lugar de 5
-      const ringCount = 3;
-      for (let i = 1; i <= ringCount; i++) {
-        const r = (maxR / ringCount) * i;
+      for (let i = 1; i <= 3; i++) {
         ctx.beginPath();
-        ctx.arc(cx, cy, r, 0, Math.PI * 2);
+        ctx.arc(cx, cy, (maxR / 3) * i, 0, Math.PI * 2);
         ctx.stroke();
       }
-
-      // ⚡ sweep solo cada 2 frames
-      if (t % 2 === 0) {
+      if (t % 2 === 0 && ctx.createConicGradient) {
         const sweepAngle = (t * 0.012) % (Math.PI * 2);
-        if (ctx.createConicGradient) {
-          const grad = ctx.createConicGradient(sweepAngle, cx, cy);
-          grad.addColorStop(0, colors.sweep);
-          grad.addColorStop(0.15, 'rgba(0,0,0,0)');
-          grad.addColorStop(1, 'rgba(0,0,0,0)');
-          ctx.fillStyle = grad;
-          ctx.beginPath();
-          ctx.arc(cx, cy, maxR, 0, Math.PI * 2);
-          ctx.fill();
-        }
+        const grad = ctx.createConicGradient(sweepAngle, cx, cy);
+        grad.addColorStop(0, colors.sweep);
+        grad.addColorStop(0.15, 'rgba(0,0,0,0)');
+        grad.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(cx, cy, maxR, 0, Math.PI * 2);
+        ctx.fill();
       }
-
-      // ⚡ Conexiones: dist reducida a 120, y solo si hay pocas partículas
-      const linkDist = 120;
-      const linkDistSq = linkDist * linkDist;
-      if (particles.length <= 40) {
-        for (let i = 0; i < particles.length; i++) {
-          const p1 = particles[i];
-          for (let j = i + 1; j < particles.length; j++) {
-            const p2 = particles[j];
-            const dx = p1.x - p2.x;
-            const dy = p1.y - p2.y;
-            const distSq = dx * dx + dy * dy;
-            if (distSq < linkDistSq) {
-              const alpha = (1 - Math.sqrt(distSq) / linkDist) * 0.35;
-              ctx.strokeStyle = colors.line + alpha + ')';
-              ctx.lineWidth = 0.6;
-              ctx.beginPath();
-              ctx.moveTo(p1.x, p1.y);
-              ctx.lineTo(p2.x, p2.y);
-              ctx.stroke();
-            }
+      const linkDist = 120, linkDistSq = linkDist * linkDist;
+      for (let i = 0; i < particles.length; i++) {
+        const p1 = particles[i];
+        for (let j = i + 1; j < particles.length; j++) {
+          const p2 = particles[j];
+          const dx = p1.x - p2.x, dy = p1.y - p2.y;
+          const dSq = dx * dx + dy * dy;
+          if (dSq < linkDistSq) {
+            const alpha = (1 - Math.sqrt(dSq) / linkDist) * 0.35;
+            ctx.strokeStyle = colors.line + alpha + ')';
+            ctx.lineWidth = 0.6;
+            ctx.beginPath();
+            ctx.moveTo(p1.x, p1.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.stroke();
           }
         }
       }
-
-      // ⚡ Partículas SIN shadowBlur (eliminado — el mayor costo de FPS)
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
-        p.x += p.vx;
-        p.y += p.vy;
+        p.x += p.vx; p.y += p.vy;
         if (p.x < 0) p.x = W;
         if (p.x > W) p.x = 0;
         if (p.y < 0) p.y = H;
         if (p.y > H) p.y = 0;
-
-        const dx = mouse.x - p.x;
-        const dy = mouse.y - p.y;
-        const distM = Math.sqrt(dx * dx + dy * dy);
-        if (distM < mouse.radius) {
-          const force = (mouse.radius - distM) / mouse.radius;
+        const dx = mouse.x - p.x, dy = mouse.y - p.y;
+        const dM = Math.sqrt(dx * dx + dy * dy);
+        if (dM < mouse.radius) {
+          const force = (mouse.radius - dM) / mouse.radius;
           ctx.strokeStyle = colors.line + (force * 0.5) + ')';
           ctx.lineWidth = 0.7;
           ctx.beginPath();
@@ -868,24 +723,18 @@ document.addEventListener('DOMContentLoaded', function () {
           ctx.lineTo(mouse.x, mouse.y);
           ctx.stroke();
         }
-
         p.phase += 0.02;
         const pulse = 1 + Math.sin(p.phase) * 0.3;
         const r = Math.max(0.6, p.baseR * pulse);
-
-        // Círculo exterior SIN glow (mucho más rápido)
         ctx.fillStyle = colors.dot;
         ctx.beginPath();
         ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
         ctx.fill();
-
-        // Núcleo blanco
         ctx.fillStyle = colors.dotCore;
         ctx.beginPath();
         ctx.arc(p.x, p.y, r * 0.4, 0, Math.PI * 2);
         ctx.fill();
       }
-
       t += 1;
       rafId = requestAnimationFrame(draw);
     }
@@ -893,7 +742,6 @@ document.addEventListener('DOMContentLoaded', function () {
     resize();
     rafId = requestAnimationFrame(draw);
 
-    // ⚡ Resize con debounce
     let resizeTimer;
     window.addEventListener('resize', function () {
       clearTimeout(resizeTimer);
@@ -913,25 +761,20 @@ document.addEventListener('DOMContentLoaded', function () {
         });
       }, { passive: true });
       heroSection.addEventListener('mouseleave', function () {
-        mouse.x = -9999;
-        mouse.y = -9999;
+        mouse.x = -9999; mouse.y = -9999;
       });
     }
 
-    // ⚡ Pausar cuando sale del viewport
     if ('IntersectionObserver' in window) {
       const io = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
           isVisible = entry.isIntersecting;
-          if (isVisible && !rafId) {
-            rafId = requestAnimationFrame(draw);
-          }
+          if (isVisible && !rafId) rafId = requestAnimationFrame(draw);
         });
       }, { threshold: 0, rootMargin: '100px' });
       io.observe(canvas);
     }
 
-    // ⚡ Pausar cuando la pestaña no está visible
     document.addEventListener('visibilitychange', function () {
       if (document.hidden) {
         if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
@@ -940,36 +783,79 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   })();
+
   /* ============================================
-     14. CURSOR PERSONALIZADO
+     14. CURSOR PERSONALIZADO (VERSIÓN ULTRA-ROBUSTA)
+     - Funciona en iframes, navegadores normales, modo oscuro/claro
+     - Captura eventos con capture:true para sortear iframes
+     - Múltiples listeners redundantes
      ============================================ */
   (function initCustomCursor() {
     const cursorRing = document.getElementById('cursorRing');
     const cursorDot = document.getElementById('cursorDot');
-    if (!cursorRing || !cursorDot) return;
 
-    const isTouch = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
-    if (isTouch) return;
-    if (prefersReducedMotion) return;
-    if (document.documentElement.classList.contains('low-power')) return;
+    // Si no existen los elementos, mostramos el cursor del sistema
+    if (!cursorRing || !cursorDot) {
+      document.body.style.cursor = 'auto';
+      return;
+    }
 
+    // ⚡ Detectar touch solo si NO hay absolutamente ninguna señal de mouse
+    const hasAnyPointer = window.matchMedia('(any-pointer: fine)').matches;
+    const noPointer = window.matchMedia('(any-pointer: none)').matches;
+
+    // Si definitivamente es un dispositivo sin puntero (móvil puro), salimos
+    if (noPointer && !hasAnyPointer) {
+      cursorRing.style.display = 'none';
+      cursorDot.style.display = 'none';
+      document.body.style.cursor = 'auto';
+      return;
+    }
+
+    // Estado
     let mouseX = -100, mouseY = -100;
     let ringX = -100, ringY = -100;
     let dotX = -100, dotY = -100;
     let rafId = null;
+    let hasRealMouse = false;
     let isReady = false;
 
-    const RING_LERP = 0.14;
+    const RING_LERP = 0.18;
     const DOT_LERP = 0.55;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function activate() {
+      if (hasRealMouse) return;
+      hasRealMouse = true;
+      cursorRing.style.display = 'block';
+      cursorDot.style.display = 'block';
+      cursorRing.style.opacity = '1';
+      cursorDot.style.opacity = '1';
+      document.body.style.cursor = 'none';
+      document.body.classList.add('cursor-ready');
+      isReady = true;
+    }
+
+    // ⚡ ESTA ES LA CLAVE: aplicar la posición DIRECTAMENTE en el evento
+    function paintAt(x, y) {
+      ringX = x;
+      ringY = y;
+      dotX = x;
+      dotY = y;
+      cursorRing.style.transform = 'translate3d(' + x + 'px, ' + y + 'px, 0) translate(-50%, -50%)';
+      cursorDot.style.transform  = 'translate3d(' + x + 'px, ' + y + 'px, 0) translate(-50%, -50%)';
+    }
 
     function onMouseMove(e) {
       mouseX = e.clientX;
       mouseY = e.clientY;
-      if (!isReady) {
-        ringX = dotX = mouseX;
-        ringY = dotY = mouseY;
-        isReady = true;
-        document.body.classList.add('cursor-ready');
+
+      if (!hasRealMouse) {
+        activate();
+        // Pintar inmediatamente en la posición real
+        paintAt(mouseX, mouseY);
+        if (!reducedMotion) animate();
+        return;
       }
     }
 
@@ -979,23 +865,35 @@ document.addEventListener('DOMContentLoaded', function () {
     function onMouseUp() { document.body.classList.remove('cursor-down'); }
 
     function animate() {
+      if (!hasRealMouse) { rafId = null; return; }
       ringX += (mouseX - ringX) * RING_LERP;
       ringY += (mouseY - ringY) * RING_LERP;
       dotX  += (mouseX - dotX)  * DOT_LERP;
       dotY  += (mouseY - dotY)  * DOT_LERP;
 
-      cursorRing.style.transform = 'translate(' + ringX + 'px, ' + ringY + 'px) translate(-50%, -50%)';
-      cursorDot.style.transform  = 'translate(' + dotX + 'px, ' + dotY + 'px) translate(-50%, -50%)';
+      cursorRing.style.transform = 'translate3d(' + ringX + 'px, ' + ringY + 'px, 0) translate(-50%, -50%)';
+      cursorDot.style.transform  = 'translate3d(' + dotX + 'px, ' + dotY + 'px, 0) translate(-50%, -50%)';
 
       rafId = requestAnimationFrame(animate);
     }
 
-    window.addEventListener('mousemove', onMouseMove, { passive: true });
-    window.addEventListener('mousedown', onMouseDown);
-    window.addEventListener('mouseup', onMouseUp);
-    document.addEventListener('mouseleave', onMouseLeaveWindow);
-    document.addEventListener('mouseenter', onMouseEnterWindow);
+    // ⚡ Registrar en múltiples targets con capture:true (sortea iframes)
+    const moveOptions = { passive: true, capture: true };
 
+    window.addEventListener('mousemove', onMouseMove, moveOptions);
+    document.addEventListener('mousemove', onMouseMove, moveOptions);
+    if (document.body) {
+      document.body.addEventListener('mousemove', onMouseMove, moveOptions);
+    }
+
+    window.addEventListener('mousedown', onMouseDown, { capture: true });
+    window.addEventListener('mouseup', onMouseUp, { capture: true });
+    document.addEventListener('mouseleave', onMouseLeaveWindow, { capture: true });
+    document.addEventListener('mouseenter', onMouseEnterWindow, { capture: true });
+    window.addEventListener('mouseleave', onMouseLeaveWindow, { capture: true });
+    window.addEventListener('mouseenter', onMouseEnterWindow, { capture: true });
+
+    // Estados hover / view
     function bindCursor() {
       document.querySelectorAll('[data-cursor="hover"]').forEach(function (el) {
         if (el.dataset.cursorBound === 'hover') return;
@@ -1010,22 +908,29 @@ document.addEventListener('DOMContentLoaded', function () {
         el.addEventListener('mouseleave', function () { document.body.classList.remove('cursor-view'); });
       });
     }
-
     bindCursor();
+
     const themeObserver = new MutationObserver(bindCursor);
     themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
-    animate();
-
+    // Pausa cuando la pestaña no está visible
     document.addEventListener('visibilitychange', function () {
       if (document.hidden) {
         if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
-      } else {
-        if (!rafId) animate();
+      } else if (hasRealMouse && !reducedMotion && !rafId) {
+        animate();
       }
     });
-  })();
 
+    // ⚡ Fallback: si tras 1s no hay mouse real, mostrar cursor del sistema
+    setTimeout(function () {
+      if (!hasRealMouse) {
+        cursorRing.style.display = 'none';
+        cursorDot.style.display = 'none';
+        document.body.style.cursor = 'auto';
+      }
+    }, 1000);
+  })();
   /* ============================================
      15. WIDGETS: PANELES
      ============================================ */
@@ -1083,7 +988,6 @@ document.addEventListener('DOMContentLoaded', function () {
       if (e.key === 'Escape' && activePanel) closePanels();
     });
 
-    /* Datos del dispositivo */
     const dIP = document.getElementById('dIP');
     const dISP = document.getElementById('dISP');
     const dCity = document.getElementById('dCity');
@@ -1115,9 +1019,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function updateTime() {
       if (!dTime) return;
       const now = new Date();
-      const hh = String(now.getHours()).padStart(2, '0');
-      const mm = String(now.getMinutes()).padStart(2, '0');
-      dTime.textContent = hh + ':' + mm;
+      dTime.textContent = String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0');
     }
     function loadDeviceData() {
       if (dOS) dOS.textContent = detectOS();
@@ -1142,18 +1044,14 @@ document.addEventListener('DOMContentLoaded', function () {
           if (dCountry) dCountry.textContent = 'No disponible';
         });
     }
-
     if (deviceRefresh) deviceRefresh.addEventListener('click', loadDeviceData);
-
     setInterval(function () {
       if (devicePanel && devicePanel.classList.contains('open')) updateTime();
     }, 60000);
 
-    /* Calculadora */
     const calcDisplay = document.getElementById('calcDisplay');
     const calcHistory = document.getElementById('calcHistory');
     const calcButtons = document.querySelectorAll('.calc-btn');
-
     let currentInput = '0';
     let previousValue = null;
     let currentOperator = null;
@@ -1172,17 +1070,15 @@ document.addEventListener('DOMContentLoaded', function () {
           ? previousValue + ' ' + currentOperator : '';
       }
     }
-    function inputDigit(digit) {
-      if (waitingForOperand) { currentInput = digit; waitingForOperand = false; }
-      else { currentInput = currentInput === '0' ? digit : currentInput + digit; }
+    function inputDigit(d) {
+      if (waitingForOperand) { currentInput = d; waitingForOperand = false; }
+      else { currentInput = currentInput === '0' ? d : currentInput + d; }
     }
     function inputDecimal() {
       if (waitingForOperand) { currentInput = '0.'; waitingForOperand = false; return; }
       if (!currentInput.includes('.')) currentInput += '.';
     }
-    function clearAll() {
-      currentInput = '0'; previousValue = null; currentOperator = null; waitingForOperand = false;
-    }
+    function clearAll() { currentInput = '0'; previousValue = null; currentOperator = null; waitingForOperand = false; }
     function toggleSign() {
       if (currentInput === '0') return;
       currentInput = currentInput.startsWith('-') ? currentInput.slice(1) : '-' + currentInput;
@@ -1201,10 +1097,7 @@ document.addEventListener('DOMContentLoaded', function () {
         case '+': result += inputValue; break;
         case '-': result -= inputValue; break;
         case '*': result *= inputValue; break;
-        case '/':
-          if (inputValue === 0) return 'Error';
-          result /= inputValue;
-          break;
+        case '/': if (inputValue === 0) return 'Error'; result /= inputValue; break;
       }
       return Math.round(result * 1e10) / 1e10;
     }
@@ -1293,7 +1186,6 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!whatsappBtn || !waPanel || !waForm) return;
 
     const WHATSAPP_NUMBER = '573158505020';
-
     let activeWidget = null;
     const devicePanel = document.getElementById('devicePanel');
     const calcPanel = document.getElementById('calcPanel');
@@ -1325,7 +1217,6 @@ document.addEventListener('DOMContentLoaded', function () {
       if (waPanel.classList.contains('open')) closeAllWidgets();
       else openWaPanel();
     });
-
     waPanel.querySelectorAll('[data-close-wa]').forEach(function (el) {
       el.addEventListener('click', closeAllWidgets);
     });
@@ -1336,7 +1227,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     waForm.addEventListener('submit', function (e) {
       e.preventDefault();
-
       const name = (document.getElementById('wa-name').value || '').trim();
       const address = (document.getElementById('wa-address').value || '').trim();
       const contact = (document.getElementById('wa-contact').value || '').trim();
@@ -1366,7 +1256,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
       const waUrl = 'https://api.whatsapp.com/send?phone=' + WHATSAPP_NUMBER + '&text=' + encodeURIComponent(message);
       window.open(waUrl, '_blank', 'noopener,noreferrer');
-
       setTimeout(function () {
         closeAllWidgets();
         waForm.reset();
@@ -1381,18 +1270,13 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   })();
 
-    /* ============================================
+  /* ============================================
      17. MATRIX EN PANEL DISPOSITIVO (OPTIMIZADO)
-     - Deshabilitado en mobile
-     - FPS reducido
-     - Corre solo cuando está visible Y dark
      ============================================ */
   (function initMatrixPanel() {
     const panel = document.getElementById('devicePanel');
     const canvas = document.getElementById('matrixPanelRain');
     if (!panel || !canvas) return;
-
-    // ⚡ Deshabilitado en mobile
     if (window.matchMedia('(max-width: 900px)').matches) return;
     if (prefersReducedMotion) return;
     if (document.documentElement.classList.contains('low-power')) return;
@@ -1407,11 +1291,11 @@ document.addEventListener('DOMContentLoaded', function () {
     let rafId = null;
     let running = false;
     let lastTime = 0;
-    const frameInterval = 100; // ⚡ 10 FPS en lugar de 15
+    const frameInterval = 100;
 
     function resize() {
       const rect = panel.getBoundingClientRect();
-      const dpr = Math.min(window.devicePixelRatio || 1, 1.5); // ⚡ tope 1.5
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
       canvas.width = Math.max(1, rect.width) * dpr;
       canvas.height = Math.max(1, rect.height) * dpr;
       canvas.style.width = rect.width + 'px';
@@ -1429,29 +1313,21 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
       }
       lastTime = now;
-
       const w = canvas.width / (Math.min(window.devicePixelRatio || 1, 1.5));
       const h = canvas.height / (Math.min(window.devicePixelRatio || 1, 1.5));
-
       ctx.fillStyle = 'rgba(0, 0, 0, 0.12)';
       ctx.fillRect(0, 0, w, h);
-
       ctx.font = fontSize + 'px "JetBrains Mono", monospace';
       ctx.textBaseline = 'top';
-
       for (let i = 0; i < columns; i++) {
         const text = chars[Math.floor(Math.random() * chars.length)];
         const x = i * fontSize;
         const y = drops[i] * fontSize;
-
-        // ⚡ Sin shadowBlur — solo color sólido
         ctx.fillStyle = '#00FF41';
         ctx.fillText(text, x, y);
-
         if (y > h && Math.random() > 0.96) drops[i] = 0;
         drops[i]++;
       }
-
       rafId = requestAnimationFrame(drawFrame);
     }
 
@@ -1461,7 +1337,6 @@ document.addEventListener('DOMContentLoaded', function () {
       resize();
       rafId = requestAnimationFrame(drawFrame);
     }
-
     function stop() {
       running = false;
       if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
@@ -1470,18 +1345,9 @@ document.addEventListener('DOMContentLoaded', function () {
         ctx.clearRect(0, 0, canvas.width / dpr, canvas.height / dpr);
       }
     }
-
-    function isDark() {
-      return document.documentElement.getAttribute('data-theme') === 'dark';
-    }
-
-    function shouldRun() {
-      return isDark() && panel.classList.contains('open');
-    }
-
-    function sync() {
-      if (shouldRun()) start(); else stop();
-    }
+    function isDark() { return document.documentElement.getAttribute('data-theme') === 'dark'; }
+    function shouldRun() { return isDark() && panel.classList.contains('open'); }
+    function sync() { if (shouldRun()) start(); else stop(); }
 
     const classObserver = new MutationObserver(sync);
     classObserver.observe(panel, { attributes: true, attributeFilter: ['class'] });
@@ -1511,3 +1377,5 @@ document.addEventListener('DOMContentLoaded', function () {
 
     sync();
   })();
+
+});
