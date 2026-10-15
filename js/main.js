@@ -599,8 +599,10 @@ document.addEventListener('DOMContentLoaded', function () {
     inner.appendChild(answer);
   });
 
-  /* ============================================
-     10. LAZY LOAD: GR WIDGET
+    /* ============================================
+     10. LAZY LOAD: GR WIDGET (OPTIMIZADO)
+     - Carga solo cuando el usuario se acerca 200px
+     - Con timeout de respaldo por si el observer no dispara
      ============================================ */
   const reviewsSection = document.getElementById('resenas');
   let grWidgetLoaded = false;
@@ -612,6 +614,7 @@ document.addEventListener('DOMContentLoaded', function () {
     script.src = 'https://grwidget.com/v1/grwidget.js';
     script.async = true;
     script.defer = true;
+    script.crossOrigin = 'anonymous';
     document.body.appendChild(script);
   }
 
@@ -624,10 +627,11 @@ document.addEventListener('DOMContentLoaded', function () {
             grObserver.disconnect();
           }
         });
-      }, { rootMargin: '300px 0px' });
+      }, { rootMargin: '200px 0px' });
       grObserver.observe(reviewsSection);
     } else {
-      loadGrWidget();
+      // Fallback: cargar tras 4s si no hay IO
+      setTimeout(loadGrWidget, 4000);
     }
   }
 
@@ -702,8 +706,11 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  /* ============================================
-     13. RADAR CANVAS EN HERO
+  /*  /* ============================================
+     13. RADAR CANVAS EN HERO (OPTIMIZADO)
+     - Deshabilitado en mobile
+     - Reducido en desktop
+     - Pausado al no estar visible
      ============================================ */
   (function initHeroRadar() {
     const canvas = document.getElementById('heroRadar');
@@ -711,27 +718,49 @@ document.addEventListener('DOMContentLoaded', function () {
     if (prefersReducedMotion) return;
     if (document.documentElement.classList.contains('low-power')) return;
 
-    const ctx = canvas.getContext('2d');
+    // ⚡ DESHABILITADO EN MOBILE — la causa #1 del score bajo
+    if (window.matchMedia('(max-width: 900px)').matches) {
+      canvas.style.display = 'none';
+      return;
+    }
+
+    const ctx = canvas.getContext('2d', { alpha: true });
+    if (!ctx) return;
+
     let W, H, dpr;
     let t = 0;
     const particles = [];
     let isVisible = true;
-    const mouse = { x: -9999, y: -9999, radius: 160 };
+    let rafId = null;
+    const mouse = { x: -9999, y: -9999, radius: 140 };
+
+    // Colores cacheados por tema (evitar getComputedStyle en cada frame)
+    let cachedColors = null;
+    let cachedTheme = null;
+    const themeObserver = new MutationObserver(function () {
+      cachedColors = null; // invalidar cache
+    });
+    themeObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme']
+    });
 
     function getColors() {
       const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      return {
+      if (cachedColors && cachedTheme === isDark) return cachedColors;
+      cachedTheme = isDark;
+      cachedColors = {
         dot: isDark ? 'rgba(99,102,241,0.95)' : 'rgba(79,70,229,0.85)',
-        dotCore: isDark ? 'rgba(255,255,255,0.95)' : 'rgba(255,255,255,0.9)',
+        dotCore: 'rgba(255,255,255,0.95)',
         line: isDark ? 'rgba(99,102,241,' : 'rgba(79,70,229,',
-        ring: isDark ? 'rgba(99,102,241,0.20)' : 'rgba(79,70,229,0.16)',
-        sweep: isDark ? 'rgba(249,115,22,0.12)' : 'rgba(249,115,22,0.10)',
-        glow: isDark ? 'rgba(99,102,241,0.9)' : 'rgba(79,70,229,0.7)'
+        ring: isDark ? 'rgba(99,102,241,0.18)' : 'rgba(79,70,229,0.14)',
+        sweep: isDark ? 'rgba(249,115,22,0.10)' : 'rgba(249,115,22,0.08)'
       };
+      return cachedColors;
     }
 
     function resize() {
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      dpr = Math.min(window.devicePixelRatio || 1, 1.5); // ⚡ tope a 1.5 en lugar de 2
       const rect = canvas.getBoundingClientRect();
       W = rect.width;
       H = rect.height;
@@ -739,15 +768,16 @@ document.addEventListener('DOMContentLoaded', function () {
       canvas.height = H * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      const targetCount = Math.max(30, Math.min(60, Math.floor((W * H) / 14000)));
+      // ⚡ menos partículas: entre 20 y 40
+      const targetCount = Math.max(20, Math.min(40, Math.floor((W * H) / 22000)));
       particles.length = 0;
       for (let i = 0; i < targetCount; i++) {
         particles.push({
           x: Math.random() * W,
           y: Math.random() * H,
-          vx: (Math.random() - 0.5) * 0.28,
-          vy: (Math.random() - 0.5) * 0.28,
-          baseR: 1 + Math.random() * 1.8,
+          vx: (Math.random() - 0.5) * 0.22,
+          vy: (Math.random() - 0.5) * 0.22,
+          baseR: 1 + Math.random() * 1.5,
           phase: Math.random() * Math.PI * 2
         });
       }
@@ -755,7 +785,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function draw() {
       if (!isVisible) {
-        requestAnimationFrame(draw);
+        rafId = null;
         return;
       }
 
@@ -768,7 +798,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
       ctx.strokeStyle = colors.ring;
       ctx.lineWidth = 1;
-      const ringCount = 5;
+      // ⚡ menos anillos: 3 en lugar de 5
+      const ringCount = 3;
       for (let i = 1; i <= ringCount; i++) {
         const r = (maxR / ringCount) * i;
         ctx.beginPath();
@@ -776,38 +807,46 @@ document.addEventListener('DOMContentLoaded', function () {
         ctx.stroke();
       }
 
-      const sweepAngle = (t * 0.008) % (Math.PI * 2);
-      if (ctx.createConicGradient) {
-        const grad = ctx.createConicGradient(sweepAngle, cx, cy);
-        grad.addColorStop(0, colors.sweep);
-        grad.addColorStop(0.15, 'rgba(0,0,0,0)');
-        grad.addColorStop(1, 'rgba(0,0,0,0)');
-        ctx.fillStyle = grad;
-        ctx.beginPath();
-        ctx.arc(cx, cy, maxR, 0, Math.PI * 2);
-        ctx.fill();
+      // ⚡ sweep solo cada 2 frames
+      if (t % 2 === 0) {
+        const sweepAngle = (t * 0.012) % (Math.PI * 2);
+        if (ctx.createConicGradient) {
+          const grad = ctx.createConicGradient(sweepAngle, cx, cy);
+          grad.addColorStop(0, colors.sweep);
+          grad.addColorStop(0.15, 'rgba(0,0,0,0)');
+          grad.addColorStop(1, 'rgba(0,0,0,0)');
+          ctx.fillStyle = grad;
+          ctx.beginPath();
+          ctx.arc(cx, cy, maxR, 0, Math.PI * 2);
+          ctx.fill();
+        }
       }
 
-      const linkDist = 150;
-      for (let i = 0; i < particles.length; i++) {
-        const p1 = particles[i];
-        for (let j = i + 1; j < particles.length; j++) {
-          const p2 = particles[j];
-          const dx = p1.x - p2.x;
-          const dy = p1.y - p2.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < linkDist) {
-            const alpha = (1 - dist / linkDist) * 0.4;
-            ctx.strokeStyle = colors.line + alpha + ')';
-            ctx.lineWidth = 0.6;
-            ctx.beginPath();
-            ctx.moveTo(p1.x, p1.y);
-            ctx.lineTo(p2.x, p2.y);
-            ctx.stroke();
+      // ⚡ Conexiones: dist reducida a 120, y solo si hay pocas partículas
+      const linkDist = 120;
+      const linkDistSq = linkDist * linkDist;
+      if (particles.length <= 40) {
+        for (let i = 0; i < particles.length; i++) {
+          const p1 = particles[i];
+          for (let j = i + 1; j < particles.length; j++) {
+            const p2 = particles[j];
+            const dx = p1.x - p2.x;
+            const dy = p1.y - p2.y;
+            const distSq = dx * dx + dy * dy;
+            if (distSq < linkDistSq) {
+              const alpha = (1 - Math.sqrt(distSq) / linkDist) * 0.35;
+              ctx.strokeStyle = colors.line + alpha + ')';
+              ctx.lineWidth = 0.6;
+              ctx.beginPath();
+              ctx.moveTo(p1.x, p1.y);
+              ctx.lineTo(p2.x, p2.y);
+              ctx.stroke();
+            }
           }
         }
       }
 
+      // ⚡ Partículas SIN shadowBlur (eliminado — el mayor costo de FPS)
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
         p.x += p.vx;
@@ -822,63 +861,85 @@ document.addEventListener('DOMContentLoaded', function () {
         const distM = Math.sqrt(dx * dx + dy * dy);
         if (distM < mouse.radius) {
           const force = (mouse.radius - distM) / mouse.radius;
-          ctx.strokeStyle = colors.line + (force * 0.55) + ')';
-          ctx.lineWidth = 0.8;
+          ctx.strokeStyle = colors.line + (force * 0.5) + ')';
+          ctx.lineWidth = 0.7;
           ctx.beginPath();
           ctx.moveTo(p.x, p.y);
           ctx.lineTo(mouse.x, mouse.y);
           ctx.stroke();
         }
 
-        p.phase += 0.025;
-        const pulse = 1 + Math.sin(p.phase) * 0.35;
+        p.phase += 0.02;
+        const pulse = 1 + Math.sin(p.phase) * 0.3;
         const r = Math.max(0.6, p.baseR * pulse);
 
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = colors.glow;
+        // Círculo exterior SIN glow (mucho más rápido)
         ctx.fillStyle = colors.dot;
         ctx.beginPath();
         ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
         ctx.fill();
 
-        ctx.shadowBlur = 0;
+        // Núcleo blanco
         ctx.fillStyle = colors.dotCore;
         ctx.beginPath();
-        ctx.arc(p.x, p.y, r * 0.35, 0, Math.PI * 2);
+        ctx.arc(p.x, p.y, r * 0.4, 0, Math.PI * 2);
         ctx.fill();
       }
 
       t += 1;
-      requestAnimationFrame(draw);
+      rafId = requestAnimationFrame(draw);
     }
 
     resize();
-    draw();
-    window.addEventListener('resize', resize);
+    rafId = requestAnimationFrame(draw);
+
+    // ⚡ Resize con debounce
+    let resizeTimer;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(resize, 200);
+    }, { passive: true });
 
     const heroSection = canvas.parentElement;
     if (heroSection) {
+      let mouseRaf = null;
       heroSection.addEventListener('mousemove', function (e) {
-        const rect = canvas.getBoundingClientRect();
-        mouse.x = e.clientX - rect.left;
-        mouse.y = e.clientY - rect.top;
-      });
+        if (mouseRaf) return;
+        mouseRaf = requestAnimationFrame(function () {
+          const rect = canvas.getBoundingClientRect();
+          mouse.x = e.clientX - rect.left;
+          mouse.y = e.clientY - rect.top;
+          mouseRaf = null;
+        });
+      }, { passive: true });
       heroSection.addEventListener('mouseleave', function () {
         mouse.x = -9999;
         mouse.y = -9999;
       });
     }
 
+    // ⚡ Pausar cuando sale del viewport
     if ('IntersectionObserver' in window) {
       const io = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
           isVisible = entry.isIntersecting;
+          if (isVisible && !rafId) {
+            rafId = requestAnimationFrame(draw);
+          }
         });
-      }, { threshold: 0 });
+      }, { threshold: 0, rootMargin: '100px' });
       io.observe(canvas);
     }
-  })();
 
+    // ⚡ Pausar cuando la pestaña no está visible
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) {
+        if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+      } else if (isVisible && !rafId) {
+        rafId = requestAnimationFrame(draw);
+      }
+    });
+  })();
   /* ============================================
      14. CURSOR PERSONALIZADO
      ============================================ */
@@ -1320,29 +1381,37 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   })();
 
-  /* ============================================
-     17. MATRIX EN PANEL DISPOSITIVO (solo dark)
+    /* ============================================
+     17. MATRIX EN PANEL DISPOSITIVO (OPTIMIZADO)
+     - Deshabilitado en mobile
+     - FPS reducido
+     - Corre solo cuando está visible Y dark
      ============================================ */
   (function initMatrixPanel() {
     const panel = document.getElementById('devicePanel');
     const canvas = document.getElementById('matrixPanelRain');
     if (!panel || !canvas) return;
 
-    const disabled = prefersReducedMotion || document.documentElement.classList.contains('low-power');
-    const ctx = canvas.getContext('2d');
-    const chars = 'アカサタナハマヤラワｱｲｳｴｵｶｷｸｹｺ0123456789ABCDEF<>{}[]/*-+=;:·'.split('');
-    const fontSize = 12;
+    // ⚡ Deshabilitado en mobile
+    if (window.matchMedia('(max-width: 900px)').matches) return;
+    if (prefersReducedMotion) return;
+    if (document.documentElement.classList.contains('low-power')) return;
+
+    const ctx = canvas.getContext('2d', { alpha: true });
+    if (!ctx) return;
+
+    const chars = 'アカサタナハマヤラワ0123456789ABCDEF<>{}[]/*-+=;:·'.split('');
+    const fontSize = 13;
     let columns = 0;
     let drops = [];
     let rafId = null;
     let running = false;
     let lastTime = 0;
-    const frameInterval = 65;
+    const frameInterval = 100; // ⚡ 10 FPS en lugar de 15
 
     function resize() {
-      if (!panel) return;
       const rect = panel.getBoundingClientRect();
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5); // ⚡ tope 1.5
       canvas.width = Math.max(1, rect.width) * dpr;
       canvas.height = Math.max(1, rect.height) * dpr;
       canvas.style.width = rect.width + 'px';
@@ -1360,49 +1429,56 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
       }
       lastTime = now;
-      const w = canvas.width / (Math.min(window.devicePixelRatio || 1, 2));
-      const h = canvas.height / (Math.min(window.devicePixelRatio || 1, 2));
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.10)';
+
+      const w = canvas.width / (Math.min(window.devicePixelRatio || 1, 1.5));
+      const h = canvas.height / (Math.min(window.devicePixelRatio || 1, 1.5));
+
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.12)';
       ctx.fillRect(0, 0, w, h);
+
       ctx.font = fontSize + 'px "JetBrains Mono", monospace';
       ctx.textBaseline = 'top';
+
       for (let i = 0; i < columns; i++) {
         const text = chars[Math.floor(Math.random() * chars.length)];
         const x = i * fontSize;
         const y = drops[i] * fontSize;
-        ctx.fillStyle = '#CCFFCC';
-        ctx.shadowColor = '#00FF41';
-        ctx.shadowBlur = 8;
-        ctx.fillText(text, x, y);
-        ctx.shadowBlur = 0;
+
+        // ⚡ Sin shadowBlur — solo color sólido
         ctx.fillStyle = '#00FF41';
-        ctx.fillText(chars[Math.floor(Math.random() * chars.length)], x, y + fontSize);
+        ctx.fillText(text, x, y);
+
         if (y > h && Math.random() > 0.96) drops[i] = 0;
         drops[i]++;
       }
+
       rafId = requestAnimationFrame(drawFrame);
     }
 
     function start() {
-      if (disabled || running) return;
+      if (running) return;
       running = true;
       resize();
       rafId = requestAnimationFrame(drawFrame);
     }
+
     function stop() {
       running = false;
       if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
       if (canvas) {
-        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
         ctx.clearRect(0, 0, canvas.width / dpr, canvas.height / dpr);
       }
     }
+
     function isDark() {
       return document.documentElement.getAttribute('data-theme') === 'dark';
     }
+
     function shouldRun() {
-      return isDark() && panel.classList.contains('open') && !disabled;
+      return isDark() && panel.classList.contains('open');
     }
+
     function sync() {
       if (shouldRun()) start(); else stop();
     }
@@ -1435,5 +1511,3 @@ document.addEventListener('DOMContentLoaded', function () {
 
     sync();
   })();
-
-});

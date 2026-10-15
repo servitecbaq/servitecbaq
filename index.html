@@ -25,8 +25,11 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" media="print" onload="this.media='all'">
+  <noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
+  </noscript>
   <script>
     (function() {
       try {
@@ -40,7 +43,8 @@
     })();
   </script>
 
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="preload" href="css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="css/styles.css"></noscript>
 
   <script type="application/ld+json">
   {
@@ -474,7 +478,7 @@
 
       <div class="founder-split">
         <div class="founder-split__photo">
-          <img src="img/david.jpg" alt="David Fragozo, fundador de Servitecbaq" loading="lazy" decoding="async">
+          <img src="img/Profile.jpg" alt="David Fragozo, fundador de Servitecbaq" loading="lazy" decoding="async">
           <div class="founder-split__badge">
             <span class="pulse-dot"></span>
             Disponible
@@ -715,7 +719,7 @@
           </a>
         </div>
 
-        <div class="grwidget-wrapper">
+        <div class="grwidget-wrapper" style="min-height: 340px; contain: layout style paint;">
           <div class="grwidget-embed" data-grwidget-key="G0gOrv6WNkt5ry1ARyK4NQHH" id="grWidgetContainer"></div>
         </div>
       </div>
@@ -937,6 +941,6 @@
     </div>
   </div>
 
-  <script src="js/main.js"></script>
+  <script src="js/main.js" defer></script>
 </body>
 </html>

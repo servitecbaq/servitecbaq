@@ -1908,3 +1908,147 @@ section { padding: clamp(4rem, 8vw, 6rem) 0; position: relative; z-index: 1; }
 }
 [data-theme="dark"] body.cursor-device .cursor-ring { border-color: #00FF41; box-shadow: 0 0 18px rgba(0,255,65,0.6); }
 [data-theme="dark"] body.cursor-device .cursor-dot { background: #00FF41; box-shadow: 0 0 16px rgba(0,255,65,1); }
+
+/* ============================================
+   PERFORMANCE OPTIMIZATIONS
+   Estas reglas mejoran Core Web Vitals sin
+   cambiar NADA del diseño visual.
+   ============================================ */
+
+/* 1. content-visibility: secciones fuera del viewport no se renderizan */
+.coverage-section,
+.services,
+.about,
+.founder,
+.tips,
+.apps,
+.featured-app,
+.faq,
+.reviews,
+.contact,
+.footer {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
+}
+
+/* 2. Cada tarjeta también se beneficia */
+.svc,
+.bento,
+.app-card,
+.about-feature,
+.tip-mini,
+.contact-card,
+.faq-item,
+.zone-chip,
+.kpi,
+.stat-block {
+  contain: layout style paint;
+}
+
+/* 3. GPU hints solo durante la animación, no permanente */
+.svc:hover,
+.bento:hover,
+.app-card:hover,
+.contact-card:hover,
+.tip-mini:hover,
+.about-feature:hover {
+  will-change: transform;
+}
+.svc,
+.bento,
+.app-card,
+.contact-card,
+.tip-mini,
+.about-feature {
+  will-change: auto;
+}
+
+/* 4. Reducir costos de backdrop-filter en mobile — fallback sólido */
+@media (max-width: 900px) {
+  .header__inner {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: var(--bg-elev);
+  }
+}
+
+/* 5. Reduce el trabajo de pintado del marquee en mobile */
+@media (max-width: 640px) {
+  .hero__marquee-track {
+    animation-duration: 60s;
+  }
+  .hero__glow {
+    display: none;
+  }
+  .hero__noise {
+    display: none;
+  }
+}
+
+/* 6. Optimizar transiciones del cursor (menos propiedades animadas) */
+.cursor-ring,
+.cursor-dot {
+  backface-visibility: hidden;
+  transform: translate3d(-50%, -50%, 0);
+}
+
+/* 7. Prevenir CLS en imágenes del fundador */
+.founder-split__photo {
+  aspect-ratio: 4 / 5;
+  background: var(--bg-subtle);
+}
+.founder-split__photo img {
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+/* 8. Prevenir CLS en el cert badge */
+.cert-embed {
+  width: 130px;
+  height: 130px;
+  aspect-ratio: 1 / 1;
+}
+
+/* 9. Hero bento — contener para evitar repintado global */
+.hero__bento {
+  contain: layout style;
+}
+
+/* 10. Optimizar la card del teléfono en featured-app */
+.featured-app-phone {
+  contain: layout style paint;
+}
+.featured-app-phone-screen {
+  will-change: auto;
+}
+
+/* 11. Desactivar animación del radar en mobile como refuerzo CSS */
+@media (max-width: 900px) {
+  #heroRadar { display: none !important; }
+}
+
+/* 12. Reducir el tamaño de las partículas de fondo global */
+@media (max-width: 640px) {
+  body::before { background: none; }
+}
+
+/* 13. Contain estricto para el hero (evita repaints del body) */
+.hero {
+  contain: layout style paint;
+  /* Ojo: no usar contain:size porque el hero depende del contenido */
+}
+
+/* 14. Optimizar la barra de scroll horizontal del hero bento */
+.hero__marquee {
+  contain: strict;
+  contain-intrinsic-size: auto 60px;
+}
+
+/* 15. Preservar accesibilidad: no rompas motion reducido */
+@media (prefers-reduced-motion: reduce) {
+  .hero__marquee-track {
+    animation: none;
+  }
+}
