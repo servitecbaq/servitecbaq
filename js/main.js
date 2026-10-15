@@ -12,10 +12,8 @@ document.addEventListener('DOMContentLoaded', function () {
       return;
     }
     if (!isMobile) return;
-
     const cores = navigator.hardwareConcurrency || 8;
     const memory = navigator.deviceMemory || 4;
-
     if (cores <= 4 || memory < 4) {
       document.documentElement.classList.add('low-power');
     }
@@ -28,6 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const nav = document.getElementById('nav');
 
   function closeNav() {
+    if (!nav || !toggle) return;
     nav.classList.remove('open');
     toggle.setAttribute('aria-expanded', 'false');
     toggle.textContent = '☰';
@@ -66,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (target) {
         e.preventDefault();
         const header = document.querySelector('.header');
-        const offset = header ? header.offsetHeight + 12 : 0;
+        const offset = header ? header.offsetHeight + 20 : 0;
         const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
         window.scrollTo({ top: top, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
       }
@@ -74,9 +73,9 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   /* ============================================
-     3. HEADER CON SOMBRA
+     3. HEADER CON SOMBRA AL SCROLL
      ============================================ */
-  const header = document.querySelector('.header');
+  const header = document.getElementById('siteHeader') || document.querySelector('.header');
   if (header) {
     let ticking = false;
     window.addEventListener('scroll', function () {
@@ -93,18 +92,24 @@ document.addEventListener('DOMContentLoaded', function () {
   /* ============================================
      4. REVEAL ON SCROLL
      ============================================ */
-  const revealTargets = ['.service-card', '.feature', '.contact-card', '.faq-item'];
+  const revealTargets = [
+    '.service-card', '.svc', '.about-feature', '.contact-card', '.faq-item',
+    '.bento', '.stat-block', '.kpi', '.zone-chip', '.founder-split__stats',
+    '.feature', '.app-card'
+  ];
   revealTargets.forEach(function (selector) {
     document.querySelectorAll(selector).forEach(function (el, i) {
+      if (el.closest('.hero__bento')) return;
+      if (el.classList.contains('reveal')) return;
       el.classList.add('reveal');
       if (i < 8) el.classList.add('reveal-delay-' + ((i % 8) + 1));
     });
   });
-  document.querySelectorAll('.section-title, .section-subtitle').forEach(function (el) {
-    el.classList.add('reveal');
+  document.querySelectorAll('.section-title, .section-subtitle, .section-lead, .section-kicker').forEach(function (el) {
+    if (!el.classList.contains('reveal')) el.classList.add('reveal');
   });
-  const founderCard = document.querySelector('.founder-card');
-  if (founderCard) founderCard.classList.add('reveal');
+  const founderCard = document.querySelector('.founder-card, .founder-split');
+  if (founderCard && !founderCard.classList.contains('reveal')) founderCard.classList.add('reveal');
 
   if ('IntersectionObserver' in window && !prefersReducedMotion) {
     const revealObserver = new IntersectionObserver(function (entries) {
@@ -305,8 +310,10 @@ document.addEventListener('DOMContentLoaded', function () {
     document.body.classList.remove('modal-open');
   }
 
-  document.querySelectorAll('.service-card').forEach(function (card) {
+  // ⚡ FIX: acepta tanto .service-card como .svc[data-service]
+  document.querySelectorAll('.service-card, .svc[data-service]').forEach(function (card) {
     const key = card.getAttribute('data-service');
+    if (!key) return;
     card.addEventListener('click', function () { openModal(key); });
     card.addEventListener('keydown', function (e) {
       if (e.key === 'Enter' || e.key === ' ') {
@@ -465,7 +472,7 @@ document.addEventListener('DOMContentLoaded', function () {
       })
       .catch(function (error) {
         console.error('Error tips:', error);
-        if (tipTrack) tipTrack.innerHTML = '<p style="text-align:center;color:var(--color-text-light);padding:40px 20px;">No se pudieron cargar los tips.</p>';
+        if (tipTrack) tipTrack.innerHTML = '<p style="text-align:center;color:var(--fg-muted);padding:40px 20px;">No se pudieron cargar los tips.</p>';
       });
   }
 
@@ -579,7 +586,6 @@ document.addEventListener('DOMContentLoaded', function () {
      9. FAQ
      ============================================ */
   const faqItems = document.querySelectorAll('.faq-item');
-
   faqItems.forEach(function (item) {
     const answer = item.querySelector('.faq-answer');
     if (!answer) return;
@@ -602,7 +608,6 @@ document.addEventListener('DOMContentLoaded', function () {
   function loadGrWidget() {
     if (grWidgetLoaded || !reviewsSection) return;
     grWidgetLoaded = true;
-
     const script = document.createElement('script');
     script.src = 'https://grwidget.com/v1/grwidget.js';
     script.async = true;
@@ -661,10 +666,8 @@ document.addEventListener('DOMContentLoaded', function () {
               formStatus.textContent = '¡Gracias! Hemos recibido tu mensaje. Te responderemos lo antes posible.';
             }
             contactForm.reset();
-
             formSubmit.disabled = false;
             formSubmit.textContent = '✉️ Enviar mensaje';
-
             setTimeout(function () {
               if (formStatus) formStatus.hidden = true;
             }, 8000);
@@ -689,7 +692,6 @@ document.addEventListener('DOMContentLoaded', function () {
      12. BOTÓN FLOTANTE DE JIRA
      ============================================ */
   const jiraFloatBtn = document.getElementById('jiraFloatBtn');
-
   if (jiraFloatBtn) {
     jiraFloatBtn.addEventListener('click', function () {
       window.open(
@@ -714,18 +716,17 @@ document.addEventListener('DOMContentLoaded', function () {
     let t = 0;
     const particles = [];
     let isVisible = true;
-
     const mouse = { x: -9999, y: -9999, radius: 160 };
 
     function getColors() {
       const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
       return {
-        dot: isDark ? 'rgba(77,216,255,0.95)' : 'rgba(37,99,235,0.85)',
+        dot: isDark ? 'rgba(99,102,241,0.95)' : 'rgba(79,70,229,0.85)',
         dotCore: isDark ? 'rgba(255,255,255,0.95)' : 'rgba(255,255,255,0.9)',
-        line: isDark ? 'rgba(77,216,255,' : 'rgba(37,99,235,',
-        ring: isDark ? 'rgba(77,216,255,0.20)' : 'rgba(37,99,235,0.16)',
-        sweep: isDark ? 'rgba(77,216,255,0.16)' : 'rgba(37,99,235,0.12)',
-        glow: isDark ? 'rgba(77,216,255,0.9)' : 'rgba(37,99,235,0.7)'
+        line: isDark ? 'rgba(99,102,241,' : 'rgba(79,70,229,',
+        ring: isDark ? 'rgba(99,102,241,0.20)' : 'rgba(79,70,229,0.16)',
+        sweep: isDark ? 'rgba(249,115,22,0.12)' : 'rgba(249,115,22,0.10)',
+        glow: isDark ? 'rgba(99,102,241,0.9)' : 'rgba(79,70,229,0.7)'
       };
     }
 
@@ -853,7 +854,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     resize();
     draw();
-
     window.addEventListener('resize', resize);
 
     const heroSection = canvas.parentElement;
@@ -923,8 +923,8 @@ document.addEventListener('DOMContentLoaded', function () {
       dotX  += (mouseX - dotX)  * DOT_LERP;
       dotY  += (mouseY - dotY)  * DOT_LERP;
 
-      cursorRing.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
-      cursorDot.style.transform  = `translate(${dotX}px, ${dotY}px) translate(-50%, -50%)`;
+      cursorRing.style.transform = 'translate(' + ringX + 'px, ' + ringY + 'px) translate(-50%, -50%)';
+      cursorDot.style.transform  = 'translate(' + dotX + 'px, ' + dotY + 'px) translate(-50%, -50%)';
 
       rafId = requestAnimationFrame(animate);
     }
@@ -935,15 +935,24 @@ document.addEventListener('DOMContentLoaded', function () {
     document.addEventListener('mouseleave', onMouseLeaveWindow);
     document.addEventListener('mouseenter', onMouseEnterWindow);
 
-    document.querySelectorAll('[data-cursor="hover"]').forEach(function (el) {
-      el.addEventListener('mouseenter', function () { document.body.classList.add('cursor-hover'); });
-      el.addEventListener('mouseleave', function () { document.body.classList.remove('cursor-hover'); });
-    });
+    function bindCursor() {
+      document.querySelectorAll('[data-cursor="hover"]').forEach(function (el) {
+        if (el.dataset.cursorBound === 'hover') return;
+        el.dataset.cursorBound = 'hover';
+        el.addEventListener('mouseenter', function () { document.body.classList.add('cursor-hover'); });
+        el.addEventListener('mouseleave', function () { document.body.classList.remove('cursor-hover'); });
+      });
+      document.querySelectorAll('[data-cursor="view"]').forEach(function (el) {
+        if (el.dataset.cursorBound === 'view') return;
+        el.dataset.cursorBound = 'view';
+        el.addEventListener('mouseenter', function () { document.body.classList.add('cursor-view'); });
+        el.addEventListener('mouseleave', function () { document.body.classList.remove('cursor-view'); });
+      });
+    }
 
-    document.querySelectorAll('[data-cursor="view"]').forEach(function (el) {
-      el.addEventListener('mouseenter', function () { document.body.classList.add('cursor-view'); });
-      el.addEventListener('mouseleave', function () { document.body.classList.remove('cursor-view'); });
-    });
+    bindCursor();
+    const themeObserver = new MutationObserver(bindCursor);
+    themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
     animate();
 
@@ -957,7 +966,7 @@ document.addEventListener('DOMContentLoaded', function () {
   })();
 
   /* ============================================
-     15. WIDGET: PANELES (Datos + Calculadora)
+     15. WIDGETS: PANELES
      ============================================ */
   (function initWidgets() {
     const overlay = document.getElementById('widgetOverlay');
@@ -979,7 +988,6 @@ document.addEventListener('DOMContentLoaded', function () {
       activePanel = panel;
       if (overlay) overlay.classList.add('open');
       document.body.classList.add('widget-open');
-
       if (panel === devicePanel) loadDeviceData();
     }
 
@@ -999,7 +1007,6 @@ document.addEventListener('DOMContentLoaded', function () {
         else openPanel(devicePanel);
       });
     }
-
     if (calcBtn) {
       calcBtn.addEventListener('click', function () {
         if (calcPanel.classList.contains('open')) closePanels();
@@ -1011,12 +1018,11 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('[data-close-widget]').forEach(function (el) {
       el.addEventListener('click', closePanels);
     });
-
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && activePanel) closePanels();
     });
 
-    /* --------- Datos del dispositivo --------- */
+    /* Datos del dispositivo */
     const dIP = document.getElementById('dIP');
     const dISP = document.getElementById('dISP');
     const dCity = document.getElementById('dCity');
@@ -1036,7 +1042,6 @@ document.addEventListener('DOMContentLoaded', function () {
       if (/Linux/.test(ua)) return 'Linux';
       return 'Desconocido';
     }
-
     function detectBrowser() {
       const ua = navigator.userAgent;
       if (/Edg\//.test(ua)) return 'Edge';
@@ -1046,7 +1051,6 @@ document.addEventListener('DOMContentLoaded', function () {
       if (/Firefox\//.test(ua)) return 'Firefox';
       return 'Desconocido';
     }
-
     function updateTime() {
       if (!dTime) return;
       const now = new Date();
@@ -1054,17 +1058,14 @@ document.addEventListener('DOMContentLoaded', function () {
       const mm = String(now.getMinutes()).padStart(2, '0');
       dTime.textContent = hh + ':' + mm;
     }
-
     function loadDeviceData() {
       if (dOS) dOS.textContent = detectOS();
       if (dBrowser) dBrowser.textContent = detectBrowser();
       updateTime();
-
       if (dIP) dIP.textContent = 'Cargando…';
       if (dISP) dISP.textContent = 'Cargando…';
       if (dCity) dCity.textContent = 'Cargando…';
       if (dCountry) dCountry.textContent = 'Cargando…';
-
       fetch('https://ipapi.co/json/')
         .then(function (r) { return r.json(); })
         .then(function (data) {
@@ -1081,15 +1082,13 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    if (deviceRefresh) {
-      deviceRefresh.addEventListener('click', loadDeviceData);
-    }
+    if (deviceRefresh) deviceRefresh.addEventListener('click', loadDeviceData);
 
     setInterval(function () {
       if (devicePanel && devicePanel.classList.contains('open')) updateTime();
     }, 60000);
 
-    /* --------- Calculadora --------- */
+    /* Calculadora */
     const calcDisplay = document.getElementById('calcDisplay');
     const calcHistory = document.getElementById('calcHistory');
     const calcButtons = document.querySelectorAll('.calc-btn');
@@ -1107,57 +1106,35 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!isNaN(num)) displayValue = num.toExponential(6);
       }
       calcDisplay.textContent = displayValue;
-
       if (calcHistory) {
         calcHistory.textContent = previousValue !== null && currentOperator !== null
-          ? previousValue + ' ' + currentOperator
-          : '';
+          ? previousValue + ' ' + currentOperator : '';
       }
     }
-
     function inputDigit(digit) {
-      if (waitingForOperand) {
-        currentInput = digit;
-        waitingForOperand = false;
-      } else {
-        currentInput = currentInput === '0' ? digit : currentInput + digit;
-      }
+      if (waitingForOperand) { currentInput = digit; waitingForOperand = false; }
+      else { currentInput = currentInput === '0' ? digit : currentInput + digit; }
     }
-
     function inputDecimal() {
-      if (waitingForOperand) {
-        currentInput = '0.';
-        waitingForOperand = false;
-        return;
-      }
+      if (waitingForOperand) { currentInput = '0.'; waitingForOperand = false; return; }
       if (!currentInput.includes('.')) currentInput += '.';
     }
-
     function clearAll() {
-      currentInput = '0';
-      previousValue = null;
-      currentOperator = null;
-      waitingForOperand = false;
+      currentInput = '0'; previousValue = null; currentOperator = null; waitingForOperand = false;
     }
-
     function toggleSign() {
       if (currentInput === '0') return;
-      currentInput = currentInput.startsWith('-')
-        ? currentInput.slice(1)
-        : '-' + currentInput;
+      currentInput = currentInput.startsWith('-') ? currentInput.slice(1) : '-' + currentInput;
     }
-
     function applyPercent() {
       const value = parseFloat(currentInput);
       if (isNaN(value)) return;
       currentInput = String(value / 100);
     }
-
     function performOperation() {
       const inputValue = parseFloat(currentInput);
       if (isNaN(inputValue)) return null;
       if (previousValue === null) return inputValue;
-
       let result = previousValue;
       switch (currentOperator) {
         case '+': result += inputValue; break;
@@ -1170,44 +1147,30 @@ document.addEventListener('DOMContentLoaded', function () {
       }
       return Math.round(result * 1e10) / 1e10;
     }
-
     function handleOperator(op) {
       const inputValue = parseFloat(currentInput);
       if (currentOperator && !waitingForOperand) {
         const result = performOperation();
         if (result === 'Error') {
-          currentInput = 'Error';
-          previousValue = null;
-          currentOperator = null;
-          waitingForOperand = true;
-          updateDisplay();
-          return;
+          currentInput = 'Error'; previousValue = null; currentOperator = null; waitingForOperand = true;
+          updateDisplay(); return;
         }
         currentInput = String(result);
         previousValue = result;
-      } else {
-        previousValue = inputValue;
-      }
+      } else { previousValue = inputValue; }
       currentOperator = op;
       waitingForOperand = true;
       updateDisplay();
     }
-
     function handleEquals() {
       if (currentOperator === null) return;
       const result = performOperation();
       if (result === 'Error') {
-        currentInput = 'Error';
-        previousValue = null;
-        currentOperator = null;
-        waitingForOperand = true;
-        updateDisplay();
-        return;
+        currentInput = 'Error'; previousValue = null; currentOperator = null; waitingForOperand = true;
+        updateDisplay(); return;
       }
       currentInput = String(result);
-      previousValue = null;
-      currentOperator = null;
-      waitingForOperand = true;
+      previousValue = null; currentOperator = null; waitingForOperand = true;
       updateDisplay();
     }
 
@@ -1215,19 +1178,14 @@ document.addEventListener('DOMContentLoaded', function () {
       btn.addEventListener('click', function () {
         const action = btn.dataset.calc;
         if (currentInput === 'Error' && action !== 'clear') clearAll();
-
-        if (/^[0-9]$/.test(action)) {
-          inputDigit(action);
-        } else {
+        if (/^[0-9]$/.test(action)) { inputDigit(action); }
+        else {
           switch (action) {
             case '.': inputDecimal(); break;
             case 'clear': clearAll(); break;
             case 'sign': toggleSign(); break;
             case 'percent': applyPercent(); break;
-            case '+':
-            case '-':
-            case '*':
-            case '/': handleOperator(action); break;
+            case '+': case '-': case '*': case '/': handleOperator(action); break;
             case '=': handleEquals(); return;
           }
         }
@@ -1237,32 +1195,25 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.addEventListener('keydown', function (e) {
       if (!calcPanel || !calcPanel.classList.contains('open')) return;
-
       const key = e.key;
       if (/^[0-9]$/.test(key)) {
         if (currentInput === 'Error') clearAll();
-        inputDigit(key);
-        updateDisplay();
+        inputDigit(key); updateDisplay();
       } else if (key === '.' || key === ',') {
         if (currentInput === 'Error') clearAll();
-        inputDecimal();
-        updateDisplay();
+        inputDecimal(); updateDisplay();
       } else if (key === '+' || key === '-' || key === '*' || key === '/') {
         if (currentInput === 'Error') clearAll();
         handleOperator(key);
       } else if (key === 'Enter' || key === '=') {
-        e.preventDefault();
-        handleEquals();
+        e.preventDefault(); handleEquals();
       } else if (key === 'Escape' || key === 'c' || key === 'C') {
-        clearAll();
-        updateDisplay();
+        clearAll(); updateDisplay();
       } else if (key === 'Backspace') {
         if (currentInput === 'Error') { clearAll(); }
         else if (currentInput.length <= 1 || (currentInput.length === 2 && currentInput.startsWith('-'))) {
           currentInput = '0';
-        } else {
-          currentInput = currentInput.slice(0, -1);
-        }
+        } else { currentInput = currentInput.slice(0, -1); }
         updateDisplay();
       }
     });
@@ -1271,7 +1222,7 @@ document.addEventListener('DOMContentLoaded', function () {
   })();
 
   /* ============================================
-     16. PANEL DE MINI-CHAT PARA WHATSAPP
+     16. PANEL WHATSAPP
      ============================================ */
   (function initWhatsAppPanel() {
     const whatsappBtn = document.getElementById('whatsappFloatBtn');
@@ -1317,9 +1268,7 @@ document.addEventListener('DOMContentLoaded', function () {
     waPanel.querySelectorAll('[data-close-wa]').forEach(function (el) {
       el.addEventListener('click', closeAllWidgets);
     });
-
     if (overlay) overlay.addEventListener('click', closeAllWidgets);
-
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && activeWidget) closeAllWidgets();
     });
@@ -1355,7 +1304,6 @@ document.addEventListener('DOMContentLoaded', function () {
       message += '\n---\nEnviado desde servitecbaq.com';
 
       const waUrl = 'https://api.whatsapp.com/send?phone=' + WHATSAPP_NUMBER + '&text=' + encodeURIComponent(message);
-
       window.open(waUrl, '_blank', 'noopener,noreferrer');
 
       setTimeout(function () {
@@ -1373,24 +1321,16 @@ document.addEventListener('DOMContentLoaded', function () {
   })();
 
   /* ============================================
-     17. MATRIX EN PANEL "TU DISPOSITIVO" (SOLO DARK)
-     - Canvas con lluvia Matrix dentro del panel
-     - Se activa solo cuando: data-theme="dark" Y panel abierto
-     - Se detiene y limpia al cerrar el panel o cambiar a modo claro
-     - Cursor cambia a verde Matrix solo cuando pasa sobre el panel
+     17. MATRIX EN PANEL DISPOSITIVO (solo dark)
      ============================================ */
   (function initMatrixPanel() {
     const panel = document.getElementById('devicePanel');
     const canvas = document.getElementById('matrixPanelRain');
     if (!panel || !canvas) return;
 
-    const disabled =
-      prefersReducedMotion ||
-      document.documentElement.classList.contains('low-power');
-
+    const disabled = prefersReducedMotion || document.documentElement.classList.contains('low-power');
     const ctx = canvas.getContext('2d');
     const chars = 'アカサタナハマヤラワｱｲｳｴｵｶｷｸｹｺ0123456789ABCDEF<>{}[]/*-+=;:·'.split('');
-
     const fontSize = 12;
     let columns = 0;
     let drops = [];
@@ -1408,108 +1348,76 @@ document.addEventListener('DOMContentLoaded', function () {
       canvas.style.width = rect.width + 'px';
       canvas.style.height = rect.height + 'px';
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
       columns = Math.max(1, Math.floor(rect.width / fontSize));
-      drops = new Array(columns).fill(1).map(function () {
-        return Math.random() * -80;
-      });
+      drops = new Array(columns).fill(1).map(function () { return Math.random() * -80; });
     }
 
     function drawFrame() {
       if (!running) return;
-
       const now = performance.now();
       if (now - lastTime < frameInterval) {
         rafId = requestAnimationFrame(drawFrame);
         return;
       }
       lastTime = now;
-
       const w = canvas.width / (Math.min(window.devicePixelRatio || 1, 2));
       const h = canvas.height / (Math.min(window.devicePixelRatio || 1, 2));
-
       ctx.fillStyle = 'rgba(0, 0, 0, 0.10)';
       ctx.fillRect(0, 0, w, h);
-
       ctx.font = fontSize + 'px "JetBrains Mono", monospace';
       ctx.textBaseline = 'top';
-
       for (let i = 0; i < columns; i++) {
         const text = chars[Math.floor(Math.random() * chars.length)];
         const x = i * fontSize;
         const y = drops[i] * fontSize;
-
         ctx.fillStyle = '#CCFFCC';
         ctx.shadowColor = '#00FF41';
         ctx.shadowBlur = 8;
         ctx.fillText(text, x, y);
-
         ctx.shadowBlur = 0;
         ctx.fillStyle = '#00FF41';
         ctx.fillText(chars[Math.floor(Math.random() * chars.length)], x, y + fontSize);
-
         if (y > h && Math.random() > 0.96) drops[i] = 0;
         drops[i]++;
       }
-
       rafId = requestAnimationFrame(drawFrame);
     }
 
     function start() {
-      if (disabled) return;
-      if (running) return;
+      if (disabled || running) return;
       running = true;
       resize();
       rafId = requestAnimationFrame(drawFrame);
     }
-
     function stop() {
       running = false;
-      if (rafId) {
-        cancelAnimationFrame(rafId);
-        rafId = null;
-      }
+      if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
       if (canvas) {
         const dpr = Math.min(window.devicePixelRatio || 1, 2);
         ctx.clearRect(0, 0, canvas.width / dpr, canvas.height / dpr);
       }
     }
-
     function isDark() {
       return document.documentElement.getAttribute('data-theme') === 'dark';
     }
-
     function shouldRun() {
       return isDark() && panel.classList.contains('open') && !disabled;
     }
-
     function sync() {
-      if (shouldRun()) start();
-      else stop();
+      if (shouldRun()) start(); else stop();
     }
 
-    // Observar cambios en el atributo class del panel (open/close)
-    const classObserver = new MutationObserver(function () {
-      sync();
-    });
+    const classObserver = new MutationObserver(sync);
     classObserver.observe(panel, { attributes: true, attributeFilter: ['class'] });
-
-    // Observar cambios de tema en <html>
-    const themeObserver = new MutationObserver(function () {
-      sync();
-    });
+    const themeObserver = new MutationObserver(sync);
     themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
-    // Redimensionar el canvas si cambia el tamaño del panel
     let resizeTimer;
     window.addEventListener('resize', function () {
       clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(function () {
-        if (running) resize();
-      }, 200);
+      resizeTimer = setTimeout(function () { if (running) resize(); }, 200);
     }, { passive: true });
 
-    // Pausar cuando la pestaña no está visible
     document.addEventListener('visibilitychange', function () {
       if (document.hidden) {
         if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
@@ -1518,7 +1426,6 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
 
-    /* --------- Cursor Matrix solo al pasar sobre el panel --------- */
     panel.addEventListener('mouseenter', function () {
       if (isDark()) document.body.classList.add('cursor-device');
     });
@@ -1526,7 +1433,6 @@ document.addEventListener('DOMContentLoaded', function () {
       document.body.classList.remove('cursor-device');
     });
 
-    // Estado inicial
     sync();
   })();
 
