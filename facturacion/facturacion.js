@@ -469,21 +469,25 @@ async function manejarEnvio(evento) {
     const numeroStat = document.getElementById('numeroStat');
     if (numeroStat) numeroStat.textContent = numeroDocumento;
 
-    // Enviar a Sheets
-    enviarDatosAGoogle(datos, numeroDocumento);
+    // Enviar a Sheets (con token de sesión y verificación de respuesta)
+    const guardadoEnSheets = await enviarDatosAGoogle(datos, numeroDocumento);
 
     // Generar PDF
     try {
         await generarPDF(datos, numeroDocumento);
-        alert(`✅ Cuenta de cobro generada correctamente.\n\nNúmero: ${numeroDocumento}\nTotal: ${formatearMoneda(datos.totales.total)}`);
+        if (guardadoEnSheets) {
+            alert(`✅ Cuenta de cobro generada correctamente.\n\nNúmero: ${numeroDocumento}\nTotal: ${formatearMoneda(datos.totales.total)}`);
+        } else {
+            alert(`⚠️ La cuenta se generó, pero NO se pudo guardar en Google Sheets.\n\nRevisa tu conexión o vuelve a iniciar sesión.\n\nNúmero: ${numeroDocumento}\nTotal: ${formatearMoneda(datos.totales.total)}`);
+        }
     } catch (error) {
         console.error('Error al generar el PDF:', error);
         alert('Hubo un error al generar el PDF. Revisa la consola para más detalles.');
     }
 }
 
-// ===== ENVIAR DATOS A GOOGLE SHEETS (IFRAME) =====
-function enviarDatosAGoogle(datos, numeroDocumento) {
+// ===== ENVIAR DATOS A GOOGLE SHEETS (FETCH con verificación) =====
+async function enviarDatosAGoogle(datos, numeroDocumento) {
     const serviciosTexto = datos.servicios.map((s, idx) => {
         const cant = s.cantidad;
         const valorUnit = formatearMonedaPDF(s.valor_unitario);
@@ -508,39 +512,28 @@ function enviarDatosAGoogle(datos, numeroDocumento) {
         Servicios:        serviciosTexto
     };
 
-    const iframeName = 'google_sheet_frame_' + Date.now();
-    const iframe = document.createElement('iframe');
-    iframe.name = iframeName;
-    iframe.style.display = 'none';
-    document.body.appendChild(iframe);
+    const cuerpo = new URLSearchParams();
+    cuerpo.append('payload', JSON.stringify(payload));
+    cuerpo.append('token', sessionStorage.getItem('sb_token') || '');
 
-    const form = document.createElement('form');
-    form.method = 'POST';
-    form.action = GOOGLE_SCRIPT_URL;
-    form.target = iframeName;
-    form.style.display = 'none';
+    try {
+        const respuesta = await fetch(GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: cuerpo.toString()
+        });
+        const data = await respuesta.json();
 
-    const input = document.createElement('input');
-    input.type = 'hidden';
-    input.name = 'payload';
-    input.value = JSON.stringify(payload);
-    form.appendChild(input);
+        if (data.result !== 'success') {
+            throw new Error(data.message || 'Respuesta inesperada del servidor');
+        }
 
-    const tokenInput = document.createElement('input');
-    tokenInput.type = 'hidden';
-    tokenInput.name = 'token';
-    tokenInput.value = sessionStorage.getItem('sb_token') || '';
-    form.appendChild(tokenInput);
-
-    document.body.appendChild(form);
-    form.submit();
-
-    setTimeout(() => {
-        if (document.body.contains(form)) document.body.removeChild(form);
-        if (document.body.contains(iframe)) document.body.removeChild(iframe);
-    }, 5000);
-
-    console.log('✅ Datos enviados a Google Sheets:', numeroDocumento);
+        console.log('✅ Datos enviados a Google Sheets:', numeroDocumento);
+        return true;
+    } catch (error) {
+        console.error('Error al guardar en Google Sheets:', error);
+        return false;
+    }
 }
 
 // ===== CARGAR LOGO COMO BASE64 =====
