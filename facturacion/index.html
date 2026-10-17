@@ -14,8 +14,9 @@
 
 <!-- ====== PROTECCIÓN DE ACCESO ====== -->
 <script>
-    // Verificar si hay sesión activa. Si no, redirigir al login.
-    if (sessionStorage.getItem('sb_autenticado') !== 'true') {
+    // Verificar si hay sesión activa con token. Si no, redirigir al login.
+    // La validación real la hace el Apps Script en cada petición; esto solo evita mostrar el módulo sin sesión.
+    if (sessionStorage.getItem('sb_autenticado') !== 'true' || !sessionStorage.getItem('sb_token')) {
         window.location.href = 'login.html';
     }
 </script>

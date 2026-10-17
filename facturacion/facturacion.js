@@ -96,6 +96,7 @@ function inicializarBotonLogout() {
             sessionStorage.removeItem('sb_autenticado');
             sessionStorage.removeItem('sb_usuario');
             sessionStorage.removeItem('sb_login_time');
+            sessionStorage.removeItem('sb_token');
             window.location.href = 'login.html';
         }
     });
@@ -402,7 +403,8 @@ async function consultarUltimoConsecutivo() {
     let ultimoLocal = parseInt(localStorage.getItem(claveStorage) || '0', 10);
 
     try {
-        const url = `${GOOGLE_SCRIPT_URL}?accion=ultimoConsecutivo&fecha=${fechaClave}`;
+        const token = sessionStorage.getItem('sb_token') || '';
+        const url = `${GOOGLE_SCRIPT_URL}?accion=ultimoConsecutivo&fecha=${fechaClave}&token=${encodeURIComponent(token)}`;
         const respuesta = await fetch(url);
         const data = await respuesta.json();
 
@@ -523,6 +525,12 @@ function enviarDatosAGoogle(datos, numeroDocumento) {
     input.name = 'payload';
     input.value = JSON.stringify(payload);
     form.appendChild(input);
+
+    const tokenInput = document.createElement('input');
+    tokenInput.type = 'hidden';
+    tokenInput.name = 'token';
+    tokenInput.value = sessionStorage.getItem('sb_token') || '';
+    form.appendChild(tokenInput);
 
     document.body.appendChild(form);
     form.submit();

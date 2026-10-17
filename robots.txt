@@ -7,5 +7,8 @@ Allow: /
 # Bloquear archivos internos de GitHub Pages
 Disallow: /.git/
 
+# Bloquear herramientas internas (no deben indexarse)
+Disallow: /facturacion/
+
 # Sitemap oficial
 Sitemap: https://servitecbaq.com/sitemap.xml

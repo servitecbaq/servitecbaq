@@ -9,8 +9,8 @@ const LOGIN_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby4LdnLYG0e0Ep
 
 // ===== INICIALIZACIÓN =====
 document.addEventListener('DOMContentLoaded', () => {
-    // Si ya hay sesión activa, redirigir al módulo
-    if (sessionStorage.getItem('sb_autenticado') === 'true') {
+    // Si ya hay sesión activa con token, redirigir al módulo
+    if (sessionStorage.getItem('sb_autenticado') === 'true' && sessionStorage.getItem('sb_token')) {
         window.location.href = 'index.html';
         return;
     }
@@ -45,18 +45,33 @@ async function manejarLogin(evento) {
     btnLoading.style.display = 'inline';
 
     try {
-        // Construir URL con parámetros
-        const url = `${LOGIN_SCRIPT_URL}?usuario=${encodeURIComponent(usuario)}&password=${encodeURIComponent(password)}`;
+        // POST: las credenciales NO viajan en la URL (no quedan en historial ni logs).
+        // El Apps Script puede leerlas igual con e.parameter.usuario / e.parameter.password.
+        const cuerpo = new URLSearchParams();
+        cuerpo.append('usuario', usuario);
+        cuerpo.append('password', password);
 
-        // Hacer la petición
-        const respuesta = await fetch(url);
+        const respuesta = await fetch(LOGIN_SCRIPT_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: cuerpo.toString()
+        });
         const data = await respuesta.json();
 
         if (data.result === 'success') {
+            if (!data.token) {
+                mostrarError('El servidor no devolvió un token de sesión. Actualiza el Apps Script.');
+                btnLogin.disabled = false;
+                btnText.style.display = 'inline';
+                btnLoading.style.display = 'none';
+                return;
+            }
+
             // Guardar sesión
             sessionStorage.setItem('sb_autenticado', 'true');
             sessionStorage.setItem('sb_usuario', usuario);
             sessionStorage.setItem('sb_login_time', Date.now().toString());
+            sessionStorage.setItem('sb_token', data.token);
 
             // Redirigir al módulo
             window.location.href = 'index.html';

@@ -350,6 +350,21 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
       }
       if (e.key === 'Escape' && modal.classList.contains('open')) close();
+
+      // Focus trap: el Tab no debe salir del modal abierto
+      if (e.key === 'Tab' && modal.classList.contains('open')) {
+        const focusables = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        if (!focusables.length) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
     });
 
     if (closeBtn) closeBtn.addEventListener('click', close);
