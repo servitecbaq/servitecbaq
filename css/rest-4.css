@@ -1,0 +1,53 @@
+@media (max-width: 900px) {
+.services-bento { grid-template-columns: repeat(2, 1fr); }
+.svc--large { grid-area: auto / span 2; }
+.svc--mini { grid-column: span 1; }
+}
+@media (max-width: 640px) {
+.logo__pill { display: none; }
+.nav.open { display: flex; }
+.services-bento { grid-template-columns: 1fr; }
+.svc--large, .svc--mini { grid-column: span 1; }
+.svc--large { padding: var(--s-6); }
+.coverage-zones { grid-template-columns: 1fr; }
+.coverage-kpis { grid-template-columns: 1fr; }
+.founder-split__photo { max-width: 100%; aspect-ratio: 4 / 5; }
+.founder-split__stats { grid-template-columns: 1fr 1fr; }
+.cert-embed { width: 110px; height: 110px; }
+.tip-nav { display: none; }
+.tip-card { min-height: 340px; padding: var(--s-8) var(--s-5); border-radius: var(--r-lg); }
+.tip-card.switching { opacity: 1; }
+.tip-track { min-height: 340px; }
+.tip-title { font-size: var(--tx-2xl); }
+.tip-desc { font-size: var(--tx-base); }
+.tips-grid { grid-template-columns: 1fr; }
+.apps-grid { grid-template-columns: 1fr; }
+.apps-toolbar { flex-direction: column; align-items: stretch; }
+.apps-filters { justify-content: flex-start; }
+.faq-item > summary { padding: var(--s-4); font-size: var(--tx-sm); }
+.faq-answer { padding: 0 var(--s-4) var(--s-4); font-size: var(--tx-xs); }
+.faq-icon { width: 28px; height: 28px; font-size: 1rem; }
+.featured-app-card { grid-template-columns: 1fr; padding: var(--s-8) var(--s-5); gap: var(--s-8); }
+.featured-app-phone { width: 180px; height: 360px; }
+.featured-app-icon { font-size: 3.2rem; }
+.featured-app-icon-title { font-size: 1.5rem; }
+.featured-app-info h3 { font-size: var(--tx-2xl); }
+.btn-play-store { width: 100%; justify-content: center; }
+.reviews-rating-card { padding: var(--s-6) var(--s-5); }
+.contact-split__form { padding: var(--s-6) var(--s-5); }
+.form-row { grid-template-columns: 1fr; gap: var(--s-4); }
+.footer-grid { grid-template-columns: 1fr; gap: var(--s-8); }
+.footer-bottom { flex-direction: column; text-align: center; }
+.widget-panel.open { transform: translateY(0px) scale(1); }
+body::before { background: none; }
+.cursor-ring, .cursor-dot { display: none !important; }
+}
+@media (hover: none) and (pointer: coarse) {
+.cursor-ring, .cursor-dot { display: none !important; }
+}
+@media (prefers-contrast: more) {
+[data-theme="dark"] { --line: rgba(241,243,250,0.4); --line-strong: rgba(241,243,250,0.6); --fg-muted: #D5DAE7; --fg-faint: #B8C0D5; }
+}
+@media (forced-colors: active) {
+.svc:focus-visible, .bento:focus-visible, .app-card:focus-visible { outline: highlight solid 2px; }
+}
