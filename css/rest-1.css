@@ -21,7 +21,6 @@ body.cursor-view .cursor-dot { opacity: 0; }
 body.cursor-down .cursor-ring { width: 32px; height: 32px; }
 body.cursor-down .cursor-dot { width: 12px; height: 12px; }
 body.cursor-leaving .cursor-ring, body.cursor-leaving .cursor-dot { opacity: 0; }
-.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
 .reveal.visible { opacity: 1; transform: translateY(0px); }
 .reveal-delay-1 { transition-delay: 0.06s; }
 .reveal-delay-2 { transition-delay: 0.12s; }

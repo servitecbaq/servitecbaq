@@ -135,10 +135,6 @@
 @media (prefers-reduced-motion: reduce), (hover: none) and (pointer: coarse) {
 .cursor-ring, .cursor-dot { display: none !important; }
 }
-@media (prefers-reduced-motion: reduce) {
-.reveal { opacity: 1 !important; transform: none !important; }
-.cursor-ring, .cursor-dot { display: none; }
-}
 @media (max-width: 1024px) {
 .about__grid { grid-template-columns: 1fr; gap: var(--s-6); }
 .about__num-block { position: static; }

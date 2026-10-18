@@ -45,6 +45,9 @@ body::before { background: none; }
 @media (hover: none) and (pointer: coarse) {
 .cursor-ring, .cursor-dot { display: none !important; }
 }
+@media (prefers-reduced-motion: reduce) {
+.cursor-ring, .cursor-dot { display: none; }
+}
 @media (prefers-contrast: more) {
 [data-theme="dark"] { --line: rgba(241,243,250,0.4); --line-strong: rgba(241,243,250,0.6); --fg-muted: #D5DAE7; --fg-faint: #B8C0D5; }
 }
