@@ -61,19 +61,6 @@
       });
     }
 
-    // Cargar aplicativos solo cuando la sección se acerca al viewport
-    if ('IntersectionObserver' in window) {
-      const appsSection = document.getElementById('apps');
-      if (appsSection) {
-        const loadObserver = new IntersectionObserver(function (entries) {
-          if (entries[0].isIntersecting) { loadObserver.disconnect(); load(); }
-        }, { rootMargin: '1200px 0px' });
-        loadObserver.observe(appsSection);
-        return;
-      }
-    }
-    load();
-
     appsFilters.addEventListener('click', function (e) {
       const btn = e.target.closest('.apps-filter');
       if (!btn) return;
@@ -91,15 +78,35 @@
       appsSearch.addEventListener('input', onInput);
     }
 
+    // Cargar aplicativos solo cuando la sección se acerca al viewport. Va al
+    // final del todo: su `return` saldría de initApps() sin registrar filtros.
+    if ('IntersectionObserver' in window) {
+      const appsSection = document.getElementById('apps');
+      if (appsSection) {
+        const loadObserver = new IntersectionObserver(function (entries) {
+          if (entries[0].isIntersecting) { loadObserver.disconnect(); load(); }
+        }, { rootMargin: '1200px 0px' });
+        loadObserver.observe(appsSection);
+        return;
+      }
+    }
+    load();
+
+    /* apps.json escribe los nombres con tildes («nómina»); sin plegarlas, buscar
+       «nomina» no devuelve nada. */
+    function fold(s) {
+      return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    }
+
     function render() {
-      const term = state.term.toLowerCase().trim();
+      const term = fold(state.term.trim());
       const filtered = state.all.filter(function (app) {
         const catOk = state.activeCategory === 'all' || app.category === state.activeCategory;
         if (!catOk) return false;
         if (!term) return true;
-        return app.name.toLowerCase().indexOf(term) !== -1 ||
-               app.desc.toLowerCase().indexOf(term) !== -1 ||
-               app.category.toLowerCase().indexOf(term) !== -1;
+        return fold(app.name).indexOf(term) !== -1 ||
+               fold(app.desc).indexOf(term) !== -1 ||
+               fold(app.category).indexOf(term) !== -1;
       });
 
       appsGrid.textContent = '';
