@@ -60,7 +60,8 @@
   .rk-r04{fill:#33E6FF;filter:url(#rkGlow)}
   .rk-rack-glow{stroke:#33E6FF;opacity:.35;filter:url(#rkSoft)}
   .rk-rack-glow2{stroke:#33E6FF;opacity:.2;filter:url(#rkSoft)}
-  @media (prefers-reduced-motion:reduce){.rk-led-b,.rk-pulse{animation:none}}
+  /* !important: el CSS global del sitio corta toda animación con animation-duration:.01ms en reduce */
+  @media (prefers-reduced-motion:reduce){.rk-pulse{animation:none;opacity:.4}.rk-led-b{animation:rkBlink 4.2s ease-in-out infinite!important}}
 </style>
   <rect transform="" x="-70" y="-58" width="292" height="226" class="rk-panel" fill="url(#rkPanel)"/>
   <rect transform="" x="-70" y="-58" width="292" height="226" class="rk-panel-grid" fill="url(#rkGrid)"/>

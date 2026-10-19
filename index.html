@@ -55,7 +55,7 @@
   <script>
     (function () {
       var files = [
-        'css/rest-1.css', 'css/rest-2.css', 'css/rest-3.css', 'css/rest-4.css', 'js/app-core.js', 'js/app-content-1.js', 'js/app-content-2.js', 'js/app-interactive-1.js', 'js/app-interactive-2.js'
+        'js/app-core.js', 'css/rest-1.css', 'css/rest-2.css', 'css/rest-3.css', 'css/rest-4.css', 'js/app-content-1.js', 'js/app-content-2.js', 'js/app-interactive-1.js', 'js/app-interactive-2.js'
       ];
       var started = false;
       var idx = 0;
@@ -354,13 +354,16 @@
         <p class="section-subtitle">Consulta disponibilidad para servicio a domicilio en tu zona.</p>
       </header>
 
+      <style>
+        @media (min-width: 1025px) {
+          body .coverage-grid { grid-template-columns: minmax(0, 1.06fr) minmax(0, 1fr); }
+          body .coverage-map { min-height: 360px; }
+        }
+        @media (max-width: 1024px) { body .coverage-map { min-height: 0; aspect-ratio: 1.54; } }
+      </style>
       <div class="coverage-grid">
         <div class="coverage-map">
-          <div class="coverage-map__pin">
-            <span class="coverage-map__pulse"></span>
-            <span class="coverage-map__dot"></span>
-          </div>
-          <span class="coverage-map__label">Barranquilla</span>
+          <img src="img/mapa-barranquilla.svg" width="640" height="415" loading="lazy" decoding="async" alt="Mapa esquemático de Barranquilla con el río Magdalena, la costa del Caribe y los municipios del área metropolitana: Soledad, Puerto Colombia, Galapa y Malambo." style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:10px;box-sizing:border-box">
         </div>
 
         <div class="coverage-zones">

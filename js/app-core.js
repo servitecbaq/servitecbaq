@@ -351,15 +351,21 @@
       });
     }
 
+    function still() { return host.querySelector('svg,img'); }
+    function fallback() {
+      if (still()) return;
+      host.innerHTML = '<img src="img/rack.svg" alt="Rack R-04 con siete unidades encendidas" style="width:100%;height:100%;object-fit:cover">';
+    }
+    if (typeof fetch !== 'function') { fallback(); return; }
     fetch('img/rack.svg').then(function (r) {
       if (!r.ok) throw new Error(r.status);
       return r.text();
     }).then(function (txt) {
-      if (host.querySelector('svg')) return;
+      if (still()) return;
       host.innerHTML = txt;
       var svg = host.querySelector('svg');
       if (svg) wire(svg);
-    }).catch(function () {});
+    }).catch(fallback);
   })();
 
 })();
