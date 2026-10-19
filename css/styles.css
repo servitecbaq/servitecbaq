@@ -842,7 +842,7 @@ section {
    ============================================ */
 .hero {
   position: relative;
-  padding: clamp(7rem, 12vw, 10rem) 0 clamp(3rem, 6vw, 5rem);
+  padding: clamp(6.5rem, 8vw, 8rem) 0 clamp(3rem, 6vw, 5rem);
   overflow: hidden;
   isolation: isolate;
   background: linear-gradient(160deg, #F7F8FB 0%, #EEF0FF 60%, #FFFFFF 100%);
