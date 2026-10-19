@@ -117,7 +117,9 @@
         /* Red de seguridad: si una hoja nunca dispara evento el usuario no puede
            quedarse con el documento anclado al hero. */
         setTimeout(unlock, 2500);
-        files = files.filter(function (f) { return f.indexOf('.css') !== -1; });
+        /* Los CSS ya entraron por su cuenta arriba; de la cadena diferida solo deben
+           quedar los JS (indexOf('.css') === -1). */
+        files = files.filter(function (f) { return f.indexOf('.css') === -1; });
 
         /* Despues del salto la pagina aun cambia de alto: el JS hidrata (rejillas,
            carruseles) y el widget de resenas se dibuja, y eso mueve el destino. Se
