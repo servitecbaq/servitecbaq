@@ -355,11 +355,14 @@
       </header>
 
       <style>
+        /* El layout de .coverage-* viaja en css/rest-*.css diferido: sin esto, al refrescar
+           sobre la sección el <img> absoluto se dimensiona contra la página entera. */
+        body .coverage-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s-4); margin-bottom: var(--s-8); }
+        body .coverage-map { position: relative; grid-row: auto; min-height: 0; aspect-ratio: 1.54; overflow: hidden; border: 1px solid var(--line); border-radius: var(--r-lg); contain: layout style paint; }
         @media (min-width: 1025px) {
           body .coverage-grid { grid-template-columns: minmax(0, 1.06fr) minmax(0, 1fr); }
-          body .coverage-map { min-height: 360px; }
+          body .coverage-map { grid-row: span 2; aspect-ratio: auto; height: 360px; align-self: start; }
         }
-        @media (max-width: 1024px) { body .coverage-map { min-height: 0; aspect-ratio: 1.54; } }
       </style>
       <div class="coverage-grid">
         <div class="coverage-map">
