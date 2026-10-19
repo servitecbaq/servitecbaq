@@ -297,17 +297,316 @@
       </div>
 
       <aside class="hero__bento" aria-label="Servicios y estado">
-        <article class="bento bento--primary" data-cursor="hover">
-          <div class="bento__head">
-            <span class="bento__kicker">Servicio estrella</span>
-            <span class="bento__chip"><span class="pulse-dot"></span>Activo</span>
+        <article class="bento bento--primary" data-cursor="hover" style="min-height:262px;padding:0">
+          <div class="bento__rack" style="position:absolute;inset:0;overflow:hidden;border-radius:inherit;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="-70 -58 292 226" preserveAspectRatio="xMidYMin slice" role="group" aria-label="Server rack R-04 interactivo: pulsa una unidad para encenderla o apagarla" style="display:block;width:100%;height:100%">
+  <defs>
+  <linearGradient id="rkPanel" x1="0" y1="0" x2="0.5" y2="1">
+    <stop offset="0" stop-color="#0A1124"/><stop offset="1" stop-color="#04060E"/>
+  </linearGradient>
+  <radialGradient id="rkShadow"><stop offset="0" stop-color="rgba(0,0,0,0.5)"/><stop offset="1" stop-color="rgba(0,0,0,0)"/></radialGradient>
+  <radialGradient id="rkAmbCyan"><stop offset="0" stop-color="rgba(51,230,255,0.14)"/><stop offset="1" stop-color="rgba(51,230,255,0)"/></radialGradient>
+  <radialGradient id="rkAmbIndigo"><stop offset="0" stop-color="rgba(99,102,241,0.13)"/><stop offset="1" stop-color="rgba(99,102,241,0)"/></radialGradient>
+  <pattern id="rkGrid" width="18" height="18" patternUnits="userSpaceOnUse">
+    <path d="M18 0H0V18" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+  </pattern>
+  <filter id="rkGlow" filterUnits="userSpaceOnUse" x="-110" y="-95" width="440" height="380"><feGaussianBlur stdDeviation="2.6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <filter id="rkSoft" filterUnits="userSpaceOnUse" x="-110" y="-95" width="440" height="380"><feGaussianBlur stdDeviation="1.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <filter id="rkBloom" filterUnits="userSpaceOnUse" x="-110" y="-95" width="440" height="380"><feGaussianBlur stdDeviation="6"/></filter>
+</defs>
+  <style>
+  .rk-txt{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Consolas,monospace)}
+  .rk-face{fill:#111A33;stroke:rgba(255,255,255,0.5);stroke-width:1.1}
+  .rk-side{fill:#0C1428;stroke:rgba(255,255,255,0.38);stroke-width:1.1}
+  .rk-top{fill:#1B2542;stroke:rgba(255,255,255,0.55);stroke-width:1.1}
+  .rk-detail{stroke:rgba(255,255,255,0.3);fill:none;stroke-width:1}
+  .rk-detail-fill{fill:rgba(255,255,255,0.08);stroke:rgba(255,255,255,0.3);stroke-width:1}
+  .rk-dot{fill:rgba(255,255,255,0.25)}
+  .rk-vent{stroke:rgba(255,255,255,0.13);stroke-width:1;fill:none}
+  .rk-unit{fill:rgba(255,255,255,0.025);stroke:rgba(255,255,255,0.26);stroke-width:1}
+  .rk-btn{fill:rgba(255,255,255,0.06);stroke:rgba(255,255,255,0.32);stroke-width:0.8}
+  .rk-port{fill:#0A1020;stroke:rgba(255,255,255,0.35);stroke-width:0.9}
+  .rk-cyan{stroke:#33E6FF;fill:none;stroke-width:1}
+  .rk-cyan-fill{fill:#33E6FF}
+  .rk-label{fill:rgba(255,255,255,0.88)}
+  .rk-dim{fill:rgba(255,255,255,0.5)}
+  .rk-scr{fill:#061426;stroke:rgba(51,230,255,0.45);stroke-width:1}
+  .rk-screen-bloom{fill:rgba(51,230,255,0.12);filter:url(#rkBloom)}
+  .rk-scr-hi{fill:#8EF4FF;filter:url(#rkGlow)}
+  .rk-scr-txt{fill:rgba(255,255,255,0.85)}
+  .rk-loadtrack{fill:rgba(255,255,255,0.1)}
+  .rk-loadbar{fill:#4FE3FF;transition:width .45s cubic-bezier(.22,.61,.36,1)}
+  .rk-loadglow{fill:rgba(79,227,255,0.4);filter:url(#rkBloom);transition:width .45s cubic-bezier(.22,.61,.36,1)}
+  .rk-unit-g{cursor:pointer}
+  .rk-unit-g:hover .rk-unit{stroke:rgba(51,230,255,0.65)}
+  .rk-unit-g:hover .rk-unit-off{stroke:rgba(255,255,255,0.35)}
+  .rk-unit-g:focus{outline:none}
+  .rk-unit-g:focus-visible{outline:1px solid rgba(51,230,255,0.9);outline-offset:2px}
+  .rk-unit-off{fill:transparent;stroke:rgba(255,255,255,0.15);stroke-width:1}
+  .rk-unit-g.rk-offg .rk-cyan{stroke:rgba(255,255,255,0.15)}
+  .rk-unit-g.rk-offg .rk-cyan-fill{fill:rgba(255,255,255,0.15)}
+  .rk-unit-g.rk-offg .rk-label{fill:rgba(255,255,255,0.28)}
+  .rk-unit-g.rk-offg .rk-unit{fill:transparent;stroke:rgba(255,255,255,0.15)}
+  .rk-unit-g.rk-offg .rk-led-a,.rk-unit-g.rk-offg .rk-led-b,.rk-unit-g.rk-offg .rk-led-c{fill:rgba(255,255,255,0.12);animation:none}
+  .rk-unit-g.rk-offg .rk-btn{fill:transparent;stroke:rgba(255,255,255,0.14)}
+  .rk-led-a{fill:#4ADE80}
+  .rk-led-b{fill:#33E6FF;animation:rkBlink 2.8s ease-in-out infinite}
+  .rk-led-c{fill:#FBBF24}
+  @keyframes rkBlink{0%,100%{opacity:1}50%{opacity:.12}}
+  .rk-cable-glow{stroke:#33E6FF;stroke-width:2.4;fill:none;opacity:.28;filter:url(#rkBloom)}
+  .rk-cable{stroke:#33E6FF;stroke-width:1.05;fill:none;opacity:.85}
+  .rk-pulse{stroke:#BFF6FF;stroke-width:1.15;fill:none;stroke-dasharray:2.6 8.4;animation:rkPulse 1.7s linear infinite;opacity:.95}
+  @keyframes rkPulse{to{stroke-dashoffset:-11}}
+  .rk-arrow{fill:#33E6FF}
+  .rk-r04{fill:#33E6FF;filter:url(#rkGlow)}
+  .rk-rack-glow{stroke:#33E6FF;opacity:.35;filter:url(#rkSoft)}
+  .rk-rack-glow2{stroke:#33E6FF;opacity:.2;filter:url(#rkSoft)}
+  @media (prefers-reduced-motion:reduce){.rk-led-b,.rk-pulse{animation:none}}
+</style>
+  <rect transform="" x="-70" y="-58" width="292" height="226" class="rk-panel" fill="url(#rkPanel)"/>
+  <rect transform="" x="-70" y="-58" width="292" height="226" class="rk-panel-grid" fill="url(#rkGrid)"/>
+  <ellipse cx="24" cy="-28" rx="92" ry="76" fill="url(#rkAmbCyan)"/>
+  <ellipse cx="150" cy="84" rx="84" ry="64" fill="url(#rkAmbIndigo)"/>
+  <rect transform="matrix(0.87 -0.5 0 1 152.42 162)" x="0" y="0" width="76" height="2" class="rk-side"/>
+  <rect transform="matrix(0.87 0.5 0 1 -65.82 36)" x="0" y="0" width="252" height="2" class="rk-face"/>
+  <rect transform="matrix(0.87 0.5 -0.87 0.5 0 -2)" x="0" y="0" width="252" height="76" rx="8" class="rk-top"/>
+  <rect transform="matrix(0.87 0.5 -0.87 0.5 0 -2)" x="3.5" y="3.5" width="245" height="69" rx="5.5" class="rk-detail"/>
+  <circle transform="matrix(0.87 0.5 -0.87 0.5 0 -2)" cx="8" cy="8" r="1.7" class="rk-detail"/>
+  <circle transform="matrix(0.87 0.5 -0.87 0.5 0 -2)" cx="8" cy="8" r="0.6" class="rk-dot"/>
+  <circle transform="matrix(0.87 0.5 -0.87 0.5 0 -2)" cx="244" cy="8" r="1.7" class="rk-detail"/>
+  <circle transform="matrix(0.87 0.5 -0.87 0.5 0 -2)" cx="244" cy="8" r="0.6" class="rk-dot"/>
+  <circle transform="matrix(0.87 0.5 -0.87 0.5 0 -2)" cx="8" cy="68" r="1.7" class="rk-detail"/>
+  <circle transform="matrix(0.87 0.5 -0.87 0.5 0 -2)" cx="8" cy="68" r="0.6" class="rk-dot"/>
+  <circle transform="matrix(0.87 0.5 -0.87 0.5 0 -2)" cx="244" cy="68" r="1.7" class="rk-detail"/>
+  <circle transform="matrix(0.87 0.5 -0.87 0.5 0 -2)" cx="244" cy="68" r="0.6" class="rk-dot"/>
+  <ellipse transform="matrix(0.87 0.5 -0.87 0.5 0 -2)" cx="80" cy="39" rx="49" ry="27" fill="url(#rkShadow)"/>
+  <rect transform="matrix(0.86 -0.5 0 1 55.43 2)" x="0" y="0" width="34" height="84" class="rk-side"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="0" y="0" width="80" height="84" class="rk-face"/>
+  <rect transform="matrix(0.86 0.5 -0.87 0.5 15.59 -55)" x="0" y="0" width="80" height="34" class="rk-top"/>
+  <circle transform="matrix(0.86 0.5 -0.87 0.5 15.59 -55)" cx="13" cy="15" r="5.2" class="rk-detail"/>
+  <circle transform="matrix(0.86 0.5 -0.87 0.5 15.59 -55)" cx="13" cy="15" r="3.4" class="rk-detail" stroke-width="0.9"/>
+  <circle transform="matrix(0.86 0.5 -0.87 0.5 15.59 -55)" cx="13" cy="15" r="1.5" class="rk-detail-fill"/>
+  <circle transform="matrix(0.86 0.5 -0.87 0.5 15.59 -55)" cx="13" cy="15" r="0.55" class="rk-dot"/>
+  <circle transform="matrix(0.86 0.5 -0.87 0.5 15.59 -55)" cx="32" cy="15" r="5.2" class="rk-detail"/>
+  <circle transform="matrix(0.86 0.5 -0.87 0.5 15.59 -55)" cx="32" cy="15" r="3.4" class="rk-detail" stroke-width="0.9"/>
+  <circle transform="matrix(0.86 0.5 -0.87 0.5 15.59 -55)" cx="32" cy="15" r="1.5" class="rk-detail-fill"/>
+  <circle transform="matrix(0.86 0.5 -0.87 0.5 15.59 -55)" cx="32" cy="15" r="0.55" class="rk-dot"/>
+  <circle transform="matrix(0.86 0.5 -0.87 0.5 15.59 -55)" cx="51" cy="15" r="5.2" class="rk-detail"/>
+  <circle transform="matrix(0.86 0.5 -0.87 0.5 15.59 -55)" cx="51" cy="15" r="3.4" class="rk-detail" stroke-width="0.9"/>
+  <circle transform="matrix(0.86 0.5 -0.87 0.5 15.59 -55)" cx="51" cy="15" r="1.5" class="rk-detail-fill"/>
+  <circle transform="matrix(0.86 0.5 -0.87 0.5 15.59 -55)" cx="51" cy="15" r="0.55" class="rk-dot"/>
+  <circle transform="matrix(0.86 0.5 -0.87 0.5 15.59 -55)" cx="70" cy="15" r="5.2" class="rk-detail"/>
+  <circle transform="matrix(0.86 0.5 -0.87 0.5 15.59 -55)" cx="70" cy="15" r="3.4" class="rk-detail" stroke-width="0.9"/>
+  <circle transform="matrix(0.86 0.5 -0.87 0.5 15.59 -55)" cx="70" cy="15" r="1.5" class="rk-detail-fill"/>
+  <circle transform="matrix(0.86 0.5 -0.87 0.5 15.59 -55)" cx="70" cy="15" r="0.55" class="rk-dot"/>
+  <text transform="matrix(0.86 0.5 -0.87 0.5 15.59 -55)" class="rk-txt rk-r04" x="7" y="31" font-size="6.8" font-weight="700" letter-spacing="0.6">R-04</text>
+  <text transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-txt rk-dim" x="4" y="8.2" font-size="5.2" letter-spacing="2.6">SERVER RACK</text>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="8.2" y="11.2" width="63.6" height="24.6" rx="3" class="rk-screen-bloom"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="9" y="12" width="62" height="23" rx="1.8" class="rk-scr"/>
+  <text id="rk-up" transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-txt rk-scr-hi" x="11.8" y="21.4" font-size="5.4" letter-spacing="0.6">UP 7/7</text>
+  <text id="rk-load" transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-txt rk-scr-txt" x="69.2" y="21.4" font-size="5.4" text-anchor="end">LOAD 53%</text>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="11.8" y="23.6" width="57.4" height="2.4" rx="1.2" class="rk-loadtrack"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="11.8" y="23.6" width="30.4" height="2.4" rx="1.2" class="rk-loadglow" id="rk-barglow"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="11.8" y="23.6" width="30.4" height="2.4" rx="1.2" class="rk-loadbar" id="rk-bar"/>
+  <g class="rk-unit-g" data-unit="1" role="button" tabindex="0" aria-pressed="true" aria-label="Unidad 1: activa">
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="2" y="39.65" width="76" height="6.2" class="rk-hit" fill="transparent"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="3" y="40" width="74" height="5.5" rx="0.8" class="rk-unit"/>
+  <path transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-cyan" d="M 7.45 40.96 A 1.9 1.9 0 1 0 6.14 40.97"/>
+  <path transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-cyan" d="M 6.8 40.8 V 43.95"/>
+  <text transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-txt rk-label" x="10.5" y="43.95" font-size="4.4">01</text>
+  <circle transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-led-a" cx="25" cy="42.75" r="0.95"/>
+  <circle transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-led-b" cx="28" cy="42.75" r="0.95" style="animation-delay:-0s"/>
+  <circle transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-led-c" cx="31" cy="42.75" r="0.95"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="36.5" y="41.4" width="1.2" height="1.2" rx="0.25" class="rk-btn"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="36.5" y="43.3" width="1.2" height="1.2" rx="0.25" class="rk-btn"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="39" y="41.4" width="1.2" height="1.2" rx="0.25" class="rk-btn"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="39" y="43.3" width="1.2" height="1.2" rx="0.25" class="rk-btn"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="41.5" y="41.4" width="1.2" height="1.2" rx="0.25" class="rk-btn"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="41.5" y="43.3" width="1.2" height="1.2" rx="0.25" class="rk-btn"/>
+  <line transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-vent" x1="47" y1="41.4" x2="76.5" y2="41.4"/>
+  <line transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-vent" x1="47" y1="42.75" x2="76.5" y2="42.75"/>
+  <line transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-vent" x1="47" y1="44.1" x2="76.5" y2="44.1"/>
+  </g>
+  <g class="rk-unit-g" data-unit="2" role="button" tabindex="0" aria-pressed="true" aria-label="Unidad 2: activa">
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="2" y="45.75" width="76" height="6.2" class="rk-hit" fill="transparent"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="3" y="46.1" width="74" height="5.5" rx="0.8" class="rk-unit"/>
+  <path transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-cyan" d="M 7.45 47.06 A 1.9 1.9 0 1 0 6.14 47.07"/>
+  <path transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-cyan" d="M 6.8 46.9 V 50.05"/>
+  <text transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-txt rk-label" x="10.5" y="50.05" font-size="4.4">02</text>
+  <circle transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-led-a" cx="25" cy="48.85" r="0.95"/>
+  <circle transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-led-b" cx="28" cy="48.85" r="0.95" style="animation-delay:-0.4s"/>
+  <circle transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-led-c" cx="31" cy="48.85" r="0.95"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="36.5" y="47.5" width="1.2" height="1.2" rx="0.25" class="rk-btn"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="36.5" y="49.4" width="1.2" height="1.2" rx="0.25" class="rk-btn"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="39" y="47.5" width="1.2" height="1.2" rx="0.25" class="rk-btn"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="39" y="49.4" width="1.2" height="1.2" rx="0.25" class="rk-btn"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="41.5" y="47.5" width="1.2" height="1.2" rx="0.25" class="rk-btn"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="41.5" y="49.4" width="1.2" height="1.2" rx="0.25" class="rk-btn"/>
+  <line transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-vent" x1="47" y1="47.5" x2="76.5" y2="47.5"/>
+  <line transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-vent" x1="47" y1="48.85" x2="76.5" y2="48.85"/>
+  <line transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-vent" x1="47" y1="50.2" x2="76.5" y2="50.2"/>
+  </g>
+  <g class="rk-unit-g" data-unit="3" role="button" tabindex="0" aria-pressed="true" aria-label="Unidad 3: activa">
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="2" y="51.85" width="76" height="6.2" class="rk-hit" fill="transparent"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="3" y="52.2" width="74" height="5.5" rx="0.8" class="rk-unit"/>
+  <path transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-cyan" d="M 7.45 53.16 A 1.9 1.9 0 1 0 6.14 53.17"/>
+  <path transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-cyan" d="M 6.8 53 V 56.15"/>
+  <text transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-txt rk-label" x="10.5" y="56.15" font-size="4.4">03</text>
+  <circle transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-led-a" cx="25" cy="54.95" r="0.95"/>
+  <circle transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-led-b" cx="28" cy="54.95" r="0.95" style="animation-delay:-0.8s"/>
+  <circle transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-led-c" cx="31" cy="54.95" r="0.95"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="36.5" y="53.6" width="1.2" height="1.2" rx="0.25" class="rk-btn"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="36.5" y="55.5" width="1.2" height="1.2" rx="0.25" class="rk-btn"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="39" y="53.6" width="1.2" height="1.2" rx="0.25" class="rk-btn"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="39" y="55.5" width="1.2" height="1.2" rx="0.25" class="rk-btn"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="41.5" y="53.6" width="1.2" height="1.2" rx="0.25" class="rk-btn"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="41.5" y="55.5" width="1.2" height="1.2" rx="0.25" class="rk-btn"/>
+  <line transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-vent" x1="47" y1="53.6" x2="76.5" y2="53.6"/>
+  <line transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-vent" x1="47" y1="54.95" x2="76.5" y2="54.95"/>
+  <line transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-vent" x1="47" y1="56.3" x2="76.5" y2="56.3"/>
+  </g>
+  <g class="rk-unit-g" data-unit="4" role="button" tabindex="0" aria-pressed="true" aria-label="Unidad 4: activa">
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="2" y="57.95" width="76" height="6.2" class="rk-hit" fill="transparent"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="3" y="58.3" width="74" height="5.5" rx="0.8" class="rk-unit"/>
+  <path transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-cyan" d="M 7.45 59.26 A 1.9 1.9 0 1 0 6.14 59.27"/>
+  <path transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-cyan" d="M 6.8 59.1 V 62.25"/>
+  <text transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-txt rk-label" x="10.5" y="62.25" font-size="4.4">04</text>
+  <circle transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-led-a" cx="25" cy="61.05" r="0.95"/>
+  <circle transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-led-b" cx="28" cy="61.05" r="0.95" style="animation-delay:-1.2s"/>
+  <circle transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-led-c" cx="31" cy="61.05" r="0.95"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="36.5" y="59.7" width="1.2" height="1.2" rx="0.25" class="rk-btn"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="36.5" y="61.6" width="1.2" height="1.2" rx="0.25" class="rk-btn"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="39" y="59.7" width="1.2" height="1.2" rx="0.25" class="rk-btn"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="39" y="61.6" width="1.2" height="1.2" rx="0.25" class="rk-btn"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="41.5" y="59.7" width="1.2" height="1.2" rx="0.25" class="rk-btn"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="41.5" y="61.6" width="1.2" height="1.2" rx="0.25" class="rk-btn"/>
+  <line transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-vent" x1="47" y1="59.7" x2="76.5" y2="59.7"/>
+  <line transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-vent" x1="47" y1="61.05" x2="76.5" y2="61.05"/>
+  <line transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-vent" x1="47" y1="62.4" x2="76.5" y2="62.4"/>
+  </g>
+  <g class="rk-unit-g" data-unit="5" role="button" tabindex="0" aria-pressed="true" aria-label="Unidad 5: activa">
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="2" y="64.05" width="76" height="6.2" class="rk-hit" fill="transparent"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="3" y="64.4" width="74" height="5.5" rx="0.8" class="rk-unit"/>
+  <path transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-cyan" d="M 7.45 65.36 A 1.9 1.9 0 1 0 6.14 65.37"/>
+  <path transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-cyan" d="M 6.8 65.2 V 68.35"/>
+  <text transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-txt rk-label" x="10.5" y="68.35" font-size="4.4">05</text>
+  <circle transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-led-a" cx="25" cy="67.15" r="0.95"/>
+  <circle transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-led-b" cx="28" cy="67.15" r="0.95" style="animation-delay:-1.6s"/>
+  <circle transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-led-c" cx="31" cy="67.15" r="0.95"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="36.5" y="65.8" width="1.2" height="1.2" rx="0.25" class="rk-btn"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="36.5" y="67.7" width="1.2" height="1.2" rx="0.25" class="rk-btn"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="39" y="65.8" width="1.2" height="1.2" rx="0.25" class="rk-btn"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="39" y="67.7" width="1.2" height="1.2" rx="0.25" class="rk-btn"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="41.5" y="65.8" width="1.2" height="1.2" rx="0.25" class="rk-btn"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="41.5" y="67.7" width="1.2" height="1.2" rx="0.25" class="rk-btn"/>
+  <line transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-vent" x1="47" y1="65.8" x2="76.5" y2="65.8"/>
+  <line transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-vent" x1="47" y1="67.15" x2="76.5" y2="67.15"/>
+  <line transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-vent" x1="47" y1="68.5" x2="76.5" y2="68.5"/>
+  </g>
+  <g class="rk-unit-g" data-unit="6" role="button" tabindex="0" aria-pressed="true" aria-label="Unidad 6: activa">
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="2" y="70.15" width="76" height="6.2" class="rk-hit" fill="transparent"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="3" y="70.5" width="74" height="5.5" rx="0.8" class="rk-unit"/>
+  <path transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-cyan" d="M 7.45 71.46 A 1.9 1.9 0 1 0 6.14 71.47"/>
+  <path transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-cyan" d="M 6.8 71.3 V 74.45"/>
+  <text transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-txt rk-label" x="10.5" y="74.45" font-size="4.4">06</text>
+  <circle transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-led-a" cx="25" cy="73.25" r="0.95"/>
+  <circle transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-led-b" cx="28" cy="73.25" r="0.95" style="animation-delay:-2s"/>
+  <circle transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-led-c" cx="31" cy="73.25" r="0.95"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="36.5" y="71.9" width="1.2" height="1.2" rx="0.25" class="rk-btn"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="36.5" y="73.8" width="1.2" height="1.2" rx="0.25" class="rk-btn"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="39" y="71.9" width="1.2" height="1.2" rx="0.25" class="rk-btn"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="39" y="73.8" width="1.2" height="1.2" rx="0.25" class="rk-btn"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="41.5" y="71.9" width="1.2" height="1.2" rx="0.25" class="rk-btn"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="41.5" y="73.8" width="1.2" height="1.2" rx="0.25" class="rk-btn"/>
+  <line transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-vent" x1="47" y1="71.9" x2="76.5" y2="71.9"/>
+  <line transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-vent" x1="47" y1="73.25" x2="76.5" y2="73.25"/>
+  <line transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-vent" x1="47" y1="74.6" x2="76.5" y2="74.6"/>
+  </g>
+  <g class="rk-unit-g" data-unit="7" role="button" tabindex="0" aria-pressed="true" aria-label="Unidad 7: activa">
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="2" y="76.25" width="76" height="6.2" class="rk-hit" fill="transparent"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="3" y="76.6" width="74" height="5.5" rx="0.8" class="rk-unit"/>
+  <path transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-cyan" d="M 7.45 77.56 A 1.9 1.9 0 1 0 6.14 77.57"/>
+  <path transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-cyan" d="M 6.8 77.4 V 80.55"/>
+  <text transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-txt rk-label" x="10.5" y="80.55" font-size="4.4">07</text>
+  <circle transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-led-a" cx="25" cy="79.35" r="0.95"/>
+  <circle transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-led-b" cx="28" cy="79.35" r="0.95" style="animation-delay:-2.4s"/>
+  <circle transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-led-c" cx="31" cy="79.35" r="0.95"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="36.5" y="78" width="1.2" height="1.2" rx="0.25" class="rk-btn"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="36.5" y="79.9" width="1.2" height="1.2" rx="0.25" class="rk-btn"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="39" y="78" width="1.2" height="1.2" rx="0.25" class="rk-btn"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="39" y="79.9" width="1.2" height="1.2" rx="0.25" class="rk-btn"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="41.5" y="78" width="1.2" height="1.2" rx="0.25" class="rk-btn"/>
+  <rect transform="matrix(0.87 0.5 0 1 -13.86 -38)" x="41.5" y="79.9" width="1.2" height="1.2" rx="0.25" class="rk-btn"/>
+  <line transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-vent" x1="47" y1="78" x2="76.5" y2="78"/>
+  <line transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-vent" x1="47" y1="79.35" x2="76.5" y2="79.35"/>
+  <line transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-vent" x1="47" y1="80.7" x2="76.5" y2="80.7"/>
+  </g>
+  <line transform="matrix(0.87 0.5 0 1 -13.86 -38)" class="rk-rack-glow" x1="2" y1="83.4" x2="78" y2="83.4"/>
+  <line transform="matrix(0.86 -0.5 0 1 55.43 2)" class="rk-rack-glow2" x1="2" y1="83.4" x2="32" y2="83.4"/>
+  <line transform="matrix(0.86 -0.5 0 1 55.43 2)" class="rk-vent" x1="3" y1="6" x2="31" y2="6"/>
+  <line transform="matrix(0.86 -0.5 0 1 55.43 2)" class="rk-vent" x1="3" y1="18" x2="31" y2="18"/>
+  <line transform="matrix(0.86 -0.5 0 1 55.43 2)" class="rk-vent" x1="3" y1="30" x2="31" y2="30"/>
+  <line transform="matrix(0.86 -0.5 0 1 55.43 2)" class="rk-vent" x1="3" y1="42" x2="31" y2="42"/>
+  <line transform="matrix(0.86 -0.5 0 1 55.43 2)" class="rk-vent" x1="3" y1="54" x2="31" y2="54"/>
+  <line transform="matrix(0.86 -0.5 0 1 55.43 2)" class="rk-vent" x1="3" y1="66" x2="31" y2="66"/>
+  <rect transform="matrix(0.86 -0.5 0 1 55.43 2)" x="11.5" y="72.9" width="9" height="2.2" rx="0.6" class="rk-port"/>
+  <circle transform="matrix(0.86 -0.5 0 1 55.43 2)" class="rk-cyan-fill" cx="13.4" cy="74" r="0.45"/>
+  <circle transform="matrix(0.86 -0.5 0 1 55.43 2)" class="rk-cyan-fill" cx="15.6" cy="74" r="0.45"/>
+  <text transform="matrix(0.86 -0.5 0 1 55.43 2)" class="rk-txt rk-dim" x="21.5" y="75.05" font-size="3.4">P01</text>
+  <circle transform="matrix(0.86 -0.5 0 1 55.43 2)" class="rk-cyan-fill" cx="16" cy="74" r="0.7"/>
+  <rect transform="matrix(0.86 -0.5 0 1 55.43 2)" x="11.5" y="58.9" width="9" height="2.2" rx="0.6" class="rk-port"/>
+  <circle transform="matrix(0.86 -0.5 0 1 55.43 2)" class="rk-cyan-fill" cx="13.4" cy="60" r="0.45"/>
+  <circle transform="matrix(0.86 -0.5 0 1 55.43 2)" class="rk-cyan-fill" cx="15.6" cy="60" r="0.45"/>
+  <text transform="matrix(0.86 -0.5 0 1 55.43 2)" class="rk-txt rk-dim" x="21.5" y="61.05" font-size="3.4">P02</text>
+  <circle transform="matrix(0.86 -0.5 0 1 55.43 2)" class="rk-cyan-fill" cx="16" cy="60" r="0.7"/>
+  <rect transform="matrix(0.86 -0.5 0 1 55.43 2)" x="11.5" y="44.9" width="9" height="2.2" rx="0.6" class="rk-port"/>
+  <circle transform="matrix(0.86 -0.5 0 1 55.43 2)" class="rk-cyan-fill" cx="13.4" cy="46" r="0.45"/>
+  <circle transform="matrix(0.86 -0.5 0 1 55.43 2)" class="rk-cyan-fill" cx="15.6" cy="46" r="0.45"/>
+  <text transform="matrix(0.86 -0.5 0 1 55.43 2)" class="rk-txt rk-dim" x="21.5" y="47.05" font-size="3.4">P03</text>
+  <circle transform="matrix(0.86 -0.5 0 1 55.43 2)" class="rk-cyan-fill" cx="16" cy="46" r="0.7"/>
+  <rect transform="matrix(0.86 -0.5 0 1 55.43 2)" x="11.5" y="30.9" width="9" height="2.2" rx="0.6" class="rk-port"/>
+  <circle transform="matrix(0.86 -0.5 0 1 55.43 2)" class="rk-cyan-fill" cx="13.4" cy="32" r="0.45"/>
+  <circle transform="matrix(0.86 -0.5 0 1 55.43 2)" class="rk-cyan-fill" cx="15.6" cy="32" r="0.45"/>
+  <text transform="matrix(0.86 -0.5 0 1 55.43 2)" class="rk-txt rk-dim" x="21.5" y="33.05" font-size="3.4">P04</text>
+  <circle transform="matrix(0.86 -0.5 0 1 55.43 2)" class="rk-cyan-fill" cx="16" cy="32" r="0.7"/>
+  <rect transform="matrix(0.86 -0.5 0 1 55.43 2)" x="11.5" y="16.9" width="9" height="2.2" rx="0.6" class="rk-port"/>
+  <circle transform="matrix(0.86 -0.5 0 1 55.43 2)" class="rk-cyan-fill" cx="13.4" cy="18" r="0.45"/>
+  <circle transform="matrix(0.86 -0.5 0 1 55.43 2)" class="rk-cyan-fill" cx="15.6" cy="18" r="0.45"/>
+  <text transform="matrix(0.86 -0.5 0 1 55.43 2)" class="rk-txt rk-dim" x="21.5" y="19.05" font-size="3.4">P05</text>
+  <circle transform="matrix(0.86 -0.5 0 1 55.43 2)" class="rk-cyan-fill" cx="16" cy="18" r="0.7"/>
+  <rect transform="matrix(0.87 0.5 -0.87 0.5 0 -2)" x="163" y="17.4" width="10" height="5.2" rx="1" class="rk-port"/>
+  <rect transform="matrix(0.87 0.5 -0.87 0.5 0 -2)" x="164.6" y="18.7" width="6.8" height="2.6" rx="0.6" class="rk-detail-fill"/>
+  <rect transform="matrix(0.87 0.5 -0.87 0.5 0 -2)" x="166.2" y="19" width="10" height="5.2" rx="1" class="rk-port"/>
+  <rect transform="matrix(0.87 0.5 -0.87 0.5 0 -2)" x="167.8" y="20.3" width="6.8" height="2.6" rx="0.6" class="rk-detail-fill"/>
+  <rect transform="matrix(0.87 0.5 -0.87 0.5 0 -2)" x="169.4" y="20.6" width="10" height="5.2" rx="1" class="rk-port"/>
+  <rect transform="matrix(0.87 0.5 -0.87 0.5 0 -2)" x="171" y="21.9" width="6.8" height="2.6" rx="0.6" class="rk-detail-fill"/>
+  <rect transform="matrix(0.87 0.5 -0.87 0.5 0 -2)" x="172.6" y="22.2" width="10" height="5.2" rx="1" class="rk-port"/>
+  <rect transform="matrix(0.87 0.5 -0.87 0.5 0 -2)" x="174.2" y="23.5" width="6.8" height="2.6" rx="0.6" class="rk-detail-fill"/>
+  <rect transform="matrix(0.87 0.5 -0.87 0.5 0 -2)" x="175.8" y="23.8" width="10" height="5.2" rx="1" class="rk-port"/>
+  <rect transform="matrix(0.87 0.5 -0.87 0.5 0 -2)" x="177.4" y="25.1" width="6.8" height="2.6" rx="0.6" class="rk-detail-fill"/>
+  <path class="rk-cable-glow" d="M69.28 70L73.78 72.25L78.36 73.21L82.98 73.16L87.62 72.41L92.25 71.24L96.82 69.96L101.32 68.85L105.72 68.21L109.98 68.34L114.07 69.53L117.97 72.08L121.64 76.28L125.05 82.42L128.17 90.8"/>
+  <path class="rk-cable" d="M69.28 70L73.78 72.25L78.36 73.21L82.98 73.16L87.62 72.41L92.25 71.24L96.82 69.96L101.32 68.85L105.72 68.21L109.98 68.34L114.07 69.53L117.97 72.08L121.64 76.28L125.05 82.42L128.17 90.8"/>
+  <path class="rk-pulse" d="M69.28 70L73.78 72.25L78.36 73.21L82.98 73.16L87.62 72.41L92.25 71.24L96.82 69.96L101.32 68.85L105.72 68.21L109.98 68.34L114.07 69.53L117.97 72.08L121.64 76.28L125.05 82.42L128.17 90.8" style="animation-delay:-0s"/>
+  <path class="rk-arrow" d="M 128.17 90.8 L 124.67 87.41 L 128.6 85.94 Z"/>
+  <path class="rk-cable-glow" d="M69.28 56L73.8 58.49L78.44 60.12L83.15 61.1L87.9 61.66L92.65 62.02L97.37 62.41L102.02 63.05L106.56 64.16L110.96 65.96L115.18 68.68L119.19 72.54L122.95 77.77L126.41 84.58L129.56 93.2"/>
+  <path class="rk-cable" d="M69.28 56L73.8 58.49L78.44 60.12L83.15 61.1L87.9 61.66L92.65 62.02L97.37 62.41L102.02 63.05L106.56 64.16L110.96 65.96L115.18 68.68L119.19 72.54L122.95 77.77L126.41 84.58L129.56 93.2"/>
+  <path class="rk-pulse" d="M69.28 56L73.8 58.49L78.44 60.12L83.15 61.1L87.9 61.66L92.65 62.02L97.37 62.41L102.02 63.05L106.56 64.16L110.96 65.96L115.18 68.68L119.19 72.54L122.95 77.77L126.41 84.58L129.56 93.2" style="animation-delay:-0.34s"/>
+  <path class="rk-arrow" d="M 129.56 93.2 L 126.08 89.79 L 130.02 88.35 Z"/>
+  <path class="rk-cable-glow" d="M69.28 42L73.82 44.73L78.51 47.03L83.31 49.04L88.17 50.91L93.05 52.81L97.91 54.87L102.71 57.25L107.4 60.1L111.94 63.58L116.29 67.83L120.41 73.01L124.26 79.26L127.78 86.74L130.94 95.6"/>
+  <path class="rk-cable" d="M69.28 42L73.82 44.73L78.51 47.03L83.31 49.04L88.17 50.91L93.05 52.81L97.91 54.87L102.71 57.25L107.4 60.1L111.94 63.58L116.29 67.83L120.41 73.01L124.26 79.26L127.78 86.74L130.94 95.6"/>
+  <path class="rk-pulse" d="M69.28 42L73.82 44.73L78.51 47.03L83.31 49.04L88.17 50.91L93.05 52.81L97.91 54.87L102.71 57.25L107.4 60.1L111.94 63.58L116.29 67.83L120.41 73.01L124.26 79.26L127.78 86.74L130.94 95.6" style="animation-delay:-0.68s"/>
+  <path class="rk-arrow" d="M 130.94 95.6 L 127.48 92.16 L 131.44 90.75 Z"/>
+  <path class="rk-cable-glow" d="M69.28 28L73.84 30.97L78.59 33.93L83.48 36.97L88.45 40.16L93.46 43.59L98.46 47.32L103.4 51.45L108.24 56.05L112.93 61.2L117.41 66.98L121.63 73.47L125.56 80.75L129.14 88.9L132.33 98"/>
+  <path class="rk-cable" d="M69.28 28L73.84 30.97L78.59 33.93L83.48 36.97L88.45 40.16L93.46 43.59L98.46 47.32L103.4 51.45L108.24 56.05L112.93 61.2L117.41 66.98L121.63 73.47L125.56 80.75L129.14 88.9L132.33 98"/>
+  <path class="rk-pulse" d="M69.28 28L73.84 30.97L78.59 33.93L83.48 36.97L88.45 40.16L93.46 43.59L98.46 47.32L103.4 51.45L108.24 56.05L112.93 61.2L117.41 66.98L121.63 73.47L125.56 80.75L129.14 88.9L132.33 98" style="animation-delay:-1.02s"/>
+  <path class="rk-arrow" d="M 132.33 98 L 128.89 94.54 L 132.86 93.15 Z"/>
+  <path class="rk-cable-glow" d="M69.28 14L73.86 17.21L78.67 20.84L83.64 24.91L88.72 29.41L93.86 34.37L99 39.78L104.1 45.65L109.08 51.99L113.91 58.82L118.52 66.13L122.86 73.93L126.87 82.24L130.51 91.06L133.71 100.4"/>
+  <path class="rk-cable" d="M69.28 14L73.86 17.21L78.67 20.84L83.64 24.91L88.72 29.41L93.86 34.37L99 39.78L104.1 45.65L109.08 51.99L113.91 58.82L118.52 66.13L122.86 73.93L126.87 82.24L130.51 91.06L133.71 100.4"/>
+  <path class="rk-pulse" d="M69.28 14L73.86 17.21L78.67 20.84L83.64 24.91L88.72 29.41L93.86 34.37L99 39.78L104.1 45.65L109.08 51.99L113.91 58.82L118.52 66.13L122.86 73.93L126.87 82.24L130.51 91.06L133.71 100.4" style="animation-delay:-1.36s"/>
+  <path class="rk-arrow" d="M 133.71 100.4 L 130.3 96.92 L 134.27 95.56 Z"/>
+</svg>
+          <span style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0" aria-live="polite" data-rack-status></span>
           </div>
-          <div class="bento__icon">
-            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/><path d="m6 11 2 2 4-4 2 2 3-3"/></svg>
-          </div>
-          <h2 class="bento__title">Reparación & Mantenimiento</h2>
-          <p class="bento__desc">Portátiles y desktop. SSD, RAM, limpieza profunda y diagnóstico.</p>
-          <div class="bento__meta"><span>⚡ Mismo día</span><span>💰 Desde $70.000</span></div>
         </article>
         <article class="bento bento--stat" data-cursor="hover">
           <div class="bento__stat-num">+500</div>
@@ -461,6 +760,7 @@
       </div>
     </div>
   </section>
+
 
   <!-- ============================================
        NOSOTROS
