@@ -273,4 +273,93 @@
       }
     });
   })();
+
+  /* ============================================
+     RACK R-04 — tarjeta "Servicio estrella" (iso-glow)
+     La escena vive en img/rack.svg: se inyecta aquí (chunk diferido)
+     para no engordar el HTML crítico.
+     ============================================ */
+  (function initRack() {
+    var host = document.querySelector('[data-rack]');
+    if (!host || host.querySelector('svg')) return;
+
+    var LOAD_PCT = [0, 8, 15, 23, 30, 38, 45, 53];
+    var BAR_W = 57.4;
+    var on = [true, true, true, true, true, true, true];
+    var statusEl = document.querySelector('[data-rack-status]');
+
+    function pad(n) { return (n < 10 ? '0' : '') + n; }
+
+    function say(n) {
+      if (statusEl) statusEl.textContent = n + ' de 7 unidades activas';
+    }
+
+    function render(svg) {
+      var n = 0, i;
+      for (i = 0; i < 7; i++) if (on[i]) n++;
+      var pct = LOAD_PCT[n];
+      var w = (BAR_W * pct / 100).toFixed(1);
+      var up = svg.getElementById('rk-up');
+      var load = svg.getElementById('rk-load');
+      var bar = svg.getElementById('rk-bar');
+      var glow = svg.getElementById('rk-barglow');
+      if (up) up.textContent = 'UP ' + n + '/7';
+      if (load) load.textContent = 'LOAD ' + pct + '%';
+      if (bar) bar.setAttribute('width', w);
+      if (glow) glow.setAttribute('width', w);
+      var groups = svg.querySelectorAll('.rk-unit-g');
+      for (i = 0; i < groups.length; i++) {
+        groups[i].classList.toggle('rk-offg', !on[i]);
+        groups[i].setAttribute('aria-pressed', on[i] ? 'true' : 'false');
+        groups[i].setAttribute('aria-label', 'Unidad ' + pad(i + 1) + ': ' + (on[i] ? 'activa' : 'apagada'));
+      }
+    }
+
+    function unit(e) {
+      var t = e.target;
+      return t && t.closest ? t.closest('.rk-unit-g') : null;
+    }
+
+    function toggle(g, svg) {
+      var i = parseInt(g.getAttribute('data-unit'), 10) - 1;
+      if (i < 0 || i > 6) return;
+      on[i] = !on[i];
+      render(svg);
+      var n = 0;
+      for (var k = 0; k < 7; k++) if (on[k]) n++;
+      say(n);
+    }
+
+    function wire(svg) {
+      render(svg);
+      svg.addEventListener('click', function (e) {
+        var g = unit(e);
+        if (g) toggle(g, svg);
+      });
+      svg.addEventListener('keydown', function (e) {
+        if (e.key !== 'Enter' && e.key !== ' ') return;
+        var g = unit(e);
+        if (!g) return;
+        e.preventDefault();
+        toggle(g, svg);
+      });
+      svg.addEventListener('dblclick', function (e) {
+        if (!unit(e)) return;
+        for (var i = 0; i < 7; i++) on[i] = true;
+        render(svg);
+        say(7);
+      });
+    }
+
+    fetch('img/rack.svg').then(function (r) {
+      if (!r.ok) throw new Error(r.status);
+      return r.text();
+    }).then(function (txt) {
+      if (host.querySelector('svg')) return;
+      host.innerHTML = txt;
+      var svg = host.querySelector('svg');
+      if (svg) wire(svg);
+    }).catch(function () {});
+  })();
+
 })();
