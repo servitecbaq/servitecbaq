@@ -104,6 +104,9 @@
       if (lastFocused && lastFocused.focus) lastFocused.focus();
     }
 
+    // El panel de WhatsApp queda por debajo del modal (9997 < 10000) y hay que cerrarlo antes
+    SVC.closeServiceModal = close;
+
     // Delegación: un único listener
     document.addEventListener('click', function (e) {
       const card = e.target.closest('.svc[data-service], .service-card[data-service]');

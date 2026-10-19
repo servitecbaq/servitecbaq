@@ -286,6 +286,20 @@
       if (panel.classList.contains('open')) closeAll(); else openPanel();
     });
 
+    // Todo CTA de WhatsApp abre el panel en vez de sacar al usuario del sitio.
+    // El href se deja intacto: sin JS, clic central o Ctrl/Cmd siguen abriendo wa.me.
+    document.addEventListener('click', function (e) {
+      if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      const link = e.target.closest && e.target.closest('a[href*="wa.me"], a[href*="api.whatsapp.com"]');
+      if (!link || link.closest('#waModal')) return;
+      const motivo = new URL(link.href, location.href).searchParams.get('text');
+      const detail = $('#wa-detail');
+      if (motivo && detail && !detail.value.trim()) detail.value = motivo;
+      if (SVC.closeServiceModal) SVC.closeServiceModal();
+      openPanel();
+      e.preventDefault();
+    });
+
     panel.addEventListener('click', function (e) {
       if (e.target.closest('[data-close-wa]')) closeAll();
     });
