@@ -1371,7 +1371,10 @@ body:not(.cursor-ready) .bento { cursor: pointer; }
   font-weight: 900;
   line-height: 0.85;
   letter-spacing: -0.06em;
-  background: linear-gradient(160deg, var(--brand) 0%, var(--orange-500) 100%);
+  /* Longhand, no el shorthand `background`: la puerta que re-serializa el CSS
+     (CSSOM) vacia los longhands del shorthand cuando hay `background-clip:text`,
+     y el numero quedaba transparente sobre un degradado inexistente. */
+  background-image: linear-gradient(160deg, var(--brand) 0%, var(--orange-500) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -2034,7 +2037,7 @@ body:not(.cursor-ready) .bento { cursor: pointer; }
   font-weight: 900;
   letter-spacing: -0.04em;
   line-height: 1;
-  background: linear-gradient(160deg, var(--brand) 0%, var(--orange-500) 100%);
+  background-image: linear-gradient(160deg, var(--brand) 0%, var(--orange-500) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
