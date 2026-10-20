@@ -1,13 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
-
-  <!-- Página principal -->
+<!-- Generado por scripts/build-pages.js -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://servitecbaq.com/</loc>
-    <lastmod>2026-10-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+    <lastmod>2026-10-19</lastmod>
   </url>
-
+  <url>
+    <loc>https://servitecbaq.com/servicios/reparacion-de-computadores-en-barranquilla/</loc>
+    <lastmod>2026-10-19</lastmod>
+  </url>
+  <url>
+    <loc>https://servitecbaq.com/servicios/instalacion-de-redes-wifi-en-barranquilla/</loc>
+    <lastmod>2026-10-19</lastmod>
+  </url>
+  <url>
+    <loc>https://servitecbaq.com/servicios/instalacion-de-camaras-cctv-barranquilla/</loc>
+    <lastmod>2026-10-19</lastmod>
+  </url>
+  <url>
+    <loc>https://servitecbaq.com/servicios/soporte-e-instalacion-de-impresoras-barranquilla/</loc>
+    <lastmod>2026-10-19</lastmod>
+  </url>
+  <url>
+    <loc>https://servitecbaq.com/servicios/instalacion-de-programas-y-aplicativos-barranquilla/</loc>
+    <lastmod>2026-10-19</lastmod>
+  </url>
+  <url>
+    <loc>https://servitecbaq.com/servicios/respaldo-de-datos-y-seguridad-informatica-barranquilla/</loc>
+    <lastmod>2026-10-19</lastmod>
+  </url>
+  <url>
+    <loc>https://servitecbaq.com/servicios/soporte-tecnico-empresarial-barranquilla/</loc>
+    <lastmod>2026-10-19</lastmod>
+  </url>
+  <url>
+    <loc>https://servitecbaq.com/servicios/desarrollo-de-software-a-la-medida-barranquilla/</loc>
+    <lastmod>2026-10-19</lastmod>
+  </url>
 </urlset>

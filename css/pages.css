@@ -1,0 +1,103 @@
+/* ============================================
+   PAGES.CSS — componentes de las páginas de servicio
+   Solo se enlaza desde /servicios/*. Los tokens (--bg, --fg, --brand, --s-*,
+   --tx-*) vienen de styles.css, así que el tema claro/oscuro funciona solo.
+   ============================================ */
+
+.svc-page { padding-top: calc(var(--header-offset) + var(--s-8)); }
+
+/* Ruta de navegación */
+.crumbs ol {
+  display: flex; flex-wrap: wrap; gap: var(--s-2);
+  list-style: none; margin: 0 0 var(--s-6); padding: 0;
+  font-family: var(--font-mono); font-size: var(--tx-xs); color: var(--fg-faint);
+}
+.crumbs a { color: var(--fg-muted); text-decoration: none; }
+.crumbs a:hover { color: var(--brand); }
+.crumbs [aria-current="page"] { color: var(--fg); }
+
+/* Cabecera de la página */
+.svc-hero { max-width: 62ch; }
+.svc-hero .section-title { margin-top: var(--s-3); }
+.svc-hero__lead { font-size: var(--tx-lg); line-height: 1.7; color: var(--fg-muted); margin-top: var(--s-5); }
+.svc-hero__actions { display: flex; flex-wrap: wrap; gap: var(--s-3); margin-top: var(--s-8); }
+
+.svc-facts {
+  display: grid; gap: var(--s-3);
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  list-style: none; margin: var(--s-10) 0 0; padding: var(--s-6) 0 0;
+  border-top: 1px solid var(--line);
+  font-size: var(--tx-sm); color: var(--fg);
+}
+.svc-facts__k {
+  display: block; margin-bottom: var(--s-1);
+  font-family: var(--font-mono); font-size: var(--tx-xs);
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-muted);
+}
+
+/* Bloques: `section` (styles.css) ya aporta el padding vertical del diseño,
+   así que no se suma un segundo ritmo con margen propio. */
+.svc-block .section-title { margin-bottom: var(--s-6); }
+
+/* Qué incluye */
+.svc-includes {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; gap: var(--s-3);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+.svc-includes li {
+  position: relative; padding: var(--s-4) var(--s-4) var(--s-4) var(--s-8);
+  background: var(--bg-elev); border: 1px solid var(--line); border-radius: var(--r-md);
+  font-size: var(--tx-sm); line-height: 1.55; box-shadow: var(--shadow-1);
+}
+.svc-includes li::before {
+  content: ""; position: absolute; left: var(--s-4); top: calc(var(--s-4) + 0.45em);
+  width: 7px; height: 7px; border-radius: 50%; background: var(--accent);
+}
+
+/* Situaciones */
+.svc-symptoms { display: grid; gap: var(--s-4); grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.svc-symptom {
+  margin: 0; padding: var(--s-6);
+  background: var(--bg-subtle); border: 1px solid var(--line); border-radius: var(--r-md);
+}
+.svc-symptom h3 { margin: 0 0 var(--s-2); font-size: var(--tx-base); font-weight: 600; color: var(--fg); }
+.svc-symptom p { margin: 0; font-size: var(--tx-sm); line-height: 1.6; color: var(--fg-muted); }
+
+/* Pasos */
+.svc-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-5); counter-reset: paso; }
+.svc-steps li { display: grid; grid-template-columns: auto 1fr; gap: var(--s-4); align-items: start; }
+.svc-steps__n {
+  font-family: var(--font-mono); font-size: var(--tx-sm); font-weight: 700;
+  color: var(--brand); background: var(--brand-soft);
+  border: 1px solid var(--line); border-radius: var(--r-sm);
+  padding: var(--s-2) var(--s-3);
+}
+.svc-steps h3 { margin: 0 0 var(--s-1); font-size: var(--tx-base); font-weight: 600; }
+.svc-steps p { margin: 0; font-size: var(--tx-sm); line-height: 1.6; color: var(--fg-muted); }
+
+/* Relacionados */
+.svc-related { display: grid; gap: var(--s-3); grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.svc-related__card {
+  display: flex; align-items: center; gap: var(--s-3);
+  padding: var(--s-5); text-decoration: none; color: var(--fg);
+  background: var(--bg-elev); border: 1px solid var(--line); border-radius: var(--r-md);
+  transition: transform 0.25s var(--ease), border-color 0.25s var(--ease), box-shadow 0.25s var(--ease);
+}
+.svc-related__card:hover { transform: translateY(-3px); border-color: var(--brand); box-shadow: var(--shadow-3); }
+.svc-related__icon { font-size: 1.4rem; line-height: 1; }
+.svc-related__label { font-size: var(--tx-sm); font-weight: 600; }
+
+/* Cierre */
+.svc-cta__panel {
+  padding: var(--s-10);
+  background: var(--bg-deep); border: 1px solid var(--line); border-radius: var(--r-xl);
+  color: #fff; text-align: center;
+}
+.svc-cta__panel .section-title { color: #fff; margin-bottom: var(--s-3); }
+.svc-cta__text { max-width: 52ch; margin: 0 auto var(--s-6); font-size: var(--tx-base); color: rgba(255, 255, 255, 0.72); }
+
+@media (max-width: 640px) {
+  .svc-page { padding-top: calc(var(--header-offset) + var(--s-5)); }
+  .svc-cta__panel { padding: var(--s-8) var(--s-5); }
+}

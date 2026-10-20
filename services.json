@@ -1,0 +1,702 @@
+{
+  "_nota": "Fuente de contenido de las paginas de servicio. scripts/build-pages.js genera servicios/<slug>/index.html a partir de este archivo. Los campos description/items coinciden con servicesData de js/app-content-1.js (modal); el generador avisa si se separan.",
+  "negocio": {
+    "nombre": "Servitecbaq",
+    "url": "https://servitecbaq.com",
+    "telefono": "+573158505020",
+    "whatsapp": "573158505020",
+    "email": "soporte@servitecbaq.com",
+    "horario": "Lunes a sábado, 9:00 a.m. a 6:00 p.m.",
+    "cobertura": [
+      "Barranquilla",
+      "Soledad",
+      "Puerto Colombia"
+    ],
+    "ogImage": "https://servitecbaq.com/img/og-image.jpg"
+  },
+  "servicios": [
+    {
+      "key": "mantenimiento",
+      "slug": "reparacion-de-computadores-en-barranquilla",
+      "label": "Mantenimiento y reparación",
+      "phrase": "reparación y mantenimiento de computadores",
+      "icon": "⚡",
+      "title": "Reparación de Computadores en Barranquilla | Servitecbaq",
+      "h1": "Reparación y mantenimiento de computadores en Barranquilla",
+      "meta": "Reparación y mantenimiento a domicilio en Barranquilla: limpieza, SSD, RAM, virus y reinstalación de Windows. Diagnóstico y precio antes de empezar.",
+      "intro": [
+        "Un computador que tarda cinco minutos en abrir Windows, se apaga solo o suena como un avión no está roto: casi siempre está sucio, con la pasta térmica seca, un disco mecánico al final de su vida o un sistema lleno de programas que nadie revisa. Ese es el trabajo que hacemos todos los días, en tu casa o en tu oficina, sin que tengas que desarmar el equipo para llevarlo a un taller.",
+        "Prolongamos la vida útil de tus equipos y solucionamos fallas de hardware y software, tanto en computadores de escritorio como portátiles. Antes de tocar nada te decimos qué encontramos y qué incluye el servicio; si la reparación no vale la pena, también te lo decimos."
+      ],
+      "items": [
+        "Limpieza interna de polvo y ventiladores",
+        "Cambio de pasta térmica",
+        "Optimización del sistema operativo",
+        "Diagnóstico completo del equipo",
+        "Cambio de piezas (disco, RAM, batería, teclado)",
+        "Reinstalación de sistema operativo",
+        "Eliminación de virus y malware",
+        "Recuperación de datos cuando sea posible"
+      ],
+      "sintomas": [
+        {
+          "q": "Prende pero no entra a Windows",
+          "a": "Reparamos el arranque o reinstalamos el sistema conservando tus archivos cuando el disco lo permite."
+        },
+        {
+          "q": "Está muy lento o se congela",
+          "a": "Medimos disco, RAM y temperatura. El salto a unidad SSD suele ser el cambio que más se nota."
+        },
+        {
+          "q": "Se apaga o se calienta demasiado",
+          "a": "Limpieza interna, cambio de pasta térmica y revisión de ventiladores."
+        },
+        {
+          "q": "Salió un virus o mensajes de rescate",
+          "a": "Limpieza de malware, revisión de extensiones y cuentas, y refuerzo de la protección."
+        },
+        {
+          "q": "No abre, hace ruidos o no carga la batería",
+          "a": "Diagnóstico de hardware y reemplazo de la pieza dañada con repuesto verificado."
+        },
+        {
+          "q": "Necesito recuperar fotos o documentos",
+          "a": "Recuperación de datos cuando el disco aún responde. Si el daño es físico, te lo decimos antes de intentar nada."
+        }
+      ],
+      "pasos": [
+        {
+          "t": "Diagnóstico antes de tocar",
+          "d": "Revisamos disco, RAM, temperatura y arranque, y te decimos qué encontramos antes de cambiar nada."
+        },
+        {
+          "t": "Presupuesto claro",
+          "d": "Qué se va a hacer, qué pieza entra y cuánto cuesta. Si la reparación no vale la pena, también te lo decimos."
+        },
+        {
+          "t": "Reparación en sitio o taller",
+          "d": "Limpieza interna, pasta térmica, cambio de pieza o reinstalación del sistema conservando tus datos cuando el disco responde."
+        },
+        {
+          "t": "Prueba entregada",
+          "d": "El equipo se prueba en carga real y queda con sistema y controladores al día."
+        }
+      ],
+      "faq": [
+        {
+          "q": "¿Van a domicilio o debo llevar el computador?",
+          "a": "Vamos a domicilio en Barranquilla, Soledad y Puerto Colombia. La mayoría de equipos se resuelven en el sitio, sin trasladarlos."
+        },
+        {
+          "q": "¿Cuánto tarda el servicio?",
+          "a": "La mayoría se resuelve el mismo día o en un plazo de 24 a 48 horas, según la complejidad y la disponibilidad de repuestos."
+        },
+        {
+          "q": "¿Pierdo mis archivos si reinstalan Windows?",
+          "a": "Respaldamos tu información antes de reinstalar cuando el disco permite leerlo. Siempre te explicamos qué se puede conservar antes de empezar."
+        },
+        {
+          "q": "¿Qué garantía tiene?",
+          "a": "Te explicamos qué encontramos, qué vamos a hacer y qué incluye el servicio antes de realizarlo. Si algo no queda bien, lo revisamos."
+        }
+      ],
+      "related": [
+        "instalacion",
+        "seguridad",
+        "impresoras"
+      ]
+    },
+    {
+      "key": "redes",
+      "slug": "instalacion-de-redes-wifi-en-barranquilla",
+      "label": "Redes e Internet",
+      "phrase": "instalación y solución de problemas de red",
+      "icon": "🌐",
+      "title": "Instalación de Redes Wi-Fi en Barranquilla | Servitecbaq",
+      "h1": "Redes e Internet para casas y PYMES en Barranquilla",
+      "meta": "Configuramos y reparamos tu red en Barranquilla: routers, mesh, VLAN para CCTV o invitados, IPs fijas y cortes de internet.",
+      "intro": [
+        "Casi ninguna red falla por el proveedor: falla por un router mal ubicado, un canal saturado en el edificio, dos puntos de acceso que se pisan entre sí o una impresora que quedó en la red de invitados. Ordenamos eso sin obra y sin cambiar el equipo que ya compraste, salvo que de verdad no dé más.",
+        "Configuramos y solucionamos problemas de conectividad en hogares, oficinas y pequeñas empresas. Cuando hace falta infraestructura, dejamos la red documentada: qué equipo hace qué, qué IPs están reservadas y dónde queda cada cable."
+      ],
+      "pasos": [
+        {
+          "t": "Medimos antes de mover",
+          "d": "Revisamos cobertura real, canales saturados y por dónde entra el tráfico pesado."
+        },
+        {
+          "t": "Ordenamos el direccionamiento",
+          "d": "Reservas DHCP y rangos definidos para que un equipo no cambie de IP cada vez que se conecta."
+        },
+        {
+          "t": "Segmentamos lo que debe ir aparte",
+          "d": "VLAN para invitados y para CCTV, de modo que una cámara no sea la puerta de entrada a la oficina."
+        },
+        {
+          "t": "Probamos y dejamos documentado",
+          "d": "Pruebas de velocidad y cobertura en los puntos críticos, con la configuración anotada."
+        }
+      ],
+      "items": [
+        "Configuración de routers y módems",
+        "Instalación de redes Wi-Fi y cableadas",
+        "Ampliación de cobertura con repetidores o mesh",
+        "Segmentación con VLAN para invitados o CCTV",
+        "Reservas DHCP y direccionamiento IP estable",
+        "Solución de cortes o lentitud de internet",
+        "Configuración de red para pequeñas oficinas"
+      ],
+      "sintomas": [
+        {
+          "q": "El Wi-Fi no llega a varias habitaciones",
+          "a": "Repetidores, mesh o cableado al punto donde realmente se necesita."
+        },
+        {
+          "q": "Se corta o se cae en horas pico",
+          "a": "Revisión de canal, interferencia y capacidad del router del proveedor."
+        },
+        {
+          "q": "La oficina creció y la red no da",
+          "a": "Switch, direccionamiento y VLAN para separar áreas y dispositivos."
+        },
+        {
+          "q": "Cámaras y dispositivos IoT conviviendo con los computadores",
+          "a": "Red separada para que un dispositivo viejo no exponga todo."
+        },
+        {
+          "q": "No sabes qué equipo está conectado",
+          "a": "Inventario de dispositivos y control de accesos."
+        }
+      ],
+      "faq": [
+        {
+          "q": "¿Hay que romper paredes para cablear?",
+          "a": "Buscamos rutas existentes y canaletas. Si una opción requiere obra, te la planteamos aparte para que decidas."
+        },
+        {
+          "q": "¿Sirve cambiar el router que puso el proveedor?",
+          "a": "Depende del caso: a veces se arregla con configuración y ubicación; lo probamos antes de sugerirte comprar algo."
+        },
+        {
+          "q": "¿Atienden oficinas con varios pisos?",
+          "a": "Sí. En PYMES trabajamos con planos de cobertura y ampliación por etapas según presupuesto."
+        }
+      ],
+      "related": [
+        "camaras",
+        "empresariales",
+        "seguridad"
+      ]
+    },
+    {
+      "key": "camaras",
+      "slug": "instalacion-de-camaras-cctv-barranquilla",
+      "label": "Videovigilancia CCTV",
+      "phrase": "videovigilancia con cámaras CCTV",
+      "icon": "📹",
+      "title": "Cámaras de Seguridad CCTV en Barranquilla | Servitecbaq",
+      "h1": "Cámaras de seguridad CCTV con acceso desde el celular",
+      "meta": "Instalación y configuración de cámaras IP y análogas con DVR/NVR, grabación por movimiento y acceso remoto desde el celular.",
+      "intro": [
+        "Un sistema de cámaras solo sirve si graba lo que pasó, guarda los días que hacen falta y lo puedes abrir desde el celular cuando estás fuera. Todo lo demás —la marca, los megapíxeles— es secundario, y es la parte que casi nadie revisa después de la instalación.",
+        "Instalamos, configuramos y administramos sistemas de cámaras de seguridad para hogares y negocios, integrados a la red que ya tienes y con el respaldo de video configurado desde el primer día."
+      ],
+      "items": [
+        "Instalación de cámaras IP y análogas (interior/exterior)",
+        "Configuración de DVR/NVR y almacenamiento",
+        "Acceso remoto desde celular (app o navegador)",
+        "Grabación por movimiento y horarios",
+        "Integración con la red existente y VLAN de CCTV",
+        "Mantenimiento, limpieza y revisión de cableado",
+        "Configuración de respaldo de video"
+      ],
+      "sintomas": [
+        {
+          "q": "Vas a montar cámaras desde cero",
+          "a": "Definimos puntos, tipo de cámara interior/exterior y tamaño del disco según los días de retención que necesites."
+        },
+        {
+          "q": "Ya tienes DVR pero no ves nada del celular",
+          "a": "Configuramos el acceso remoto y dejamos tus credenciales bajo tu control."
+        },
+        {
+          "q": "Las cámaras se caen o la grabación tiene huecos",
+          "a": "Revisión de fuente, cableado, disco y horarios de grabación."
+        },
+        {
+          "q": "Necesitas que el negocio quede registrado completo",
+          "a": "Cobertura de accesos, caja y zona de trabajo, con grabación por movimiento y horarios."
+        },
+        {
+          "q": "Cámaras compartiendo red con la oficina",
+          "a": "Segregamos el CCTV en su propia VLAN."
+        }
+      ],
+      "pasos": [
+        {
+          "t": "Recorrido y puntos de cámara",
+          "d": "Definimos accesos, puntos ciegos e iluminación para saber cuántas cámaras van y dónde, en interior o exterior."
+        },
+        {
+          "t": "Cableado y grabador protegido",
+          "d": "Tendido ordenado, DVR/NVR en un lugar resguardado y disco calculado según los días de retención que necesitas."
+        },
+        {
+          "t": "Acceso remoto configurado",
+          "d": "Vista desde el celular con su usuario, grabación por movimiento y horarios ajustados a tu operación."
+        },
+        {
+          "t": "Entrega y mantenimiento",
+          "d": "Probamos de día y de noche, dejamos el acceso documentado y programamos limpieza y revisión del cableado."
+        }
+      ],
+      "faq": [
+        {
+          "q": "¿Cuántos días se graba?",
+          "a": "Depende del tamaño del disco, la resolución y si grabas continuo o solo por movimiento. Con eso calculamos la retención antes de instalar."
+        },
+        {
+          "q": "¿Puedo verlas desde fuera?",
+          "a": "Sí, desde la app o el navegador del celular. La cuenta queda a tu nombre, no a la nuestra."
+        },
+        {
+          "q": "¿Instalan cámaras que ya compré?",
+          "a": "Sí. Revisamos compatibilidad con el grabador antes de montar para no descubrir problemas en el techo."
+        },
+        {
+          "q": "¿Hacen mantenimiento de una instalación antigua?",
+          "a": "Sí: limpieza de lentes, revisión de cableado y fuentes, estado del disco y verificación de que esté grabando de verdad."
+        }
+      ],
+      "related": [
+        "redes",
+        "empresariales",
+        "seguridad"
+      ],
+      "modalTitle": "Videovigilancia (CCTV)"
+    },
+    {
+      "key": "impresoras",
+      "slug": "soporte-e-instalacion-de-impresoras-barranquilla",
+      "label": "Impresoras",
+      "phrase": "soporte e instalación de impresoras",
+      "icon": "🖨️",
+      "title": "Reparación de Impresoras en Barranquilla | Servitecbaq",
+      "h1": "Impresoras que imprimen, desde el computador y el celular",
+      "meta": "Instalamos y reparamos impresoras en Barranquilla: red o Wi-Fi, impresión desde el celular, atascos, controladores y tóner.",
+      "intro": [
+        "La impresora es el dispositivo que todo el mundo cree roto cuando lo que falta es un controlador, una IP que cambió o un equipo que quedó apuntando a la red de invitados. Lo resolvemos en el sitio, con la impresora que ya tienes.",
+        "Instalamos, configuramos y reparamos impresoras de todas las marcas, en hogares y oficinas, y dejamos la impresión compartida funcionando para que no dependa del computador de uno solo."
+      ],
+      "items": [
+        "Instalación en Windows y Mac",
+        "Configuración en red o Wi-Fi",
+        "Solución de atascos y errores",
+        "Cambio de cartuchos y tóner",
+        "Impresión desde celular o tablet",
+        "Configuración de impresora compartida en red"
+      ],
+      "sintomas": [
+        {
+          "q": "No imprime aunque aparece instalada",
+          "a": "Puerto, controlador y cola de impresión: casi siempre está ahí."
+        },
+        {
+          "q": "Solo imprime desde un computador",
+          "a": "Impresora compartida o de red para que impriman todos los equipos."
+        },
+        {
+          "q": "Quieres imprimir desde el celular",
+          "a": "Configuramos impresión móvil en Android y iPhone."
+        },
+        {
+          "q": "Se atasca o sale manchada",
+          "a": "Revisión de rodillos, banda y camino del papel, y limpieza."
+        },
+        {
+          "q": "Marca error de tóner o cartucho",
+          "a": "Cambio de consumible y reinicio del contador cuando aplica."
+        }
+      ],
+      "pasos": [
+        {
+          "t": "Identificamos modelo y conexión",
+          "d": "Marca, controlador y si va por USB, red o Wi-Fi: casi siempre el problema está ahí."
+        },
+        {
+          "t": "Instalación y uso compartido",
+          "d": "La impresora visible en cada equipo de la casa u oficina, incluidos celular y tablet."
+        },
+        {
+          "t": "Ajuste de cola y perfiles",
+          "d": "Puerto correcto, controlador adecuado y cola limpia para que no vuelva a quedarse trabada."
+        },
+        {
+          "t": "Prueba con un trabajo real",
+          "d": "Imprimimos juntos, verificamos la calidad y te dejamos claro qué hacer si falla de nuevo."
+        }
+      ],
+      "faq": [
+        {
+          "q": "¿Trabajan con cualquier marca?",
+          "a": "Sí, en instalación y configuración. Si una reparación requiere repuesto costoso, te decimos si conviene más el reemplazo."
+        },
+        {
+          "q": "¿Sirve para la oficina con varios equipos?",
+          "a": "Sí. Configuramos la impresora en red y la compartimos para que no dependa de un computador encendido."
+        },
+        {
+          "q": "¿Vienen a domicilio?",
+          "a": "Sí, en Barranquilla, Soledad y Puerto Colombia."
+        }
+      ],
+      "related": [
+        "mantenimiento",
+        "redes",
+        "instalacion"
+      ]
+    },
+    {
+      "key": "instalacion",
+      "slug": "instalacion-de-programas-y-aplicativos-barranquilla",
+      "label": "Aplicativos y programas",
+      "phrase": "instalación y configuración de programas",
+      "icon": "🧩",
+      "title": "Instalación de Programas en Barranquilla | Servitecbaq",
+      "h1": "Instalación, configuración y soporte de aplicativos",
+      "meta": "Dejamos tu equipo listo: Windows, macOS o Linux, Office, correo, sistemas contables y los programas que usas cada día.",
+      "intro": [
+        "Un equipo nuevo mal configurado es peor que uno viejo conocido: sin respaldo, con el antivirus de prueba que caduca en 30 días, el correo a medio configurar y el sistema contable que no imprime. Esa parte del trabajo casi nadie la hace bien y es la que genera los problemas de los primeros meses.",
+        "Dejamos tus equipos listos para trabajar, estudiar o disfrutar, y te ayudamos con los programas que usas a diario, incluyendo los que dan guerra: Office, sistemas contables y clientes de correo."
+      ],
+      "items": [
+        "Instalación de computadores nuevos",
+        "Configuración inicial de Windows, macOS o Linux",
+        "Instalación de programas esenciales",
+        "Configuración de cuentas y correo",
+        "Instalación y configuración de programas",
+        "Solución de errores en Office, sistemas contables y navegadores",
+        "Configuración de correo y aplicaciones corporativas",
+        "Actualización o reinstalación de aplicaciones"
+      ],
+      "sintomas": [
+        {
+          "q": "Compraste un computador nuevo",
+          "a": "Puesta a punto completa: cuentas, programas esenciales, respaldo y protección desde el primer uso."
+        },
+        {
+          "q": "Office pide licencia o falla al abrir archivos",
+          "a": "Reinstalación limpia y activación con tu cuenta, sin dejar versiones viejas chocando."
+        },
+        {
+          "q": "El sistema contable no deja facturar",
+          "a": "Revisión de componentes, permisos, ruta de la base de datos e impresora asociada."
+        },
+        {
+          "q": "El correo no sincroniza en el celular ni en el PC",
+          "a": "Configuración correcta del cliente y de los registros del dominio."
+        },
+        {
+          "q": "Necesitas el mismo programa en varios equipos",
+          "a": "Despliegue y licencias por equipo, con registro de cuál tiene qué."
+        }
+      ],
+      "pasos": [
+        {
+          "t": "Inventario de lo que usas",
+          "d": "Office, sistema contable, correo, antivirus y los programas propios de tu trabajo; ninguno se queda fuera."
+        },
+        {
+          "t": "Instalación y licencias",
+          "d": "Programas actualizados, licencias activadas y cuentas de correo configuradas en cada equipo."
+        },
+        {
+          "t": "Migración de lo que ya tenías",
+          "d": "Pasamos archivos, favoritos y perfiles del equipo viejo al nuevo sin que pierdas nada."
+        },
+        {
+          "t": "Primer uso acompañado",
+          "d": "Te mostramos dónde quedó cada cosa y dejamos el equipo listo para trabajar ese mismo día."
+        }
+      ],
+      "faq": [
+        {
+          "q": "¿Instalan programas sin licencia?",
+          "a": "No. Trabajamos con las licencias que tengas y te decimos qué opción legal conviene para tu caso."
+        },
+        {
+          "q": "¿Pasan los datos del equipo viejo al nuevo?",
+          "a": "Sí, pasamos archivos, cuentas y favoritos cuando el equipo de origen sigue leyendo."
+        },
+        {
+          "q": "¿Atienden sistemas contables y facturación electrónica?",
+          "a": "Sí, soporte de instalación y errores comunes. Si el problema es del proveedor del software, te decimos qué pedirles exactamente."
+        }
+      ],
+      "related": [
+        "mantenimiento",
+        "seguridad",
+        "empresariales"
+      ],
+      "modalTitle": "Instalación, configuración y soporte de aplicativos"
+    },
+    {
+      "key": "seguridad",
+      "slug": "respaldo-de-datos-y-seguridad-informatica-barranquilla",
+      "label": "Seguridad y respaldo",
+      "phrase": "respaldo de datos y seguridad",
+      "icon": "🔒",
+      "title": "Seguridad y Respaldo de Datos en Barranquilla | Servitecbaq",
+      "h1": "Seguridad, respaldos y administración de usuarios",
+      "meta": "Copias de seguridad automatizadas y probadas, antivirus, protección ransomware, usuarios y permisos con Active Directory y MFA.",
+      "intro": [
+        "El ransomware no avisa y el disco que falla tampoco. La diferencia entre un susto de dos horas y cerrar el negocio una semana suele ser una copia que nadie revisa si estaba funcionando. Por eso montamos el respaldo y probamos que se pueda restaurar, que es la parte que casi nadie hace.",
+        "Protegemos tu información, configuramos copias de seguridad y gestionamos cuentas, permisos y accesos, con políticas que se sostienen cuando se va una persona."
+      ],
+      "items": [
+        "Instalación de antivirus y firewall",
+        "Configuración de copias de seguridad automáticas",
+        "Respaldo en la nube o discos externos",
+        "Protección contra ransomware",
+        "Asesoría en contraseñas seguras",
+        "Altas, bajas y modificaciones de usuarios",
+        "Grupos, roles y permisos por área",
+        "Políticas de contraseñas y expiración",
+        "Integración con Active Directory y Microsoft 365",
+        "Configuración de MFA y auditoría de accesos"
+      ],
+      "sintomas": [
+        {
+          "q": "Nunca has probado restaurar un respaldo",
+          "a": "Montamos la copia automática y hacemos una restauración de prueba contigo viendo."
+        },
+        {
+          "q": "Salió un aviso de ransomware o archivos cifrados",
+          "a": "Contención, limpieza y evaluación de qué se puede recuperar."
+        },
+        {
+          "q": "Se fue un empleado y sus accesos siguen activos",
+          "a": "Baja real de cuentas, correo, licencias y dispositivos."
+        },
+        {
+          "q": "Todos comparten la misma contraseña de administrador",
+          "a": "Cuentas individuales con permisos por rol y MFA activado."
+        },
+        {
+          "q": "No sabes quién entró a qué",
+          "a": "Auditoría de accesos y registro de eventos."
+        }
+      ],
+      "pasos": [
+        {
+          "t": "Definimos qué debe sobrevivir",
+          "d": "Documentos, contabilidad, correos y bases de datos: qué se respalda y cada cuánto tiempo."
+        },
+        {
+          "t": "Respaldo automático",
+          "d": "Discos externos y nube con copias programadas, no con la promesa de acordarse."
+        },
+        {
+          "t": "Cuentas y permisos por área",
+          "d": "Altas, bajas y accesos según el rol, políticas de contraseña y MFA donde corresponde."
+        },
+        {
+          "t": "Restauración probada",
+          "d": "Simulamos la recuperación: un respaldo que no se puede restaurar no es respaldo."
+        }
+      ],
+      "faq": [
+        {
+          "q": "¿Con qué frecuencia se hacen los respaldos?",
+          "a": "Lo definimos según cuánto puedas perder: diario, cada hora o continuo. Y se deja constancia de cuándo fue la última restauración probada."
+        },
+        {
+          "q": "¿El respaldo queda en la nube o en disco?",
+          "a": "Puede ser en ambos. Recomendamos dos destinos distintos porque disco y nube fallan por razones diferentes."
+        },
+        {
+          "q": "¿Manejan Active Directory y Microsoft 365?",
+          "a": "Sí: altas, bajas, grupos, permisos, políticas de contraseña y MFA, tanto en dominio local como en 365."
+        },
+        {
+          "q": "Si ya me infectaron, ¿se soluciona?",
+          "a": "Depende del daño. Primero contenemos para que no siga avanzando y después te decimos qué es recuperable."
+        }
+      ],
+      "related": [
+        "empresariales",
+        "mantenimiento",
+        "redes"
+      ],
+      "modalTitle": "Seguridad, respaldo y administración de usuarios"
+    },
+    {
+      "key": "empresariales",
+      "slug": "soporte-tecnico-empresarial-barranquilla",
+      "label": "Soluciones empresariales",
+      "phrase": "soporte técnico empresarial",
+      "icon": "☁️",
+      "title": "Soporte Técnico Empresarial en Barranquilla | Servitecbaq",
+      "h1": "Soluciones empresariales: servidores, nube y soporte continuo",
+      "meta": "Servidores Windows y Linux, VMware, Microsoft 365 y Azure, Active Directory, respaldos y monitoreo para PYMES.",
+      "intro": [
+        "Una PYME no necesita un departamento de sistemas, necesita que alguien responda cuando el servidor se cae, cuando entra un empleado nuevo o cuando el respaldo lleva tres meses sin salir. Ahí es donde un contrato suelto de hora por evento sale caro.",
+        "Administración de infraestructura para pequeñas y medianas empresas: servidores, virtualización, nube, usuarios y respaldos, con monitoreo y automatización para que los problemas se vean antes de que los vea tu equipo."
+      ],
+      "items": [
+        "Administración de servidores Windows y Linux",
+        "Virtualización con VMware",
+        "Microsoft 365 y Azure",
+        "Active Directory y políticas de grupo (GPO)",
+        "Respaldos empresariales y plan de recuperación",
+        "Automatización con PowerShell",
+        "Monitoreo de red y servidores",
+        "Asesoría en seguridad informática"
+      ],
+      "pasos": [
+        {
+          "t": "Levantamos el inventario",
+          "d": "Qué equipos, servicios, licencias y accesos existen hoy, y dónde están las deudas."
+        },
+        {
+          "t": "Ordenamos usuarios y permisos",
+          "d": "Active Directory, grupos por área y políticas que se apliquen solas."
+        },
+        {
+          "t": "Aseguramos el respaldo",
+          "d": "Copia automática con dos destinos y restauración probada, no solo configurada."
+        },
+        {
+          "t": "Monitoreamos y respondemos",
+          "d": "Alertas sobre servicios y espacio, con soporte por WhatsApp cuando algo se sale."
+        }
+      ],
+      "sintomas": [
+        {
+          "q": "El servidor se cae o llena el disco sin aviso",
+          "a": "Monitoreo con alertas y limpieza programada."
+        },
+        {
+          "q": "Cada nuevo empleado toma medio día de soporte",
+          "a": "Plantillas de usuario, permisos por rol y alta en minutos."
+        },
+        {
+          "q": "Microsoft 365 mal aprovechado",
+          "a": "Licencias, correo, OneDrive, SharePoint y seguridad base configurados como corresponde."
+        },
+        {
+          "q": "No existe plan si se pierde el equipo",
+          "a": "Respaldos y recuperación documentados, con tiempos definidos."
+        },
+        {
+          "q": "Varios locales o sucursales conectadas",
+          "a": "Red entre sedes, VLAN y acceso seguro."
+        }
+      ],
+      "faq": [
+        {
+          "q": "¿Trabajan por contrato o por evento?",
+          "a": "Ambas formas. Escríbenos con cuántos equipos eres y qué te está costando hoy, y te proponemos la modalidad que salga más barata."
+        },
+        {
+          "q": "¿Pueden hacerse cargo de lo que dejó otro proveedor?",
+          "a": "Sí. Empezamos con un inventario para saber qué hay antes de tocar producción."
+        },
+        {
+          "q": "¿Manejan servidores propios y nube al tiempo?",
+          "a": "Sí, incluido VMware, migraciones a 365 o Azure y escenarios híbridos."
+        },
+        {
+          "q": "¿Atienden urgencias fuera del horario?",
+          "a": "El horario habitual es lunes a sábado de 9:00 a.m. a 6:00 p.m.; para empresas se acuerda un canal de prioridad aparte."
+        }
+      ],
+      "related": [
+        "seguridad",
+        "redes",
+        "desarrollo"
+      ]
+    },
+    {
+      "key": "desarrollo",
+      "slug": "desarrollo-de-software-a-la-medida-barranquilla",
+      "label": "Desarrollo de software",
+      "phrase": "desarrollo de software a la medida",
+      "icon": "👨‍💻",
+      "title": "Desarrollo de Software en Barranquilla | Servitecbaq",
+      "h1": "Desarrollo de software y automatización para tu operación",
+      "meta": "Automatización de tareas, integración de sistemas y APIs, reportes SQL y páginas web a la medida para negocios en Barranquilla.",
+      "intro": [
+        "Antes de escribir una línea de código vale la pena preguntarse si eso que se hace a mano cuatro horas al día no se resuelve con una plantilla y una tarea programada. Buena parte de los encargos que nos llegan se arreglan con automatización pequeña, y eso es más barato que un sistema nuevo.",
+        "Cuando sí hace falta software, lo hacemos a la medida: webs y landing pages, automatización de tareas repetitivas, integración entre sistemas y reportes sobre tus propias bases de datos."
+      ],
+      "items": [
+        "Páginas web y landing pages",
+        "Automatización de tareas repetitivas",
+        "Scripts en PowerShell y Python",
+        "Integración de sistemas y APIs",
+        "Bases de datos SQL y reportes personalizados",
+        "Aplicaciones web a la medida"
+      ],
+      "sintomas": [
+        {
+          "q": "Copias datos de un sistema a otro a mano",
+          "a": "Integración por API o archivo, con registro de lo que se movió."
+        },
+        {
+          "q": "El mismo reporte se arma cada lunes",
+          "a": "Script que lo genera y lo entrega solo."
+        },
+        {
+          "q": "Necesitas presencia web para el negocio",
+          "a": "Página o landing rápida, con formulario y contacto por WhatsApp."
+        },
+        {
+          "q": "Los procesos de la oficina viven en Excel",
+          "a": "Evaluamos si conviene una app web simple o basta con ordenar el archivo y sus permisos."
+        },
+        {
+          "q": "Varios computadores de la empresa hacen lo mismo",
+          "a": "Automatización con PowerShell y tareas programadas."
+        }
+      ],
+      "pasos": [
+        {
+          "t": "Entendemos el proceso",
+          "d": "Qué se hace hoy, cuánto toma y dónde se pierde tiempo o información en el camino."
+        },
+        {
+          "t": "Alcance cerrado antes de programar",
+          "d": "Pantallas, datos y reglas por escrito, con lo que queda explícitamente fuera de esta fase."
+        },
+        {
+          "t": "Entregas cortas y visibles",
+          "d": "Versiones de prueba que puedes usar desde temprano, en lugar de esperar hasta el final."
+        },
+        {
+          "t": "Puesta en marcha y soporte",
+          "d": "Publicamos, migramos los datos, capacitamos a quien lo usa y dejamos todo documentado."
+        }
+      ],
+      "faq": [
+        {
+          "q": "¿Cuánto tarda un proyecto?",
+          "a": "Depende del alcance. Primero entregamos la propuesta con qué se hace, en qué orden y qué queda fuera."
+        },
+        {
+          "q": "¿Se quedan con el código?",
+          "a": "El trabajo es tuyo: repositorio, accesos y documentación de cómo se despliega."
+        },
+        {
+          "q": "¿Mantienen lo que desarrollan?",
+          "a": "Sí, con soporte aparte. También dejamos el proyecto documentado por si prefieres que lo tome otro."
+        }
+      ],
+      "related": [
+        "empresariales",
+        "seguridad",
+        "instalacion"
+      ]
+    }
+  ]
+}

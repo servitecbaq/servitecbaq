@@ -2246,6 +2246,8 @@ body:not(.cursor-ready) .bento { cursor: pointer; }
               transform var(--t-fast) var(--ease);
 }
 .footer-social a:hover { background: var(--brand); border-color: var(--brand); transform: translateY(-2px); }
+/* h3: las paginas de servicio cierran con un h2 y el pie saltaria de nivel. */
+.footer-col h3,
 .footer-col h4 {
   font-size: var(--tx-sm);
   font-weight: 700;

@@ -107,8 +107,11 @@
     // El panel de WhatsApp queda por debajo del modal (9997 < 10000) y hay que cerrarlo antes
     SVC.closeServiceModal = close;
 
-    // Delegación: un único listener
+    // Delegación: un único listener.
+    // Los títulos de las tarjetas enlazan a su página de servicio; si el clic
+    // cae dentro de un <a>, deja pasar la navegación y no abre el modal.
     document.addEventListener('click', function (e) {
+      if (e.target.closest('a')) return;
       const card = e.target.closest('.svc[data-service], .service-card[data-service]');
       if (card) {
         open(card.getAttribute('data-service'));
@@ -116,7 +119,8 @@
     });
 
     document.addEventListener('keydown', function (e) {
-      const card = e.target.closest && e.target.closest('.svc[data-service], .service-card[data-service]');
+      const card = !e.target.closest || e.target.closest('a') ? null
+        : e.target.closest('.svc[data-service], .service-card[data-service]');
       if (card && (e.key === 'Enter' || e.key === ' ')) {
         e.preventDefault();
         open(card.getAttribute('data-service'));
