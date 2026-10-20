@@ -78,6 +78,8 @@
 
 /* Relacionados */
 .svc-related { display: grid; gap: var(--s-3); grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+/* En las paginas de tip solo hay un servicio relacionado: auto-fit lo estiraria a todo el ancho. */
+.svc-related--one { grid-template-columns: minmax(0, 340px); }
 .svc-related__card {
   display: flex; align-items: center; gap: var(--s-3);
   padding: var(--s-5); text-decoration: none; color: var(--fg);
@@ -87,6 +89,30 @@
 .svc-related__card:hover { transform: translateY(-3px); border-color: var(--brand); box-shadow: var(--shadow-3); }
 .svc-related__icon { font-size: 1.4rem; line-height: 1; }
 .svc-related__label { font-size: var(--tx-sm); font-weight: 600; }
+
+/* Tips: prosa suelta e índice del hub */
+.tip-prose { max-width: 70ch; margin: 0; font-size: var(--tx-base); line-height: 1.75; color: var(--fg-muted); }
+.tip-prose--warn {
+  padding: var(--s-5) var(--s-6);
+  border-left: 3px solid var(--orange-500);
+  background: var(--bg-subtle);
+  border-radius: 0 var(--r-md) var(--r-md) 0;
+}
+
+.tip-cat + .tip-cat { margin-top: var(--s-8); }
+.tip-cat > .section-title { margin-bottom: var(--s-4); }
+.tip-index { display: grid; gap: var(--s-3); grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+.tip-index__card {
+  display: flex; flex-direction: column; gap: var(--s-2);
+  padding: var(--s-5); text-decoration: none; color: var(--fg);
+  background: var(--bg-elev); border: 1px solid var(--line); border-radius: var(--r-md);
+  transition: transform 0.25s var(--ease), border-color 0.25s var(--ease), box-shadow 0.25s var(--ease);
+}
+.tip-index__card:hover { transform: translateY(-3px); border-color: var(--brand); box-shadow: var(--shadow-3); }
+.tip-index__icon { font-size: 1.5rem; line-height: 1; }
+.tip-index__card h3 { margin: 0; font-size: var(--tx-base); font-weight: 600; }
+.tip-index__card p { margin: 0; font-size: var(--tx-sm); line-height: 1.6; color: var(--fg-muted); }
+.tip-index__k { margin-top: auto; padding-top: var(--s-2); font-size: var(--tx-xs); font-weight: 700; color: var(--brand); }
 
 /* Cierre */
 .svc-cta__panel {

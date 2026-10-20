@@ -1,5 +1,6 @@
 [
   {
+    "slug": "bitlocker-cifrar-disco-completo",
     "category": "Seguridad",
     "icon": "🔐",
     "title": "BitLocker cifra todo tu disco",
@@ -7,6 +8,7 @@
     "benefit": "Evita filtraciones en caso de robo"
   },
   {
+    "slug": "laps-contrasena-unica-por-equipo",
     "category": "Seguridad",
     "icon": "🛡️",
     "title": "LAPS: contraseña única por equipo",
@@ -14,6 +16,7 @@
     "benefit": "Bloquea movimientos laterales en la red"
   },
   {
+    "slug": "windows-defender-application-control",
     "category": "Seguridad",
     "icon": "🚫",
     "title": "Windows Defender Application Control",
@@ -21,6 +24,7 @@
     "benefit": "Detiene malware antes de que se ejecute"
   },
   {
+    "slug": "autenticacion-multiplicador-mfa",
     "category": "Seguridad",
     "icon": "🔑",
     "title": "Autenticación multifactor (MFA)",
@@ -28,6 +32,7 @@
     "benefit": "Bloquea accesos no autorizados"
   },
   {
+    "slug": "permisos-ntfs-bien-configurados",
     "category": "Seguridad",
     "icon": "📁",
     "title": "Permisos NTFS bien configurados",
@@ -35,6 +40,7 @@
     "benefit": "Menos brechas por error humano"
   },
   {
+    "slug": "auditoria-de-eventos-en-windows",
     "category": "Seguridad",
     "icon": "🕵️",
     "title": "Auditoría de eventos en Windows",
@@ -42,6 +48,7 @@
     "benefit": "Visibilidad de qué pasa en tu red"
   },
   {
+    "slug": "firewall-con-reglas-de-salida",
     "category": "Seguridad",
     "icon": "🧱",
     "title": "Firewall con reglas de salida",
@@ -49,6 +56,7 @@
     "benefit": "Controla qué sale de tu red"
   },
   {
+    "slug": "task-scheduler-con-powershell",
     "category": "Productividad",
     "icon": "⏰",
     "title": "Task Scheduler + PowerShell",
@@ -56,6 +64,7 @@
     "benefit": "Ahorra horas de trabajo manual al mes"
   },
   {
+    "slug": "snap-layouts-ventanas-windows",
     "category": "Productividad",
     "icon": "🪟",
     "title": "Snap Layouts con Win + Z",
@@ -63,6 +72,7 @@
     "benefit": "Ahorra minutos en cada tarea"
   },
   {
+    "slug": "escritorios-virtuales-windows",
     "category": "Productividad",
     "icon": "🗂️",
     "title": "Escritorios virtuales con Win + Tab",
@@ -70,6 +80,7 @@
     "benefit": "Menos distracciones, más foco"
   },
   {
+    "slug": "powertoys-microsoft-utilidades",
     "category": "Productividad",
     "icon": "⚡",
     "title": "PowerToys de Microsoft",
@@ -77,6 +88,7 @@
     "benefit": "Funciones avanzadas gratis"
   },
   {
+    "slug": "everything-busqueda-archivos-windows",
     "category": "Productividad",
     "icon": "🔎",
     "title": "Búsqueda con Everything en vez de Windows Search",
@@ -84,6 +96,7 @@
     "benefit": "Encuentra archivos al instante"
   },
   {
+    "slug": "historial-del-portapapeles-win-v",
     "category": "Productividad",
     "icon": "📋",
     "title": "Portapapeles con historial (Win + V)",
@@ -91,6 +104,7 @@
     "benefit": "Copiar y pegar sin límites"
   },
   {
+    "slug": "escritorio-remoto-sobre-vpn",
     "category": "Redes",
     "icon": "🖥️",
     "title": "RDP sobre VPN para soporte remoto",
@@ -98,6 +112,7 @@
     "benefit": "Soporte inmediato sin viajar"
   },
   {
+    "slug": "directivas-de-grupo-gpo",
     "category": "Redes",
     "icon": "📋",
     "title": "Group Policy (GPO) centraliza todo",
@@ -105,6 +120,7 @@
     "benefit": "Gestión masiva desde un punto"
   },
   {
+    "slug": "reservas-dhcp-por-direccion-mac",
     "category": "Redes",
     "icon": "🌐",
     "title": "Reservas DHCP por MAC",
@@ -112,6 +128,7 @@
     "benefit": "IPs estables sin tocar cada PC"
   },
   {
+    "slug": "vlans-para-separar-trafico",
     "category": "Redes",
     "icon": "📡",
     "title": "VLANs para separar tráfico",
@@ -119,6 +136,7 @@
     "benefit": "Red segmentada y más segura"
   },
   {
+    "slug": "dns-con-filtrado-contenido",
     "category": "Redes",
     "icon": "🛰️",
     "title": "DNS con filtrado (Quad9, Cloudflare Family)",
@@ -126,6 +144,7 @@
     "benefit": "Bloquea sitios peligrosos en toda la red"
   },
   {
+    "slug": "analisis-de-canales-wifi",
     "category": "Redes",
     "icon": "📶",
     "title": "Análisis de canales Wi-Fi",
@@ -133,6 +152,7 @@
     "benefit": "Wi-Fi más rápido sin invertir"
   },
   {
+    "slug": "wpa3-en-redes-corporativas",
     "category": "Redes",
     "icon": "🔒",
     "title": "WPA3 en redes corporativas",
@@ -140,6 +160,7 @@
     "benefit": "Conexión inalámbrica a prueba de ataques"
   },
   {
+    "slug": "file-history-onedrive-kfm",
     "category": "Datos",
     "icon": "💾",
     "title": "File History + OneDrive KFM",
@@ -147,6 +168,7 @@
     "benefit": "Nunca más 'se me borró el archivo'"
   },
   {
+    "slug": "storage-sense-limpieza-automatica",
     "category": "Datos",
     "icon": "🧹",
     "title": "Storage Sense libera espacio solo",
@@ -154,6 +176,7 @@
     "benefit": "Menos mantenimiento manual"
   },
   {
+    "slug": "versiones-anteriores-shadow-copies",
     "category": "Datos",
     "icon": "🕰️",
     "title": "Versiones anteriores (Shadow Copies)",
@@ -161,6 +184,7 @@
     "benefit": "Restauras archivos en segundos"
   },
   {
+    "slug": "regla-3-2-1-de-respaldo",
     "category": "Datos",
     "icon": "🔁",
     "title": "Regla 3-2-1 de respaldo",
@@ -168,6 +192,7 @@
     "benefit": "Protección real contra desastres"
   },
   {
+    "slug": "onedrive-versionado-de-archivos",
     "category": "Datos",
     "icon": "☁️",
     "title": "OneDrive con versionado",
@@ -175,6 +200,7 @@
     "benefit": "Sin miedo a sobrescribir por error"
   },
   {
+    "slug": "cifrado-de-carpetas-con-efs",
     "category": "Datos",
     "icon": "🔐",
     "title": "Cifrado de carpetas con EFS",
@@ -182,6 +208,7 @@
     "benefit": "Datos críticos protegidos con contraseña"
   },
   {
+    "slug": "compresion-ntfs-archivos-poco-usados",
     "category": "Datos",
     "icon": "🗄️",
     "title": "Compresión NTFS para archivos poco usados",
@@ -189,6 +216,7 @@
     "benefit": "Más espacio sin eliminar nada"
   },
   {
+    "slug": "windows-update-for-business",
     "category": "Sistemas",
     "icon": "⚙️",
     "title": "Windows Update for Business",
@@ -196,6 +224,7 @@
     "benefit": "Actualizaciones sin interrupciones"
   },
   {
+    "slug": "imagen-de-sistema-con-dism",
     "category": "Sistemas",
     "icon": "🖱️",
     "title": "Imagen de sistema con DISM",
@@ -203,6 +232,7 @@
     "benefit": "Reinstalaciones ultrarrápidas"
   },
   {
+    "slug": "sandbox-de-windows-para-probar",
     "category": "Sistemas",
     "icon": "🧪",
     "title": "Sandbox de Windows para pruebas",
@@ -210,6 +240,7 @@
     "benefit": "Prueba sin riesgo de infección"
   },
   {
+    "slug": "sysinternals-suite-diagnostico",
     "category": "Sistemas",
     "icon": "🧰",
     "title": "Sysinternals Suite para diagnóstico",
@@ -217,6 +248,7 @@
     "benefit": "Diagnóstico profesional gratis"
   },
   {
+    "slug": "performance-monitor-en-windows",
     "category": "Sistemas",
     "icon": "📊",
     "title": "Performance Monitor en Windows",

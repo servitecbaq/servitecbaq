@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<!-- Generado por scripts/build-pages.js a partir de tips.json + scripts/tips-content.js. No editar a mano. -->
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Sandbox de Windows: probar sin arriesgar el equipo</title>
+  <meta name="description" content="Windows Sandbox levanta un Windows limpio y desechable en segundos para abrir un archivo sospechoso o probar un instalador sin tocar nada.">
+  <meta name="author" content="Servitecbaq">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0A0D1F" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#F7F8FB" media="(prefers-color-scheme: light)">
+  <meta name="google-site-verification" content="UroQP0TYR1nk7Vt3Ws_MzWo_x_mi3C6uYbYdDphph58" />
+
+  <meta property="og:title" content="Sandbox de Windows: probar sin arriesgar el equipo">
+  <meta property="og:description" content="Windows Sandbox levanta un Windows limpio y desechable en segundos para abrir un archivo sospechoso o probar un instalador sin tocar nada.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://servitecbaq.com/tips/sandbox-de-windows-para-probar/">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:site_name" content="Servitecbaq">
+  <meta property="og:image" content="https://servitecbaq.com/img/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Sandbox de Windows: probar sin arriesgar el equipo">
+  <meta name="twitter:description" content="Windows Sandbox levanta un Windows limpio y desechable en segundos para abrir un archivo sospechoso o probar un instalador sin tocar nada.">
+  <meta name="twitter:image" content="https://servitecbaq.com/img/og-image.jpg">
+
+  <link rel="canonical" href="https://servitecbaq.com/tips/sandbox-de-windows-para-probar/" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>">
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/outfit-latin.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/jetbrainsmono-latin.woff2" crossorigin>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/pages.css">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Article","headline":"Sandbox de Windows: probar sin arriesgar el equipo","description":"Windows Sandbox levanta un Windows limpio y desechable en segundos para abrir un archivo sospechoso o probar un instalador sin tocar nada.","inLanguage":"es","url":"https://servitecbaq.com/tips/sandbox-de-windows-para-probar/","author":{"@type":"Organization","name":"Servitecbaq"},"publisher":{"@type":"Organization","name":"Servitecbaq","url":"https://servitecbaq.com/"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://servitecbaq.com/tips/sandbox-de-windows-para-probar/"}}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://servitecbaq.com/"},{"@type":"ListItem","position":2,"name":"Tips","item":"https://servitecbaq.com/tips/"},{"@type":"ListItem","position":3,"name":"Sandbox de Windows: probar sin arriesgar el equipo","item":"https://servitecbaq.com/tips/sandbox-de-windows-para-probar/"}]}
+  </script>
+</head>
+<body class="svc-page-body">
+  <header class="header" id="siteHeader">
+    <div class="header__shell">
+      <div class="header__inner">
+        <a href="/#inicio" class="logo" aria-label="Servitecbaq inicio">
+          <span class="logo__mark" aria-hidden="true">
+            <img src="/img/logo.webp" alt="Servitecbaq" width="160" height="120">
+          </span>
+          <span class="logo__text">servitecbaq</span>
+        </a>
+        <nav class="nav" id="nav" aria-label="Navegación principal">
+          <a href="/#servicios">Servicios</a>
+          <a href="/#nosotros">Nosotros</a>
+          <a href="/#fundador">Fundador</a>
+          <a href="/tips/">Tips</a>
+          <a href="/#apps">Apps</a>
+          <a href="/#saldo">App Saldo</a>
+          <a href="/#faq">FAQ</a>
+          <a href="/#resenas">Reseñas</a>
+          <a href="/#contacto">Contacto</a>
+        </nav>
+        <div class="header__actions">
+          <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+            <span class="theme-icon-light" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg></span>
+            <span class="theme-icon-dark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg></span>
+          </button>
+          <a href="https://wa.me/573158505020?text=Hola%2C%20necesito%20servicio%20t%C3%A9cnico" class="btn btn--accent btn--sm header__cta" target="_blank" rel="noopener">
+            <span class="pulse-dot" aria-hidden="true"></span>
+            Cotizar ahora
+          </a>
+          <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">☰</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido" class="svc-page">
+    <div class="container">
+      <nav class="crumbs" aria-label="Ruta de navegación">
+        <ol>
+          <li><a href="/">Inicio</a></li>
+          <li><a href="/tips/">Tips</a></li>
+          <li><span aria-current="page">Sandbox de Windows: probar sin arriesgar el equipo</span></li>
+        </ol>
+      </nav>
+
+      <header class="svc-hero">
+        <span class="section-kicker">🧪 Sistemas</span>
+        <h1 class="section-title section-title--left">Sandbox de Windows: probar sin arriesgar el equipo</h1>
+        <p class="svc-hero__lead">Hay momentos en que hace falta abrir un archivo que llegó por correo o instalar un programa que nadie conoce. Hacerlo en el equipo de trabajo es un riesgo; hacerlo en una máquina virtual armada a mano toma media hora.</p>
+        <p class="svc-hero__lead">Windows Sandbox es la versión rápida: un Windows limpio en una ventana, que se levanta en segundos y se descarta al cerrarla. Lo que pase ahí no toca el equipo real.</p>
+        <div class="svc-hero__actions">
+          <a class="btn btn--accent btn--lg" href="https://wa.me/573158505020?text=Hola%2C%20vi%20el%20tip%20de%20sandbox%20de%20windows%3A%20probar%20sin%20arriesgar%20el%20equipo%20y%20necesito%20ayuda%20con%20eso" target="_blank" rel="noopener">💬 Pedir que lo configuren</a>
+          <a class="btn btn--ghost btn--lg" href="/tips/">Ver todos los tips</a>
+        </div>
+      </header>
+
+      <section class="svc-block">
+        <h2 class="section-title section-title--left">Cómo lo implementamos</h2>
+        <ol class="svc-steps">
+          <li><span class="svc-steps__n" aria-hidden="true">01</span><div><p>Activar la funcionalidad en Programas y características y verificar que la virtualización venga de la UEFI.</p></div></li>
+          <li><span class="svc-steps__n" aria-hidden="true">02</span><div><p>Guardar un archivo de configuración .wsb con la carpeta compartida y el software que siempre hace falta.</p></div></li>
+          <li><span class="svc-steps__n" aria-hidden="true">03</span><div><p>Probar el instalador o abrir el archivo dentro del entorno aislado.</p></div></li>
+          <li><span class="svc-steps__n" aria-hidden="true">04</span><div><p>Cerrar sin miedo: al cerrarse se descarta todo, así que nada que se quiera conservar se deja dentro.</p></div></li>
+        </ol>
+      </section>
+
+      <section class="svc-block">
+        <h2 class="section-title section-title--left">Cuándo te conviene</h2>
+        <p class="tip-prose">Equipos con Windows Pro o Enterprise y suficiente RAM para dos sistemas a la vez. En Windows Home no está disponible y la alternativa es una máquina virtual completa.</p>
+      </section>
+
+      <section class="svc-block">
+        <h2 class="section-title section-title--left">El error que vemos siempre</h2>
+        <p class="tip-prose tip-prose--warn">Esperar que los archivos creados dentro sobrevivan al cierre. Sandbox es desechable por diseño; lo que se guarda, se guarda afuera.</p>
+      </section>
+
+      <section class="svc-block">
+        <h2 class="section-title section-title--left">Servicio relacionado</h2>
+        <div class="svc-related svc-related--one">
+          <a class="svc-related__card" href="/servicios/reparacion-de-computadores-en-barranquilla/"><span class="svc-related__icon" aria-hidden="true">⚡</span><span class="svc-related__label">Mantenimiento y reparación en Barranquilla</span></a>
+        </div>
+      </section>
+
+      <section class="svc-block">
+        <h2 class="section-title section-title--left">Otros tips de sistemas</h2>
+        <div class="svc-related">
+          <a class="svc-related__card" href="/tips/windows-defender-application-control/"><span class="svc-related__icon" aria-hidden="true">🚫</span><span class="svc-related__label">Windows Defender Application Control</span></a>
+          <a class="svc-related__card" href="/tips/sysinternals-suite-diagnostico/"><span class="svc-related__icon" aria-hidden="true">🧰</span><span class="svc-related__label">Sysinternals Suite para diagnóstico</span></a>
+          <a class="svc-related__card" href="/tips/firewall-con-reglas-de-salida/"><span class="svc-related__icon" aria-hidden="true">🧱</span><span class="svc-related__label">Firewall con reglas de salida</span></a>
+        </div>
+      </section>
+
+      <section class="svc-cta">
+        <div class="svc-cta__panel">
+        <h2 class="section-title">¿Lo dejamos configurado?</h2>
+        <p class="svc-cta__text">Prueba sin riesgo de infección. Cuéntanos cómo tienes los equipos hoy y te decimos qué aplica en tu caso, sin que desmontes nada.</p>
+        <a class="btn btn--accent btn--lg" href="https://wa.me/573158505020?text=Hola%2C%20necesito%20ayuda%20con%3A%20Sandbox%20de%20Windows%3A%20probar%20sin%20arriesgar%20el%20equipo" target="_blank" rel="noopener">💬 Escribir por WhatsApp</a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col--brand">
+          <a href="/#inicio" class="logo">
+            <span class="logo__mark" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17V7a2 2 0 0 1 2-2h9l5 5v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"/><path d="M14 5v5h5"/><path d="M9 13h6M9 16h4"/></svg>
+            </span>
+            <span class="logo__text">servitecbaq</span>
+          </a>
+          <p class="footer-col__desc">Servicio técnico a domicilio en Barranquilla y área metropolitana. Reparación, redes, CCTV y soporte empresarial.</p>
+        </div>
+        <div class="footer-col">
+          <h3>Servicios</h3>
+          <ul>
+            <li><a href="/servicios/reparacion-de-computadores-en-barranquilla/">Mantenimiento y reparación</a></li>
+            <li><a href="/servicios/instalacion-de-redes-wifi-en-barranquilla/">Redes e Internet</a></li>
+            <li><a href="/servicios/instalacion-de-camaras-cctv-barranquilla/">Videovigilancia CCTV</a></li>
+            <li><a href="/servicios/soporte-e-instalacion-de-impresoras-barranquilla/">Impresoras</a></li>
+            <li><a href="/servicios/instalacion-de-programas-y-aplicativos-barranquilla/">Aplicativos y programas</a></li>
+            <li><a href="/servicios/respaldo-de-datos-y-seguridad-informatica-barranquilla/">Seguridad y respaldo</a></li>
+            <li><a href="/servicios/soporte-tecnico-empresarial-barranquilla/">Soluciones empresariales</a></li>
+            <li><a href="/servicios/desarrollo-de-software-a-la-medida-barranquilla/">Desarrollo de software</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Empresa</h3>
+          <ul>
+            <li><a href="/#nosotros">Nosotros</a></li>
+            <li><a href="/#fundador">Fundador</a></li>
+            <li><a href="/tips/">Tips</a></li>
+            <li><a href="/#apps">Aplicativos</a></li>
+            <li><a href="/#saldo">App Saldo</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Contacto</h3>
+          <ul>
+            <li><a href="https://wa.me/573158505020" target="_blank" rel="noopener">+573158505020</a></li>
+            <li><a href="mailto:soporte@servitecbaq.com">soporte@servitecbaq.com</a></li>
+            <li>Barranquilla, Colombia</li>
+            <li>Lun–Sáb · 9:00–18:00</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 servitecbaq · Todos los derechos reservados</p>
+      </div>
+    </div>
+  </footer>
+  <script src="/js/app-core.js" defer></script>
+</body>
+</html>

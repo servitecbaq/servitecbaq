@@ -1,10 +1,11 @@
 #!/usr/bin/env node
-/* Genera las paginas estaticas de servicio a partir de services.json.
+/* Genera las paginas estaticas de servicio y de tips a partir de services.json,
+   tips.json y scripts/tips-content.js.
    Uso:  node scripts/build-pages.js            (genera y reescribe sitemap.xml)
          node scripts/build-pages.js --check    (solo valida, no escribe)
 
    GitHub Pages sirve ficheros estaticos: el HTML generado va commiteado en el
-   repo, igual que css/rest-*.css. Editar services.json, no los HTML. */
+   repo, igual que css/rest-*.css. Editar los JSON, no los HTML. */
 
 const fs = require('fs');
 const path = require('path');
@@ -62,6 +63,40 @@ function validarEnlaces() {
 const urlDe = s => NEG.url + '/servicios/' + s.slug + '/';
 const wa = txt => 'https://wa.me/' + NEG.whatsapp + '?text=' + encodeURIComponent(txt);
 
+function headBase({ title, meta, h1, url, ld }) {
+  return `  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>${esc(title)}</title>
+  <meta name="description" content="${esc(meta)}">
+  <meta name="author" content="${esc(NEG.nombre)}">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0A0D1F" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#F7F8FB" media="(prefers-color-scheme: light)">
+  <meta name="google-site-verification" content="UroQP0TYR1nk7Vt3Ws_MzWo_x_mi3C6uYbYdDphph58" />
+
+  <meta property="og:title" content="${esc(h1)}">
+  <meta property="og:description" content="${esc(meta)}">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="${url}">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:site_name" content="${esc(NEG.nombre)}">
+  <meta property="og:image" content="${NEG.ogImage}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${esc(h1)}">
+  <meta name="twitter:description" content="${esc(meta)}">
+  <meta name="twitter:image" content="${NEG.ogImage}">
+
+  <link rel="canonical" href="${url}" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>">
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/outfit-latin.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/jetbrainsmono-latin.woff2" crossorigin>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/pages.css">
+${ld.map(o => '  <script type="application/ld+json">\n  ' + JSON.stringify(o) + '\n  </script>').join('\n')}`;
+}
+
 function head(s) {
   const ld = [
     {
@@ -102,41 +137,11 @@ function head(s) {
     }
   ];
 
-  return `  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>${esc(s.title)}</title>
-  <meta name="description" content="${esc(s.meta)}">
-  <meta name="author" content="${esc(NEG.nombre)}">
-  <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#0A0D1F" media="(prefers-color-scheme: dark)">
-  <meta name="theme-color" content="#F7F8FB" media="(prefers-color-scheme: light)">
-  <meta name="google-site-verification" content="UroQP0TYR1nk7Vt3Ws_MzWo_x_mi3C6uYbYdDphph58" />
-
-  <meta property="og:title" content="${esc(s.h1)}">
-  <meta property="og:description" content="${esc(s.meta)}">
-  <meta property="og:type" content="article">
-  <meta property="og:url" content="${urlDe(s)}">
-  <meta property="og:locale" content="es_CO">
-  <meta property="og:site_name" content="${esc(NEG.nombre)}">
-  <meta property="og:image" content="${NEG.ogImage}">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="${esc(s.h1)}">
-  <meta name="twitter:description" content="${esc(s.meta)}">
-  <meta name="twitter:image" content="${NEG.ogImage}">
-
-  <link rel="canonical" href="${urlDe(s)}" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>">
-  <link rel="preload" as="font" type="font/woff2" href="/fonts/outfit-latin.woff2" crossorigin>
-  <link rel="preload" as="font" type="font/woff2" href="/fonts/jetbrainsmono-latin.woff2" crossorigin>
-  <link rel="stylesheet" href="/css/styles.css">
-  <link rel="stylesheet" href="/css/pages.css">
-${ld.map(o => '  <script type="application/ld+json">\n  ' + JSON.stringify(o) + '\n  </script>').join('\n')}`;
+  return headBase({ title: s.title, meta: s.meta, h1: s.h1, url: urlDe(s), ld });
 }
 
 function header() {
-  const nav = [['Servicios', '/#servicios'], ['Nosotros', '/#nosotros'], ['Fundador', '/#fundador'], ['Tips', '/#tips'], ['Apps', '/#apps'], ['App Saldo', '/#saldo'], ['FAQ', '/#faq'], ['Reseñas', '/#resenas'], ['Contacto', '/#contacto']];
+  const nav = [['Servicios', '/#servicios'], ['Nosotros', '/#nosotros'], ['Fundador', '/#fundador'], ['Tips', '/tips/'], ['Apps', '/#apps'], ['App Saldo', '/#saldo'], ['FAQ', '/#faq'], ['Reseñas', '/#resenas'], ['Contacto', '/#contacto']];
   return `  <header class="header" id="siteHeader">
     <div class="header__shell">
       <div class="header__inner">
@@ -189,7 +194,7 @@ ${SERVICIOS.map(s => '            <li><a href="/servicios/' + s.slug + '/">' + e
           <ul>
             <li><a href="/#nosotros">Nosotros</a></li>
             <li><a href="/#fundador">Fundador</a></li>
-            <li><a href="/#tips">Tips</a></li>
+            <li><a href="/tips/">Tips</a></li>
             <li><a href="/#apps">Aplicativos</a></li>
             <li><a href="/#saldo">App Saldo</a></li>
           </ul>
@@ -319,12 +324,217 @@ ${footer()}
 `;
 }
 
+/* ============================================
+   TIPS — paginas /tips/<slug>/ y el hub /tips/
+   El contenido largo vive en scripts/tips-content.js, indexado por la posicion
+   del tip en tips.json. tips.json manda para el home; el resto para las paginas.
+   ============================================ */
+const TIPS = JSON.parse(fs.readFileSync(path.join(ROOT, 'tips.json'), 'utf8'));
+const TIPS_C = require('./tips-content.js');
+const tipIdx = Object.keys(TIPS_C).map(Number).sort((a, b) => a - b);
+const tip = i => Object.assign({}, TIPS[i], TIPS_C[i], { idx: i });
+const urlTip = i => NEG.url + '/tips/' + TIPS_C[i].slug + '/';
+
+function validarTips() {
+  const slugs = {};
+  tipIdx.forEach(i => {
+    const c = TIPS_C[i];
+    if (!TIPS[i]) { warnings.push('tips-content[' + i + ']: no hay tip en esa posicion de tips.json'); return; }
+    if (c.slug !== c.slug.toLowerCase() || /[^a-z0-9-]/.test(c.slug)) warnings.push(c.slug + ': slug no es ascii minusculo con guiones');
+    if (slugs[c.slug]) warnings.push(c.slug + ': slug repetido');
+    slugs[c.slug] = true;
+    if (!byKey[c.service]) warnings.push(c.slug + ': service «' + c.service + '» no existe en services.json');
+    if (c.h1.length > 65) warnings.push(c.slug + ': h1 de ' + c.h1.length + ' caracteres (max 65)');
+    if (c.meta.length > 165) warnings.push(c.slug + ': meta de ' + c.meta.length + ' caracteres (max 165)');
+    if (!c.pasos || c.pasos.length < 3 || c.pasos.length > 5) warnings.push(c.slug + ': «pasos» debe tener entre 3 y 5');
+    if (!c.intro || c.intro.length !== 2) warnings.push(c.slug + ': «intro» debe tener 2 parrafos');
+    (c.relacionados || []).forEach(r => {
+      if (!TIPS_C[r]) warnings.push(c.slug + ': relacionado [' + r + '] no tiene contenido todavia');
+    });
+  });
+  TIPS.forEach((t, i) => {
+    if (!TIPS_C[i]) warnings.push('tip ' + i + ' («' + t.title + '»): sin pagina, falta en scripts/tips-content.js');
+  });
+}
+
+function crumbs(nav) {
+  return `      <nav class="crumbs" aria-label="Ruta de navegación">
+        <ol>
+${nav.map(([t, h]) => '          <li>' + (h ? '<a href="' + h + '">' + esc(t) + '</a>' : '<span aria-current="page">' + esc(t) + '</span>') + '</li>').join('\n')}
+        </ol>
+      </nav>`;
+}
+
+function tipLd(c) {
+  return [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: c.h1,
+      description: c.meta,
+      inLanguage: 'es',
+      url: urlTip(c.idx),
+      author: { '@type': 'Organization', name: NEG.nombre },
+      publisher: { '@type': 'Organization', name: NEG.nombre, url: NEG.url + '/' },
+      mainEntityOfPage: { '@type': 'WebPage', '@id': urlTip(c.idx) }
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Inicio', item: NEG.url + '/' },
+        { '@type': 'ListItem', position: 2, name: 'Tips', item: NEG.url + '/tips/' },
+        { '@type': 'ListItem', position: 3, name: c.h1, item: urlTip(c.idx) }
+      ]
+    }
+  ];
+}
+
+function tipMain(c) {
+  const s = byKey[c.service] || {};
+  const rel = (c.relacionados || []).filter(r => TIPS_C[r]).map(tip);
+  return `  <main id="contenido" class="svc-page">
+    <div class="container">
+${crumbs([['Inicio', '/'], ['Tips', '/tips/'], [c.h1, null]])}
+
+      <header class="svc-hero">
+        <span class="section-kicker">${c.icon} ${esc(c.category)}</span>
+        <h1 class="section-title section-title--left">${esc(c.h1)}</h1>
+${c.intro.map(t => '        <p class="svc-hero__lead">' + esc(t) + '</p>').join('\n')}
+        <div class="svc-hero__actions">
+          <a class="btn btn--accent btn--lg" href="${wa('Hola, vi el tip de ' + c.h1.toLowerCase() + ' y necesito ayuda con eso')}" target="_blank" rel="noopener">💬 Pedir que lo configuren</a>
+          <a class="btn btn--ghost btn--lg" href="/tips/">Ver todos los tips</a>
+        </div>
+      </header>
+
+      <section class="svc-block">
+        <h2 class="section-title section-title--left">Cómo lo implementamos</h2>
+        <ol class="svc-steps">
+${c.pasos.map((t, k) => '          <li><span class="svc-steps__n" aria-hidden="true">' + String(k + 1).padStart(2, '0') + '</span><div><p>' + esc(t) + '</p></div></li>').join('\n')}
+        </ol>
+      </section>
+
+      <section class="svc-block">
+        <h2 class="section-title section-title--left">Cuándo te conviene</h2>
+        <p class="tip-prose">${esc(c.cuando)}</p>
+      </section>
+
+      <section class="svc-block">
+        <h2 class="section-title section-title--left">El error que vemos siempre</h2>
+        <p class="tip-prose tip-prose--warn">${esc(c.error)}</p>
+      </section>
+
+      <section class="svc-block">
+        <h2 class="section-title section-title--left">Servicio relacionado</h2>
+        <div class="svc-related svc-related--one">
+          <a class="svc-related__card" href="/servicios/${s.slug}/"><span class="svc-related__icon" aria-hidden="true">${s.icon}</span><span class="svc-related__label">${esc(s.label)} en Barranquilla</span></a>
+        </div>
+      </section>
+
+      <section class="svc-block">
+        <h2 class="section-title section-title--left">Otros tips de ${esc(c.category.toLowerCase())}</h2>
+        <div class="svc-related">
+${rel.map(r => '          <a class="svc-related__card" href="/tips/' + r.slug + '/"><span class="svc-related__icon" aria-hidden="true">' + r.icon + '</span><span class="svc-related__label">' + esc(r.title) + '</span></a>').join('\n')}
+        </div>
+      </section>
+
+      <section class="svc-cta">
+        <div class="svc-cta__panel">
+        <h2 class="section-title">¿Lo dejamos configurado?</h2>
+        <p class="svc-cta__text">${esc(c.benefit)}. Cuéntanos cómo tienes los equipos hoy y te decimos qué aplica en tu caso, sin que desmontes nada.</p>
+        <a class="btn btn--accent btn--lg" href="${wa('Hola, necesito ayuda con: ' + c.h1)}" target="_blank" rel="noopener">💬 Escribir por WhatsApp</a>
+        </div>
+      </section>
+    </div>
+  </main>`;
+}
+
+function tipPage(c) {
+  return `<!DOCTYPE html>
+<!-- Generado por scripts/build-pages.js a partir de tips.json + scripts/tips-content.js. No editar a mano. -->
+<html lang="es" data-theme="light">
+<head>
+${headBase({ title: c.h1, meta: c.meta, h1: c.h1, url: urlTip(c.idx), ld: tipLd(c) })}
+</head>
+<body class="svc-page-body">
+${header()}
+
+${tipMain(c)}
+
+${footer()}
+  <script src="/js/app-core.js" defer></script>
+</body>
+</html>
+`;
+}
+
+function tipsHub() {
+  const porCat = {};
+  tipIdx.forEach(i => { const t = tip(i); (porCat[t.category] = porCat[t.category] || []).push(t); });
+  const cats = Object.keys(porCat);
+  const ld = [{
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'Tips de Windows para casas y oficinas',
+    description: 'Guías cortas de seguridad, redes, respaldo y productividad en Windows, escritas por Servitecbaq desde el soporte diario en Barranquilla.',
+    url: NEG.url + '/tips/',
+    inLanguage: 'es'
+  }];
+  const url = NEG.url + '/tips/';
+  return `<!DOCTYPE html>
+<!-- Generado por scripts/build-pages.js. No editar a mano. -->
+<html lang="es" data-theme="light">
+<head>
+${headBase({
+    title: 'Tips de Windows para casa y oficina | Servitecbaq',
+    meta: 'Guías cortas de seguridad, redes, respaldo y productividad en Windows, probadas en equipos reales de casas y oficinas de Barranquilla.',
+    h1: 'Tips de Windows para casa y oficina',
+    url: url, ld: ld
+  })}
+</head>
+<body class="svc-page-body">
+${header()}
+
+  <main id="contenido" class="svc-page">
+    <div class="container">
+${crumbs([['Inicio', '/'], ['Tips', null]])}
+      <header class="svc-hero">
+        <span class="section-kicker">💡 Tips</span>
+        <h1 class="section-title section-title--left">Tips de Windows para casa y oficina</h1>
+        <p class="svc-hero__lead">Lo que aprendemos cada día arreglando equipos en Barranquilla: qué control sirve de verdad, cómo lo montamos y en qué se equivocan los manuales genéricos.</p>
+        <p class="svc-hero__lead">Cada guía es corta y termina diciendo cuándo conviene hacerlo uno mismo y cuándo sale más barato llamar.</p>
+      </header>
+      <section class="svc-block">
+${cats.map(cat => `      <div class="tip-cat">
+        <h2 class="section-title section-title--left">${esc(cat)}</h2>
+        <div class="tip-index">
+${porCat[cat].map(t => '          <a class="tip-index__card" href="/tips/' + t.slug + '/"><span class="tip-index__icon" aria-hidden="true">' + t.icon + '</span><h3>' + esc(t.title) + '</h3><p>' + esc(t.desc) + '</p><span class="tip-index__k">✨ ' + esc(t.benefit) + '</span></a>').join('\n')}
+        </div>
+      </div>`).join('\n')}
+      </section>
+      <section class="svc-cta">
+        <div class="svc-cta__panel">
+        <h2 class="section-title">¿Prefieres que lo hagamos nosotros?</h2>
+        <p class="svc-cta__text">Trabajamos en Barranquilla y el área metropolitana, en casa, oficina o remoto.</p>
+        <a class="btn btn--accent btn--lg" href="${wa('Hola, vi los tips y necesito ayuda')}" target="_blank" rel="noopener">💬 Escribir por WhatsApp</a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+${footer()}
+  <script src="/js/app-core.js" defer></script>
+</body>
+</html>
+`;
+}
+
 function sitemap() {
   // Fecha local del contenido: toISOString() trae la hora UTC, que en Colombia
   // (+0 respecto a -5) deja un <lastmod> en el futuro.
   const d = new Date(fs.statSync(path.join(ROOT, 'services.json')).mtimeMs);
   const today = [d.getFullYear(), String(d.getMonth() + 1).padStart(2, '0'), String(d.getDate()).padStart(2, '0')].join('-');
-  const urls = [NEG.url + '/'].concat(SERVICIOS.map(urlDe));
+  const urls = [NEG.url + '/'].concat(SERVICIOS.map(urlDe), [NEG.url + '/tips/'], tipIdx.map(urlTip));
   return `<?xml version="1.0" encoding="UTF-8"?>
 <!-- Generado por scripts/build-pages.js -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -335,6 +545,7 @@ ${urls.map(u => '  <url>\n    <loc>' + u + '</loc>\n    <lastmod>' + today + '</
 
 validarConModal();
 validarEnlaces();
+validarTips();
 
 if (warnings.length) {
   console.log('Avisos:');
@@ -357,4 +568,15 @@ SERVICIOS.forEach(s => {
   escritas++;
 });
 escribir(path.join(ROOT, 'sitemap.xml'), sitemap());
-console.log(escritas + ' paginas generadas y sitemap.xml reescrito (' + (SERVICIOS.length + 1) + ' URLs).');
+
+let tipsEscritas = 0;
+tipIdx.forEach(i => {
+  const dir = path.join(ROOT, 'tips', TIPS_C[i].slug);
+  fs.mkdirSync(dir, { recursive: true });
+  escribir(path.join(dir, 'index.html'), tipPage(tip(i)));
+  tipsEscritas++;
+});
+fs.mkdirSync(path.join(ROOT, 'tips'), { recursive: true });
+escribir(path.join(ROOT, 'tips', 'index.html'), tipsHub());
+
+console.log(escritas + ' paginas de servicio y ' + tipsEscritas + ' de tips generadas; sitemap.xml reescrito (' + (SERVICIOS.length + tipIdx.length + 2) + ' URLs).');

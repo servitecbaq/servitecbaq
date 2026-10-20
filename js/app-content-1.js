@@ -199,11 +199,20 @@
         tipTrack.appendChild(card);
         state.card = card;
 
+        // Cada tip tiene su página estática en /tips/<slug>/: el título enlaza.
+        function tipHref(tip) {
+          return tip.slug ? '/tips/' + tip.slug + '/' : null;
+        }
+
         function paint(tip, animate) {
+          const href = tipHref(tip);
+          const title = href
+            ? '<a href="' + href + '">' + tip.title + '</a>'
+            : tip.title;
           const html =
             '<span class="tip-category">' + tip.category + '</span>' +
             '<div class="tip-icon" aria-hidden="true">' + tip.icon + '</div>' +
-            '<h3 class="tip-title">' + tip.title + '</h3>' +
+            '<h3 class="tip-title">' + title + '</h3>' +
             '<p class="tip-desc">' + tip.desc + '</p>' +
             '<span class="tip-benefit">✨ ' + tip.benefit + '</span>';
           if (!animate || !shouldAutoplay) {
@@ -237,9 +246,13 @@
           state.data.forEach(function (tip) {
             const mini = document.createElement('article');
             mini.className = 'tip-mini';
+            const href = tipHref(tip);
+            const title = href
+              ? '<a href="' + href + '">' + tip.title + '</a>'
+              : tip.title;
             mini.innerHTML =
               '<span class="tip-mini-icon" aria-hidden="true">' + tip.icon + '</span>' +
-              '<h4>' + tip.title + '</h4>' +
+              '<h4>' + title + '</h4>' +
               '<p>' + tip.desc + '</p>';
             gridFrag.appendChild(mini);
           });
