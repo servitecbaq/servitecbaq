@@ -1840,7 +1840,7 @@ body:not(.cursor-ready) .bento { cursor: pointer; }
 .featured-app-phone-screen {
   width: 100%;
   height: 100%;
-  background: linear-gradient(160deg, #1E1B4B 0%, #0D1224 100%);
+  background: #FFFFFF;
   border-radius: 28px;
   display: flex;
   flex-direction: column;
@@ -1852,18 +1852,13 @@ body:not(.cursor-ready) .bento { cursor: pointer; }
   overflow: hidden;
 }
 .featured-app-phone-screen::before {
-  content: "";
-  position: absolute;
-  top: -30%; right: -30%;
-  width: 200px; height: 200px;
-  background: radial-gradient(circle, rgba(249,115,22,0.3), transparent 65%);
-  filter: blur(40px);
+  content: none;
 }
 .featured-app-icon { font-size: 4rem; margin-bottom: var(--s-4); position: relative; z-index: 1; }
 .featured-app-icon-title {
   font-size: 1.8rem;
   font-weight: 800;
-  color: #fff;
+  color: #0D1224;
   margin-bottom: 4px;
   position: relative;
   z-index: 1;
@@ -1871,7 +1866,7 @@ body:not(.cursor-ready) .bento { cursor: pointer; }
 }
 .featured-app-icon-subtitle {
   font-size: var(--tx-sm);
-  color: var(--orange-400);
+  color: #C2410C;
   font-weight: 500;
   position: relative;
   z-index: 1;
