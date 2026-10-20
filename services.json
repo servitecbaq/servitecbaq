@@ -6,7 +6,7 @@
     "telefono": "+573158505020",
     "whatsapp": "573158505020",
     "email": "soporte@servitecbaq.com",
-    "horario": "Lunes a sábado, 9:00 a.m. a 6:00 p.m.",
+    "horario": "Lunes a sábado, 9:00 a.m. a 5:00 p.m.",
     "cobertura": [
       "Barranquilla",
       "Soledad",
@@ -608,7 +608,7 @@
         },
         {
           "q": "¿Atienden urgencias fuera del horario?",
-          "a": "El horario habitual es lunes a sábado de 9:00 a.m. a 6:00 p.m.; para empresas se acuerda un canal de prioridad aparte."
+          "a": "El horario habitual es lunes a sábado de 9:00 a.m. a 5:00 p.m.; para empresas se acuerda un canal de prioridad aparte."
         }
       ],
       "related": [

@@ -119,7 +119,7 @@ function head(s) {
         serviceUrl: wa('Hola, necesito ' + s.phrase),
         availableLanguage: ['es']
       },
-      hoursOfOperation: { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], opens: '09:00', closes: '18:00' }
+      hoursOfOperation: { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], opens: '09:00', closes: '17:00' }
     },
     {
       '@context': 'https://schema.org',
@@ -205,7 +205,7 @@ ${SERVICIOS.map(s => '            <li><a href="/servicios/' + s.slug + '/">' + e
             <li><a href="https://wa.me/${NEG.whatsapp}" target="_blank" rel="noopener">${esc(NEG.telefono)}</a></li>
             <li><a href="mailto:${NEG.email}">${esc(NEG.email)}</a></li>
             <li>Barranquilla, Colombia</li>
-            <li>Lun–Sáb · 9:00–18:00</li>
+            <li>Lun–Sáb · 9:00–17:00</li>
           </ul>
         </div>
       </div>
