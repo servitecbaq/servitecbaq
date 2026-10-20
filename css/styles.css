@@ -1658,6 +1658,9 @@ body:not(.cursor-ready) .bento { cursor: pointer; }
   opacity: 0;
 }
 .tips-grid-wrapper.open { max-height: 5000px; opacity: 1; }
+/* El bloque que centra el enlace final no es una cabecera real: heredaba el
+   margen de .section-head y dejaba 48px muertos antes de la sección siguiente. */
+.tips > .container > .section-head:last-child { margin-bottom: 0; }
 .tips-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
