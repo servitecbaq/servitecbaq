@@ -2057,6 +2057,13 @@ body:not(.cursor-ready) .bento { cursor: pointer; }
 .grwidget-embed { width: 100%; min-height: 300px; color: var(--fg); }
 .grwidget-embed * { max-width: 100%; }
 .grwidget-embed img { border-radius: var(--r-sm); }
+/* El widget de GR Widget pinta su paleta clara dentro de nuestra tarjeta oscura y
+   sus iniciales (4,34:1) no pasan ni en claro. No usamos su .grw-theme-dark: sólo
+   cambia el fondo, deja los mismos textos flojos. [data-theme] siempre existe y
+   sube la especificidad: el CSS del widget se inyecta después del nuestro. */
+[data-theme] .grwidget-embed .grw-review-avatar-initials { background: #f1f5f9 !important; color: #334155 !important; }
+[data-theme="dark"] .grwidget-embed .grw-branding .grw-branding-link span { color: #94a3b8 !important; }
+[data-theme="dark"] .grwidget-embed .grw-branding .grw-branding-link span span { color: #a5aafb !important; }
 
 /* ============================================
    CONTACTO — Split
