@@ -1,6 +1,6 @@
 /* ============================================
-   PAGES.CSS — componentes de las páginas de servicio
-   Solo se enlaza desde /servicios/*. Los tokens (--bg, --fg, --brand, --s-*,
+   PAGES.CSS — componentes de las páginas generadas
+   Solo se enlaza desde /servicios/, /tips/ y /apps/. Los tokens (--bg, --fg, --brand, --s-*,
    --tx-*) vienen de styles.css, así que el tema claro/oscuro funciona solo.
    ============================================ */
 
@@ -64,6 +64,32 @@
 .svc-symptom h3 { margin: 0 0 var(--s-2); font-size: var(--tx-base); font-weight: 600; color: var(--fg); }
 .svc-symptom p { margin: 0; font-size: var(--tx-sm); line-height: 1.6; color: var(--fg-muted); }
 
+/* Icono y capturas de la app (pagina /apps/saldo/) */
+.app-icon {
+  display: block; width: 5rem; height: 5rem; margin: 0 0 var(--s-5);
+  border: 1px solid var(--line); border-radius: 1.15rem;
+}
+.app-shots { display: grid; gap: var(--s-5); grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+.app-shot { margin: 0; }
+.app-shot img {
+  display: block; width: 100%; height: auto;
+  background: var(--bg-subtle); border: 1px solid var(--line); border-radius: var(--r-md);
+}
+.app-shot figcaption { margin-top: var(--s-3); font-size: var(--tx-xs); line-height: 1.5; color: var(--fg-muted); }
+.app-shots + .tip-prose { margin-top: var(--s-8); }
+
+/* Planes de la app (pagina /apps/saldo/) */
+.app-plans { display: grid; gap: var(--s-4); grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.app-plan {
+  margin: 0; padding: var(--s-6);
+  background: var(--bg-subtle); border: 1px solid var(--line); border-radius: var(--r-md);
+}
+.app-plan__name { margin: 0; font-size: var(--tx-sm); font-weight: 600; color: var(--fg-muted); }
+.app-plan__price { margin: var(--s-2) 0 0; font-size: var(--tx-xl); font-weight: 700; color: var(--fg); }
+.app-plan__note { margin: var(--s-1) 0 0; font-family: var(--font-mono); font-size: var(--tx-xs); color: var(--fg-muted); }
+.app-plan ul { list-style: none; margin: var(--s-5) 0 0; padding: 0; display: grid; gap: var(--s-2); font-size: var(--tx-sm); color: var(--fg); }
+.app-plan ul li::before { content: '·'; margin-right: var(--s-2); color: var(--accent); }
+
 /* Pasos */
 .svc-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-5); counter-reset: paso; }
 .svc-steps li { display: grid; grid-template-columns: auto 1fr; gap: var(--s-4); align-items: start; }
@@ -75,6 +101,8 @@
 }
 .svc-steps h3 { margin: 0 0 var(--s-1); font-size: var(--tx-base); font-weight: 600; }
 .svc-steps p { margin: 0; font-size: var(--tx-sm); line-height: 1.6; color: var(--fg-muted); }
+/* Defecto preexistente: en oscuro --brand (#6366f1) sobre --brand-soft da 3.74:1. */
+[data-theme="dark"] .svc-steps__n { color: var(--fg); }
 
 /* Relacionados */
 .svc-related { display: grid; gap: var(--s-3); grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
@@ -113,6 +141,8 @@
 .tip-index__card h3 { margin: 0; font-size: var(--tx-base); font-weight: 600; }
 .tip-index__card p { margin: 0; font-size: var(--tx-sm); line-height: 1.6; color: var(--fg-muted); }
 .tip-index__k { margin-top: auto; padding-top: var(--s-2); font-size: var(--tx-xs); font-weight: 700; color: var(--brand); }
+/* Defecto preexistente: en oscuro --brand sobre el fondo de tarjeta da 3.9:1. */
+[data-theme="dark"] .tip-index__k { color: var(--fg-muted); }
 
 /* Cierre */
 .svc-cta__panel {

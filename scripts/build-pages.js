@@ -141,7 +141,7 @@ function head(s) {
 }
 
 function header() {
-  const nav = [['Servicios', '/#servicios'], ['Nosotros', '/#nosotros'], ['Fundador', '/#fundador'], ['Tips', '/tips/'], ['Apps', '/#apps'], ['App Saldo', '/#saldo'], ['FAQ', '/#faq'], ['Reseñas', '/#resenas'], ['Contacto', '/#contacto']];
+  const nav = [['Servicios', '/#servicios'], ['Nosotros', '/#nosotros'], ['Fundador', '/#fundador'], ['Tips', '/tips/'], ['Apps', '/#apps'], ['App Saldo', '/apps/saldo/'], ['FAQ', '/#faq'], ['Reseñas', '/#resenas'], ['Contacto', '/#contacto']];
   return `  <header class="header" id="siteHeader">
     <div class="header__shell">
       <div class="header__inner">
@@ -196,7 +196,7 @@ ${SERVICIOS.map(s => '            <li><a href="/servicios/' + s.slug + '/">' + e
             <li><a href="/#fundador">Fundador</a></li>
             <li><a href="/tips/">Tips</a></li>
             <li><a href="/#apps">Aplicativos</a></li>
-            <li><a href="/#saldo">App Saldo</a></li>
+            <li><a href="/apps/saldo/">App Saldo</a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -529,12 +529,216 @@ ${footer()}
 `;
 }
 
-function sitemap() {
-  // Fecha local del contenido: toISOString() trae la hora UTC, que en Colombia
+/* ============================================
+   APP SALDO — pagina /apps/saldo/
+   Las características y precios los publica el desarrollador del app
+   (scripts/app-saldo-content.js cita la fuente). Servitecbaq solo aporta el
+   soporte local, así que la pagina no suplanta la ficha oficial.
+   ============================================ */
+const APP = require('./app-saldo-content.js');
+const urlApp = NEG.url + '/apps/' + APP.slug + '/';
+
+function validarApp() {
+  if (APP.slug !== APP.slug.toLowerCase() || /[^a-z0-9-]/.test(APP.slug)) warnings.push(APP.slug + ': slug no es ascii minusculo con guiones');
+  if (APP.title.length > 65) warnings.push(APP.slug + ': title de ' + APP.title.length + ' caracteres (max 65)');
+  if (APP.meta.length > 165) warnings.push(APP.slug + ': meta de ' + APP.meta.length + ' caracteres (max 165)');
+  if (!APP.intro || APP.intro.length !== 2) warnings.push(APP.slug + ': «intro» debe tener 2 parrafos');
+  if (!APP.pasos || APP.pasos.length !== 4) warnings.push(APP.slug + ': «pasos» debe tener 4 entradas');
+  if (APP.planes.length !== 3) warnings.push(APP.slug + ': «planes» debe tener 3 entradas');
+  APP.planes.forEach(p => { if (!/^\d+$/.test(p.amount)) warnings.push(APP.slug + ': plan «' + p.name + '» sin amount numerico'); });
+  APP.related.forEach(r => {
+    if (!byKey[r]) warnings.push(APP.slug + ': related apunta a «' + r + '», que no es un servicio');
+  });
+  [APP.icono].concat(APP.capturas).forEach(x => {
+    if (!x.w || !x.h) warnings.push(APP.slug + ': «' + x.src + '» sin width/height, da CLS');
+    if (!fs.existsSync(path.join(ROOT, x.src.replace(/^\//, '')))) warnings.push(APP.slug + ': falta el archivo ' + x.src);
+  });
+}
+
+function appLd() {
+  return [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'MobileApplication',
+      name: 'Saldo',
+      description: APP.intro[0],
+      url: urlApp,
+      downloadUrl: APP.playUrl,
+      operatingSystem: 'Android',
+      applicationCategory: 'BusinessApplication',
+      image: NEG.url + APP.icono.src,
+      screenshot: APP.capturas.map(c => NEG.url + c.src),
+      featureList: APP.funciones,
+      developer: { '@type': 'Organization', name: APP.desarrollador, url: APP.devUrl },
+      offers: APP.planes.map(p => ({
+        '@type': 'Offer', name: p.name, price: p.amount, priceCurrency: 'COP', category: 'https://schema.org/Subscription'
+      }))
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Inicio', item: NEG.url + '/' },
+        { '@type': 'ListItem', position: 2, name: 'App destacada', item: NEG.url + '/#saldo' },
+        { '@type': 'ListItem', position: 3, name: 'Saldo', item: urlApp }
+      ]
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: APP.faq.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } }))
+    }
+  ];
+}
+
+function appMain() {
+  return `  <main id="contenido" class="svc-page">
+    <div class="container">
+${crumbs([['Inicio', '/'], ['App destacada', '/#saldo'], ['Saldo', null]])}
+
+      <header class="svc-hero">
+        <img class="app-icon" src="${APP.icono.src}" width="${APP.icono.w}" height="${APP.icono.h}" alt="${esc(APP.icono.alt)}" decoding="async">
+        <span class="section-kicker">${esc(APP.kicker)}</span>
+        <h1 class="section-title section-title--left">${esc(APP.h1)}</h1>
+${APP.intro.map(t => '        <p class="svc-hero__lead">' + esc(t) + '</p>').join('\n')}
+        <div class="svc-hero__actions">
+          <a class="btn btn--accent btn--lg" href="${APP.playUrl}" target="_blank" rel="noopener">📲 Descargar en Google Play</a>
+          <a class="btn btn--ghost btn--lg" href="${wa('Hola, necesito que me monten la app Saldo en el negocio')}" target="_blank" rel="noopener">💬 Pedir el montaje</a>
+        </div>
+        <ul class="svc-facts">
+          <li><span class="svc-facts__k">Plataforma</span>Android (Google Play)</li>
+          <li><span class="svc-facts__k">Soporte local</span>${esc(NEG.cobertura.join(' · '))}</li>
+          <li><span class="svc-facts__k">Desarrollador</span>${esc(APP.desarrollador)}</li>
+        </ul>
+      </header>
+
+      <section class="svc-block">
+        <h2 class="section-title section-title--left">Qué hace Saldo</h2>
+        <ul class="svc-includes">
+${APP.funciones.map(i => '          <li>' + esc(i) + '</li>').join('\n')}
+        </ul>
+      </section>
+
+      <section class="svc-block">
+        <h2 class="section-title section-title--left">Así se ve en el teléfono</h2>
+        <div class="app-shots">
+${APP.capturas.map(c => '          <figure class="app-shot"><img src="' + c.src + '" width="' + c.w + '" height="' + c.h + '" alt="' + esc(c.alt) + '" loading="lazy" decoding="async"><figcaption>' + esc(c.cap) + '</figcaption></figure>').join('\n')}
+        </div>
+        <p class="tip-prose">${esc(APP.avisoCapturas)}</p>
+      </section>
+
+      <section class="svc-block">
+        <h2 class="section-title section-title--left">¿Te suena alguna de estas situaciones?</h2>
+        <div class="svc-symptoms">
+${APP.sintomas.map(x => '          <article class="svc-symptom"><h3>' + esc(x.q) + '</h3><p>' + esc(x.a) + '</p></article>').join('\n')}
+        </div>
+      </section>
+
+      <section class="svc-block">
+        <h2 class="section-title section-title--left">Planes y precios</h2>
+        <div class="app-plans">
+${APP.planes.map(p => `          <article class="app-plan">
+            <h3 class="app-plan__name">${esc(p.name)}</h3>
+            <p class="app-plan__price">${esc(p.price)}</p>
+            <p class="app-plan__note">${esc(p.note)}</p>
+            <ul>
+${p.items.map(i => '              <li>' + esc(i) + '</li>').join('\n')}
+            </ul>
+          </article>`).join('\n')}
+        </div>
+        <p class="tip-prose">${esc(APP.avisoPrecios)}</p>
+      </section>
+
+      <section class="svc-block">
+        <h2 class="section-title section-title--left">Cómo te lo montamos</h2>
+        <ol class="svc-steps">
+${APP.pasos.map((x, i) => '          <li><span class="svc-steps__n" aria-hidden="true">' + String(i + 1).padStart(2, '0') + '</span><div><h3>' + esc(x.t) + '</h3><p>' + esc(x.d) + '</p></div></li>').join('\n')}
+        </ol>
+      </section>
+
+      <section class="svc-block">
+        <h2 class="section-title section-title--left">Cuándo alcanza con el plan gratuito</h2>
+        <p class="tip-prose">${esc(APP.cuando)}</p>
+      </section>
+
+      <section class="svc-block">
+        <h2 class="section-title section-title--left">El error que vemos siempre</h2>
+        <p class="tip-prose tip-prose--warn">${esc(APP.error)}</p>
+      </section>
+
+      <section class="svc-block">
+        <div class="faq-split">
+          <div class="faq-split__head">
+            <span class="section-kicker">❓ Preguntas frecuentes</span>
+            <h2 class="section-title section-title--left">Dudas sobre la app Saldo</h2>
+            <a class="btn btn--accent" href="${wa('Hola, tengo una duda sobre la app Saldo')}" target="_blank" rel="noopener">💬 Pregúntanos directamente</a>
+          </div>
+          <div class="faq-list">
+${APP.faq.map(f => '            <details class="faq-item"><summary><span>' + esc(f.q) + '</span><span class="faq-icon" aria-hidden="true">+</span></summary><div class="faq-answer">' + esc(f.a) + '</div></details>').join('\n')}
+          </div>
+        </div>
+      </section>
+
+      <section class="svc-block">
+        <h2 class="section-title section-title--left">Servicios relacionados</h2>
+        <div class="svc-related">
+${APP.related.map(r => { const o = byKey[r]; return '          <a class="svc-related__card" href="/servicios/' + o.slug + '/"><span class="svc-related__icon" aria-hidden="true">' + o.icon + '</span><span class="svc-related__label">' + esc(o.label) + '</span></a>'; }).join('\n')}
+        </div>
+      </section>
+
+      <section class="svc-block">
+        <h2 class="section-title section-title--left">Otros tips de Windows para el negocio</h2>
+        <div class="svc-related svc-related--one">
+          <a class="svc-related__card" href="/tips/"><span class="svc-related__icon" aria-hidden="true">💡</span><span class="svc-related__label">Guías de respaldo, redes y seguridad</span></a>
+        </div>
+      </section>
+
+      <section class="svc-block">
+        <h2 class="section-title section-title--left">Ficha del producto</h2>
+        <ul class="svc-facts">
+          <li><span class="svc-facts__k">Desarrollador</span><a href="${APP.devUrl}" target="_blank" rel="noopener">${esc(APP.desarrollador)}</a></li>
+          <li><span class="svc-facts__k">Google Play</span>${esc(APP.paquete)}</li>
+          <li><span class="svc-facts__k">Idiomas</span>Español, inglés y portugués</li>
+          <li><span class="svc-facts__k">Sitio del app</span><a href="${APP.devUrl}" target="_blank" rel="noopener">alejandrofragozo.github.io/saldo-web</a></li>
+        </ul>
+        <p class="tip-prose">${esc(APP.avisoMarca)}</p>
+      </section>
+
+      <section class="svc-cta">
+        <div class="svc-cta__panel">
+        <h2 class="section-title">${esc(APP.ctaTitle)}</h2>
+        <p class="svc-cta__text">${esc(APP.ctaText)}</p>
+        <a class="btn btn--accent btn--lg" href="${wa('Hola, quiero que me monten Saldo en el negocio')}" target="_blank" rel="noopener">💬 Escribir por WhatsApp</a>
+        </div>
+      </section>
+    </div>
+  </main>`;
+}
+
+function appPage() {
+  return `<!DOCTYPE html>
+<!-- Generado por scripts/build-pages.js a partir de scripts/app-saldo-content.js. No editar a mano. -->
+<html lang="es" data-theme="light">
+<head>
+${headBase({ title: APP.title, meta: APP.meta, h1: APP.h1, url: urlApp, ld: appLd() })}
+</head>
+<body class="svc-page-body">
+${header()}
+
+${appMain()}
+
+${footer()}
+  <script src="/js/app-core.js" defer></script>
+</body>
+</html>
+`;
+}
+
+function sitemap() {  // Fecha local del contenido: toISOString() trae la hora UTC, que en Colombia
   // (+0 respecto a -5) deja un <lastmod> en el futuro.
   const d = new Date(fs.statSync(path.join(ROOT, 'services.json')).mtimeMs);
   const today = [d.getFullYear(), String(d.getMonth() + 1).padStart(2, '0'), String(d.getDate()).padStart(2, '0')].join('-');
-  const urls = [NEG.url + '/'].concat(SERVICIOS.map(urlDe), [NEG.url + '/tips/'], tipIdx.map(urlTip));
+  const urls = [NEG.url + '/'].concat(SERVICIOS.map(urlDe), [NEG.url + '/tips/'], tipIdx.map(urlTip), [urlApp]);
   return `<?xml version="1.0" encoding="UTF-8"?>
 <!-- Generado por scripts/build-pages.js -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -546,6 +750,7 @@ ${urls.map(u => '  <url>\n    <loc>' + u + '</loc>\n    <lastmod>' + today + '</
 validarConModal();
 validarEnlaces();
 validarTips();
+validarApp();
 
 if (warnings.length) {
   console.log('Avisos:');
@@ -579,4 +784,8 @@ tipIdx.forEach(i => {
 fs.mkdirSync(path.join(ROOT, 'tips'), { recursive: true });
 escribir(path.join(ROOT, 'tips', 'index.html'), tipsHub());
 
-console.log(escritas + ' paginas de servicio y ' + tipsEscritas + ' de tips generadas; sitemap.xml reescrito (' + (SERVICIOS.length + tipIdx.length + 2) + ' URLs).');
+const dirApp = path.join(ROOT, 'apps', APP.slug);
+fs.mkdirSync(dirApp, { recursive: true });
+escribir(path.join(dirApp, 'index.html'), appPage());
+
+console.log(escritas + ' paginas de servicio, ' + tipsEscritas + ' de tips y 1 de app generadas; sitemap.xml reescrito (' + (SERVICIOS.length + tipIdx.length + 3) + ' URLs).');
