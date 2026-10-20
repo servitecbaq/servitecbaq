@@ -4,6 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <!-- Mismo arranque de tema que index.html: data-theme="light" es solo el valor previo. -->
+  <script>(function(){try{var s=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',s||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));}catch(e){}})();</script>
   <title>Análisis de canales Wi-Fi antes de cambiar el router</title>
   <meta name="description" content="Antes de comprar un router nuevo: ver qué canales están ocupados, medir la señal real y mover el punto de acceso. Casi siempre hay una causa física.">
   <meta name="author" content="Servitecbaq">

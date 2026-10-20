@@ -4,6 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <!-- Mismo arranque de tema que index.html: data-theme="light" es solo el valor previo. -->
+  <script>(function(){try{var s=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',s||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));}catch(e){}})();</script>
   <title>Auditoría de eventos: saber quién entró y qué se borró</title>
   <meta name="description" content="Habilitar la auditoría de eventos de Windows deja rastro de inicios de sesión, cambios de permisos y borrados. Qué eventos activar y dónde se ven.">
   <meta name="author" content="Servitecbaq">

@@ -4,6 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <!-- Mismo arranque de tema que index.html: data-theme="light" es solo el valor previo. -->
+  <script>(function(){try{var s=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',s||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));}catch(e){}})();</script>
   <title>VLAN: que las cámaras no compartan red con la oficina</title>
   <meta name="description" content="Separar CCTV, invitados y equipos de trabajo en VLAN distintas limita el daño de un compromiso y ordena el tráfico de la red de la oficina.">
   <meta name="author" content="Servitecbaq">

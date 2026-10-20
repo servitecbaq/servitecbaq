@@ -4,6 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <!-- Mismo arranque de tema que index.html: data-theme="light" es solo el valor previo. -->
+  <script>(function(){try{var s=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',s||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));}catch(e){}})();</script>
   <title>Snap Layouts: organizar ventanas con Win + Z</title>
   <meta name="description" content="En Windows 11, Win + Z reparte la pantalla en diseños fijos. Para quien trabaja con dos o tres ventanas abiertas todo el día, cambia el día.">
   <meta name="author" content="Servitecbaq">

@@ -4,6 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <!-- Mismo arranque de tema que index.html: data-theme="light" es solo el valor previo. -->
+  <script>(function(){try{var s=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',s||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));}catch(e){}})();</script>
   <title>Group Policy: configurar todos los PCs a la vez</title>
   <meta name="description" content="Con Active Directory, una GPO aplica pantalla de bloqueo, fondo, unidades de red y permisos en todos los equipos. Sin entrar uno por uno.">
   <meta name="author" content="Servitecbaq">

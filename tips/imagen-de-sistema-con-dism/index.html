@@ -4,6 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <!-- Mismo arranque de tema que index.html: data-theme="light" es solo el valor previo. -->
+  <script>(function(){try{var s=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',s||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));}catch(e){}})();</script>
   <title>Capturar la imagen de un equipo con DISM</title>
   <meta name="description" content="DISM /Capture-Image deja el sistema de un equipo en un archivo .wim para reinstalarlo entero en minutos cuando el disco muere.">
   <meta name="author" content="Servitecbaq">

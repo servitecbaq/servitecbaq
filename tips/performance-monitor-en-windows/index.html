@@ -4,6 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <!-- Mismo arranque de tema que index.html: data-theme="light" es solo el valor previo. -->
+  <script>(function(){try{var s=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',s||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));}catch(e){}})();</script>
   <title>Performance Monitor: medir antes de cambiar el disco</title>
   <meta name="description" content="Contadores de disco, memoria y procesador para saber si la lentitud es de hardware o de software, con datos y no con impresiones.">
   <meta name="author" content="Servitecbaq">

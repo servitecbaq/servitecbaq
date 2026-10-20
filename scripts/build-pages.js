@@ -66,6 +66,8 @@ const wa = txt => 'https://wa.me/' + NEG.whatsapp + '?text=' + encodeURIComponen
 function headBase({ title, meta, h1, url, ld }) {
   return `  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <!-- Mismo arranque de tema que index.html: data-theme="light" es solo el valor previo. -->
+  <script>(function(){try{var s=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',s||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));}catch(e){}})();</script>
   <title>${esc(title)}</title>
   <meta name="description" content="${esc(meta)}">
   <meta name="author" content="${esc(NEG.nombre)}">
