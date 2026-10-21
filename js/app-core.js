@@ -46,6 +46,13 @@
     document.head.appendChild(s);
   })();
 
+  /* Un solo listener cubre los enlaces de WhatsApp de cada página. En el panel
+     se segmenta por página: así cada guía se mide por clientes que escriben. */
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest || !e.target.closest('a[href*="wa.me"]')) return;
+    if (typeof window.clarity === 'function') window.clarity('event', 'wa_clic');
+  });
+
   /* ============================================
      HELPERS
      ============================================ */
