@@ -15,6 +15,7 @@
     whatsappNumber: '573158505020',
     jiraUrl: 'https://servitecbaq.atlassian.net/servicedesk/customer/portal/3',
     grWidgetSrc: 'https://grwidget.com/v1/grwidget.js',
+    clarityProjectId: 'z0y013ihgd',
     ipApiUrl: 'https://ipapi.co/json/',
     tipAutoplayMs: 8000,
     breakpoints: { mobile: 640, tablet: 900, desktop: 1024 },
@@ -32,6 +33,18 @@
       frameIntervalMs: 100
     }
   };
+
+  /* Clarity se arranca aquí y no en el <head> porque las 43 URLs del sitio ya
+     cargan este fichero: la medición no cuesta bytes de documento. */
+  (function () {
+    const id = CONFIG.clarityProjectId;
+    if (!id || window.clarity) return;
+    window.clarity = function () { (window.clarity.q = window.clarity.q || []).push(arguments); };
+    const s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.clarity.ms/tag/' + id;
+    document.head.appendChild(s);
+  })();
 
   /* ============================================
      HELPERS
