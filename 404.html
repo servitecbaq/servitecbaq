@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>(function(){try{var s=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',s||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));}catch(e){}})();</script>
+  <title>Página no encontrada · Servitecbaq</title>
+  <meta name="description" content="La página que buscabas no existe. Desde aquí puedes ir a los servicios de soporte técnico en Barranquilla, las guías o escribir por WhatsApp.">
+  <style>
+    /* Va todo en línea y con rutas absolutas: este archivo lo sirve GitHub Pages
+       desde cualquier profundidad, donde los enlaces relativos del sitio no aplican. */
+    :root {
+      --bg: #F7F8FB; --bg-elev: #FFFFFF; --fg: #0D1224; --fg-muted: #5C6784;
+      --line: #E2E6EF; --brand: #4F46E5; --brand-soft: #EEF0FF;
+      --shadow: 0 8px 24px rgba(30,27,75,0.10), 0 2px 6px rgba(30,27,75,0.05);
+    }
+    [data-theme="dark"] {
+      --bg: #0A0D1F; --bg-elev: #131831; --fg: #F1F3FA; --fg-muted: #A5AECC;
+      --line: rgba(165,174,204,0.14); --brand: #A5AAFB; --brand-soft: rgba(99,102,241,0.15);
+      --shadow: 0 8px 24px rgba(0,0,0,0.55);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; display: grid; place-items: center;
+      padding: 24px; background: var(--bg); color: var(--fg);
+      font: 400 16px/1.6 "Segoe UI", system-ui, -apple-system, sans-serif;
+    }
+    main { width: 100%; max-width: 620px; }
+    .code {
+      margin: 0 0 8px; font-size: 15px; font-weight: 700; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--brand);
+    }
+    h1 { margin: 0 0 12px; font-size: clamp(28px, 6vw, 40px); line-height: 1.15; font-weight: 700; }
+    .lead { margin: 0 0 28px; color: var(--fg-muted); }
+    nav { display: grid; gap: 10px; margin-bottom: 28px; }
+    nav a {
+      display: flex; align-items: center; gap: 12px; padding: 14px 16px;
+      background: var(--bg-elev); border: 1px solid var(--line); border-radius: 14px;
+      box-shadow: var(--shadow); color: var(--fg); font-weight: 600; text-decoration: none;
+    }
+    nav a span[aria-hidden] { font-size: 20px; }
+    nav a small { display: block; font-weight: 400; color: var(--fg-muted); }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .cta {
+      padding: 14px 22px; border-radius: 999px; background: var(--brand);
+      color: #FFFFFF; font-weight: 700; text-decoration: none;
+    }
+    [data-theme="dark"] .cta { color: #0A0D1F; }
+    .alt { color: var(--fg-muted); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+    a:focus-visible { outline: 3px solid var(--brand); outline-offset: 3px; border-radius: 8px; }
+    footer { margin-top: 32px; color: var(--fg-muted); font-size: 14px; }
+    footer a { color: var(--brand); }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="code">Error 404</p>
+    <h1>Esta página no está</h1>
+    <p class="lead">El enlace puede estar mal escrito o la guía cambió de dirección. Lo que sí sigue funcionando:</p>
+
+    <nav aria-label="Destinos disponibles">
+      <a href="/servicios/soporte-tecnico-empresarial-barranquilla/"><span aria-hidden="true">🛠️</span><span>Soporte técnico a domicilio<small>Computadores, redes y impresoras en Barranquilla y área metropolitana</small></span></a>
+      <a href="/servicios/reparacion-de-computadores-en-barranquilla/"><span aria-hidden="true">💻</span><span>Reparación de computadores<small>Diagnóstico, limpieza, repuestos y recuperación de datos</small></span></a>
+      <a href="/tips/"><span aria-hidden="true">📖</span><span>Guías técnicas<small>32 guías cortas de seguridad, redes y respaldo en Windows</small></span></a>
+      <a href="/apps/saldo/"><span aria-hidden="true">📱</span><span>App Saldo<small>Control de saldo y consumos desde el celular</small></span></a>
+    </nav>
+
+    <div class="actions">
+      <a class="cta" href="https://wa.me/573158505020?text=Hola%2C%20busc%C3%A9%20una%20p%C3%A1gina%20en%20servitecbaq.com%20y%20no%20apareci%C3%B3.%20%C2%BFMe%20ayudas%3F" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+      <a class="alt" href="/">Volver al inicio</a>
+    </div>
+
+    <footer>Servitecbaq · Lun–Sáb 9:00–17:00 · <a href="mailto:soporte@servitecbaq.com">soporte@servitecbaq.com</a></footer>
+  </main>
+</body>
+</html>
