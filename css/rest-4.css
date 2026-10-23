@@ -1,56 +1,55 @@
-@media (max-width: 900px) {
-.services-bento { grid-template-columns: repeat(2, 1fr); }
-.svc--large { grid-area: auto / span 2; }
-.svc--mini { grid-column: span 1; }
-}
-@media (max-width: 640px) {
-.logo__pill { display: none; }
-.nav.open { display: flex; }
-.services-bento { grid-template-columns: 1fr; }
-.svc--large, .svc--mini { grid-column: span 1; }
-.svc--large { padding: var(--s-6); }
-.coverage-zones { grid-template-columns: 1fr; }
-.coverage-kpis { grid-template-columns: 1fr; }
-.founder-split__photo { max-width: 100%; aspect-ratio: 4 / 5; }
-.founder-split__stats { grid-template-columns: 1fr 1fr; }
-.cert-embed { width: 110px; height: 110px; }
-.tip-nav { display: none; }
-.tip-card { min-height: 340px; padding: var(--s-8) var(--s-5); border-radius: var(--r-lg); }
-.tip-card.switching { opacity: 1; }
-.tip-track { min-height: 340px; }
-.tip-title { font-size: var(--tx-2xl); }
-.tip-desc { font-size: var(--tx-base); }
-.tips-grid { grid-template-columns: 1fr; }
-.apps-grid { grid-template-columns: 1fr; }
-.apps-toolbar { flex-direction: column; align-items: stretch; }
-.apps-filters { justify-content: flex-start; }
-.faq-item > summary { padding: var(--s-4); font-size: var(--tx-sm); }
-.faq-answer { padding: 0 var(--s-4) var(--s-4); font-size: var(--tx-xs); }
-.faq-icon { width: 28px; height: 28px; font-size: 1rem; }
-.featured-app-card { grid-template-columns: 1fr; padding: var(--s-8) var(--s-5); gap: var(--s-8); }
-.featured-app-phone { width: 180px; height: 360px; }
-.featured-app-icon { font-size: 3.2rem; }
-.featured-app-icon-title { font-size: 1.5rem; }
-.featured-app-info h3 { font-size: var(--tx-2xl); }
-.btn-play-store { width: 100%; justify-content: center; }
-.reviews-rating-card { padding: var(--s-6) var(--s-5); }
-.contact-split__form { padding: var(--s-6) var(--s-5); }
-.form-row { grid-template-columns: 1fr; gap: var(--s-4); }
-.footer-grid { grid-template-columns: 1fr; gap: var(--s-8); }
-.footer-bottom { flex-direction: column; text-align: center; }
-.widget-panel.open { transform: translateY(0px) scale(1); }
-body::before { background: none; }
-.cursor-ring, .cursor-dot { display: none !important; }
-}
 @media (hover: none) and (pointer: coarse) {
 .cursor-ring, .cursor-dot { display: none !important; }
-}
-@media (prefers-reduced-motion: reduce) {
-.cursor-ring, .cursor-dot { display: none; }
 }
 @media (prefers-contrast: more) {
 [data-theme="dark"] { --line: rgba(241,243,250,0.4); --line-strong: rgba(241,243,250,0.6); --fg-muted: #D5DAE7; --fg-faint: #B8C0D5; }
 }
 @media (forced-colors: active) {
 .svc:focus-visible, .bento:focus-visible, .app-card:focus-visible { outline: highlight solid 2px; }
+}
+@media (hover: hover) and (pointer: fine) {
+.whatsapp-float:hover, .calc-float:hover, .device-float:hover, .jira-float:hover { transform: translateZ(0px) scale(1.08); }
+.widget-close:hover { background: var(--bg-subtle); color: var(--fg); transform: rotate(90deg); }
+.widget-refresh:hover { background: var(--brand-soft); border-color: var(--brand); color: var(--brand); transform: translateY(-2px); }
+.calc-btn:hover { background: var(--brand-soft); border-color: var(--brand); }
+.logo:hover { transform: scale(1.09); }
+.nav a:hover { color: var(--fg); background: var(--bg-subtle); }
+.theme-toggle:hover { background: var(--bg-subtle); color: var(--fg); border-color: var(--line); transform: rotate(15deg); }
+.btn:hover { transform: translateY(-2px); }
+.btn--accent:hover { box-shadow: rgba(249, 115, 22, 0.5) 0px 14px 40px; transform: translateY(-3px); }
+.btn--ghost:hover { border-color: var(--brand); color: var(--brand); box-shadow: var(--shadow-3); }
+.btn-outline:hover { border-color: var(--brand); color: var(--brand); box-shadow: var(--shadow-3); transform: translateY(-3px); }
+.btn-linkedin:hover { transform: translateY(-2px); box-shadow: rgba(10, 102, 194, 0.5) 0px 12px 28px; }
+.bento:hover { transform: translateY(-4px); box-shadow: var(--shadow-4); border-color: var(--brand); }
+.bento:hover .bento__icon { transform: scale(1.08) rotate(-6deg); }
+.bento:hover::before { transform: scaleX(1); }
+.zone-chip:hover { transform: translateY(-2px); border-color: var(--brand); }
+.svc:hover { transform: translateY(-6px); box-shadow: var(--shadow-4); border-color: var(--brand); }
+.svc:hover .svc__icon { transform: scale(1.08) rotate(-6deg); }
+.svc:hover .svc__more { gap: 10px; }
+.about-feature:hover { transform: translateX(6px); border-color: var(--brand); box-shadow: var(--shadow-3); }
+.founder-skills span:hover { transform: translateY(-2px); border-color: var(--brand); color: var(--brand); }
+.cert-badge:hover { transform: translateY(-4px); border-color: var(--brand); box-shadow: var(--shadow-3); }
+.tip-nav:hover { background: var(--brand); color: rgb(255, 255, 255); border-color: var(--brand); transform: translateY(-50%) scale(1.1); }
+.tip-mini:hover { transform: translateY(-4px); box-shadow: var(--shadow-3); border-color: var(--brand); }
+.apps-filter:hover { color: var(--brand); border-color: var(--brand); transform: translateY(-1px); }
+.app-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-3); border-color: var(--brand); }
+.app-card:hover .app-link { transform: translateX(4px); }
+.featured-app-phone:hover { transform: translateY(-6px) rotate(-2deg); }
+.btn-play-store:hover { transform: translateY(-2px); box-shadow: var(--shadow-4); }
+.faq-item:hover { box-shadow: var(--shadow-3); border-color: var(--brand); }
+.faq-item > summary:hover { color: var(--brand); }
+.contact-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-4); border-color: var(--brand); }
+.contact-card--accent:hover { border-color: var(--orange-600); }
+.contact-card:hover .contact-icon { transform: scale(1.1); }
+.footer-social a:hover { background: var(--brand); border-color: var(--brand); transform: translateY(-2px); }
+.footer-col ul a:hover { color: var(--orange-400); }
+.modal-close:hover { transform: rotate(90deg); background: var(--brand); color: rgb(255, 255, 255); border-color: var(--brand); }
+.wa-submit:hover { transform: translateY(-2px); box-shadow: rgba(37, 211, 102, 0.5) 0px 8px 20px; }
+.wa-direct:hover { color: rgb(37, 211, 102); background: rgba(37, 211, 102, 0.08); }
+[data-theme="dark"] #devicePanel .widget-close:hover { background: rgba(0, 255, 65, 0.15); color: rgb(0, 0, 0); }
+[data-theme="dark"] #devicePanel .widget-refresh:hover { background: rgba(0, 255, 65, 0.15); border-color: rgb(0, 255, 65); box-shadow: rgba(0, 255, 65, 0.45) 0px 0px 18px; }
+}
+@media (prefers-reduced-transparency: reduce) {
+.svc__badge, .founder-split__badge { background: var(--brand); }
 }
