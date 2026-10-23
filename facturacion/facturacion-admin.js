@@ -339,6 +339,10 @@ function recargarVistas() {
     const carteraActiva = !document.getElementById('vistaCartera').hidden;
     const cotActiva = !document.getElementById('vistaCotizaciones').hidden;
 
+    // Cada pestaña se carga una sola vez; como el servidor acaba de cambiar,
+    // la vista oculta tiene que volver a pedirse cuando se active.
+    document.querySelectorAll('.vista-tab').forEach(t => { delete t.dataset.cargada; });
+
     if (carteraActiva) cargarCartera();
     if (cotActiva) cargarCotizaciones();
     refrescarNumero();
