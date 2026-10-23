@@ -41,13 +41,6 @@
                 <svg viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 Volver
             </a>
-            <button type="button" class="btn-reset" id="btnReset" title="Reiniciar consecutivo del día">
-                <svg viewBox="0 0 24 24" fill="none" width="18" height="18">
-                    <path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"
-                          stroke="currentColor" stroke-width="2"
-                          stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </button>
             <button type="button" class="btn-logout" id="btnLogout" title="Cerrar sesión">
                 <svg viewBox="0 0 24 24" fill="none" width="18" height="18">
                     <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"
@@ -65,6 +58,41 @@
 
 <main class="layout">
 
+    <!-- ====== VISTAS ====== -->
+    <nav class="vistas" role="tablist" aria-label="Vistas del módulo">
+        <button type="button" class="vista-tab is-active" role="tab" id="tabDocumento"
+                aria-selected="true" aria-controls="vistaDocumento">Nuevo documento</button>
+        <button type="button" class="vista-tab" role="tab" id="tabCartera"
+                aria-selected="false" aria-controls="vistaCartera">Cartera</button>
+        <button type="button" class="vista-tab" role="tab" id="tabCotizaciones"
+                aria-selected="false" aria-controls="vistaCotizaciones">Cotizaciones</button>
+    </nav>
+
+    <div class="vista" id="vistaDocumento" role="tabpanel" aria-labelledby="tabDocumento">
+
+    <!-- ====== TIPO DE DOCUMENTO ====== -->
+    <section class="card card-tipo">
+        <div class="card-header">
+            <div class="card-title">
+                <span class="card-dot dot-blue"></span>
+                <h2>Tipo de documento</h2>
+            </div>
+            <span class="card-tag">Define la numeración</span>
+        </div>
+        <div class="tipo-opciones">
+            <label class="tipo-opcion">
+                <input type="radio" name="tipoDocumento" value="Cuenta" checked>
+                <span>Cuenta de cobro</span>
+                <small>CC-AAAAMMDD####</small>
+            </label>
+            <label class="tipo-opcion">
+                <input type="radio" name="tipoDocumento" value="Cotización">
+                <span>Cotización</span>
+                <small>COT-AAAAMMDD####</small>
+            </label>
+        </div>
+    </section>
+
     <!-- ====== TARJETAS DE RESUMEN ====== -->
     <section class="stats-grid">
         <div class="stat-card">
@@ -73,7 +101,7 @@
             </div>
             <div class="stat-info">
                 <span class="stat-label">Estado</span>
-                <span class="stat-value">Borrador</span>
+                <span class="stat-value" id="estadoStat">Borrador</span>
             </div>
         </div>
         <div class="stat-card">
@@ -118,33 +146,35 @@
             </div>
             <div class="grid-2">
                 <div class="campo">
-                    <label>Nombre Completo</label>
-                    <input type="text" id="emisor_nombre" value="David Fragozo" readonly>
+                    <label for="emisor_nombre">Nombre Completo</label>
+                    <input type="text" id="emisor_nombre" name="emisor_nombre" value="David Fragozo" readonly>
                 </div>
                 <div class="campo">
-                    <label>Cédula / NIT</label>
-                    <input type="text" id="emisor_documento" value="1143260112" readonly>
+                    <label for="emisor_documento">Cédula / NIT</label>
+                    <input type="text" id="emisor_documento" name="emisor_documento" value="1143260112" readonly>
                 </div>
                 <div class="campo">
-                    <label>Teléfono</label>
-                    <input type="tel" id="emisor_telefono" value="315 850 5020" readonly>
+                    <label for="emisor_telefono">Teléfono</label>
+                    <input type="tel" id="emisor_telefono" name="emisor_telefono" value="315 850 5020" readonly>
                 </div>
                 <div class="campo">
-                    <label>Correo Electrónico</label>
-                    <input type="email" id="emisor_email" value="contabilidad@servitecbaq.com" readonly>
+                    <label for="emisor_email">Correo Electrónico</label>
+                    <input type="email" id="emisor_email" name="emisor_email" value="contabilidad@servitecbaq.com" readonly>
                 </div>
                 <div class="campo">
-                    <label>Ciudad</label>
-                    <input type="text" id="emisor_ciudad" value="Barranquilla, Atlántico" readonly>
+                    <label for="emisor_ciudad">Ciudad</label>
+                    <input type="text" id="emisor_ciudad" name="emisor_ciudad" value="Barranquilla, Atlántico" readonly>
                 </div>
                 <div class="campo">
-                    <label>Sitio Web</label>
-                    <input type="url" id="emisor_website" value="https://servitecbaq.com" readonly>
+                    <label for="emisor_website">Sitio Web</label>
+                    <input type="url" id="emisor_website" name="emisor_website" value="https://servitecbaq.com" readonly>
                 </div>
                 <div class="campo">
-                    <label>N.° Cuenta de Cobro</label>
-                    <input type="text" id="numero_cuenta" value="PENDIENTE" readonly>
+                    <label for="numero_cuenta" id="etiquetaNumero">N.° de Cuenta de Cobro</label>
+                    <input type="text" id="numero_cuenta" name="numero_cuenta" value="PENDIENTE" readonly>
+                    <span class="campo-ayuda">Lo asigna el servidor al guardar.</span>
                 </div>
+                <input type="hidden" id="documento_origen" name="documento_origen" value="">
             </div>
         </section>
 
@@ -188,6 +218,66 @@
                     <input type="text" id="cliente_direccion" name="cliente_direccion">
                 </div>
             </div>
+            <div id="clienteHistorial" class="cliente-historial" aria-live="polite"></div>
+        </section>
+
+        <!-- ====== EQUIPOS ====== -->
+        <section class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="card-dot dot-purple"></span>
+                    <h2>Equipos del cliente</h2>
+                </div>
+                <span class="card-tag">Opcional</span>
+            </div>
+
+            <div id="equiposCliente" class="equipos-cliente" aria-live="polite"></div>
+
+            <div class="form-equipo" id="formEquipo">
+                <div class="grid-2">
+                    <div class="campo">
+                        <label for="eq_tipo">Tipo de equipo</label>
+                        <input type="text" id="eq_tipo" name="eq_tipo" placeholder="Ej: Laptop, Impresora, Router">
+                    </div>
+                    <div class="campo">
+                        <label for="eq_marca">Marca</label>
+                        <input type="text" id="eq_marca" name="eq_marca" placeholder="Ej: Dell, HP, Epson">
+                    </div>
+                    <div class="campo">
+                        <label for="eq_modelo">Modelo</label>
+                        <input type="text" id="eq_modelo" name="eq_modelo">
+                    </div>
+                    <div class="campo">
+                        <label for="eq_serial">Número de serie</label>
+                        <input type="text" id="eq_serial" name="eq_serial">
+                    </div>
+                    <div class="campo">
+                        <label for="eq_activos">N.° de activos fijos</label>
+                        <input type="text" id="eq_activos" name="eq_activos">
+                    </div>
+                    <div class="campo">
+                        <label for="eq_estado">Estado</label>
+                        <select id="eq_estado" name="eq_estado">
+                            <option value="En taller">En taller</option>
+                            <option value="Entregado">Entregado</option>
+                            <option value="Repuesto">Repuesto</option>
+                            <option value="Retirado">Retirado</option>
+                        </select>
+                    </div>
+                    <div class="campo campo-ancho">
+                        <label for="eq_detalle">Detalle (componentes, color, accesorios)</label>
+                        <input type="text" id="eq_detalle" name="eq_detalle">
+                    </div>
+                    <div class="campo campo-ancho">
+                        <label for="eq_nota">Nota interna</label>
+                        <input type="text" id="eq_nota" name="eq_nota">
+                    </div>
+                </div>
+                <button type="button" class="btn-agregar" id="btnEquipoNuevo">
+                    <svg viewBox="0 0 24 24" fill="none" width="18" height="18"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+                    Registrar equipo
+                </button>
+            </div>
         </section>
 
         <!-- ====== SERVICIOS ====== -->
@@ -209,7 +299,7 @@
                             <th style="width: 18%;">Valor Unit.</th>
                             <th style="width: 10%;">IVA %</th>
                             <th style="width: 15%;">Total</th>
-                            <th style="width: 3%;"></th>
+                            <th scope="col" style="width: 3%;"><span class="lector-solo">Acciones</span></th>
                         </tr>
                     </thead>
                     <tbody id="cuerpoServicios"></tbody>
@@ -249,6 +339,44 @@
             </div>
         </section>
 
+        <!-- ====== DATOS PARA PAGO ====== -->
+        <section class="card" id="bloquePago">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="card-dot dot-green"></span>
+                    <h2>Datos para pago</h2>
+                </div>
+                <span class="card-tag">Se imprimen en el PDF</span>
+            </div>
+            <div class="pago-grid">
+                <div class="pago-dato">
+                    <strong>Bancolombia</strong>
+                    <span id="pagoBancolombia">Cuenta de Ahorros 478 0000 1250 · David Fragozo</span>
+                </div>
+                <div class="pago-dato">
+                    <strong>Nequi</strong>
+                    <span id="pagoNequi">314 686 4986 · David Fragozo</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ====== VIGENCIA (SOLO COTIZACIÓN) ====== -->
+        <section class="card" id="bloqueVigencia" hidden>
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="card-dot dot-orange"></span>
+                    <h2>Vigencia de la cotización</h2>
+                </div>
+                <span class="card-tag">Solo cotización</span>
+            </div>
+            <div class="grid-2">
+                <div class="campo">
+                    <label for="vigencia_dias">Días de vigencia</label>
+                    <input type="number" id="vigencia_dias" name="vigencia_dias" value="15" min="1" max="365" step="1">
+                </div>
+            </div>
+        </section>
+
         <!-- ====== OBSERVACIONES ====== -->
         <section class="card">
             <div class="card-header">
@@ -268,16 +396,121 @@
                 <svg viewBox="0 0 24 24" fill="none" width="18" height="18"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 Limpiar
             </button>
-            <button type="submit" class="btn-primario">
+            <button type="submit" class="btn-primario" id="btnEnviar">
                 <svg viewBox="0 0 24 24" fill="none" width="18" height="18"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z" stroke="currentColor" stroke-width="2"/><path d="M14 2v6h6M9 15l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                Generar Cuenta de Cobro
+                <span class="btn-texto">Generar Cuenta de Cobro</span>
             </button>
         </div>
 
     </form>
+    </div><!-- /vistaDocumento -->
+
+    <!-- ====== CARTERA ====== -->
+    <div class="vista" id="vistaCartera" role="tabpanel" aria-labelledby="tabCartera" hidden>
+        <section class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="card-dot dot-orange"></span>
+                    <h2>Cartera de cuentas de cobro</h2>
+                </div>
+                <button type="button" class="btn-enlace" id="btnActualizarCartera">Actualizar</button>
+            </div>
+
+            <div class="cartera-resumen" id="carteraResumen" aria-live="polite">
+                <span class="chip">Sin cargar</span>
+            </div>
+
+            <div class="filtros">
+                <div class="campo">
+                    <label for="carteraBusca">Buscar</label>
+                    <input type="search" id="carteraBusca" placeholder="Número, cliente o documento">
+                </div>
+                <div class="campo">
+                    <label for="carteraEstado">Estado</label>
+                    <select id="carteraEstado">
+                        <option value="">Todos</option>
+                        <option value="Pendiente">Pendiente</option>
+                        <option value="Pagada">Pagada</option>
+                        <option value="Anulada">Anulada</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="tabla-responsive tabla-admin-envoltura">
+                <table class="tabla-admin" id="tablaCartera">
+                    <caption class="lector-solo">Cuentas de cobro registradas con su estado de pago</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Número</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Cliente</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col">Pago</th>
+                            <th scope="col" class="col-acciones">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cuerpoCartera"></tbody>
+                </table>
+            </div>
+        </section>
+    </div><!-- /vistaCartera -->
+
+    <!-- ====== COTIZACIONES ====== -->
+    <div class="vista" id="vistaCotizaciones" role="tabpanel" aria-labelledby="tabCotizaciones" hidden>
+        <section class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="card-dot dot-blue"></span>
+                    <h2>Cotizaciones</h2>
+                </div>
+                <button type="button" class="btn-enlace" id="btnActualizarCotizaciones">Actualizar</button>
+            </div>
+
+            <p class="ayuda-vista">Una cotización vigente se puede convertir en cuenta de cobro. La conversación copia el cliente, los ítems y el total, y deja la cotización marcada como <strong>Convertida</strong>.</p>
+
+            <div class="filtros">
+                <div class="campo">
+                    <label for="cotBusca">Buscar</label>
+                    <input type="search" id="cotBusca" placeholder="Número, cliente o documento">
+                </div>
+                <div class="campo">
+                    <label for="cotEstado">Estado</label>
+                    <select id="cotEstado">
+                        <option value="">Todas</option>
+                        <option value="Pendiente">Vigentes</option>
+                        <option value="Aceptada">Aceptadas</option>
+                        <option value="Convertida">Convertidas</option>
+                        <option value="Rechazada">Rechazadas</option>
+                        <option value="Anulada">Anuladas</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="tabla-responsive tabla-admin-envoltura">
+                <table class="tabla-admin" id="tablaCotizaciones">
+                    <caption class="lector-solo">Cotizaciones registradas y su estado</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Número</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Cliente</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col" class="col-acciones">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cuerpoCotizaciones"></tbody>
+                </table>
+            </div>
+        </section>
+    </div><!-- /vistaCotizaciones -->
 </main>
+
+<div id="contenedorModal"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="facturacion.js"></script>
+<script src="facturacion-admin.js"></script>
 </body>
 </html>

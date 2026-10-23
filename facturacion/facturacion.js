@@ -6,12 +6,16 @@
    documento correcto para personas naturales
    no responsables de IVA según la DIAN.
    
-   Guarda un registro automático en Google Sheets
-   a través de Google Apps Script usando un iframe
-   oculto para evitar problemas de CORS.
-   
-   Sistema de numeración: CC-AAAAMMDD####
-   Ejemplo: CC-202610080001
+   Genera cuentas de cobro y cotizaciones en PDF; la cuenta de
+   cobro es el documento correcto para personas naturales no
+   responsables de IVA según la DIAN.
+
+   Guarda un registro automático en Google Sheets vía Apps Script
+   (fetch por POST: el token de sesión nunca viaja en la URL).
+
+   Numeración: CC-AAAAMMDD#### y COT-AAAAMMDD####
+   La asigna el servidor bajo LockService; el navegador solo mostra
+   una previsión. Ejemplo: CC-202610080001
    ============================================ */
 
 // ===== CONFIGURACIÓN =====
@@ -74,16 +78,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (form) form.addEventListener('submit', manejarEnvio);
     
     // Mostrar datos del usuario logueado
-    mostrarUsuarioLogueado();   
+    mostrarUsuarioLogueado();
 
-    // Inicializar botón de reset
-    inicializarBotonReset();
+    inicializarTipoDocumento();
+    inicializarClienteHistorial();
+    inicializarEquipos();
+    refrescarNumero();
 
     // Inicializar botón de logout
     inicializarBotonLogout();
-
-    // Consultar el último consecutivo del día al cargar la página
-    consultarUltimoConsecutivo();
 });
 
 // ===== BOTÓN DE CERRAR SESIÓN =====
@@ -112,27 +115,31 @@ function agregarFila(descripcion = '', cantidad = 1, valor = 0, iva = 0) {
     fila.innerHTML = `
         <td>
             <input type="text" name="descripcion[]"
-                   value="${descripcion}"
+                   aria-label="Descripción del servicio"
+                   value="${esc(descripcion)}"
                    placeholder="Ej: Mantenimiento preventivo" required>
         </td>
-        <td>
+        <td data-etiqueta="Cantidad">
             <input type="number" name="cantidad[]"
-                   value="${cantidad}" min="0.01" step="0.01"
+                   aria-label="Cantidad"
+                   value="${esc(cantidad)}" min="0.01" step="0.01"
                    onchange="calcularTotales()" oninput="calcularTotales()">
         </td>
-        <td>
+        <td data-etiqueta="Valor unitario">
             <input type="number" name="valor[]"
-                   value="${valor}" min="0" step="0.01"
+                   aria-label="Valor unitario"
+                   value="${esc(valor)}" min="0" step="0.01"
                    onchange="calcularTotales()" oninput="calcularTotales()">
         </td>
-        <td>
+        <td data-etiqueta="IVA %">
             <input type="number" name="iva[]"
-                   value="${iva}" min="0" max="100" step="0.01"
+                   aria-label="IVA porcentaje"
+                   value="${esc(iva)}" min="0" max="100" step="0.01"
                    onchange="calcularTotales()" oninput="calcularTotales()">
         </td>
-        <td class="total-linea">$0</td>
+        <td class="total-linea" data-etiqueta="Total de la línea">$0</td>
         <td>
-            <button type="button" class="btn-eliminar"
+            <button type="button" class="btn-eliminar" aria-label="Quitar este servicio"
                     onclick="eliminarFila(this)">✖</button>
         </td>
     `;
@@ -369,6 +376,9 @@ function recolectarDatos() {
         },
         totalLetras: document.getElementById('totalLetras').textContent,
         observaciones: document.getElementById('observaciones').value.trim(),
+        vigencia: parseInt(document.getElementById('vigencia_dias').value, 10) || 15,
+        equipos: equiposSeleccionados(),
+        origen: document.getElementById('documento_origen').value.trim(),
         fecha: new Date().toLocaleDateString('es-CO')
     };
 }
@@ -379,62 +389,108 @@ function parsearMoneda(texto) {
     return parseInt(limpio, 10) || 0;
 }
 
-// ===== CALCULAR CLAVE DE FECHA DEL DÍA =====
-function obtenerFechaClave() {
-    const hoy = new Date();
+// ===== CONSULTAR AL APPS SCRIPT =====
+// Todo va por POST: el token de sesión no debe aparecer nunca en una URL
+// (quedaría en el historial del navegador y en los logs del proxy).
+async function api(accion, parametros) {
+    const cuerpo = new URLSearchParams();
+    cuerpo.append('accion', accion);
+    cuerpo.append('token', sessionStorage.getItem('sb_token') || '');
+    Object.keys(parametros || {}).forEach(k => {
+        if (parametros[k] !== '' && parametros[k] != null) cuerpo.append(k, parametros[k]);
+    });
+
+    const respuesta = await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: cuerpo.toString()
+    });
+    return respuesta.json();
+}
+
+// ===== TIPO DE DOCUMENTO EN CURSO =====
+const TIPOS = {
+    'Cuenta':     { prefijo: 'CC-',  etiqueta: 'CUENTA DE COBRO', archivo: 'CuentaCobro',  boton: 'Generar Cuenta de Cobro' },
+    'Cotización': { prefijo: 'COT-', etiqueta: 'COTIZACIÓN',      archivo: 'Cotizacion',   boton: 'Generar Cotización' }
+};
+
+function tipoActual() {
+    const marcado = document.querySelector('input[name="tipoDocumento"]:checked');
+    return TIPOS[marcado ? marcado.value : 'Cuenta'] ? marcado.value : 'Cuenta';
+}
+
+function claveFecha(hoy = new Date()) {
     const año = hoy.getFullYear();
     const mes = String(hoy.getMonth() + 1).padStart(2, '0');
     const dia = String(hoy.getDate()).padStart(2, '0');
     return `${año}${mes}${dia}`;
 }
 
-// ===== CONSULTAR ÚLTIMO CONSECUTIVO DEL DÍA DESDE EL SHEETS =====
-async function consultarUltimoConsecutivo() {
-    const fechaClave = obtenerFechaClave();
-    const claveStorage = `consecutivo_${fechaClave}`;
-    const claveReset = `reset_${fechaClave}`;
+// El número definitivo lo pone el servidor al guardar (bajo candado).
+// Esto es solo la vista previa del campo.
+async function refrescarNumero() {
+    const tipo = tipoActual();
+    const estatuto = document.getElementById('numeroStat');
+    const campo = document.getElementById('numero_cuenta');
+    const etiqueta = document.getElementById('etiquetaNumero');
 
-    if (localStorage.getItem(claveReset) === 'true') {
-        console.log(`🔒 Reset activo para ${fechaClave} - no se consulta el Sheet`);
-        localStorage.setItem(claveStorage, '0');
-        return 0;
-    }
-
-    let ultimoLocal = parseInt(localStorage.getItem(claveStorage) || '0', 10);
+    if (etiqueta) etiqueta.textContent = tipo === 'Cotización' ? 'N.° de Cotización' : 'N.° de Cuenta de Cobro';
 
     try {
-        const token = sessionStorage.getItem('sb_token') || '';
-        const url = `${GOOGLE_SCRIPT_URL}?accion=ultimoConsecutivo&fecha=${fechaClave}&token=${encodeURIComponent(token)}`;
-        const respuesta = await fetch(url);
-        const data = await respuesta.json();
-
+        const data = await api('asignarNumero', { tipo, fecha: claveFecha() });
         if (data.result === 'success') {
-            const ultimoSheet = parseInt(data.ultimoConsecutivo) || 0;
-            const ultimoReal = Math.max(ultimoLocal, ultimoSheet);
-            localStorage.setItem(claveStorage, ultimoReal.toString());
-            console.log(`📋 Consecutivo sincronizado (${fechaClave}): último = ${ultimoReal}`);
-            return ultimoReal;
+            if (campo) campo.value = data.numero;
+            if (estatuto) estatuto.textContent = data.numero;
+            return data.numero;
         }
+        console.warn('No se pudo leer el consecutivo:', data.message);
     } catch (error) {
-        console.warn('⚠️ No se pudo consultar el Sheets, usando localStorage:', error);
+        console.warn('No se pudo consultar el consecutivo:', error);
     }
 
-    return ultimoLocal;
+    if (estatuto) estatuto.textContent = 'Al guardar';
+    if (campo) campo.value = 'PENDIENTE';
+    return null;
 }
 
-// ===== GENERAR NÚMERO CONSECUTIVO =====
-function generarNumeroConsecutivo() {
-    const fechaClave = obtenerFechaClave();
-    const claveStorage = `consecutivo_${fechaClave}`;
-    let ultimoNumero = parseInt(localStorage.getItem(claveStorage) || '0', 10);
+// ===== CAMBIAR TIPO DE DOCUMENTO =====
+function aplicarTipo() {
+    const tipo = tipoActual();
+    const esCot = tipo === 'Cotización';
 
-    let nuevoNumero = ultimoNumero + 1;
-    localStorage.setItem(claveStorage, nuevoNumero.toString());
+    const btn = document.getElementById('btnEnviar');
+    if (btn) btn.querySelector('.btn-texto').textContent = TIPOS[tipo].boton;
 
-    const consecutivoFormateado = nuevoNumero.toString().padStart(4, '0');
+    const pago = document.getElementById('bloquePago');
+    if (pago) pago.hidden = esCot;
 
-    return `CC-${fechaClave}${consecutivoFormateado}`;
+    const vigencia = document.getElementById('bloqueVigencia');
+    if (vigencia) vigencia.hidden = !esCot;
 }
+
+function inicializarTipoDocumento() {
+    document.querySelectorAll('input[name="tipoDocumento"]').forEach(radio => {
+        radio.addEventListener('change', () => {
+            aplicarTipo();
+            refrescarNumero();
+        });
+    });
+
+    const pagoBancolombia = document.getElementById('pagoBancolombia');
+    if (pagoBancolombia) {
+        const b = DATOS_BANCARIOS.bancolombia;
+        pagoBancolombia.textContent = `${b.tipo} ${b.numero} · ${b.titular}`;
+    }
+
+    const pagoNequi = document.getElementById('pagoNequi');
+    if (pagoNequi) {
+        const n = DATOS_BANCARIOS.nequi;
+        pagoNequi.textContent = `${n.celular} · ${n.titular}`;
+    }
+
+    aplicarTipo();
+}
+
 
 // ===== MANEJAR ENVÍO =====
 async function manejarEnvio(evento) {
@@ -464,30 +520,39 @@ async function manejarEnvio(evento) {
     }
 
     const datos = recolectarDatos();
-    const numeroDocumento = generarNumeroConsecutivo();
+    const tipo = tipoActual();
+    const numeroVista = document.getElementById('numero_cuenta').value;
+
+    // El servidor asigna y devuelve el número; el de la pantalla era una
+    // previsión y puede haber quedado desfasado por otro equipo.
+    const guardado = await enviarDatosAGoogle(datos, tipo);
+    const numeroDocumento = guardado.numero || numeroVista;
 
     const numeroStat = document.getElementById('numeroStat');
     if (numeroStat) numeroStat.textContent = numeroDocumento;
 
-    // Enviar a Sheets (con token de sesión y verificación de respuesta)
-    const guardadoEnSheets = await enviarDatosAGoogle(datos, numeroDocumento);
+    const estadoStat = document.getElementById('estadoStat');
+    if (estadoStat) estadoStat.textContent = guardado.ok ? 'Pendiente' : 'Sin guardar';
 
-    // Generar PDF
     try {
-        await generarPDF(datos, numeroDocumento);
-        if (guardadoEnSheets) {
-            alert(`✅ Cuenta de cobro generada correctamente.\n\nNúmero: ${numeroDocumento}\nTotal: ${formatearMoneda(datos.totales.total)}`);
+        await generarPDF(datos, numeroDocumento, tipo);
+        if (guardado.ok) {
+            alert(`✅ ${TIPOS[tipo].etiqueta === 'COTIZACIÓN' ? 'Cotización' : 'Cuenta de cobro'} generada correctamente.\n\nNúmero: ${numeroDocumento}\nTotal: ${formatearMoneda(datos.totales.total)}`);
         } else {
-            alert(`⚠️ La cuenta se generó, pero NO se pudo guardar en Google Sheets.\n\nRevisa tu conexión o vuelve a iniciar sesión.\n\nNúmero: ${numeroDocumento}\nTotal: ${formatearMoneda(datos.totales.total)}`);
+            alert(`⚠️ El PDF se generó, pero NO se pudo guardar en Google Sheets.\n\nRevisa tu conexión o vuelve a iniciar sesión.\n\nNúmero previsto: ${numeroDocumento}\n\nEl documento NO quedó en el registro: vuelve a generarlo después de reconectar.`);
         }
     } catch (error) {
         console.error('Error al generar el PDF:', error);
         alert('Hubo un error al generar el PDF. Revisa la consola para más detalles.');
+        return;
     }
+
+    refrescarNumero();
+    if (datos.cliente.documento.length >= 4) cargarFichaCliente();
 }
 
-// ===== ENVIAR DATOS A GOOGLE SHEETS (FETCH con verificación) =====
-async function enviarDatosAGoogle(datos, numeroDocumento) {
+// ===== ENVIAR DATOS A GOOGLE SHEETS =====
+async function enviarDatosAGoogle(datos, tipo) {
     const serviciosTexto = datos.servicios.map((s, idx) => {
         const cant = s.cantidad;
         const valorUnit = formatearMonedaPDF(s.valor_unitario);
@@ -496,8 +561,14 @@ async function enviarDatosAGoogle(datos, numeroDocumento) {
         return `${idx + 1}. ${s.descripcion} | Cant: ${cant} | V.Unit: ${valorUnit}${ivaTexto} | Total: ${total}`;
     }).join('\n');
 
+    // La vigencia no tiene columna propia en la hoja: se deja escrita en las
+    // observaciones, que es donde el PDF también la muestra.
+    const observaciones = tipo === 'Cotización'
+        ? [datos.observaciones, `Vigencia: ${datos.vigencia || 15} días calendario`].filter(Boolean).join('\n')
+        : datos.observaciones;
+
     const payload = {
-        NumeroCuenta:     numeroDocumento,
+        Tipo:             tipo,
         ClienteNombre:    datos.cliente.nombre,
         ClienteTipoDoc:   datos.cliente.tipoDoc,
         ClienteDocumento: datos.cliente.documento,
@@ -508,33 +579,30 @@ async function enviarDatosAGoogle(datos, numeroDocumento) {
         IVA:              Number(datos.totales.iva) || 0,
         Total:            Number(datos.totales.total) || 0,
         TotalLetras:      datos.totalLetras,
-        Observaciones:    datos.observaciones || '',
-        Servicios:        serviciosTexto
+        Observaciones:    observaciones || '',
+        Servicios:        serviciosTexto,
+        Equipos:          equiposSeleccionados().join('\n'),
+        Origen:           datos.origen || ''
     };
 
-    const cuerpo = new URLSearchParams();
-    cuerpo.append('payload', JSON.stringify(payload));
-    cuerpo.append('token', sessionStorage.getItem('sb_token') || '');
-
     try {
-        const respuesta = await fetch(GOOGLE_SCRIPT_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: cuerpo.toString()
-        });
-        const data = await respuesta.json();
-
-        if (data.result !== 'success') {
-            throw new Error(data.message || 'Respuesta inesperada del servidor');
-        }
-
-        console.log('✅ Datos enviados a Google Sheets:', numeroDocumento);
-        return true;
+        const data = await api('guardar', { payload: JSON.stringify(payload) });
+        if (data.result !== 'success') throw new Error(data.message || 'Respuesta inesperada del servidor');
+        console.log('✅ Guardado en Google Sheets:', data.numero);
+        return { ok: true, numero: data.numero };
     } catch (error) {
         console.error('Error al guardar en Google Sheets:', error);
-        return false;
+        return { ok: false, numero: null };
     }
 }
+
+// ===== EQUIPOS ADJUNTOS AL DOCUMENTO =====
+function equiposSeleccionados() {
+    return [...document.querySelectorAll('#equiposCliente input[type="checkbox"]:checked')]
+        .map(c => c.value)
+        .filter(Boolean);
+}
+
 
 // ===== CARGAR LOGO COMO BASE64 =====
 function cargarLogo() {
@@ -560,7 +628,8 @@ function cargarLogo() {
 }
 
 // ===== GENERAR PDF =====
-async function generarPDF(datos, numeroDocumento) {
+async function generarPDF(datos, numeroDocumento, tipo = 'Cuenta') {
+    const esCotizacion = tipo === 'Cotización';
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF('p', 'mm', 'a4');
 
@@ -606,7 +675,7 @@ async function generarPDF(datos, numeroDocumento) {
     doc.setTextColor(255, 255, 255);
     doc.setFontSize(11);
     doc.setFont('helvetica', 'bold');
-    doc.text('CUENTA DE COBRO', paginaAncho - margen, 14, { align: 'right' });
+    doc.text(TIPOS[tipo].etiqueta, paginaAncho - margen, 14, { align: 'right' });
     doc.setFontSize(9);
     doc.setFont('helvetica', 'normal');
     doc.text(`No. ${numeroDocumento}`, paginaAncho - margen, 20, { align: 'right' });
@@ -749,7 +818,7 @@ async function generarPDF(datos, numeroDocumento) {
     doc.text(lineasLetras, margen, y);
     y += lineasLetras.length * 4 + 6;
 
-    // ===== DATOS PARA PAGO =====
+    // ===== DATOS PARA PAGO / VIGENCIA =====
     const cajaAlto = 36;
     doc.setFillColor(240, 247, 255);
     doc.roundedRect(margen, y, paginaAncho - margen * 2, cajaAlto, 2, 2, 'F');
@@ -760,42 +829,84 @@ async function generarPDF(datos, numeroDocumento) {
     doc.setTextColor(21, 101, 192);
     doc.setFontSize(10);
     doc.setFont('helvetica', 'bold');
-    doc.text('DATOS PARA PAGO', margen + 6, y + 7);
 
-    doc.setDrawColor(30, 136, 229);
-    doc.setLineWidth(0.3);
-    doc.line(margen + 6, y + 9, margen + 60, y + 9);
+    if (esCotizacion) {
+        doc.text('CONDICIONES DE LA COTIZACIÓN', margen + 6, y + 7);
+        doc.setLineWidth(0.3);
+        doc.line(margen + 6, y + 9, margen + 80, y + 9);
 
-    doc.setTextColor(51, 65, 85);
-    doc.setFontSize(8.5);
-    doc.setFont('helvetica', 'bold');
-    doc.text('Bancolombia', margen + 6, y + 14);
-    doc.setFont('helvetica', 'normal');
-    doc.text(
-        `${DATOS_BANCARIOS.bancolombia.tipo}: ${DATOS_BANCARIOS.bancolombia.numero}`,
-        margen + 6, y + 19
-    );
-    doc.text(
-        `Titular: ${DATOS_BANCARIOS.bancolombia.titular} · C.C. ${DATOS_BANCARIOS.bancolombia.cedula}`,
-        margen + 6, y + 24
-    );
+        doc.setTextColor(51, 65, 85);
+        doc.setFontSize(8.5);
+        doc.setFont('helvetica', 'normal');
+        doc.text(`Precio vigente por ${datos.vigencia || 15} días calendario desde la fecha de emisión.`, margen + 6, y + 16);
+        doc.text('Los tiempos de ejecución se acuerdan al confirmar el servicio.', margen + 6, y + 21.5);
+        doc.text('Para aceptar, responde este documento o escribe a soporte@servitecbaq.com.', margen + 6, y + 27);
+        doc.setFont('helvetica', 'italic');
+        doc.setFontSize(7.5);
+        doc.setTextColor(100, 116, 139);
+        doc.text('Al confirmar la cotización se emite la cuenta de cobro correspondiente.', margen + 6, y + 32.5);
+    } else {
+        doc.text('DATOS PARA PAGO', margen + 6, y + 7);
 
-    const colDerX = margen + (paginaAncho - margen * 2) / 2 + 5;
-    doc.setFont('helvetica', 'bold');
-    doc.text('Nequi', colDerX, y + 14);
-    doc.setFont('helvetica', 'normal');
-    doc.text(`Celular: ${DATOS_BANCARIOS.nequi.celular}`, colDerX, y + 19);
-    doc.text(`Titular: ${DATOS_BANCARIOS.nequi.titular}`, colDerX, y + 24);
+        doc.setDrawColor(30, 136, 229);
+        doc.setLineWidth(0.3);
+        doc.line(margen + 6, y + 9, margen + 60, y + 9);
 
-    doc.setFont('helvetica', 'italic');
-    doc.setFontSize(7.5);
-    doc.setTextColor(100, 116, 139);
-    doc.text(
-        'Por favor envíe el comprobante de pago a soporte@servitecbaq.com o al WhatsApp 315 850 5020.',
-        margen + 6, y + 31
-    );
+        doc.setTextColor(51, 65, 85);
+        doc.setFontSize(8.5);
+        doc.setFont('helvetica', 'bold');
+        doc.text('Bancolombia', margen + 6, y + 14);
+        doc.setFont('helvetica', 'normal');
+        doc.text(
+            `${DATOS_BANCARIOS.bancolombia.tipo}: ${DATOS_BANCARIOS.bancolombia.numero}`,
+            margen + 6, y + 19
+        );
+        doc.text(
+            `Titular: ${DATOS_BANCARIOS.bancolombia.titular} · C.C. ${DATOS_BANCARIOS.bancolombia.cedula}`,
+            margen + 6, y + 24
+        );
+
+        const colDerX = margen + (paginaAncho - margen * 2) / 2 + 5;
+        doc.setFont('helvetica', 'bold');
+        doc.text('Nequi', colDerX, y + 14);
+        doc.setFont('helvetica', 'normal');
+        doc.text(`Celular: ${DATOS_BANCARIOS.nequi.celular}`, colDerX, y + 19);
+        doc.text(`Titular: ${DATOS_BANCARIOS.nequi.titular}`, colDerX, y + 24);
+
+        doc.setFont('helvetica', 'italic');
+        doc.setFontSize(7.5);
+        doc.setTextColor(100, 116, 139);
+        doc.text(
+            'Por favor envíe el comprobante de pago a soporte@servitecbaq.com o al WhatsApp 315 850 5020.',
+            margen + 6, y + 31
+        );
+    }
 
     y += cajaAlto + 8;
+
+    // ===== EQUIPOS INTERVENIDOS =====
+    if (datos.equipos && datos.equipos.length) {
+        if (y + 6 + datos.equipos.length * 4.5 > paginaAlto - 50) {
+            doc.addPage();
+            y = 25;
+        }
+
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(9.5);
+        doc.setTextColor(21, 101, 192);
+        doc.text('EQUIPOS INTERVENIDOS', margen, y);
+        y += 5;
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(8.5);
+        doc.setTextColor(51, 65, 85);
+
+        datos.equipos.forEach(equipo => {
+            const lineas = doc.splitTextToSize('· ' + equipo, paginaAncho - margen * 2);
+            doc.text(lineas, margen, y);
+            y += lineas.length * 4 + 1;
+        });
+        y += 5;
+    }
 
     // ===== OBSERVACIONES =====
     if (datos.observaciones) {
@@ -850,71 +961,210 @@ async function generarPDF(datos, numeroDocumento) {
     }
 
     // ===== GUARDAR =====
-    const nombreArchivo = `CuentaCobro_${numeroDocumento}_${datos.cliente.nombre.replace(/\s+/g, '_')}.pdf`;
+    const nombreArchivo = `${TIPOS[tipo].archivo}_${numeroDocumento}_${datos.cliente.nombre.replace(/\s+/g, '_')}.pdf`;
     doc.save(nombreArchivo);
 }
 
-// ===== BOTÓN DE RESET DEL CONSECUTIVO =====
-function inicializarBotonReset() {
-    const btn = document.getElementById('btnReset');
-    if (!btn) return;
+// ===== FICHA DEL CLIENTE (historial + equipos) =====
+let timerFicha = null;
+let ultimoDocumentoConsultado = '';
 
-    btn.addEventListener('click', mostrarModalReset);
+function esc(texto) {
+    return String(texto == null ? '' : texto)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
 
-function mostrarModalReset() {
-    const fechaClave = obtenerFechaClave();
-    const claveStorage = `consecutivo_${fechaClave}`;
-    const actual = parseInt(localStorage.getItem(claveStorage) || '0', 10);
+function inicializarClienteHistorial() {
+    const campo = document.getElementById('cliente_documento');
+    if (!campo) return;
 
-    const overlay = document.createElement('div');
-    overlay.className = 'modal-overlay';
-    overlay.innerHTML = `
-        <div class="modal-box">
-            <h3>
-                <span class="modal-icon">
-                    <svg viewBox="0 0 24 24" fill="none" width="18" height="18">
-                        <path d="M12 9v4M12 17h.01M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"
-                              stroke="currentColor" stroke-width="2"
-                              stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </span>
-                Reiniciar consecutivo
-            </h3>
-            <p>Esto reiniciará el contador del día <strong>${fechaClave}</strong> para que la próxima cuenta de cobro vuelva a empezar en <strong>0001</strong>.</p>
-            <div class="modal-info">
-                <div>Último consecutivo hoy: <strong>${actual === 0 ? 'ninguno' : 'CC-' + fechaClave + String(actual).padStart(4, '0')}</strong></div>
-                <div style="margin-top:6px; font-size:0.8rem; color: var(--gris-500);">El historial en Google Sheets no se modifica.</div>
-            </div>
-            <div class="modal-actions">
-                <button type="button" class="btn-cancelar" id="modalCancelar">Cancelar</button>
-                <button type="button" class="btn-confirmar" id="modalConfirmar">Sí, reiniciar</button>
-            </div>
+    campo.addEventListener('input', () => {
+        clearTimeout(timerFicha);
+        timerFicha = setTimeout(cargarFichaCliente, 500);
+    });
+    campo.addEventListener('blur', cargarFichaCliente);
+
+    const rellenar = document.getElementById('clienteHistorial');
+    if (rellenar) rellenar.addEventListener('click', (e) => {
+        if (e.target.id === 'btnRellenarCliente') rellenarCliente();
+    });
+}
+
+async function cargarFichaCliente() {
+    const documento = document.getElementById('cliente_documento').value.trim();
+    const caja = document.getElementById('clienteHistorial');
+    const equiposCaja = document.getElementById('equiposCliente');
+    if (!caja) return;
+
+    if (documento.length < 4) {
+        ultimoDocumentoConsultado = '';
+        caja.innerHTML = '';
+        if (equiposCaja) equiposCaja.innerHTML = '';
+        return;
+    }
+
+    ultimoDocumentoConsultado = documento;
+    caja.innerHTML = '<div class="ficha-cargando">Buscando historial de ' + esc(documento) + '…</div>';
+
+    try {
+        const [rCliente, rEquipos] = await Promise.all([
+            api('buscarCliente', { documento }),
+            api('equiposPorCliente', { documento })
+        ]);
+
+        pintarHistorial(caja, rCliente.cliente);
+        if (equiposCaja) pintarEquipos(equiposCaja, rEquipos.equipos || []);
+    } catch (error) {
+        console.warn('No se pudo leer la ficha del cliente:', error);
+        caja.innerHTML = '<div class="ficha-error">No se pudo consultar el historial. Revisa tu conexión.</div>';
+    }
+}
+
+function pintarHistorial(caja, cliente) {
+    if (!cliente) {
+        caja.innerHTML = '<div class="ficha-empty">Cliente nuevo: todavía no tiene documentos registrados.</div>';
+        return;
+    }
+
+    const pendiente = cliente.montoPendiente > 0
+        ? `<span class="chip chip-pendiente">${cliente.pendientes} pendiente${cliente.pendientes === 1 ? '' : 's'} · ${formatearMoneda(cliente.montoPendiente)}</span>`
+        : '<span class="chip chip-al-dia">Sin saldos pendientes</span>';
+
+    caja.innerHTML = `
+        <div class="ficha-head">
+            <strong>${esc(cliente.nombre)}</strong>
+            <span>${esc(cliente.tipoDoc)} ${esc(cliente.documento)}</span>
         </div>
+        <div class="ficha-chips">
+            <span class="chip">${cliente.emitidas} documento${cliente.emitidas === 1 ? '' : 's'}</span>
+            ${pendiente}
+            <span class="chip chip-fecha">Última: ${esc(cliente.ultima || '—')}</span>
+        </div>
+        <button type="button" class="btn-enlace" id="btnRellenarCliente">Rellenar datos del cliente</button>
     `;
 
-    document.body.appendChild(overlay);
-    setTimeout(() => overlay.classList.add('active'), 10);
+    caja.dataset.nombre    = cliente.nombre || '';
+    caja.dataset.tipoDoc   = cliente.tipoDoc || 'CC';
+    caja.dataset.email     = cliente.email || '';
+    caja.dataset.telefono  = cliente.telefono || '';
+    caja.dataset.direccion = cliente.direccion || '';
+}
 
-    const cerrar = () => {
-        overlay.classList.remove('active');
-        setTimeout(() => overlay.remove(), 200);
+function rellenarCliente() {
+    const caja = document.getElementById('clienteHistorial');
+    if (!caja) return;
+
+    const campos = {
+        cliente_nombre:     caja.dataset.nombre,
+        cliente_email:      caja.dataset.email,
+        cliente_telefono:   caja.dataset.telefono,
+        cliente_direccion:  caja.dataset.direccion
     };
 
-    overlay.querySelector('#modalCancelar').addEventListener('click', cerrar);
-    overlay.addEventListener('click', (e) => {
-        if (e.target === overlay) cerrar();
+    let completados = 0;
+    Object.keys(campos).forEach(id => {
+        const input = document.getElementById(id);
+        if (input && !input.value.trim() && campos[id]) {
+            input.value = campos[id];
+            completados++;
+        }
     });
 
-    overlay.querySelector('#modalConfirmar').addEventListener('click', () => {
-        localStorage.removeItem(claveStorage);
-        localStorage.setItem(`reset_${fechaClave}`, 'true');
-        cerrar();
+    const tipoDoc = document.getElementById('cliente_tipo_doc');
+    if (tipoDoc && caja.dataset.tipoDoc) {
+        [...tipoDoc.options].forEach(o => { if (o.value === caja.dataset.tipoDoc) tipoDoc.value = o.value; });
+    }
 
-        setTimeout(() => {
-            alert(`✅ Consecutivo reiniciado.\n\nLa próxima cuenta de cobro del ${fechaClave} será CC-${fechaClave}0001.`);
-        }, 250);
-    });
+    if (completados === 0) {
+        caja.querySelector('#btnRellenarCliente').textContent = 'Los datos ya están completos';
+    }
+}
+
+function pintarEquipos(caja, equipos) {
+    // La selección no se pierde al repintar (por ejemplo al registrar un equipo nuevo).
+    const seleccion = new Set(equiposSeleccionados());
+
+    if (!equipos.length) {
+        caja.innerHTML = '<div class="ficha-empty">Este cliente no tiene equipos registrados. Usa «Equipo nuevo».</div>';
+        return;
+    }
+
+    caja.innerHTML = `<div class="equipos-titulo">${equipos.length} equipo(s) registrado(s)</div>` +
+        equipos.map(eq => {
+            const etiqueta = [eq.tipo, eq.marca, eq.modelo].filter(Boolean).join(' ') || 'Equipo';
+            const detalle  = [eq.serial && 'SN ' + eq.serial, eq.activos, eq.detalle].filter(Boolean).join(' · ');
+            const valor    = [etiqueta, detalle].filter(Boolean).join(' | ') + (eq.estado ? ' | ' + eq.estado : '');
+            return `
+                <label class="equipo-fila">
+                    <input type="checkbox" value="${esc(valor)}">
+                    <span class="equipo-nombre">${esc(etiqueta)}</span>
+                    <span class="equipo-meta">${esc(detalle)}</span>
+                    <span class="chip chip-${eq.estado === 'Entregado' ? 'al-dia' : 'pendiente'}">${esc(eq.estado)}</span>
+                </label>`;
+        }).join('');
+
+    caja.querySelectorAll('input[type="checkbox"]').forEach(c => { if (seleccion.has(c.value)) c.checked = true; });
+}
+
+// ===== REGISTRO RÁPIDO DE EQUIPO =====
+function inicializarEquipos() {
+    const btn = document.getElementById('btnEquipoNuevo');
+    if (btn) btn.addEventListener('click', guardarEquipo);
+
+    const form = document.getElementById('formEquipo');
+    if (form) form.addEventListener('submit', (e) => { e.preventDefault(); guardarEquipo(); });
+}
+
+async function guardarEquipo() {
+    const documento = document.getElementById('cliente_documento').value.trim();
+    if (!documento) {
+        alert('Primero escribe el documento del cliente para poder registrar el equipo.');
+        return;
+    }
+
+    const valor = (id) => {
+        const el = document.getElementById(id);
+        return el ? el.value.trim() : '';
+    };
+
+    const datos = {
+        documento,
+        cliente: document.getElementById('cliente_nombre').value.trim(),
+        tipo:    valor('eq_tipo'),
+        marca:   valor('eq_marca'),
+        modelo:  valor('eq_modelo'),
+        serial:  valor('eq_serial'),
+        activos: valor('eq_activos'),
+        detalle: valor('eq_detalle'),
+        estado:  valor('eq_estado') || 'En taller',
+        nota:    valor('eq_nota'),
+        numero:  document.getElementById('numero_cuenta').value
+    };
+
+    if (!datos.tipo && !datos.marca && !datos.serial && !datos.activos) {
+        alert('El equipo necesita al menos un dato: tipo, marca, serial o nº de activos.');
+        return;
+    }
+
+    const btn = document.getElementById('btnEquipoNuevo');
+    if (btn) btn.disabled = true;
+
+    try {
+        const data = await api('equipoGuardar', { payload: JSON.stringify(datos) });
+        if (data.result !== 'success') throw new Error(data.message || 'Respuesta inesperada');
+
+        ['eq_tipo', 'eq_marca', 'eq_modelo', 'eq_serial', 'eq_activos', 'eq_detalle', 'eq_nota']
+            .forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+
+        await cargarFichaCliente();
+        alert('✅ Equipo registrado.');
+    } catch (error) {
+        console.error('Error al registrar el equipo:', error);
+        alert('No se pudo registrar el equipo. Revisa la consola.');
+    } finally {
+        if (btn) btn.disabled = false;
+    }
 }
 
 // ===== LIMPIAR FORMULARIO =====
@@ -926,8 +1176,15 @@ function limpiarFormulario() {
     document.getElementById('emisor_documento').value = EMISOR_DEFAULT.cedula;
     document.getElementById('emisor_website').value = EMISOR_DEFAULT.website;
 
+    const historial = document.getElementById('clienteHistorial');
+    if (historial) historial.innerHTML = '';
+    const equipos = document.getElementById('equiposCliente');
+    if (equipos) equipos.innerHTML = '';
+    ultimoDocumentoConsultado = '';
+
     agregarFila();
     calcularTotales();
+    refrescarNumero();
 }
 
 // ===== MOSTRAR USUARIO LOGUEADO EN EL CHIP =====
@@ -965,3 +1222,7 @@ window.agregarFila = agregarFila;
 window.eliminarFila = eliminarFila;
 window.calcularTotales = calcularTotales;
 window.limpiarFormulario = limpiarFormulario;
+window.api = api;
+window.esc = esc;
+window.tipoActual = tipoActual;
+window.TIPOS = TIPOS;

@@ -145,31 +145,6 @@ body {
     transform: translateX(-2px);
 }
 
-/* ===== BOTÓN DE RESET ===== */
-.btn-reset {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    background: rgba(255, 255, 255, 0.12);
-    color: #fff;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 50%;
-    cursor: pointer;
-    transition: all var(--transicion);
-    padding: 0;
-}
-
-.btn-reset:hover {
-    background: rgba(255, 255, 255, 0.25);
-    transform: rotate(180deg);
-}
-
-.btn-reset:active {
-    transform: rotate(360deg) scale(0.95);
-}
-
 /* ===== BOTÓN DE LOGOUT ===== */
 .btn-logout {
     display: inline-flex;
@@ -350,8 +325,8 @@ body {
 
 .card-tag {
     font-size: 0.7rem;
-    font-weight: 600;
-    color: var(--gris-500);
+    font-weight: 700;
+    color: var(--gris-700);
     background: var(--gris-100);
     padding: 4px 10px;
     border-radius: 999px;
@@ -436,6 +411,9 @@ textarea:focus {
    ============================================ */
 .tabla-responsive {
     overflow-x: auto;
+    /* Containing block para los .lector-solo de los <th>: sin esto, el span
+       absolute escapa del recorte y ensancha la página en móvil. */
+    position: relative;
     border-radius: var(--radio-sm);
     border: 1px solid var(--gris-200);
     margin-bottom: 16px;
@@ -470,6 +448,10 @@ table tr:last-child td {
 
 table tr:hover td {
     background: var(--gris-50);
+}
+
+@media (hover: none), (pointer: coarse) {
+    table tr:hover td { background: transparent; }
 }
 
 table td input {
@@ -916,4 +898,404 @@ textarea {
     .modal-actions button {
         width: 100%;
     }
+}
+
+/* ============================================
+   VISTAS (documento / cartera / cotizaciones)
+   ============================================ */
+[hidden] { display: none !important; }
+
+.vistas {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 4px;
+}
+
+.vista-tab {
+    appearance: none;
+    border: 1px solid var(--gris-200);
+    background: #fff;
+    color: var(--gris-700);
+    font: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 9px 18px;
+    border-radius: 999px;
+    cursor: pointer;
+    min-height: 40px;
+    touch-action: manipulation;
+    transition: background-color var(--transicion), color var(--transicion), border-color var(--transicion);
+}
+
+.vista-tab.is-active {
+    background: var(--azul-900);
+    border-color: var(--azul-900);
+    color: #fff;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .vista-tab:hover { border-color: var(--azul-300); }
+}
+
+.vista-tab:active { transform: scale(0.985); transition-duration: 140ms; }
+
+/* ============================================
+   TIPO DE DOCUMENTO
+   ============================================ */
+.tipo-opciones {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+}
+
+.tipo-opcion {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    align-items: center;
+    column-gap: 10px;
+    padding: 14px 16px;
+    border: 1.5px solid var(--gris-200);
+    border-radius: var(--radio-sm);
+    cursor: pointer;
+    min-height: 60px;
+    touch-action: manipulation;
+    transition: border-color var(--transicion), background-color var(--transicion);
+}
+
+.tipo-opcion input { grid-row: span 2; width: 18px; height: 18px; margin: 0; flex-shrink: 0; }
+.tipo-opcion span { font-weight: 600; color: var(--gris-900); }
+.tipo-opcion small { color: var(--gris-700); font-variant-numeric: tabular-nums; }
+
+@media (hover: hover) and (pointer: fine) {
+    .tipo-opcion:hover { border-color: var(--azul-300); }
+}
+
+.tipo-opcion:has(input:checked) {
+    border-color: var(--azul-500);
+    background: var(--azul-100);
+}
+
+.campo-ayuda {
+    display: block;
+    margin-top: 4px;
+    font-size: 0.72rem;
+    color: var(--gris-500);
+}
+
+/* ============================================
+   FICHA DE CLIENTE Y EQUIPOS
+   ============================================ */
+.cliente-historial:not(:empty),
+.equipos-cliente:not(:empty) {
+    margin-top: 16px;
+    padding: 14px;
+    background: var(--gris-50);
+    border: 1px solid var(--gris-200);
+    border-radius: var(--radio-sm);
+}
+
+.ficha-cargando,
+.ficha-empty,
+.ficha-error {
+    font-size: 0.82rem;
+    color: var(--gris-500);
+}
+
+.ficha-error { color: var(--rojo-500); }
+
+.ficha-head {
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.ficha-head strong { color: var(--gris-900); font-size: 0.95rem; overflow-wrap: anywhere; }
+.ficha-head span { color: var(--gris-500); font-size: 0.8rem; font-variant-numeric: tabular-nums; }
+
+.ficha-chips { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+
+.chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    background: var(--gris-100);
+    color: var(--gris-700);
+    font-variant-numeric: tabular-nums;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+}
+
+.chip-pendiente { background: #fef3c7; color: #92400e; }
+.chip-al-dia,
+.chip-pagada    { background: var(--verde-100); color: #065f46; }
+.chip-anulada,
+.chip-rechazada { background: var(--rojo-100); color: #991b1b; }
+.chip-convertida,
+.chip-aceptada  { background: var(--azul-100); color: var(--azul-700); }
+.chip-fecha     { background: transparent; border: 1px solid var(--gris-200); }
+
+.btn-enlace {
+    appearance: none;
+    background: none;
+    border: none;
+    padding: 6px 0;
+    min-height: 40px;
+    font: inherit;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--azul-700);
+    cursor: pointer;
+    touch-action: manipulation;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .btn-enlace:hover { text-decoration: underline; }
+}
+
+.equipos-titulo {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--gris-500);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+}
+
+.equipo-fila {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 4px 10px;
+    align-items: center;
+    padding: 10px 8px;
+    border-top: 1px solid var(--gris-200);
+    cursor: pointer;
+    touch-action: manipulation;
+}
+
+.equipo-fila input { width: 18px; height: 18px; margin: 0; flex-shrink: 0; }
+.equipo-nombre { font-size: 0.85rem; font-weight: 600; color: var(--gris-900); overflow-wrap: anywhere; }
+.equipo-meta { grid-column: 2; font-size: 0.75rem; color: var(--gris-500); overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+.equipo-fila .chip { grid-row: 1; }
+
+.form-equipo {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px dashed var(--gris-300);
+}
+
+.campo-ancho { grid-column: 1 / -1; }
+
+.pago-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 12px;
+}
+
+.pago-dato {
+    padding: 12px 14px;
+    background: var(--azul-100);
+    border-radius: var(--radio-sm);
+    min-width: 0;
+}
+
+.pago-dato strong { display: block; color: var(--azul-700); font-size: 0.85rem; }
+.pago-dato span { display: block; color: var(--gris-700); font-size: 0.8rem; overflow-wrap: anywhere; }
+
+/* ============================================
+   TABLAS DE ADMINISTRACIÓN
+   ============================================ */
+.filtros {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 14px;
+    margin: 16px 0;
+}
+
+.cartera-resumen { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+
+.ayuda-vista {
+    font-size: 0.82rem;
+    color: var(--gris-500);
+    line-height: 1.55;
+    margin: 4px 0 0;
+}
+
+.tabla-admin-envoltura { overflow-x: auto; }
+
+.tabla-admin {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+}
+
+.tabla-admin th,
+.tabla-admin td {
+    padding: 10px 8px;
+    text-align: left;
+    border-bottom: 1px solid var(--gris-100);
+    vertical-align: top;
+}
+
+.tabla-admin thead th {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--gris-500);
+    background: var(--gris-50);
+    white-space: nowrap;
+}
+
+.tabla-admin tbody th[scope="row"] {
+    font-weight: 700;
+    color: var(--azul-700);
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+}
+
+.celda-monto { white-space: nowrap; font-variant-numeric: tabular-nums; font-weight: 600; }
+.celda-cliente { color: var(--gris-900); overflow-wrap: anywhere; }
+.celda-sub { font-size: 0.74rem; color: var(--gris-500); overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+.tabla-esperando { color: var(--gris-500); font-style: italic; }
+.col-acciones { width: 240px; }
+
+.btn-mini {
+    appearance: none;
+    font: inherit;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 7px 12px;
+    min-height: 36px;
+    border-radius: var(--radio-sm);
+    border: 1px solid var(--gris-200);
+    background: #fff;
+    color: var(--gris-700);
+    cursor: pointer;
+    touch-action: manipulation;
+    transition: background-color var(--transicion), border-color var(--transicion);
+}
+
+.btn-mini:active { transform: scale(0.97); transition-duration: 140ms; }
+
+@media (hover: hover) and (pointer: fine) {
+    .btn-mini:hover { border-color: var(--gris-300); background: var(--gris-50); }
+    .btn-mini-pago:hover { border-color: var(--verde-500); background: var(--verde-100); }
+    .btn-mini-peligro:hover { border-color: var(--rojo-500); background: var(--rojo-100); }
+}
+
+.btn-mini-pago {
+    border-color: var(--verde-500);
+    color: #065f46;
+    background: var(--verde-100);
+}
+
+.btn-mini-peligro {
+    border-color: var(--rojo-500);
+    color: #991b1b;
+    background: var(--rojo-100);
+}
+
+.lector-solo {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+}
+
+.btn-peligro { background: var(--rojo-500); }
+
+@media (prefers-reduced-transparency: reduce) {
+    .modal-overlay { backdrop-filter: none; background: rgba(10, 37, 64, 0.9); }
+}
+
+@media (max-width: 640px) {
+    .filtros { grid-template-columns: 1fr; }
+    .col-acciones { width: auto; }
+    .tipo-opcion { min-height: 52px; padding: 12px; }
+
+    /* Las tablas dejan de ser columnas: una línea = una tarjeta. Con seis
+       columnas en 390 px los inputs quedaban cortados a la mitad. */
+    table td input {
+        background: #fff;
+        border-color: var(--gris-200);
+    }
+
+    #tablaServicios thead,
+    .tabla-admin thead { display: none; }
+
+    #tablaServicios tbody tr,
+    .tabla-admin tbody tr {
+        display: grid;
+        gap: 10px 12px;
+        padding: 14px 12px;
+        border-bottom: 1px solid var(--gris-200);
+    }
+
+    #tablaServicios tbody td,
+    .tabla-admin tbody td,
+    .tabla-admin tbody th {
+        display: block;
+        padding: 0;
+        border: 0;
+    }
+
+    .tabla-admin tbody th { background: transparent; }
+
+    /* Servicios: descripción arriba y luego los cuatro campos etiquetados. */
+    #tablaServicios tbody tr { grid-template-columns: 1fr 1fr; }
+    #tablaServicios tbody td:nth-child(1) { grid-column: 1 / -1; }
+    #tablaServicios tbody td:nth-child(5) { grid-column: 1; }
+    #tablaServicios tbody td:nth-child(6) { grid-column: 2; justify-self: end; align-self: end; }
+
+    #tablaServicios tbody td:nth-child(n+2):nth-child(-n+5)::before {
+        content: attr(data-etiqueta);
+        display: block;
+        font-size: 0.68rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: var(--gris-600);
+        margin-bottom: 4px;
+    }
+
+    #tablaServicios td.total-linea { text-align: left; }
+    #tablaServicios td:last-child { display: flex; justify-content: flex-end; }
+    #tablaServicios .btn-eliminar { width: 44px; height: 44px; }
+
+    /* Cartera y cotizaciones: número y estado en la primera fila,
+       fecha y monto en la segunda, el resto ocupa todo el ancho. */
+    .tabla-admin tbody tr { grid-template-columns: 1fr auto; }
+    .tabla-admin tbody th { grid-column: 1; grid-row: 1; white-space: normal; }
+    .tabla-admin tbody td:nth-child(5) { grid-column: 2; grid-row: 1; justify-self: end; text-align: right; }
+    .tabla-admin tbody td:nth-child(2) { grid-column: 1; grid-row: 2; }
+    .tabla-admin tbody td:nth-child(4) { grid-column: 2; grid-row: 2; justify-self: end; text-align: right; }
+    .tabla-admin tbody td:nth-child(3),
+    .tabla-admin tbody td:nth-child(n+6) { grid-column: 1 / -1; }
+
+    /* En móvil se pierde la cabecera PAGO; la etiqueta va en la celda. */
+    #tablaCartera tbody td:nth-child(6)::before {
+        content: 'Pago';
+        display: block;
+        font-size: 0.68rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: var(--gris-600);
+        margin-bottom: 2px;
+    }
+    .tabla-admin .celda-monto { font-size: 0.9rem; }
+    .tabla-admin .tabla-esperando { grid-column: 1 / -1; }
+    .btn-mini { min-height: 44px; }
 }
