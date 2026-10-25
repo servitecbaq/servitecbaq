@@ -328,12 +328,12 @@
         return;
       }
 
-      let msg = '🔧 Nueva solicitud de servicio\n\n';
-      msg += '👤 Nombre: ' + name + '\n';
-      msg += '📍 Dirección: ' + address + '\n';
-      msg += '📞 Contacto: ' + contact + '\n';
-      msg += '🛠️ Servicio: ' + service + '\n';
-      if (detail) msg += '📝 Detalle: ' + detail + '\n';
+      let msg = 'Nueva solicitud de servicio\n\n';
+      msg += 'Nombre: ' + name + '\n';
+      msg += 'Dirección: ' + address + '\n';
+      msg += 'Contacto: ' + contact + '\n';
+      msg += 'Servicio: ' + service + '\n';
+      if (detail) msg += 'Detalle: ' + detail + '\n';
       msg += '\n---\nEnviado desde servitecbaq.com';
 
       const url = 'https://api.whatsapp.com/send?phone=' + CONFIG.whatsappNumber +

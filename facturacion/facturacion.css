@@ -529,7 +529,7 @@ table td input:focus {
     transform: rotate(90deg);
 }
 
-/* El botón decía "✖", que en Windows/Chrome se pinta como emoji a color y no hereda
+/* El botón usaba el carácter U+2716, que en Windows/Chrome se pinta como emoji a color y no hereda
    el rojo del hover. Ahora es un SVG en currentColor, como el resto del módulo. */
 .btn-eliminar svg { width: 14px; height: 14px; display: block; }
 

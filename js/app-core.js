@@ -99,7 +99,7 @@
     })();
   }
 
-  // ⚡ Cache de matchMedia (evita crear objetos repetidos)
+  // Cache de matchMedia (evita crear objetos repetidos)
   const mqCache = new Map();
   function mq(query) {
     if (!mqCache.has(query)) mqCache.set(query, window.matchMedia(query));
@@ -151,7 +151,7 @@
     function close() {
       nav.classList.remove('open');
       toggle.setAttribute('aria-expanded', 'false');
-      toggle.textContent = '☰';
+      toggle.innerHTML = '<svg class="hic" aria-hidden="true"><use href="/img/heroicons.svg#h-bars-3"/></svg>';
       toggle.setAttribute('aria-label', 'Abrir menú');
       document.body.classList.remove('nav-open');
     }
@@ -159,7 +159,9 @@
     toggle.addEventListener('click', function () {
       const isOpen = nav.classList.toggle('open');
       toggle.setAttribute('aria-expanded', String(isOpen));
-      toggle.textContent = isOpen ? '✕' : '☰';
+      toggle.innerHTML = isOpen
+        ? '<svg class="hic" aria-hidden="true"><use href="/img/heroicons.svg#h-x-mark"/></svg>'
+        : '<svg class="hic" aria-hidden="true"><use href="/img/heroicons.svg#h-bars-3"/></svg>';
       toggle.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
       document.body.classList.toggle('nav-open', isOpen);
     });
@@ -178,7 +180,7 @@
       if (e.key === 'Escape' && nav.classList.contains('open')) close();
     });
 
-    // ⚡ Cerrar al cambiar a desktop
+    // Cerrar al cambiar a desktop
     mq('(min-width: 901px)').addEventListener('change', function (e) {
       if (e.matches) close();
     });

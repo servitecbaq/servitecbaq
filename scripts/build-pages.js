@@ -18,6 +18,7 @@ const checkOnly = process.argv.includes('--check');
 const warnings = [];
 
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+const hic = id => '<svg class="hic" aria-hidden="true"><use href="/img/heroicons.svg#' + id + '"/></svg>';
 
 const byKey = {};
 SERVICIOS.forEach(s => { byKey[s.key] = s; });
@@ -164,7 +165,7 @@ ${nav.map(([t, h]) => '          <a href="' + h + '">' + t + '</a>').join('\n')}
           <a href="${wa('Hola, necesito servicio técnico')}" class="btn btn--accent btn--sm header__cta" target="_blank" rel="noopener">
             Cotizar ahora
           </a>
-          <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">☰</button>
+          <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">${hic('h-bars-3')}</button>
         </div>
       </div>
     </div>
@@ -231,11 +232,11 @@ function main(s) {
       </nav>
 
       <header class="svc-hero">
-        <span class="section-kicker">${s.icon} ${esc(s.label)}</span>
+        <span class="section-kicker">${hic(s.icon)} ${esc(s.label)}</span>
         <h1 class="section-title section-title--left">${esc(s.h1)}</h1>
 ${s.intro.map(par => '        <p class="svc-hero__lead">' + esc(par) + '</p>').join('\n')}
         <div class="svc-hero__actions">
-          <a class="btn btn--accent btn--lg" href="${wa('Hola, necesito ' + s.phrase + ' en Barranquilla')}" target="_blank" rel="noopener">💬 Pedir por WhatsApp</a>
+          <a class="btn btn--accent btn--lg" href="${wa('Hola, necesito ' + s.phrase + ' en Barranquilla')}" target="_blank" rel="noopener">${hic('h-chat-bubble-left-right')} Pedir por WhatsApp</a>
           <a class="btn btn--ghost btn--lg" href="mailto:${NEG.email}?subject=${encodeURIComponent(s.label)}">Correo a ${esc(NEG.email)}</a>
         </div>
         <ul class="svc-facts">
@@ -276,9 +277,9 @@ ${s.pasos.map((x, i) => '          <li><span class="svc-steps__n" aria-hidden="t
       <section class="svc-block">
         <div class="faq-split">
           <div class="faq-split__head">
-            <span class="section-kicker">❓ Preguntas frecuentes</span>
+            <span class="section-kicker">${hic('h-question-mark-circle')} Preguntas frecuentes</span>
             <h2 class="section-title section-title--left">Dudas sobre ${esc(s.phrase)}</h2>
-            <a class="btn btn--accent" href="${wa('Hola, tengo una duda sobre ' + s.phrase)}" target="_blank" rel="noopener">💬 Pregúntanos directamente</a>
+            <a class="btn btn--accent" href="${wa('Hola, tengo una duda sobre ' + s.phrase)}" target="_blank" rel="noopener">${hic('h-chat-bubble-left-right')} Pregúntanos directamente</a>
           </div>
           <div class="faq-list">
 ${s.faq.map(f => '            <details class="faq-item"><summary><span>' + esc(f.q) + '</span><span class="faq-icon" aria-hidden="true">+</span></summary><div class="faq-answer">' + esc(f.a) + '</div></details>').join('\n')}
@@ -289,7 +290,7 @@ ${s.faq.map(f => '            <details class="faq-item"><summary><span>' + esc(f
       <section class="svc-block">
         <h2 class="section-title section-title--left">Otros servicios en Barranquilla</h2>
         <div class="svc-related">
-${s.related.map(r => { const o = byKey[r]; return '          <a class="svc-related__card" href="/servicios/' + o.slug + '/"><span class="svc-related__icon" aria-hidden="true">' + o.icon + '</span><span class="svc-related__label">' + esc(o.label) + '</span></a>'; }).join('\n')}
+${s.related.map(r => { const o = byKey[r]; return '          <a class="svc-related__card" href="/servicios/' + o.slug + '/"><span class="svc-related__icon" aria-hidden="true">' + hic(o.icon) + '</span><span class="svc-related__label">' + esc(o.label) + '</span></a>'; }).join('\n')}
         </div>
       </section>
 
@@ -297,7 +298,7 @@ ${s.related.map(r => { const o = byKey[r]; return '          <a class="svc-relat
         <div class="svc-cta__panel">
         <h2 class="section-title">Hablemos de ${esc(s.phrase)}</h2>
         <p class="svc-cta__text">Escríbenos con qué está pasando y te decimos qué puede ser antes de que te desplaces. Sin compromiso.</p>
-        <a class="btn btn--accent btn--lg" href="${wa('Hola, necesito ' + s.phrase + ' en Barranquilla')}" target="_blank" rel="noopener">💬 Escribir por WhatsApp</a>
+        <a class="btn btn--accent btn--lg" href="${wa('Hola, necesito ' + s.phrase + ' en Barranquilla')}" target="_blank" rel="noopener">${hic('h-chat-bubble-left-right')} Escribir por WhatsApp</a>
         </div>
       </section>
     </div>
@@ -398,11 +399,11 @@ function tipMain(c) {
 ${crumbs([['Inicio', '/'], ['Tips', '/tips/'], [c.h1, null]])}
 
       <header class="svc-hero">
-        <span class="section-kicker">${c.icon} ${esc(c.category)}</span>
+        <span class="section-kicker">${hic(c.icon)} ${esc(c.category)}</span>
         <h1 class="section-title section-title--left">${esc(c.h1)}</h1>
 ${c.intro.map(t => '        <p class="svc-hero__lead">' + esc(t) + '</p>').join('\n')}
         <div class="svc-hero__actions">
-          <a class="btn btn--accent btn--lg" href="${wa('Hola, vi el tip de ' + c.h1.toLowerCase() + ' y necesito ayuda con eso')}" target="_blank" rel="noopener">💬 Pedir que lo configuren</a>
+          <a class="btn btn--accent btn--lg" href="${wa('Hola, vi el tip de ' + c.h1.toLowerCase() + ' y necesito ayuda con eso')}" target="_blank" rel="noopener">${hic('h-chat-bubble-left-right')} Pedir que lo configuren</a>
           <a class="btn btn--ghost btn--lg" href="/tips/">Ver todos los tips</a>
         </div>
       </header>
@@ -427,14 +428,14 @@ ${c.pasos.map((t, k) => '          <li><span class="svc-steps__n" aria-hidden="t
       <section class="svc-block">
         <h2 class="section-title section-title--left">Servicio relacionado</h2>
         <div class="svc-related svc-related--one">
-          <a class="svc-related__card" href="/servicios/${s.slug}/"><span class="svc-related__icon" aria-hidden="true">${s.icon}</span><span class="svc-related__label">${esc(s.label)} en Barranquilla</span></a>
+          <a class="svc-related__card" href="/servicios/${s.slug}/"><span class="svc-related__icon" aria-hidden="true">${hic(s.icon)}</span><span class="svc-related__label">${esc(s.label)} en Barranquilla</span></a>
         </div>
       </section>
 
       <section class="svc-block">
         <h2 class="section-title section-title--left">Otros tips de ${esc(c.category.toLowerCase())}</h2>
         <div class="svc-related">
-${rel.map(r => '          <a class="svc-related__card" href="/tips/' + r.slug + '/"><span class="svc-related__icon" aria-hidden="true">' + r.icon + '</span><span class="svc-related__label">' + esc(r.title) + '</span></a>').join('\n')}
+${rel.map(r => '          <a class="svc-related__card" href="/tips/' + r.slug + '/"><span class="svc-related__icon" aria-hidden="true">' + hic(r.icon) + '</span><span class="svc-related__label">' + esc(r.title) + '</span></a>').join('\n')}
         </div>
       </section>
 
@@ -442,7 +443,7 @@ ${rel.map(r => '          <a class="svc-related__card" href="/tips/' + r.slug + 
         <div class="svc-cta__panel">
         <h2 class="section-title">¿Lo dejamos configurado?</h2>
         <p class="svc-cta__text">${esc(c.benefit)}. Cuéntanos cómo tienes los equipos hoy y te decimos qué aplica en tu caso, sin que desmontes nada.</p>
-        <a class="btn btn--accent btn--lg" href="${wa('Hola, necesito ayuda con: ' + c.h1)}" target="_blank" rel="noopener">💬 Escribir por WhatsApp</a>
+        <a class="btn btn--accent btn--lg" href="${wa('Hola, necesito ayuda con: ' + c.h1)}" target="_blank" rel="noopener">${hic('h-chat-bubble-left-right')} Escribir por WhatsApp</a>
         </div>
       </section>
     </div>
@@ -499,7 +500,7 @@ ${header()}
     <div class="container">
 ${crumbs([['Inicio', '/'], ['Tips', null]])}
       <header class="svc-hero">
-        <span class="section-kicker">💡 Tips</span>
+        <span class="section-kicker">${hic('h-light-bulb')} Tips</span>
         <h1 class="section-title section-title--left">Tips de Windows para casa y oficina</h1>
         <p class="svc-hero__lead">Lo que aprendemos cada día arreglando equipos en Barranquilla: qué control sirve de verdad, cómo lo montamos y en qué se equivocan los manuales genéricos.</p>
         <p class="svc-hero__lead">Cada guía es corta y termina diciendo cuándo conviene hacerlo uno mismo y cuándo sale más barato llamar.</p>
@@ -508,7 +509,7 @@ ${crumbs([['Inicio', '/'], ['Tips', null]])}
 ${cats.map(cat => `      <div class="tip-cat">
         <h2 class="section-title section-title--left">${esc(cat)}</h2>
         <div class="tip-index">
-${porCat[cat].map(t => '          <a class="tip-index__card" href="/tips/' + t.slug + '/"><span class="tip-index__icon" aria-hidden="true">' + t.icon + '</span><h3>' + esc(t.title) + '</h3><p>' + esc(t.desc) + '</p><span class="tip-index__k">✨ ' + esc(t.benefit) + '</span></a>').join('\n')}
+${porCat[cat].map(t => '          <a class="tip-index__card" href="/tips/' + t.slug + '/"><span class="tip-index__icon" aria-hidden="true">' + hic(t.icon) + '</span><h3>' + esc(t.title) + '</h3><p>' + esc(t.desc) + '</p><span class="tip-index__k">' + hic('h-sparkles') + ' ' + esc(t.benefit) + '</span></a>').join('\n')}
         </div>
       </div>`).join('\n')}
       </section>
@@ -516,7 +517,7 @@ ${porCat[cat].map(t => '          <a class="tip-index__card" href="/tips/' + t.s
         <div class="svc-cta__panel">
         <h2 class="section-title">¿Prefieres que lo hagamos nosotros?</h2>
         <p class="svc-cta__text">Trabajamos en Barranquilla y el área metropolitana, en casa, oficina o remoto.</p>
-        <a class="btn btn--accent btn--lg" href="${wa('Hola, vi los tips y necesito ayuda')}" target="_blank" rel="noopener">💬 Escribir por WhatsApp</a>
+        <a class="btn btn--accent btn--lg" href="${wa('Hola, vi los tips y necesito ayuda')}" target="_blank" rel="noopener">${hic('h-chat-bubble-left-right')} Escribir por WhatsApp</a>
         </div>
       </section>
     </div>
@@ -602,8 +603,8 @@ ${crumbs([['Inicio', '/'], ['App destacada', '/#saldo'], ['Saldo', null]])}
         <h1 class="section-title section-title--left">${esc(APP.h1)}</h1>
 ${APP.intro.map(t => '        <p class="svc-hero__lead">' + esc(t) + '</p>').join('\n')}
         <div class="svc-hero__actions">
-          <a class="btn btn--accent btn--lg" href="${APP.playUrl}" target="_blank" rel="noopener">📲 Descargar en Google Play</a>
-          <a class="btn btn--ghost btn--lg" href="${wa('Hola, necesito que me monten la app Saldo en el negocio')}" target="_blank" rel="noopener">💬 Pedir el montaje</a>
+          <a class="btn btn--accent btn--lg" href="${APP.playUrl}" target="_blank" rel="noopener">${hic('h-play-circle')} Descargar en Google Play</a>
+          <a class="btn btn--ghost btn--lg" href="${wa('Hola, necesito que me monten la app Saldo en el negocio')}" target="_blank" rel="noopener">${hic('h-chat-bubble-left-right')} Pedir el montaje</a>
         </div>
         <ul class="svc-facts">
           <li><span class="svc-facts__k">Plataforma</span>Android (Google Play)</li>
@@ -669,9 +670,9 @@ ${APP.pasos.map((x, i) => '          <li><span class="svc-steps__n" aria-hidden=
       <section class="svc-block">
         <div class="faq-split">
           <div class="faq-split__head">
-            <span class="section-kicker">❓ Preguntas frecuentes</span>
+            <span class="section-kicker">${hic('h-question-mark-circle')} Preguntas frecuentes</span>
             <h2 class="section-title section-title--left">Dudas sobre la app Saldo</h2>
-            <a class="btn btn--accent" href="${wa('Hola, tengo una duda sobre la app Saldo')}" target="_blank" rel="noopener">💬 Pregúntanos directamente</a>
+            <a class="btn btn--accent" href="${wa('Hola, tengo una duda sobre la app Saldo')}" target="_blank" rel="noopener">${hic('h-chat-bubble-left-right')} Pregúntanos directamente</a>
           </div>
           <div class="faq-list">
 ${APP.faq.map(f => '            <details class="faq-item"><summary><span>' + esc(f.q) + '</span><span class="faq-icon" aria-hidden="true">+</span></summary><div class="faq-answer">' + esc(f.a) + '</div></details>').join('\n')}
@@ -682,14 +683,14 @@ ${APP.faq.map(f => '            <details class="faq-item"><summary><span>' + esc
       <section class="svc-block">
         <h2 class="section-title section-title--left">Servicios relacionados</h2>
         <div class="svc-related">
-${APP.related.map(r => { const o = byKey[r]; return '          <a class="svc-related__card" href="/servicios/' + o.slug + '/"><span class="svc-related__icon" aria-hidden="true">' + o.icon + '</span><span class="svc-related__label">' + esc(o.label) + '</span></a>'; }).join('\n')}
+${APP.related.map(r => { const o = byKey[r]; return '          <a class="svc-related__card" href="/servicios/' + o.slug + '/"><span class="svc-related__icon" aria-hidden="true">' + hic(o.icon) + '</span><span class="svc-related__label">' + esc(o.label) + '</span></a>'; }).join('\n')}
         </div>
       </section>
 
       <section class="svc-block">
         <h2 class="section-title section-title--left">Otros tips de Windows para el negocio</h2>
         <div class="svc-related svc-related--one">
-          <a class="svc-related__card" href="/tips/"><span class="svc-related__icon" aria-hidden="true">💡</span><span class="svc-related__label">Guías de respaldo, redes y seguridad</span></a>
+          <a class="svc-related__card" href="/tips/"><span class="svc-related__icon" aria-hidden="true">${hic('h-light-bulb')}</span><span class="svc-related__label">Guías de respaldo, redes y seguridad</span></a>
         </div>
       </section>
 
@@ -708,7 +709,7 @@ ${APP.related.map(r => { const o = byKey[r]; return '          <a class="svc-rel
         <div class="svc-cta__panel">
         <h2 class="section-title">${esc(APP.ctaTitle)}</h2>
         <p class="svc-cta__text">${esc(APP.ctaText)}</p>
-        <a class="btn btn--accent btn--lg" href="${wa('Hola, quiero que me monten Saldo en el negocio')}" target="_blank" rel="noopener">💬 Escribir por WhatsApp</a>
+        <a class="btn btn--accent btn--lg" href="${wa('Hola, quiero que me monten Saldo en el negocio')}" target="_blank" rel="noopener">${hic('h-chat-bubble-left-right')} Escribir por WhatsApp</a>
         </div>
       </section>
     </div>

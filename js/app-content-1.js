@@ -19,42 +19,42 @@
      ============================================ */
   const servicesData = {
     mantenimiento: {
-      icon: '⚡', title: 'Mantenimiento y reparación',
+      icon: 'svc-mantenimiento', title: 'Mantenimiento y reparación',
       description: 'Prolongamos la vida útil de tus equipos y solucionamos fallas de hardware y software, tanto en computadores de escritorio como portátiles.',
       items: ['Limpieza interna de polvo y ventiladores','Cambio de pasta térmica','Optimización del sistema operativo','Diagnóstico completo del equipo','Cambio de piezas (disco, RAM, batería, teclado)','Reinstalación de sistema operativo','Eliminación de virus y malware','Recuperación de datos cuando sea posible']
     },
     redes: {
-      icon: '🌐', title: 'Redes e Internet',
+      icon: 'svc-redes', title: 'Redes e Internet',
       description: 'Configuramos y solucionamos problemas de conectividad en hogares, oficinas y pequeñas empresas.',
       items: ['Configuración de routers y módems','Instalación de redes Wi-Fi y cableadas','Ampliación de cobertura con repetidores o mesh','Segmentación con VLAN para invitados o CCTV','Reservas DHCP y direccionamiento IP estable','Solución de cortes o lentitud de internet','Configuración de red para pequeñas oficinas']
     },
     impresoras: {
-      icon: '🖨️', title: 'Impresoras',
+      icon: 'svc-impresoras', title: 'Impresoras',
       description: 'Instalamos, configuramos y reparamos impresoras de todas las marcas, en hogares y oficinas.',
       items: ['Instalación en Windows y Mac','Configuración en red o Wi-Fi','Solución de atascos y errores','Cambio de cartuchos y tóner','Impresión desde celular o tablet','Configuración de impresora compartida en red']
     },
     instalacion: {
-      icon: '🧩', title: 'Instalación, configuración y soporte de aplicativos',
+      icon: 'svc-instalacion', title: 'Instalación, configuración y soporte de aplicativos',
       description: 'Dejamos tus equipos listos para trabajar, estudiar o disfrutar, y te ayudamos con los programas que usas a diario.',
       items: ['Instalación de computadores nuevos','Configuración inicial de Windows, macOS o Linux','Instalación de programas esenciales','Configuración de cuentas y correo','Instalación y configuración de programas','Solución de errores en Office, sistemas contables y navegadores','Configuración de correo y aplicaciones corporativas','Actualización o reinstalación de aplicaciones']
     },
     seguridad: {
-      icon: '🔒', title: 'Seguridad, respaldo y administración de usuarios',
+      icon: 'svc-seguridad', title: 'Seguridad, respaldo y administración de usuarios',
       description: 'Protegemos tu información, configuramos copias de seguridad y gestionamos cuentas, permisos y accesos.',
       items: ['Instalación de antivirus y firewall','Configuración de copias de seguridad automáticas','Respaldo en la nube o discos externos','Protección contra ransomware','Asesoría en contraseñas seguras','Altas, bajas y modificaciones de usuarios','Grupos, roles y permisos por área','Políticas de contraseñas y expiración','Integración con Active Directory y Microsoft 365','Configuración de MFA y auditoría de accesos']
     },
     camaras: {
-      icon: '📹', title: 'Videovigilancia (CCTV)',
+      icon: 'svc-camaras', title: 'Videovigilancia (CCTV)',
       description: 'Instalamos, configuramos y administramos sistemas de cámaras de seguridad para hogares y negocios.',
       items: ['Instalación de cámaras IP y análogas (interior/exterior)','Configuración de DVR/NVR y almacenamiento','Acceso remoto desde celular (app o navegador)','Grabación por movimiento y horarios','Integración con la red existente y VLAN de CCTV','Mantenimiento, limpieza y revisión de cableado','Configuración de respaldo de video']
     },
     desarrollo: {
-      icon: '👨‍💻', title: 'Desarrollo de software',
+      icon: 'svc-desarrollo', title: 'Desarrollo de software',
       description: 'Creamos soluciones a la medida para automatizar procesos y mejorar la operación de tu negocio.',
       items: ['Páginas web y landing pages','Automatización de tareas repetitivas','Scripts en PowerShell y Python','Integración de sistemas y APIs','Bases de datos SQL y reportes personalizados','Aplicaciones web a la medida']
     },
     empresariales: {
-      icon: '☁️', title: 'Soluciones empresariales',
+      icon: 'svc-empresariales', title: 'Soluciones empresariales',
       description: 'Infraestructura, servidores y servicios en la nube para pequeñas y medianas empresas.',
       items: ['Administración de servidores Windows y Linux','Virtualización con VMware','Microsoft 365 y Azure','Active Directory y políticas de grupo (GPO)','Respaldos empresariales y plan de recuperación','Automatización con PowerShell','Monitoreo de red y servidores','Asesoría en seguridad informática']
     }
@@ -76,7 +76,7 @@
       const data = servicesData[key];
       if (!data) return;
       lastFocused = document.activeElement;
-      iconEl.textContent = data.icon;
+      iconEl.innerHTML = '<svg class="hic" aria-hidden="true"><use href="/img/heroicons.svg#' + data.icon + '"/></svg>';
       titleEl.textContent = data.title;
       descEl.textContent = data.description;
       listEl.textContent = '';
@@ -211,10 +211,10 @@
             : tip.title;
           const html =
             '<span class="tip-category">' + tip.category + '</span>' +
-            '<div class="tip-icon" aria-hidden="true">' + tip.icon + '</div>' +
+            '<div class="tip-icon" aria-hidden="true"><svg class="hic"><use href="/img/heroicons.svg#' + tip.icon + '"/></svg></div>' +
             '<h3 class="tip-title">' + title + '</h3>' +
             '<p class="tip-desc">' + tip.desc + '</p>' +
-            '<span class="tip-benefit">✨ ' + tip.benefit + '</span>';
+            '<span class="tip-benefit"><svg class="hic" aria-hidden="true"><use href="/img/heroicons.svg#h-sparkles"/></svg> ' + tip.benefit + '</span>';
           if (!animate || !shouldAutoplay) {
             card.innerHTML = html;
             return;
@@ -251,7 +251,7 @@
               ? '<a href="' + href + '">' + tip.title + '</a>'
               : tip.title;
             mini.innerHTML =
-              '<span class="tip-mini-icon" aria-hidden="true">' + tip.icon + '</span>' +
+              '<span class="tip-mini-icon" aria-hidden="true"><svg class="hic"><use href="/img/heroicons.svg#' + tip.icon + '"/></svg></span>' +
               '<h4>' + title + '</h4>' +
               '<p>' + tip.desc + '</p>';
             gridFrag.appendChild(mini);

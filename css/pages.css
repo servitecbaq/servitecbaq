@@ -115,7 +115,7 @@
   transition: transform 0.25s var(--ease), border-color 0.25s var(--ease), box-shadow 0.25s var(--ease);
 }
 .svc-related__card:hover { transform: translateY(-3px); border-color: var(--brand); box-shadow: var(--shadow-3); }
-.svc-related__icon { font-size: 1.4rem; line-height: 1; }
+.svc-related__icon { font-size: 1.4rem; line-height: 1; color: var(--brand); display: inline-flex; align-items: center; justify-content: center; }
 .svc-related__label { font-size: var(--tx-sm); font-weight: 600; }
 
 /* Tips: prosa suelta e índice del hub */
@@ -137,10 +137,10 @@
   transition: transform 0.25s var(--ease), border-color 0.25s var(--ease), box-shadow 0.25s var(--ease);
 }
 .tip-index__card:hover { transform: translateY(-3px); border-color: var(--brand); box-shadow: var(--shadow-3); }
-.tip-index__icon { font-size: 1.5rem; line-height: 1; }
+.tip-index__icon { font-size: 1.5rem; line-height: 1; color: var(--brand); display: inline-flex; align-items: center; justify-content: center; }
 .tip-index__card h3 { margin: 0; font-size: var(--tx-base); font-weight: 600; }
 .tip-index__card p { margin: 0; font-size: var(--tx-sm); line-height: 1.6; color: var(--fg-muted); }
-.tip-index__k { margin-top: auto; padding-top: var(--s-2); font-size: var(--tx-xs); font-weight: 700; color: var(--brand); }
+.tip-index__k { margin-top: auto; padding-top: var(--s-2); font-size: var(--tx-xs); font-weight: 700; color: var(--brand); display: inline-flex; align-items: center; gap: 6px; }
 /* Defecto preexistente: en oscuro --brand sobre el fondo de tarjeta da 3.9:1. */
 [data-theme="dark"] .tip-index__k { color: var(--fg-muted); }
 

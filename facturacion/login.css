@@ -21,10 +21,27 @@ body {
 
 .login-wrapper {
     width: 100%;
-    max-width: 400px;
+    max-width: 960px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 48px;
+}
+
+/* La ilustración (unDraw, recolorada con la paleta) acompaña al formulario en
+   escritorio; en móvil la tarjeta va sola para no empujar los campos. */
+.login-illus {
+    width: min(396px, 38vw);
+    height: auto;
+    display: none;
+}
+
+@media (min-width: 900px) {
+    .login-illus { display: block; }
 }
 
 .login-card {
+    flex: 0 1 400px;
     background: #fff;
     border-radius: 16px;
     padding: 40px 32px;

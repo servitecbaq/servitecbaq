@@ -58,7 +58,7 @@
           setStatus('¡Gracias! Hemos recibido tu mensaje. Te responderemos lo antes posible.', 'success');
           form.reset();
           submit.disabled = false;
-          submit.textContent = '✉️ Enviar mensaje';
+          submit.innerHTML = '<svg class="hic" aria-hidden="true"><use href="/img/heroicons.svg#h-paper-airplane"/></svg> Enviar mensaje';
           setTimeout(function () {
             if (status) status.hidden = true;
           }, 8000);
@@ -68,11 +68,11 @@
           console.error('Error formulario:', err);
           setStatus('Hubo un problema al enviar. Intenta de nuevo o escríbenos por WhatsApp.', 'error');
           submit.disabled = false;
-          submit.textContent = '✉️ Enviar mensaje';
+          submit.innerHTML = '<svg class="hic" aria-hidden="true"><use href="/img/heroicons.svg#h-paper-airplane"/></svg> Enviar mensaje';
         });
     });
 
-    // ⚡ Limpiar listeners al descargar (buena práctica)
+    // Limpiar listeners al descargar (buena práctica)
     window.addEventListener('beforeunload', function () { controller.abort(); });
   })();
 

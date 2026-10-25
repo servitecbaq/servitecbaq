@@ -4,7 +4,7 @@
    vía Apps Script.
    ============================================ */
 
-// ⚠️ Reemplaza esta URL con la de tu Apps Script de login
+// Reemplaza esta URL con la de tu Apps Script de login
 const LOGIN_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby4LdnLYG0e0EpdwPf2C0JvD9KzE2ML3FhgbcYfdshsGgTMKsM7rWGMf1YkjxFNwhUS/exec';
 
 // ===== INICIALIZACIÓN =====

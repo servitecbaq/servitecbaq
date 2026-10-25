@@ -141,7 +141,7 @@
         }).join('');
 
         card.innerHTML =
-          '<div class="app-logo" aria-hidden="true">' + app.icon + '</div>' +
+          '<div class="app-logo" aria-hidden="true"><svg class="hic"><use href="/img/heroicons.svg#' + app.icon + '"/></svg></div>' +
           '<h3 class="app-name">' + app.name + '</h3>' +
           '<p class="app-desc">' + app.desc + '</p>' +
           '<div class="app-meta">' + badges + '</div>' +
@@ -172,7 +172,7 @@
       inner.appendChild(answer);
     });
 
-    // ⚡ Solo una FAQ abierta a la vez (mejor UX)
+    // Solo una FAQ abierta a la vez (mejor UX)
     const items = $$('.faq-item');
     items.forEach(function (item) {
       item.addEventListener('toggle', function () {

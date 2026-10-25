@@ -2,7 +2,7 @@
   {
     "slug": "bitlocker-cifrar-disco-completo",
     "category": "Seguridad",
-    "icon": "🔐",
+    "icon": "h-lock-closed",
     "title": "BitLocker cifra todo tu disco",
     "desc": "Windows Pro incluye BitLocker para cifrar el disco completo. Si roban un portátil corporativo, los datos son ilegibles sin la clave.",
     "benefit": "Evita filtraciones en caso de robo"
@@ -10,7 +10,7 @@
   {
     "slug": "laps-contrasena-unica-por-equipo",
     "category": "Seguridad",
-    "icon": "🛡️",
+    "icon": "h-shield-check",
     "title": "LAPS: contraseña única por equipo",
     "desc": "Local Administrator Password Solution (LAPS) asigna una contraseña distinta a cada PC, gestionada desde Active Directory. Adiós a la clave compartida.",
     "benefit": "Bloquea movimientos laterales en la red"
@@ -18,7 +18,7 @@
   {
     "slug": "windows-defender-application-control",
     "category": "Seguridad",
-    "icon": "🚫",
+    "icon": "h-no-symbol",
     "title": "Windows Defender Application Control",
     "desc": "Bloquea la ejecución de programas no firmados. Es una de las defensas más efectivas contra ransomware en entornos corporativos.",
     "benefit": "Detiene malware antes de que se ejecute"
@@ -26,7 +26,7 @@
   {
     "slug": "autenticacion-multiplicador-mfa",
     "category": "Seguridad",
-    "icon": "🔑",
+    "icon": "h-key",
     "title": "Autenticación multifactor (MFA)",
     "desc": "Activar MFA en Microsoft 365 reduce el riesgo de robo de cuentas en más del 99%. Es la medida más efectiva contra phishing.",
     "benefit": "Bloquea accesos no autorizados"
@@ -34,7 +34,7 @@
   {
     "slug": "permisos-ntfs-bien-configurados",
     "category": "Seguridad",
-    "icon": "📁",
+    "icon": "h-folder",
     "title": "Permisos NTFS bien configurados",
     "desc": "Asignar permisos por grupos en lugar de usuarios individuales simplifica la gestión y reduce errores cuando alguien cambia de rol.",
     "benefit": "Menos brechas por error humano"
@@ -42,7 +42,7 @@
   {
     "slug": "auditoria-de-eventos-en-windows",
     "category": "Seguridad",
-    "icon": "🕵️",
+    "icon": "h-document-magnifying-glass",
     "title": "Auditoría de eventos en Windows",
     "desc": "Activar la auditoría de inicios de sesión permite detectar intentos fallidos y accesos sospechosos antes de que sea tarde.",
     "benefit": "Visibilidad de qué pasa en tu red"
@@ -50,7 +50,7 @@
   {
     "slug": "firewall-con-reglas-de-salida",
     "category": "Seguridad",
-    "icon": "🧱",
+    "icon": "h-squares-2x2",
     "title": "Firewall con reglas de salida",
     "desc": "El firewall de Windows no solo filtra entradas; también puedes bloquear salidas de aplicaciones no autorizadas que intenten enviar datos.",
     "benefit": "Controla qué sale de tu red"
@@ -58,7 +58,7 @@
   {
     "slug": "task-scheduler-con-powershell",
     "category": "Productividad",
-    "icon": "⏰",
+    "icon": "h-clock",
     "title": "Task Scheduler + PowerShell",
     "desc": "Automatiza backups, limpiezas, reportes y tareas repetitivas con scripts programados. Una vez configurado, trabaja solo.",
     "benefit": "Ahorra horas de trabajo manual al mes"
@@ -66,7 +66,7 @@
   {
     "slug": "snap-layouts-ventanas-windows",
     "category": "Productividad",
-    "icon": "🪟",
+    "icon": "h-window",
     "title": "Snap Layouts con Win + Z",
     "desc": "Organiza múltiples ventanas al instante en plantillas predefinidas. Perfecto para comparar documentos o trabajar con varias apps.",
     "benefit": "Ahorra minutos en cada tarea"
@@ -74,7 +74,7 @@
   {
     "slug": "escritorios-virtuales-windows",
     "category": "Productividad",
-    "icon": "🗂️",
+    "icon": "h-rectangle-stack",
     "title": "Escritorios virtuales con Win + Tab",
     "desc": "Separa contextos: un escritorio para 'Trabajo', otro para 'Reuniones', otro para 'Personal'. Cambias entre ellos al instante.",
     "benefit": "Menos distracciones, más foco"
@@ -82,7 +82,7 @@
   {
     "slug": "powertoys-microsoft-utilidades",
     "category": "Productividad",
-    "icon": "⚡",
+    "icon": "h-bolt",
     "title": "PowerToys de Microsoft",
     "desc": "Suite gratuita con herramientas como PowerRename, FancyZones, Color Picker y Run. Aumenta la productividad sin costo.",
     "benefit": "Funciones avanzadas gratis"
@@ -90,7 +90,7 @@
   {
     "slug": "everything-busqueda-archivos-windows",
     "category": "Productividad",
-    "icon": "🔎",
+    "icon": "h-magnifying-glass",
     "title": "Búsqueda con Everything en vez de Windows Search",
     "desc": "Everything indexa todos tus archivos en segundos y encuentra cualquier cosa al instante, sin consumir recursos.",
     "benefit": "Encuentra archivos al instante"
@@ -98,7 +98,7 @@
   {
     "slug": "historial-del-portapapeles-win-v",
     "category": "Productividad",
-    "icon": "📋",
+    "icon": "h-clipboard",
     "title": "Portapapeles con historial (Win + V)",
     "desc": "Windows guarda los últimos 25 elementos copiados. Puedes pegarlos sin volver a copiarlos uno por uno.",
     "benefit": "Copiar y pegar sin límites"
@@ -106,7 +106,7 @@
   {
     "slug": "escritorio-remoto-sobre-vpn",
     "category": "Redes",
-    "icon": "🖥️",
+    "icon": "h-computer-desktop",
     "title": "RDP sobre VPN para soporte remoto",
     "desc": "Administra equipos de sucursales sin desplazarte. Con RDP sobre VPN accedes al escritorio remoto de cualquier PC de la empresa.",
     "benefit": "Soporte inmediato sin viajar"
@@ -114,7 +114,7 @@
   {
     "slug": "directivas-de-grupo-gpo",
     "category": "Redes",
-    "icon": "📋",
+    "icon": "h-cog-6-tooth",
     "title": "Group Policy (GPO) centraliza todo",
     "desc": "Aplica configuraciones, restricciones y políticas a toda la empresa desde un solo lugar. Usuarios, contraseñas, permisos, todo.",
     "benefit": "Gestión masiva desde un punto"
@@ -122,7 +122,7 @@
   {
     "slug": "reservas-dhcp-por-direccion-mac",
     "category": "Redes",
-    "icon": "🌐",
+    "icon": "h-globe-alt",
     "title": "Reservas DHCP por MAC",
     "desc": "Asigna una IP fija a un equipo sin configurarla manualmente. Ideal para impresoras, servidores y cámaras de seguridad.",
     "benefit": "IPs estables sin tocar cada PC"
@@ -130,7 +130,7 @@
   {
     "slug": "vlans-para-separar-trafico",
     "category": "Redes",
-    "icon": "📡",
+    "icon": "h-signal",
     "title": "VLANs para separar tráfico",
     "desc": "Separa la red de invitados de la red de trabajo con VLANs. Mejora la seguridad y el rendimiento del tráfico crítico.",
     "benefit": "Red segmentada y más segura"
@@ -138,7 +138,7 @@
   {
     "slug": "dns-con-filtrado-contenido",
     "category": "Redes",
-    "icon": "🛰️",
+    "icon": "h-server",
     "title": "DNS con filtrado (Quad9, Cloudflare Family)",
     "desc": "Cambiar el DNS por uno con filtrado bloquea dominios maliciosos antes de que lleguen a tu red. Gratis y muy efectivo.",
     "benefit": "Bloquea sitios peligrosos en toda la red"
@@ -146,7 +146,7 @@
   {
     "slug": "analisis-de-canales-wifi",
     "category": "Redes",
-    "icon": "📶",
+    "icon": "h-wifi",
     "title": "Análisis de canales Wi-Fi",
     "desc": "En oficinas, varios APs en el mismo canal se interfieren. Un análisis de canales mejora la velocidad y cobertura sin cambiar hardware.",
     "benefit": "Wi-Fi más rápido sin invertir"
@@ -154,7 +154,7 @@
   {
     "slug": "wpa3-en-redes-corporativas",
     "category": "Redes",
-    "icon": "🔒",
+    "icon": "h-lock-closed",
     "title": "WPA3 en redes corporativas",
     "desc": "WPA3 es el estándar más seguro de Wi-Fi actual. Si tu router lo soporta, úsalo en lugar de WPA2 o WEP.",
     "benefit": "Conexión inalámbrica a prueba de ataques"
@@ -162,7 +162,7 @@
   {
     "slug": "file-history-onedrive-kfm",
     "category": "Datos",
-    "icon": "💾",
+    "icon": "h-circle-stack",
     "title": "File History + OneDrive KFM",
     "desc": "Respaldo automático de Escritorio, Documentos e Imágenes con OneDrive Known Folder Move. Restauras un archivo borrado en segundos.",
     "benefit": "Nunca más 'se me borró el archivo'"
@@ -170,7 +170,7 @@
   {
     "slug": "storage-sense-limpieza-automatica",
     "category": "Datos",
-    "icon": "🧹",
+    "icon": "h-trash",
     "title": "Storage Sense libera espacio solo",
     "desc": "Windows elimina automáticamente archivos temporales, papelera y descargas antiguas. Útil en servidores y PCs con disco limitado.",
     "benefit": "Menos mantenimiento manual"
@@ -178,7 +178,7 @@
   {
     "slug": "versiones-anteriores-shadow-copies",
     "category": "Datos",
-    "icon": "🕰️",
+    "icon": "h-arrow-path",
     "title": "Versiones anteriores (Shadow Copies)",
     "desc": "Recupera versiones previas de archivos o carpetas sin necesidad de backup externo. Windows las guarda por defecto si están activadas.",
     "benefit": "Restauras archivos en segundos"
@@ -186,7 +186,7 @@
   {
     "slug": "regla-3-2-1-de-respaldo",
     "category": "Datos",
-    "icon": "🔁",
+    "icon": "h-archive-box",
     "title": "Regla 3-2-1 de respaldo",
     "desc": "3 copias de los datos, en 2 medios distintos, con 1 copia fuera del sitio. Es el estándar de oro contra pérdida total.",
     "benefit": "Protección real contra desastres"
@@ -194,7 +194,7 @@
   {
     "slug": "onedrive-versionado-de-archivos",
     "category": "Datos",
-    "icon": "☁️",
+    "icon": "h-cloud",
     "title": "OneDrive con versionado",
     "desc": "OneDrive guarda hasta 500 versiones de cada archivo por 30 días. Recupera cualquier estado anterior sin perder trabajo.",
     "benefit": "Sin miedo a sobrescribir por error"
@@ -202,7 +202,7 @@
   {
     "slug": "cifrado-de-carpetas-con-efs",
     "category": "Datos",
-    "icon": "🔐",
+    "icon": "h-lock-closed",
     "title": "Cifrado de carpetas con EFS",
     "desc": "EFS (Encrypting File System) permite cifrar carpetas específicas sin cifrar todo el disco. Útil para datos sensibles.",
     "benefit": "Datos críticos protegidos con contraseña"
@@ -210,7 +210,7 @@
   {
     "slug": "compresion-ntfs-archivos-poco-usados",
     "category": "Datos",
-    "icon": "🗄️",
+    "icon": "h-rectangle-stack",
     "title": "Compresión NTFS para archivos poco usados",
     "desc": "Windows puede comprimir carpetas completas sin perder acceso. Ideal para datos históricos que ocupan mucho disco.",
     "benefit": "Más espacio sin eliminar nada"
@@ -218,7 +218,7 @@
   {
     "slug": "windows-update-for-business",
     "category": "Sistemas",
-    "icon": "⚙️",
+    "icon": "h-cog-6-tooth",
     "title": "Windows Update for Business",
     "desc": "Controla cuándo y cómo se actualizan los equipos de la empresa. Evita reinicios en horario laboral.",
     "benefit": "Actualizaciones sin interrupciones"
@@ -226,7 +226,7 @@
   {
     "slug": "imagen-de-sistema-con-dism",
     "category": "Sistemas",
-    "icon": "🖱️",
+    "icon": "h-command-line",
     "title": "Imagen de sistema con DISM",
     "desc": "DISM permite crear y aplicar imágenes completas de Windows. Restauras un equipo en minutos, no en horas.",
     "benefit": "Reinstalaciones ultrarrápidas"
@@ -234,7 +234,7 @@
   {
     "slug": "sandbox-de-windows-para-probar",
     "category": "Sistemas",
-    "icon": "🧪",
+    "icon": "h-beaker",
     "title": "Sandbox de Windows para pruebas",
     "desc": "Windows Sandbox crea un entorno aislado para ejecutar software dudoso sin arriesgar el sistema real.",
     "benefit": "Prueba sin riesgo de infección"
@@ -242,7 +242,7 @@
   {
     "slug": "sysinternals-suite-diagnostico",
     "category": "Sistemas",
-    "icon": "🧰",
+    "icon": "h-wrench-screwdriver",
     "title": "Sysinternals Suite para diagnóstico",
     "desc": "Suite gratuita de Microsoft con Process Explorer, Autoruns, TCPView y más. Diagnostica cualquier problema de sistema.",
     "benefit": "Diagnóstico profesional gratis"
@@ -250,7 +250,7 @@
   {
     "slug": "performance-monitor-en-windows",
     "category": "Sistemas",
-    "icon": "📊",
+    "icon": "h-chart-bar",
     "title": "Performance Monitor en Windows",
     "desc": "Permon permite ver en tiempo real CPU, RAM, disco y red. Identifica cuellos de botella antes de que se vuelvan quejas.",
     "benefit": "Detecta problemas antes de que crezcan"
