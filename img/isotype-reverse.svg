@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 208 208" width="208" height="208" role="img" aria-label="Servitecbaq isotype">
+  <title>Servitecbaq — isótipo sobre retícula isométrica 2:1</title>
+  <g fill="#F5F7FA">
+    <polygon points="8,70 128,10 164,28 60,80 96,98 96,134 8,90"/>
+    <polygon points="200,138 80,198 44,180 148,128 112,110 112,74 200,118"/>
+  </g>
+  <g fill="none" stroke="#19AFAF" stroke-width="5" stroke-linecap="round">
+    <path d="M34 176 128 129"/>
+    <circle cx="34" cy="176" r="8" stroke-width="4"/>
+  </g>
+  <polygon points="139,126 126.5,121.5 130.5,112.5" fill="#19AFAF"/>
+  <circle cx="172" cy="62" r="10" fill="none" stroke="#19AFAF" stroke-width="6"/>
+</svg>

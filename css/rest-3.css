@@ -14,7 +14,7 @@
 .grwidget-embed { width: 100%; min-height: 300px; color: var(--fg); }
 .grwidget-embed * { max-width: 100%; }
 .grwidget-embed img { border-radius: var(--r-sm); }
-[data-theme] .grwidget-embed .grw-review-avatar-initials { background: rgb(237, 241, 244) !important; color: rgb(76, 90, 107) !important; }
+[data-theme] .grwidget-embed .grw-review-avatar-initials { background: rgb(237, 241, 244) !important; color: rgb(90, 100, 114) !important; }
 [data-theme="dark"] .grwidget-embed .grw-branding .grw-branding-link span { color: rgb(122, 135, 148) !important; }
 [data-theme="dark"] .grwidget-embed .grw-branding .grw-branding-link span span { color: rgb(143, 166, 192) !important; }
 .contact-split { display: grid; grid-template-columns: 380px 1fr; gap: var(--s-8); align-items: start; }

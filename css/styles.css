@@ -7,17 +7,26 @@
    TOKENS — Design System "Bento Studio Tech"
    ============================================ */
 :root {
-  /* Neutrales */
-  --n-0: #FFFFFF; --n-25: #FAFBFC; --n-50: #F5F7F9; --n-100: #EDF1F4;
-  --n-200: #DDE4EA; --n-300: #C3CCD6; --n-400: #A7AFB8; --n-500: #6B7684;
-  --n-600: #4C5A6B; --n-700: #33455A; --n-800: #22354A; --n-900: #142B4A; --n-950: #0A1522;
+  /* Neutrales — valores literales del sistema de identidad v1
+     (n-50 = blanco frío de la guía, n-200 = trama/divisores, n-600 = grafito para
+     texto secundario sobre blanco: 5.59:1 sobre #F5F7FA). */
+  --n-0: #FFFFFF; --n-25: #FAFBFC; --n-50: #F5F7FA; --n-100: #EDF1F4;
+  --n-200: #DDE3EA; --n-300: #C3CCD6; --n-400: #A7AFB8; --n-500: #6B7684;
+  --n-600: #5A6472; --n-700: #33455A; --n-800: #22354A; --n-900: #142B4A; --n-950: #0A1522;
 
   /* Navy (marca) */
   --navy-50: #EBF0F6; --navy-100: #D7E1EB; --navy-200: #9DB2CA; --navy-300: #8FA6C0;
   --navy-500: #2F5478; --navy-600: #142B4A; --navy-700: #0F2138;
   --navy-800: #0A1828; --navy-900: #06101C;
+  /* Superficie elevada DENTRO de un área navy (footer, tiles sobre --n-900). Rol tomado
+     tal cual del sistema de identidad: sin ella el tile del logo desaparece sobre el navy. */
+  --navy-soft: #223A5C;
 
-  /* Aguamarina (acento) */
+  /* Aguamarina (acento). El sistema de identidad propone un "aguamarina profundo"
+     #0F7F80 para texto/link sobre blanco; medido sobre el fondo real del sitio
+     (--n-50 #F5F7FA) da 4.48:1, por debajo de los 4.5 AA que dice cumplir. --teal-700
+     #0C6E6E es el mismo tono más cerrado y llega a 5.64:1, así que el sitio se queda
+     con él para la función de "acento escrito" y no baja al valor de la guía. */
   --teal-50: #E8F6F5; --teal-100: #CFEDEB; --teal-300: #6FC9C8;
   --teal-400: #35BFBF; --teal-500: #19AFAF; --teal-600: #0E7C7C; --teal-700: #0C6E6E;
 
@@ -326,7 +335,6 @@ body.cursor-leaving .cursor-dot { opacity: 0; }
 @keyframes underlineIn { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 @keyframes heroSlideIn { from { transform: translateY(24px); } to { transform: translateY(0); } }
 @keyframes mapPing { 0% { transform: scale(0.6); opacity: 1; } 100% { transform: scale(2.4); opacity: 0; } }
-@keyframes logoBarranquilla { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
 @keyframes waBubbleIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
 /* ============================================
@@ -620,12 +628,34 @@ body:not(.cursor-ready) .jira-float { cursor: pointer; }
   align-items: center;
   justify-content: center;
   border-radius: var(--r-sm);
-  background: linear-gradient(135deg, var(--navy-600), var(--navy-800));
-  color: #fff;
+  /* Tile navy PLANO: el sistema de identidad prohíbe mezclar el degradado del mockup
+     con el logo plano, así que aquí no entra --btn-fill. */
+  background: var(--navy-600);
+  color: var(--n-50);
   box-shadow: 0 4px 12px rgba(20,43,74,0.4);
   flex-shrink: 0;
 }
-.logo__mark svg { width: 18px; height: 18px; }
+/* Dentro del tile de 40px se dibuja la versión REDUCIDA del isótipo (solo los dos
+   ganchos): el completo exige 48px y por debajo de 32px la traza y los anillos se
+   cierran y el signo se vuelve una mancha. */
+.logo__mark svg { width: 24px; height: 24px; }
+.logo__text { letter-spacing: -0.028em; }
+.logo__text-accent {
+  /* Regla 1 del sistema: una sola línea, sin espacio intermedio, y el corte de lectura
+     lo da el color (SERVITEC navy + BAQ aguamarina). #19AFAF sobre el fondo claro es
+     2.51:1, sólo admisible aquí porque es logotipo (exento en WCAG 1.4.3); se pinta por
+     recorte para que el píxel sea literalmente ese aguamarina y no un tinte derivado. */
+  background-image: linear-gradient(var(--teal-500), var(--teal-500));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+/* Sobre navy el logotipo se invierte: ganchos y texto en blanco frío, BAQ sigue en
+   aguamarina (5.29:1 sobre #142B4A). */
+[data-theme="dark"] .logo__text { color: var(--n-50); }
+.footer-col--brand .logo__mark { background: var(--navy-soft); }
+.footer-col--brand .logo__text { color: var(--n-50); }
 .logo__pill {
   font-family: var(--font-mono);
   font-size: 0.6rem;
@@ -638,16 +668,6 @@ body:not(.cursor-ready) .jira-float { cursor: pointer; }
   line-height: 1;
   flex-shrink: 0;
 }
-[data-theme="dark"] .logo__text {
-  background: linear-gradient(90deg, #FF5C7A 0%, #FF5C7A 15%, #FFE066 30%, #FFE066 45%, #4ADE80 60%, #4ADE80 75%, #DCD9EE 90%, #DCD9EE 100%);
-  background-size: 300% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-  animation: logoBarranquilla 10s ease-in-out infinite alternate;
-}
-
 .nav { display: flex; align-items: center; gap: 2px; }
 .nav a {
   padding: 8px 12px;
@@ -834,7 +854,7 @@ section {
   padding: clamp(6.5rem, 8vw, 8rem) 0 clamp(3rem, 6vw, 5rem);
   overflow: hidden;
   isolation: isolate;
-  background: linear-gradient(160deg, #F5F7F9 0%, #EBF0F6 60%, #FFFFFF 100%);
+  background: linear-gradient(160deg, #F5F7FA 0%, #EBF0F6 60%, #FFFFFF 100%);
   contain: layout style;
 }
 [data-theme="dark"] .hero { background: linear-gradient(160deg, #0A1522 0%, #10202F 60%, #0A1522 100%); }
@@ -1285,7 +1305,7 @@ body:not(.cursor-ready) .bento { cursor: pointer; }
 .svc--dark .svc__desc,
 .svc--dark .svc__more { color: #fff; }
 .svc--dark .svc__desc { opacity: 0.85; }
-.svc--dark .svc__icon { background: rgba(255,255,255,0.15); color: #fff; box-shadow: none; }
+.svc--dark .svc__icon { background: rgba(255,255,255,0.15); color: var(--n-50); box-shadow: none; }
 .svc--accent {
   background: var(--gold-slab);
   border-color: var(--gold-300);
@@ -1331,6 +1351,10 @@ body:not(.cursor-ready) .bento { cursor: pointer; }
 .svc__icon svg { width: 26px; height: 26px; }
 .svc__icon--sm { width: 40px; height: 40px; border-radius: var(--r-sm); }
 .svc__icon--sm svg { width: 20px; height: 20px; }
+/* En oscuro el tile de servicio queda sobre navy, y ahí el sistema de identidad entrega
+   la variante inversa de los iconos en blanco frío, no en un tinte de la marca. Se limita
+   a las mini para no pisar el tinta de la tarjeta dorada. */
+[data-theme="dark"] .svc--mini .svc__icon { color: var(--n-50); }
 .svc__title {
   font-size: var(--tx-xl);
   font-weight: 700;
@@ -2063,7 +2087,7 @@ body:not(.cursor-ready) .bento { cursor: pointer; }
    sus iniciales (4,34:1) no pasan ni en claro. No usamos su .grw-theme-dark: sólo
    cambia el fondo, deja los mismos textos flojos. [data-theme] siempre existe y
    sube la especificidad: el CSS del widget se inyecta después del nuestro. */
-[data-theme] .grwidget-embed .grw-review-avatar-initials { background: #EDF1F4 !important; color: #4C5A6B !important; }
+[data-theme] .grwidget-embed .grw-review-avatar-initials { background: #EDF1F4 !important; color: #5A6472 !important; }
 [data-theme="dark"] .grwidget-embed .grw-branding .grw-branding-link span { color: #7A8794 !important; }
 [data-theme="dark"] .grwidget-embed .grw-branding .grw-branding-link span span { color: #8FA6C0 !important; }
 
@@ -2669,7 +2693,7 @@ body:not(.cursor-ready) .bento { cursor: pointer; }
     --line: rgba(20,43,74,0.4);
     --line-strong: rgba(20,43,74,0.6);
     --fg-muted: #33455A;
-    --fg-faint: #4C5A6B;
+    --fg-faint: #5A6472;
   }
   [data-theme="dark"] {
     --line: rgba(232,238,244,0.4);
