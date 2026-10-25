@@ -1,5 +1,5 @@
 /* ============================================
-   SERVITECBAQ — app-interactive-2.js — widgets + WhatsApp + matrix
+   SERVITECBAQ — app-interactive-2.js — widgets + WhatsApp
    ============================================ */
 (function () {
   'use strict';
@@ -9,10 +9,7 @@
 
   var SVC = window.SVC;
   if (!SVC) return;
-  var CONFIG = SVC.CONFIG, $ = SVC.$, $$ = SVC.$$, whenIdle = SVC.whenIdle,
-      rafThrottle = SVC.rafThrottle, debounce = SVC.debounce, mq = SVC.mq,
-      isMobile = SVC.isMobile, isTablet = SVC.isTablet,
-      prefersReducedMotion = SVC.prefersReducedMotion;
+  var CONFIG = SVC.CONFIG, $ = SVC.$, $$ = SVC.$$;
   /* ============================================
      15. WIDGETS: DATOS + CALCULADORA
      ============================================ */
@@ -358,113 +355,6 @@
         e.target.style.boxShadow = '';
       }
     });
-  })();
-
-  /* ============================================
-     17. MATRIX RAIN — Solo dark + panel abierto
-     ============================================ */
-  (function initMatrixPanel() {
-    const panel = $('#devicePanel');
-    const canvas = $('#matrixPanelRain');
-    if (!panel || !canvas) return;
-    if (prefersReducedMotion) return;
-    if (document.documentElement.classList.contains('low-power')) return;
-    if (isTablet) return;
-
-    const ctx = canvas.getContext('2d', { alpha: true });
-    if (!ctx) return;
-
-    const chars = 'アカサタナハマヤラワ0123456789ABCDEF<>{}[]/*-+=;:·'.split('');
-    const fontSize = CONFIG.matrix.fontSize;
-    let columns = 0;
-    let drops = [];
-    let rafId = null;
-    let running = false;
-    let lastTime = 0;
-    const interval = CONFIG.matrix.frameIntervalMs;
-
-    function resize() {
-      const rect = panel.getBoundingClientRect();
-      const dpr = Math.min(window.devicePixelRatio || 1, CONFIG.matrix.maxDpr);
-      canvas.width = Math.max(1, Math.round(rect.width * dpr));
-      canvas.height = Math.max(1, Math.round(rect.height * dpr));
-      canvas.style.width = rect.width + 'px';
-      canvas.style.height = rect.height + 'px';
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      columns = Math.max(1, Math.floor(rect.width / fontSize));
-      drops = new Array(columns).fill(1).map(function () { return Math.random() * -80; });
-    }
-
-    function drawFrame() {
-      if (!running) return;
-      const now = performance.now();
-      if (now - lastTime < interval) {
-        rafId = requestAnimationFrame(drawFrame);
-        return;
-      }
-      lastTime = now;
-
-      const dpr = Math.min(window.devicePixelRatio || 1, CONFIG.matrix.maxDpr);
-      const w = canvas.width / dpr;
-      const h = canvas.height / dpr;
-
-      ctx.fillStyle = 'rgba(0,0,0,0.12)';
-      ctx.fillRect(0, 0, w, h);
-      ctx.font = fontSize + 'px "JetBrains Mono", monospace';
-      ctx.textBaseline = 'top';
-      ctx.fillStyle = '#00FF41';
-
-      for (let i = 0; i < columns; i++) {
-        const c = chars[Math.floor(Math.random() * chars.length)];
-        const x = i * fontSize;
-        const y = drops[i] * fontSize;
-        ctx.fillText(c, x, y);
-        if (y > h && Math.random() > 0.96) drops[i] = 0;
-        drops[i]++;
-      }
-      rafId = requestAnimationFrame(drawFrame);
-    }
-
-    function start() {
-      if (running) return;
-      running = true;
-      resize();
-      rafId = requestAnimationFrame(drawFrame);
-    }
-    function stop() {
-      running = false;
-      if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
-      const dpr = Math.min(window.devicePixelRatio || 1, CONFIG.matrix.maxDpr);
-      ctx.clearRect(0, 0, canvas.width / dpr, canvas.height / dpr);
-    }
-    function isDark() {
-      return document.documentElement.getAttribute('data-theme') === 'dark';
-    }
-    function sync() {
-      if (isDark() && panel.classList.contains('open')) start(); else stop();
-    }
-
-    new MutationObserver(sync).observe(panel, { attributes: true, attributeFilter: ['class'] });
-    new MutationObserver(sync).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-
-    window.addEventListener('resize', debounce(function () { if (running) resize(); }, 200), { passive: true });
-
-    document.addEventListener('visibilitychange', function () {
-      if (document.hidden) {
-        if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
-      } else if (running) {
-        rafId = requestAnimationFrame(drawFrame);
-      }
-    });
-
-    panel.addEventListener('mouseenter', function () {
-      if (isDark()) document.body.classList.add('cursor-device');
-    });
-    panel.addEventListener('mouseleave', function () {
-      document.body.classList.remove('cursor-device');
-    });
-
-    sync();
   })();
 
 })();

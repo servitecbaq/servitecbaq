@@ -26,11 +26,6 @@
       maxParticles: 40,
       linkDist: 120,
       mouseRadius: 140
-    },
-    matrix: {
-      maxDpr: 1.5,
-      fontSize: 13,
-      frameIntervalMs: 100
     }
   };
 
@@ -89,7 +84,7 @@
   }
 
   // Inserta nodos por lotes para evitar long tasks en el render inicial
-  function mountInChunks(container, nodes, chunkSize) {
+  function mountInChunks(container, nodes, chunkSize, done) {
     let i = 0;
     const size = chunkSize || 6;
     const token = (container._mountToken = (container._mountToken || 0) + 1);
@@ -100,6 +95,7 @@
       for (; i < end; i++) frag.appendChild(nodes[i]);
       container.appendChild(frag);
       if (i < nodes.length) whenIdle(next, 4000);
+      else if (done) done();
     })();
   }
 

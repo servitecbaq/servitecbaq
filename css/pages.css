@@ -88,7 +88,7 @@
 .app-plan__price { margin: var(--s-2) 0 0; font-size: var(--tx-xl); font-weight: 700; color: var(--fg); }
 .app-plan__note { margin: var(--s-1) 0 0; font-family: var(--font-mono); font-size: var(--tx-xs); color: var(--fg-muted); }
 .app-plan ul { list-style: none; margin: var(--s-5) 0 0; padding: 0; display: grid; gap: var(--s-2); font-size: var(--tx-sm); color: var(--fg); }
-.app-plan ul li::before { content: '·'; margin-right: var(--s-2); color: var(--accent); }
+.app-plan ul li::before { content: '·'; margin-right: var(--s-2); color: var(--accent-ink); }
 
 /* Pasos */
 .svc-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-5); counter-reset: paso; }
@@ -101,7 +101,7 @@
 }
 .svc-steps h3 { margin: 0 0 var(--s-1); font-size: var(--tx-base); font-weight: 600; }
 .svc-steps p { margin: 0; font-size: var(--tx-sm); line-height: 1.6; color: var(--fg-muted); }
-/* Defecto preexistente: en oscuro --brand (#6366f1) sobre --brand-soft da 3.74:1. */
+/* En oscuro --brand es claro sobre --brand-soft: el número se pinta con --fg. */
 [data-theme="dark"] .svc-steps__n { color: var(--fg); }
 
 /* Relacionados */
@@ -122,7 +122,7 @@
 .tip-prose { max-width: 70ch; margin: 0; font-size: var(--tx-base); line-height: 1.75; color: var(--fg-muted); }
 .tip-prose--warn {
   padding: var(--s-5) var(--s-6);
-  border-left: 3px solid var(--orange-500);
+  border-left: 3px solid var(--teal-500);
   background: var(--bg-subtle);
   border-radius: 0 var(--r-md) var(--r-md) 0;
 }

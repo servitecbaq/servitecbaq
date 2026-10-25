@@ -2,42 +2,42 @@
 <style>
 .mp-txt{font-family:ui-monospace,'JetBrains Mono',Consolas,monospace;font-size:10.5px;letter-spacing:.4px;paint-order:stroke;stroke:rgba(5,8,20,.85);stroke-width:3px;stroke-linejoin:round}
 .mp-road{stroke:rgba(255,255,255,.24);fill:none;stroke-width:.9}
-.mp-road-glow{stroke:rgba(51,230,255,.10);fill:none;stroke-width:3.4}
-.mp-wave{stroke:rgba(51,230,255,.18);fill:none;stroke-width:.9}
-.mp-coast{fill:none;stroke:rgba(51,230,255,.55);stroke-width:1.1}
+.mp-road-glow{stroke:rgba(63,208,208,.10);fill:none;stroke-width:3.4}
+.mp-wave{stroke:rgba(63,208,208,.18);fill:none;stroke-width:.9}
+.mp-coast{fill:none;stroke:rgba(63,208,208,.55);stroke-width:1.1}
 .mp-nb{fill:rgba(255,255,255,.015);stroke:rgba(255,255,255,.16);stroke-width:.9;stroke-dasharray:3 3}
-.mp-nb2{fill:rgba(165,170,251,.05);stroke:rgba(165,170,251,.45);stroke-width:1}
-.mp-cien{fill:rgba(51,230,255,.06);stroke:rgba(51,230,255,.22);stroke-width:.7;stroke-dasharray:2 3}
-.mp-city-fill{fill:rgba(79,70,229,.16)}
-.mp-city-line{fill:none;stroke:rgba(165,170,251,.9);stroke-width:1.2}
+.mp-nb2{fill:rgba(143,166,192,.05);stroke:rgba(143,166,192,.45);stroke-width:1}
+.mp-cien{fill:rgba(63,208,208,.06);stroke:rgba(63,208,208,.22);stroke-width:.7;stroke-dasharray:2 3}
+.mp-city-fill{fill:rgba(143,166,192,.16)}
+.mp-city-line{fill:none;stroke:rgba(143,166,192,.9);stroke-width:1.2}
 .mp-streets{stroke:rgba(255,255,255,.09);fill:none;stroke-width:.7}
-.mp-ave{stroke:rgba(51,230,255,.26);fill:none;stroke-width:1.1}
-.mp-river{stroke:#33E6FF;fill:none;stroke-width:2.4;opacity:.5}
-.mp-river-thin{stroke:#33E6FF;fill:none;stroke-width:1.1;opacity:.34}
-.mp-river-glow{stroke:#33E6FF;fill:none;stroke-width:9;opacity:.08}
-.mp-range{fill:none;stroke:rgba(249,115,22,.3);stroke-width:.9;stroke-dasharray:2 5}
-.mp-route{stroke:rgba(51,230,255,.45);fill:none;stroke-width:.9}
-.mp-route-pulse{stroke:#BFF6FF;fill:none;stroke-width:1.2;stroke-dasharray:3 13;animation:mpRun 2.4s linear infinite}
-.mp-zone-dot{fill:#33E6FF}
+.mp-ave{stroke:rgba(63,208,208,.26);fill:none;stroke-width:1.1}
+.mp-river{stroke:#3FD0D0;fill:none;stroke-width:2.4;opacity:.5}
+.mp-river-thin{stroke:#3FD0D0;fill:none;stroke-width:1.1;opacity:.34}
+.mp-river-glow{stroke:#3FD0D0;fill:none;stroke-width:9;opacity:.08}
+.mp-range{fill:none;stroke:rgba(143,166,192,.3);stroke-width:.9;stroke-dasharray:2 5}
+.mp-route{stroke:rgba(63,208,208,.45);fill:none;stroke-width:.9}
+.mp-route-pulse{stroke:#B7EAEA;fill:none;stroke-width:1.2;stroke-dasharray:3 13;animation:mpRun 2.4s linear infinite}
+.mp-zone-dot{fill:#3FD0D0}
 .mp-lab{fill:rgba(255,255,255,.74)}
-.mp-lab-hi{fill:#8EF4FF}
+.mp-lab-hi{fill:#8FE0E0}
 .mp-dim{fill:rgba(255,255,255,.34)}
 .mp-air{fill:rgba(255,255,255,.5)}
-.mp-dot{fill:#F97316;stroke:#fff;stroke-width:1.6}
-.mp-ping{fill:none;stroke:rgba(249,115,22,.7);stroke-width:1.2;animation:mpPing 2.4s ease-out infinite}
-.mp-cross{stroke:rgba(249,115,22,.5);stroke-width:1}
+.mp-dot{fill:#8FA6C0;stroke:#fff;stroke-width:1.6}
+.mp-ping{fill:none;stroke:rgba(143,166,192,.7);stroke-width:1.2;animation:mpPing 2.4s ease-out infinite}
+.mp-cross{stroke:rgba(143,166,192,.5);stroke-width:1}
 .mp-scale path{stroke:rgba(255,255,255,.4);fill:none;stroke-width:1}
-.mp-compass path{fill:rgba(165,170,251,.85)}
-.mp-compass text{fill:rgba(165,170,251,.85)}
+.mp-compass path{fill:rgba(143,166,192,.85)}
+.mp-compass text{fill:rgba(143,166,192,.85)}
 @keyframes mpPing{0%{r:6;opacity:.9}70%,100%{r:26;opacity:0}}
 @keyframes mpRun{to{stroke-dashoffset:-32}}
 @media (prefers-reduced-motion:reduce){.mp-route-pulse,.mp-ping{animation:none}}
 </style>
 <defs>
-<linearGradient id="mpBg" x1="0" y1="0" x2=".35" y2="1"><stop offset="0" stop-color="#0C1328"/><stop offset="1" stop-color="#05070F"/></linearGradient>
-<linearGradient id="mpSea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(51,230,255,.22)"/><stop offset="1" stop-color="rgba(51,230,255,.03)"/></linearGradient>
-<radialGradient id="mpAmb"><stop offset="0" stop-color="rgba(79,70,229,.34)"/><stop offset="1" stop-color="rgba(79,70,229,0)"/></radialGradient>
-<radialGradient id="mpPin"><stop offset="0" stop-color="rgba(249,115,22,.5)"/><stop offset="1" stop-color="rgba(249,115,22,0)"/></radialGradient>
+<linearGradient id="mpBg" x1="0" y1="0" x2=".35" y2="1"><stop offset="0" stop-color="#0F1F30"/><stop offset="1" stop-color="#06101C"/></linearGradient>
+<linearGradient id="mpSea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(63,208,208,.22)"/><stop offset="1" stop-color="rgba(63,208,208,.03)"/></linearGradient>
+<radialGradient id="mpAmb"><stop offset="0" stop-color="rgba(143,166,192,.34)"/><stop offset="1" stop-color="rgba(143,166,192,0)"/></radialGradient>
+<radialGradient id="mpPin"><stop offset="0" stop-color="rgba(143,166,192,.5)"/><stop offset="1" stop-color="rgba(143,166,192,0)"/></radialGradient>
 <pattern id="mpGrid" width="22" height="22" patternUnits="userSpaceOnUse"><path d="M22 0H0V22" fill="none" stroke="rgba(255,255,255,.03)" stroke-width="1"/></pattern>
 <clipPath id="mpPlate"><rect width="640" height="415" rx="14"/></clipPath>
 <clipPath id="mpCity"><path d="M209.1 264.5L250.5 258.8L250.7 265.9L273 267.2L288.4 276.8L315.1 276.9L333.3 296.5L331.9 304.1L351.2 315.7L369.5 302.6L394.8 304.1L400.4 289.8L419.7 278.9L423.4 282.8L432.7 268.7L463.4 268.6L458.5 219L447 182.8L392.2 134.1L336.3 93.5L322 61.5L312.9 16.1L307.8 16.6L319.9 71.2L316.4 72.5L324.1 82.9L310.9 98.7L326 88L337.7 110.4L345.7 109.5L346.3 117.7L326 131.7L317.4 131.2L321.6 118.6L314.9 128.3L303.9 126.7L299.6 131L303.4 126.4L292.6 123.4L288.2 113.3L310.6 100.5L285.3 110.4L279.2 132.8L287.4 140.5L282.2 147L301 133L316.1 135.3L350.6 123.7L330.8 161.3L292 155.7L282.2 167.8L277.6 164.8L263.8 178.9L276.5 188.9L278.8 201.3L259.7 217.6L245.5 211.7L231.6 226.3L226.2 224.8L238.6 242.7L215.5 248.9L209.1 264.5Z"/></clipPath>
@@ -92,5 +92,5 @@
 <g transform="translate(30 385)" class="mp-scale"><path d="M0 0H70.3M0 -4V4M70.3 -4V4"/><text x="35.2" y="12" text-anchor="middle" class="mp-txt mp-dim">5 km</text></g>
 <g transform="translate(30 36)" class="mp-compass"><path d="M0 -12L5 7L0 3.4L-5 7Z"/><text y="19" text-anchor="middle" class="mp-txt mp-lab">N</text></g>
 </g>
-<rect x=".5" y=".5" width="639" height="414" rx="13.5" fill="none" stroke="rgba(165,170,251,.22)"/>
+<rect x=".5" y=".5" width="639" height="414" rx="13.5" fill="none" stroke="rgba(143,166,192,.22)"/>
 </svg>

@@ -72,8 +72,8 @@ function headBase({ title, meta, h1, url, ld }) {
   <meta name="description" content="${esc(meta)}">
   <meta name="author" content="${esc(NEG.nombre)}">
   <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#0A0D1F" media="(prefers-color-scheme: dark)">
-  <meta name="theme-color" content="#F7F8FB" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0A1522" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#F5F7F9" media="(prefers-color-scheme: light)">
   <meta name="google-site-verification" content="UroQP0TYR1nk7Vt3Ws_MzWo_x_mi3C6uYbYdDphph58" />
 
   <meta property="og:title" content="${esc(h1)}">
@@ -162,7 +162,6 @@ ${nav.map(([t, h]) => '          <a href="' + h + '">' + t + '</a>').join('\n')}
             <span class="theme-icon-dark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg></span>
           </button>
           <a href="${wa('Hola, necesito servicio técnico')}" class="btn btn--accent btn--sm header__cta" target="_blank" rel="noopener">
-            <span class="pulse-dot" aria-hidden="true"></span>
             Cotizar ahora
           </a>
           <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">☰</button>

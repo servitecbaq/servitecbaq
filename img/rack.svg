@@ -1,11 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="-70 -58 292 226" preserveAspectRatio="xMidYMin slice" role="group" aria-label="Server rack R-04 interactivo: pulsa una unidad para encenderla o apagarla" style="display:block;width:100%;height:100%">
   <defs>
   <linearGradient id="rkPanel" x1="0" y1="0" x2="0.5" y2="1">
-    <stop offset="0" stop-color="#0A1124"/><stop offset="1" stop-color="#04060E"/>
+    <stop offset="0" stop-color="#0A1828"/><stop offset="1" stop-color="#04060E"/>
   </linearGradient>
   <radialGradient id="rkShadow"><stop offset="0" stop-color="rgba(0,0,0,0.5)"/><stop offset="1" stop-color="rgba(0,0,0,0)"/></radialGradient>
-  <radialGradient id="rkAmbCyan"><stop offset="0" stop-color="rgba(51,230,255,0.14)"/><stop offset="1" stop-color="rgba(51,230,255,0)"/></radialGradient>
-  <radialGradient id="rkAmbIndigo"><stop offset="0" stop-color="rgba(99,102,241,0.13)"/><stop offset="1" stop-color="rgba(99,102,241,0)"/></radialGradient>
+  <radialGradient id="rkAmbCyan"><stop offset="0" stop-color="rgba(63,208,208,0.14)"/><stop offset="1" stop-color="rgba(63,208,208,0)"/></radialGradient>
+  <radialGradient id="rkAmbIndigo"><stop offset="0" stop-color="rgba(143,166,192,0.13)"/><stop offset="1" stop-color="rgba(143,166,192,0)"/></radialGradient>
   <pattern id="rkGrid" width="18" height="18" patternUnits="userSpaceOnUse">
     <path d="M18 0H0V18" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
   </pattern>
@@ -25,22 +25,22 @@
   .rk-unit{fill:rgba(255,255,255,0.025);stroke:rgba(255,255,255,0.26);stroke-width:1}
   .rk-btn{fill:rgba(255,255,255,0.06);stroke:rgba(255,255,255,0.32);stroke-width:0.8}
   .rk-port{fill:#0A1020;stroke:rgba(255,255,255,0.35);stroke-width:0.9}
-  .rk-cyan{stroke:#33E6FF;fill:none;stroke-width:1}
-  .rk-cyan-fill{fill:#33E6FF}
+  .rk-cyan{stroke:#3FD0D0;fill:none;stroke-width:1}
+  .rk-cyan-fill{fill:#3FD0D0}
   .rk-label{fill:rgba(255,255,255,0.88)}
   .rk-dim{fill:rgba(255,255,255,0.5)}
-  .rk-scr{fill:#061426;stroke:rgba(51,230,255,0.45);stroke-width:1}
-  .rk-screen-bloom{fill:rgba(51,230,255,0.12);filter:url(#rkBloom)}
-  .rk-scr-hi{fill:#8EF4FF;filter:url(#rkGlow)}
+  .rk-scr{fill:#061426;stroke:rgba(63,208,208,0.45);stroke-width:1}
+  .rk-screen-bloom{fill:rgba(63,208,208,0.12);filter:url(#rkBloom)}
+  .rk-scr-hi{fill:#8FE0E0;filter:url(#rkGlow)}
   .rk-scr-txt{fill:rgba(255,255,255,0.85)}
   .rk-loadtrack{fill:rgba(255,255,255,0.1)}
-  .rk-loadbar{fill:#4FE3FF;transition:width .45s cubic-bezier(.22,.61,.36,1)}
-  .rk-loadglow{fill:rgba(79,227,255,0.4);filter:url(#rkBloom);transition:width .45s cubic-bezier(.22,.61,.36,1)}
+  .rk-loadbar{fill:#5CD5D5;transition:width .45s cubic-bezier(.22,.61,.36,1)}
+  .rk-loadglow{fill:rgba(92,213,213,0.4);filter:url(#rkBloom);transition:width .45s cubic-bezier(.22,.61,.36,1)}
   .rk-unit-g{cursor:pointer}
-  .rk-unit-g:hover .rk-unit{stroke:rgba(51,230,255,0.65)}
+  .rk-unit-g:hover .rk-unit{stroke:rgba(63,208,208,0.65)}
   .rk-unit-g:hover .rk-unit-off{stroke:rgba(255,255,255,0.35)}
   .rk-unit-g:focus{outline:none}
-  .rk-unit-g:focus-visible{outline:1px solid rgba(51,230,255,0.9);outline-offset:2px}
+  .rk-unit-g:focus-visible{outline:1px solid rgba(63,208,208,0.9);outline-offset:2px}
   .rk-unit-off{fill:transparent;stroke:rgba(255,255,255,0.15);stroke-width:1}
   .rk-unit-g.rk-offg .rk-cyan{stroke:rgba(255,255,255,0.15)}
   .rk-unit-g.rk-offg .rk-cyan-fill{fill:rgba(255,255,255,0.15)}
@@ -49,17 +49,17 @@
   .rk-unit-g.rk-offg .rk-led-a,.rk-unit-g.rk-offg .rk-led-b,.rk-unit-g.rk-offg .rk-led-c{fill:rgba(255,255,255,0.12);animation:none}
   .rk-unit-g.rk-offg .rk-btn{fill:transparent;stroke:rgba(255,255,255,0.14)}
   .rk-led-a{fill:#4ADE80}
-  .rk-led-b{fill:#33E6FF;animation:rkBlink 2.8s ease-in-out infinite}
+  .rk-led-b{fill:#3FD0D0;animation:rkBlink 2.8s ease-in-out infinite}
   .rk-led-c{fill:#FBBF24}
   @keyframes rkBlink{0%,100%{opacity:1}50%{opacity:.12}}
-  .rk-cable-glow{stroke:#33E6FF;stroke-width:2.4;fill:none;opacity:.28;filter:url(#rkBloom)}
-  .rk-cable{stroke:#33E6FF;stroke-width:1.05;fill:none;opacity:.85}
-  .rk-pulse{stroke:#BFF6FF;stroke-width:1.15;fill:none;stroke-dasharray:2.6 8.4;animation:rkPulse 1.7s linear infinite;opacity:.95}
+  .rk-cable-glow{stroke:#3FD0D0;stroke-width:2.4;fill:none;opacity:.28;filter:url(#rkBloom)}
+  .rk-cable{stroke:#3FD0D0;stroke-width:1.05;fill:none;opacity:.85}
+  .rk-pulse{stroke:#B7EAEA;stroke-width:1.15;fill:none;stroke-dasharray:2.6 8.4;animation:rkPulse 1.7s linear infinite;opacity:.95}
   @keyframes rkPulse{to{stroke-dashoffset:-11}}
-  .rk-arrow{fill:#33E6FF}
-  .rk-r04{fill:#33E6FF;filter:url(#rkGlow)}
-  .rk-rack-glow{stroke:#33E6FF;opacity:.35;filter:url(#rkSoft)}
-  .rk-rack-glow2{stroke:#33E6FF;opacity:.2;filter:url(#rkSoft)}
+  .rk-arrow{fill:#3FD0D0}
+  .rk-r04{fill:#3FD0D0;filter:url(#rkGlow)}
+  .rk-rack-glow{stroke:#3FD0D0;opacity:.35;filter:url(#rkSoft)}
+  .rk-rack-glow2{stroke:#3FD0D0;opacity:.2;filter:url(#rkSoft)}
   /* !important: el CSS global del sitio corta toda animación con animation-duration:.01ms en reduce */
   @media (prefers-reduced-motion:reduce){.rk-pulse{animation:none;opacity:.4}.rk-led-b{animation:rkBlink 4.2s ease-in-out infinite!important}}
 </style>

@@ -25,6 +25,16 @@
 
     const controller = new AbortController();
     const state = { all: [], activeCategory: 'all', term: '' };
+    let primerMontaje = true;
+
+    // La rejilla se monta por lotes, así que crece ~1900px despues de que el navegador
+    // ya resolvio la ancla: quien entra por #resenas, #faq o #contacto se queda corto.
+    function reasentarAncla() {
+      const id = location.hash.slice(1);
+      if (!id) return;
+      const destino = document.getElementById(id);
+      if (destino) destino.scrollIntoView();
+    }
 
     function load() {
       fetch('apps.json', { signal: controller.signal })
@@ -139,7 +149,9 @@
 
         frag.appendChild(card);
       });
-      mountInChunks(appsGrid, Array.prototype.slice.call(frag.children), 6);
+      mountInChunks(appsGrid, Array.prototype.slice.call(frag.children), 6,
+        primerMontaje && reasentarAncla);
+      primerMontaje = false;
     }
   })();
 

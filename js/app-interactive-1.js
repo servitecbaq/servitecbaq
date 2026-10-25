@@ -125,11 +125,11 @@
       if (cachedColors && cachedTheme === isDark) return cachedColors;
       cachedTheme = isDark;
       cachedColors = {
-        dot: isDark ? 'rgba(99,102,241,0.95)' : 'rgba(79,70,229,0.85)',
+        dot: isDark ? 'rgba(143,166,192,0.95)' : 'rgba(20,43,74,0.85)',
         dotCore: 'rgba(255,255,255,0.95)',
-        line: isDark ? 'rgba(99,102,241,' : 'rgba(79,70,229,',
-        ring: isDark ? 'rgba(99,102,241,0.18)' : 'rgba(79,70,229,0.14)',
-        sweep: isDark ? 'rgba(249,115,22,0.10)' : 'rgba(249,115,22,0.08)'
+        line: isDark ? 'rgba(143,166,192,' : 'rgba(20,43,74,',
+        ring: isDark ? 'rgba(143,166,192,0.18)' : 'rgba(20,43,74,0.14)',
+        sweep: isDark ? 'rgba(63,208,208,0.14)' : 'rgba(63,208,208,0.10)'
       };
       return cachedColors;
     }
