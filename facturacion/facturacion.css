@@ -28,9 +28,6 @@
     --verde-500: #10b981;
     --verde-100: #d1fae5;
 
-    --naranja-500: #f59e0b;
-    --naranja-100: #fef3c7;
-
     --n-900: #142B4A;
     --n-700: #33455A;
     --n-600: #5A6472;
@@ -744,37 +741,11 @@ textarea {
     gap: 10px;
 }
 
-.modal-box h3 .modal-icon {
-    width: 32px;
-    height: 32px;
-    background: var(--naranja-100);
-    color: var(--naranja-500);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-}
-
 .modal-box p {
     color: var(--n-700);
     font-size: 0.92rem;
     line-height: 1.55;
     margin-bottom: 18px;
-}
-
-.modal-box .modal-info {
-    background: var(--n-50);
-    border: 1px solid var(--n-200);
-    border-radius: var(--radio-sm);
-    padding: 12px 16px;
-    margin-bottom: 20px;
-    font-size: 0.85rem;
-    color: var(--n-700);
-}
-
-.modal-box .modal-info strong {
-    color: var(--n-900);
 }
 
 .modal-actions {
@@ -881,7 +852,6 @@ textarea {
         padding: 6px 10px;
         font-size: 0.75rem;
     }
-    .btn-reset,
     .btn-logout {
         width: 32px;
         height: 32px;
