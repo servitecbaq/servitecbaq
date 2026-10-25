@@ -157,3 +157,76 @@
   .svc-page { padding-top: calc(var(--header-offset) + var(--s-5)); }
   .svc-cta__panel { padding: var(--s-8) var(--s-5); }
 }
+
+/* ── /marca/ · kit de marca ─────────────────────────────────────────────
+   Todo en tokens: esta hoja no debe traer ningún hex, que es lo que permite
+   que el tema oscuro se herede sin reglas propias. */
+.svc-block__lead { margin: 0 0 var(--s-5); font-size: var(--tx-base); line-height: 1.7; color: var(--fg-muted); }
+.kit-grid { display: grid; gap: var(--s-4); grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.kit-grid--wide { grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); }
+.kit-card {
+  margin: 0; display: flex; flex-direction: column; gap: var(--s-3);
+  padding: var(--s-4); background: var(--bg-elev);
+  border: 1px solid var(--line); border-radius: var(--r-md);
+}
+.kit-card__fig {
+  display: flex; align-items: center; justify-content: center;
+  min-height: 148px; padding: var(--s-4);
+  background: var(--bg-subtle); border-radius: var(--r-sm);
+}
+/* El navy del tile no sigue al tema: es el fondo sobre el que existe la variante
+   inversa, así que se fija a propósito. */
+.kit-card__fig--navy { background: var(--navy-600); }
+.kit-card__fig img { display: block; max-width: 100%; }
+.kit-card__titulo { margin: 0 0 var(--s-2); font-size: var(--tx-base); font-weight: 700; }
+.kit-card__nota { margin: 0 0 var(--s-2); font-size: var(--tx-sm); line-height: 1.6; color: var(--fg-muted); }
+.kit-card__regla { margin: 0 0 var(--s-2); font-size: var(--tx-sm); line-height: 1.6; color: var(--accent-ink); font-weight: 600; }
+/* --n-600 y no --fg-faint: sobre la tira clara (#EDF1F4) el secundario del sitio se
+   queda en 4,06:1 y axe lo marca; el grafito de la guía llega a 5,28:1. */
+.kit-card__file { display: block; margin-top: var(--s-1); font-family: var(--font-mono); font-size: var(--tx-xs); color: var(--n-600); word-break: break-all; }
+[data-theme="dark"] .kit-card__file { color: var(--n-300); }
+.kit-card__dl {
+  display: inline-block; margin-top: var(--s-3); padding: var(--s-2) var(--s-4);
+  font-size: var(--tx-sm); font-weight: 700; text-decoration: none;
+  color: var(--brand); border: 1px solid var(--line); border-radius: var(--r-pill);
+}
+.kit-card__dl:hover { border-color: var(--brand); background: var(--brand-soft); }
+.kit-strip { display: grid; gap: var(--s-4); margin-bottom: var(--s-5); }
+.kit-strip__fila {
+  display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-4);
+  padding: var(--s-5); background: var(--bg-subtle); border-radius: var(--r-md);
+}
+.kit-strip__fila--navy { background: var(--navy-600); }
+.kit-strip__fila--navy .kit-card__file { color: var(--n-400); }
+.kit-strip__fila--navy .kit-card__dl { color: var(--n-50); border-color: var(--navy-soft); }
+.kit-strip__fila--navy .kit-card__dl:hover { background: var(--navy-soft); }
+.kit-pal { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-2); }
+.kit-pal__fila {
+  display: grid; grid-template-columns: 56px 1fr auto; align-items: center; gap: var(--s-4);
+  padding: var(--s-3) var(--s-4); background: var(--bg-elev);
+  border: 1px solid var(--line); border-radius: var(--r-sm);
+}
+.kit-pal__muestra { width: 56px; height: 34px; border-radius: var(--r-xs); border: 1px solid var(--line); }
+.kit-pal__dato b { display: block; font-size: var(--tx-sm); font-weight: 700; }
+.kit-pal__dato code { font-family: var(--font-mono); font-size: var(--tx-xs); color: var(--fg-muted); }
+.kit-pal__contraste { font-size: var(--tx-xs); color: var(--fg-muted); text-align: right; }
+.kit-reglas { list-style: decimal; margin: 0; padding-left: var(--s-6); display: grid; gap: var(--s-3); font-size: var(--tx-base); line-height: 1.7; }
+.kit-reglas li::marker { color: var(--accent-ink); font-weight: 700; }
+.kit-pngs { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-2); }
+.kit-pngs__fila {
+  display: grid; grid-template-columns: 48px 1fr auto; align-items: center; gap: var(--s-4);
+  padding: var(--s-3) var(--s-4); background: var(--bg-elev);
+  border: 1px solid var(--line); border-radius: var(--r-sm);
+}
+.kit-pngs__muestra { width: 48px; height: 48px; border-radius: var(--r-xs); }
+.kit-pngs__dato b { display: block; font-size: var(--tx-sm); font-weight: 700; }
+.kit-pngs__dato code { font-family: var(--font-mono); font-size: var(--tx-xs); color: var(--n-600); }
+.kit-pngs__dato small { display: block; margin-top: 3px; font-size: var(--tx-xs); color: var(--fg-muted); line-height: 1.55; }
+[data-theme="dark"] .kit-pngs__dato code { color: var(--n-300); }
+@media (max-width: 640px) {
+  .kit-pal__fila { grid-template-columns: 44px 1fr; }
+  .kit-pal__muestra { width: 44px; }
+  .kit-pal__contraste { grid-column: 1 / -1; text-align: left; }
+  .kit-pngs__fila { grid-template-columns: 48px 1fr; }
+  .kit-pngs__fila .kit-card__dl { grid-column: 1 / -1; justify-self: start; }
+}

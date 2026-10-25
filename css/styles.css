@@ -635,10 +635,21 @@ body:not(.cursor-ready) .jira-float { cursor: pointer; }
   box-shadow: 0 4px 12px rgba(20,43,74,0.4);
   flex-shrink: 0;
 }
-/* Dentro del tile de 40px se dibuja la versión REDUCIDA del isótipo (solo los dos
-   ganchos): el completo exige 48px y por debajo de 32px la traza y los anillos se
-   cierran y el signo se vuelve una mancha. */
-.logo__mark svg { width: 24px; height: 24px; }
+/* El tile pinta la versión REDUCIDA del isótipo (solo los dos ganchos): el completo
+   exige 48px y por debajo de 32px la traza y los anillos se cierran y el signo se
+   vuelve una mancha (regla 4). Va como máscara sobre currentColor, no como <img>,
+   porque el vector fija su propio color y no heredaría el blanco frío del tema
+   oscuro; así el archivo se sirve una vez para las 43 páginas y fuera del HTML. */
+/* El isótipo del tile va INLINE en el HTML (los dos ganchos de isotype-sm.svg, sin los
+   anillos ni el trazo de 5u) con fill="currentColor": así herede el blanco frío del tema
+   oscuro sin máscaras, y el header pinta sin pedir ningún archivo. Medido: enlazarlo con
+   mask:url() desde el CSS crítico cuesta 150 ms de LCP móvil (1726 → 1876), y ni siquiera
+   el data URI lo recupera del todo (1801). Regla 4 de la guía: por debajo de 32 px solo
+   la variante reducida, que es la que está copiada aquí. */
+.logo__mark svg { width: 24px; height: 24px; display: block; }
+/* En el pie el bloque es navy de por sí, así que ahí sí va el isótipo COMPLETO en su
+   variante inversa, sin tile: a 56px pasa del mínimo de 48px de la regla 4. */
+.footer-mark { width: 56px; height: 56px; flex-shrink: 0; }
 .logo__text { letter-spacing: -0.028em; }
 .logo__text-accent {
   /* Regla 1 del sistema: una sola línea, sin espacio intermedio, y el corte de lectura
@@ -654,7 +665,6 @@ body:not(.cursor-ready) .jira-float { cursor: pointer; }
 /* Sobre navy el logotipo se invierte: ganchos y texto en blanco frío, BAQ sigue en
    aguamarina (5.29:1 sobre #142B4A). */
 [data-theme="dark"] .logo__text { color: var(--n-50); }
-.footer-col--brand .logo__mark { background: var(--navy-soft); }
 .footer-col--brand .logo__text { color: var(--n-50); }
 .logo__pill {
   font-family: var(--font-mono);
