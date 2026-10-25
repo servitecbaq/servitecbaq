@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acceso · ServitecBAQ</title>
+    <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+    <link rel="icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/img/icons/apple-touch-icon.png">
     <link rel="stylesheet" href="login.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,10 +17,20 @@
 <div class="login-wrapper">
     <div class="login-card">
         <div class="login-header">
+            <!-- Regla 4 de la guía: a 60 px ya se permite el isótipo COMPLETO (ganchos +
+                 destornillador + anillos), y sobre la tarjeta blanca va en sus dos tintas,
+                 sin tile ni degradado encima (regla 6). -->
             <div class="login-logo">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 2L3 7v10l9 5 9-5V7l-9-5z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-                    <path d="M12 12l9-5M12 12v10M12 12L3 7" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                <svg viewBox="0 0 208 208" width="60" height="60" role="img" aria-label="Servitecbaq">
+                    <g fill="#142B4A">
+                        <polygon points="8,70 128,10 164,28 60,80 96,98 96,134 8,90"/>
+                        <polygon points="200,138 80,198 44,180 148,128 112,110 112,74 200,118"/>
+                    </g>
+                    <g fill="none" stroke="#19AFAF" stroke-width="5" stroke-linecap="round">
+                        <path d="M34 176 128 129"/><circle cx="34" cy="176" r="8" stroke-width="4"/>
+                    </g>
+                    <polygon points="139,126 126.5,121.5 130.5,112.5" fill="#19AFAF"/>
+                    <circle cx="172" cy="62" r="10" fill="none" stroke="#19AFAF" stroke-width="6"/>
                 </svg>
             </div>
             <h1>ServitecBAQ</h1>

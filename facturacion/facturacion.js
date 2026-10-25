@@ -623,7 +623,7 @@ function cargarLogo() {
             }
         };
         img.onerror = () => reject(new Error('No se pudo cargar el logo'));
-        img.src = 'img/logo.png';
+        img.src = 'img/isotype-pdf.png';
     });
 }
 
@@ -647,7 +647,7 @@ async function generarPDF(datos, numeroDocumento, tipo = 'Cuenta') {
     }
 
     // ===== ENCABEZADO =====
-    doc.setFillColor(10, 37, 64);
+    doc.setFillColor(20, 43, 74);
     doc.rect(0, 0, paginaAncho, 34, 'F');
 
     // Logo (si se cargó)
@@ -667,7 +667,7 @@ async function generarPDF(datos, numeroDocumento, tipo = 'Cuenta') {
     doc.text('Reparación, Mantenimiento y Soporte Tecnológico', textoX, 20);
     doc.text('Barranquilla, Atlántico · Colombia', textoX, 24.5);
 
-    doc.setTextColor(100, 181, 246);
+    doc.setTextColor(111, 201, 200);
     doc.setFontSize(8);
     doc.text('www.servitecbaq.com', textoX, 29);
 
@@ -684,17 +684,17 @@ async function generarPDF(datos, numeroDocumento, tipo = 'Cuenta') {
     y = 44;
 
     // ===== DATOS DEL EMISOR =====
-    doc.setTextColor(21, 101, 192);
+    doc.setTextColor(12, 110, 110);
     doc.setFontSize(10);
     doc.setFont('helvetica', 'bold');
     doc.text('DATOS DEL EMISOR', margen, y);
     y += 2;
-    doc.setDrawColor(30, 136, 229);
+    doc.setDrawColor(25, 175, 175);
     doc.setLineWidth(0.5);
     doc.line(margen, y, margen + 50, y);
     y += 5;
 
-    doc.setTextColor(51, 65, 85);
+    doc.setTextColor(51, 69, 90);
     doc.setFontSize(9);
     doc.setFont('helvetica', 'normal');
 
@@ -711,7 +711,7 @@ async function generarPDF(datos, numeroDocumento, tipo = 'Cuenta') {
     y += 10;
 
     // ===== DATOS DEL CLIENTE =====
-    doc.setTextColor(21, 101, 192);
+    doc.setTextColor(12, 110, 110);
     doc.setFontSize(10);
     doc.setFont('helvetica', 'bold');
     doc.text('DATOS DEL CLIENTE', margen, y);
@@ -719,7 +719,7 @@ async function generarPDF(datos, numeroDocumento, tipo = 'Cuenta') {
     doc.line(margen, y, margen + 50, y);
     y += 5;
 
-    doc.setTextColor(51, 65, 85);
+    doc.setTextColor(51, 69, 90);
     doc.setFontSize(9);
     doc.setFont('helvetica', 'normal');
 
@@ -736,7 +736,7 @@ async function generarPDF(datos, numeroDocumento, tipo = 'Cuenta') {
     y += 6;
 
     // ===== TABLA DE SERVICIOS =====
-    doc.setTextColor(21, 101, 192);
+    doc.setTextColor(12, 110, 110);
     doc.setFontSize(10);
     doc.setFont('helvetica', 'bold');
     doc.text('DETALLE DE SERVICIOS', margen, y);
@@ -747,7 +747,9 @@ async function generarPDF(datos, numeroDocumento, tipo = 'Cuenta') {
     const colValor = margen + 125;
     const colTotal = paginaAncho - margen - 3;
 
-    doc.setFillColor(30, 136, 229);
+    // Cabecera de tabla: relleno con texto blanco encima, así que va teal-600 (#0E7C7C,
+    // 5,01:1). La aguamarina pura #19AFAF con blanco se queda en 2,69:1.
+    doc.setFillColor(14, 124, 124);
     doc.rect(margen, y, paginaAncho - margen * 2, 7, 'F');
     doc.setTextColor(255, 255, 255);
     doc.setFontSize(9);
@@ -758,13 +760,13 @@ async function generarPDF(datos, numeroDocumento, tipo = 'Cuenta') {
     doc.text('Total', colTotal, y + 5, { align: 'right' });
     y += 7;
 
-    doc.setTextColor(51, 65, 85);
+    doc.setTextColor(51, 69, 90);
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(9);
 
     datos.servicios.forEach((servicio, idx) => {
         if (idx % 2 === 0) {
-            doc.setFillColor(248, 250, 252);
+            doc.setFillColor(245, 247, 250);
             doc.rect(margen, y, paginaAncho - margen * 2, 7, 'F');
         }
 
@@ -777,7 +779,7 @@ async function generarPDF(datos, numeroDocumento, tipo = 'Cuenta') {
         doc.text(formatearMonedaPDF(servicio.valor_unitario), colValor, y + 5);
         doc.text(formatearMonedaPDF(servicio.total_linea), colTotal, y + 5, { align: 'right' });
 
-        doc.setDrawColor(226, 232, 240);
+        doc.setDrawColor(221, 227, 234);
         doc.setLineWidth(0.2);
         doc.line(margen, y + 7, paginaAncho - margen, y + 7);
         y += 7;
@@ -790,7 +792,7 @@ async function generarPDF(datos, numeroDocumento, tipo = 'Cuenta') {
 
     doc.setFontSize(9);
     doc.setFont('helvetica', 'normal');
-    doc.setTextColor(100, 116, 139);
+    doc.setTextColor(90, 100, 114);
 
     doc.text('Subtotal:', totalesX, y);
     doc.text(formatearMonedaPDF(datos.totales.subtotal), colTotal, y, { align: 'right' });
@@ -800,7 +802,7 @@ async function generarPDF(datos, numeroDocumento, tipo = 'Cuenta') {
     doc.text(formatearMonedaPDF(datos.totales.iva), colTotal, y, { align: 'right' });
     y += 7;
 
-    doc.setFillColor(10, 37, 64);
+    doc.setFillColor(20, 43, 74);
     doc.rect(totalesX - 3, y - 4, 63, 11, 'F');
     doc.setTextColor(255, 255, 255);
     doc.setFontSize(11);
@@ -810,7 +812,7 @@ async function generarPDF(datos, numeroDocumento, tipo = 'Cuenta') {
     y += 14;
 
     // ===== MONTO EN LETRAS =====
-    doc.setTextColor(51, 65, 85);
+    doc.setTextColor(51, 69, 90);
     doc.setFont('helvetica', 'italic');
     doc.setFontSize(8.5);
     const totalLetrasTexto = `Son: ${datos.totalLetras}`;
@@ -820,13 +822,13 @@ async function generarPDF(datos, numeroDocumento, tipo = 'Cuenta') {
 
     // ===== DATOS PARA PAGO / VIGENCIA =====
     const cajaAlto = 36;
-    doc.setFillColor(240, 247, 255);
+    doc.setFillColor(235, 240, 246);
     doc.roundedRect(margen, y, paginaAncho - margen * 2, cajaAlto, 2, 2, 'F');
-    doc.setDrawColor(30, 136, 229);
+    doc.setDrawColor(25, 175, 175);
     doc.setLineWidth(0.4);
     doc.roundedRect(margen, y, paginaAncho - margen * 2, cajaAlto, 2, 2, 'S');
 
-    doc.setTextColor(21, 101, 192);
+    doc.setTextColor(12, 110, 110);
     doc.setFontSize(10);
     doc.setFont('helvetica', 'bold');
 
@@ -835,7 +837,7 @@ async function generarPDF(datos, numeroDocumento, tipo = 'Cuenta') {
         doc.setLineWidth(0.3);
         doc.line(margen + 6, y + 9, margen + 80, y + 9);
 
-        doc.setTextColor(51, 65, 85);
+        doc.setTextColor(51, 69, 90);
         doc.setFontSize(8.5);
         doc.setFont('helvetica', 'normal');
         doc.text(`Precio vigente por ${datos.vigencia || 15} días calendario desde la fecha de emisión.`, margen + 6, y + 16);
@@ -843,16 +845,16 @@ async function generarPDF(datos, numeroDocumento, tipo = 'Cuenta') {
         doc.text('Para aceptar, responde este documento o escribe a soporte@servitecbaq.com.', margen + 6, y + 27);
         doc.setFont('helvetica', 'italic');
         doc.setFontSize(7.5);
-        doc.setTextColor(100, 116, 139);
+        doc.setTextColor(90, 100, 114);
         doc.text('Al confirmar la cotización se emite la cuenta de cobro correspondiente.', margen + 6, y + 32.5);
     } else {
         doc.text('DATOS PARA PAGO', margen + 6, y + 7);
 
-        doc.setDrawColor(30, 136, 229);
+        doc.setDrawColor(25, 175, 175);
         doc.setLineWidth(0.3);
         doc.line(margen + 6, y + 9, margen + 60, y + 9);
 
-        doc.setTextColor(51, 65, 85);
+        doc.setTextColor(51, 69, 90);
         doc.setFontSize(8.5);
         doc.setFont('helvetica', 'bold');
         doc.text('Bancolombia', margen + 6, y + 14);
@@ -875,7 +877,7 @@ async function generarPDF(datos, numeroDocumento, tipo = 'Cuenta') {
 
         doc.setFont('helvetica', 'italic');
         doc.setFontSize(7.5);
-        doc.setTextColor(100, 116, 139);
+        doc.setTextColor(90, 100, 114);
         doc.text(
             'Por favor envíe el comprobante de pago a soporte@servitecbaq.com o al WhatsApp 315 850 5020.',
             margen + 6, y + 31
@@ -893,12 +895,12 @@ async function generarPDF(datos, numeroDocumento, tipo = 'Cuenta') {
 
         doc.setFont('helvetica', 'bold');
         doc.setFontSize(9.5);
-        doc.setTextColor(21, 101, 192);
+        doc.setTextColor(12, 110, 110);
         doc.text('EQUIPOS INTERVENIDOS', margen, y);
         y += 5;
         doc.setFont('helvetica', 'normal');
         doc.setFontSize(8.5);
-        doc.setTextColor(51, 65, 85);
+        doc.setTextColor(51, 69, 90);
 
         datos.equipos.forEach(equipo => {
             const lineas = doc.splitTextToSize('· ' + equipo, paginaAncho - margen * 2);
@@ -912,12 +914,12 @@ async function generarPDF(datos, numeroDocumento, tipo = 'Cuenta') {
     if (datos.observaciones) {
         doc.setFont('helvetica', 'bold');
         doc.setFontSize(9.5);
-        doc.setTextColor(21, 101, 192);
+        doc.setTextColor(12, 110, 110);
         doc.text('OBSERVACIONES', margen, y);
         y += 5;
         doc.setFont('helvetica', 'normal');
         doc.setFontSize(8.5);
-        doc.setTextColor(51, 65, 85);
+        doc.setTextColor(51, 69, 90);
         const obsLineas = doc.splitTextToSize(datos.observaciones, paginaAncho - margen * 2);
         doc.text(obsLineas, margen, y);
         y += obsLineas.length * 4 + 6;
@@ -928,12 +930,12 @@ async function generarPDF(datos, numeroDocumento, tipo = 'Cuenta') {
     const firmaX = paginaAncho - margen - firmaAncho;
     const firmaY = paginaAlto - 45;
 
-    doc.setDrawColor(51, 65, 85);
+    doc.setDrawColor(51, 69, 90);
     doc.setLineWidth(0.3);
     doc.line(firmaX, firmaY, firmaX + firmaAncho, firmaY);
 
     doc.setFontSize(8.5);
-    doc.setTextColor(51, 65, 85);
+    doc.setTextColor(51, 69, 90);
     doc.setFont('helvetica', 'normal');
     doc.text(datos.emisor.nombre, firmaX + 5, firmaY + 5);
     doc.text(`C.C. ${datos.emisor.cedula}`, firmaX + 5, firmaY + 9);
@@ -944,7 +946,7 @@ async function generarPDF(datos, numeroDocumento, tipo = 'Cuenta') {
     for (let i = 1; i <= totalPaginas; i++) {
         doc.setPage(i);
         doc.setFontSize(7.5);
-        doc.setTextColor(148, 163, 184);
+        doc.setTextColor(167, 175, 184);
         doc.setFont('helvetica', 'normal');
         doc.text(
             `ServitecBAQ · ${datos.emisor.email} · ${datos.emisor.telefono} · www.servitecbaq.com`,

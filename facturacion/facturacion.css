@@ -3,12 +3,27 @@
    Diseño moderno · Dashboard SaaS
    ============================================ */
 
+/* Los anclas son los literales de la guía de marca (navy #142B4A, aguamarina #19AFAF,
+   gris #A7AFB8) y los mismos pasos de las rampas que usa css/styles.css: el módulo no
+   define paleta propia, solo toma decisiones de rol sobre la del sitio.
+   Regla de contraste que hay que respetar al mover cualquier valor: la aguamarina pura
+   (--teal-500) NO lleva blanco encima (2,69:1); para rellenos con texto va --teal-600
+   (5,01:1) y para texto escrito va --teal-700 (6,05:1). */
 :root {
-    --azul-900: #0a2540;
-    --azul-700: #1565c0;
-    --azul-500: #1e88e5;
-    --azul-300: #64b5f6;
-    --azul-100: #e3f2fd;
+    --navy-900: #0A1828;
+    --navy-700: #0F2138;
+    --navy-600: #142B4A;
+    --navy-500: #2F5478;
+    --navy-200: #9DB2CA;
+    --navy-100: #D7E1EB;
+    --navy-50:  #EBF0F6;
+
+    --teal-700: #0C6E6E;
+    --teal-600: #0E7C7C;
+    --teal-500: #19AFAF;
+    --teal-400: #35BFBF;
+    --teal-300: #6FC9C8;
+    --teal-100: #CFEDEB;
 
     --verde-500: #10b981;
     --verde-100: #d1fae5;
@@ -16,23 +31,27 @@
     --naranja-500: #f59e0b;
     --naranja-100: #fef3c7;
 
-    --purple-500: #8b5cf6;
-    --purple-100: #ede9fe;
-
-    --gris-900: #0f172a;
-    --gris-700: #334155;
-    --gris-500: #64748b;
-    --gris-300: #cbd5e1;
-    --gris-200: #e2e8f0;
-    --gris-100: #f1f5f9;
-    --gris-50:  #f8fafc;
+    --n-900: #142B4A;
+    --n-700: #33455A;
+    --n-600: #5A6472;
+    --n-400: #A7AFB8;
+    --n-300: #C3CCD6;
+    --n-200: #DDE3EA;
+    --n-100: #EDF1F4;
+    --n-50:  #F5F7FA;
 
     --rojo-500: #ef4444;
     --rojo-100: #fee2e2;
+    /* #ef4444 con blanco o sobre rojo-100 se queda en ~3:1 y no pasa AA en texto normal.
+       El 500 se conserva para trazos; lo que lleva tinta encima usa el 700 (6:1). */
+    --rojo-700: #b91c1c;
 
-    --sombra-sm: 0 1px 2px rgba(15, 23, 42, 0.05);
-    --sombra-md: 0 4px 12px rgba(15, 23, 42, 0.08);
-    --sombra-lg: 0 12px 32px rgba(15, 23, 42, 0.12);
+    --blanco-frio: #F5F7FA;
+    --tinta-sobre-marca: #FFFFFF;
+
+    --sombra-sm: 0 1px 2px rgba(20, 43, 74, 0.05);
+    --sombra-md: 0 4px 12px rgba(20, 43, 74, 0.08);
+    --sombra-lg: 0 12px 32px rgba(20, 43, 74, 0.12);
 
     --radio-sm: 8px;
     --radio-md: 12px;
@@ -51,11 +70,11 @@ html { scroll-behavior: smooth; }
 
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: var(--gris-50);
+    background: var(--n-50);
     background-image:
-        radial-gradient(circle at 0% 0%, rgba(30, 136, 229, 0.06) 0%, transparent 40%),
-        radial-gradient(circle at 100% 100%, rgba(139, 92, 246, 0.05) 0%, transparent 40%);
-    color: var(--gris-900);
+        radial-gradient(circle at 0% 0%, rgba(14, 124, 124, 0.06) 0%, transparent 40%),
+        radial-gradient(circle at 100% 100%, rgba(25, 175, 175, 0.05) 0%, transparent 40%);
+    color: var(--n-900);
     line-height: 1.6;
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
@@ -65,7 +84,7 @@ body {
    BARRA SUPERIOR
    ============================================ */
 .topbar {
-    background: linear-gradient(135deg, var(--azul-900) 0%, var(--azul-700) 100%);
+    background: linear-gradient(135deg, var(--navy-900) 0%, var(--navy-600) 100%);
     color: #fff;
     padding: 16px 0;
     box-shadow: var(--sombra-md);
@@ -183,10 +202,14 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
+/* El avatar va dentro de la pastilla translúcida sobre la banda navy: era un degradado
+   azul→violeta con las iniciales en blanco (2,1:1 sobre el tramo claro). Ahora pastilla
+   del mismo familia que el tile del logo, así que el blanco hereda el contraste de la banda. */
 .user-avatar {
     width: 30px;
     height: 30px;
-    background: linear-gradient(135deg, #64b5f6, #8b5cf6);
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.28);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -223,7 +246,7 @@ body {
     align-items: center;
     gap: 14px;
     box-shadow: var(--sombra-sm);
-    border: 1px solid var(--gris-200);
+    border: 1px solid var(--n-200);
     transition: transform var(--transicion), box-shadow var(--transicion);
 }
 
@@ -244,10 +267,11 @@ body {
 
 .stat-icon svg { width: 22px; height: 22px; }
 
-.icon-blue   { background: var(--azul-100);    color: var(--azul-700); }
-.icon-green  { background: var(--verde-100);   color: var(--verde-500); }
-.icon-orange { background: var(--naranja-100); color: var(--naranja-500); }
-.icon-purple { background: var(--purple-100);  color: var(--purple-500); }
+/* Dos familias de acento, no cuatro: los viejos blue/purple eran el mismo slot.
+   El verde y el ámbar se quedaron solo donde significan algo (chip de pago, pendiente,
+   confirmación destructiva); como adorno de tarjeta o de cabecera iban fuera de guía. */
+.icon-navy   { background: var(--navy-50);    color: var(--navy-600); }
+.icon-teal   { background: var(--teal-100);    color: var(--teal-700); }
 
 .stat-info {
     display: flex;
@@ -257,7 +281,7 @@ body {
 
 .stat-label {
     font-size: 0.75rem;
-    color: var(--gris-500);
+    color: var(--n-600);
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -266,7 +290,7 @@ body {
 .stat-value {
     font-size: 1.05rem;
     font-weight: 700;
-    color: var(--gris-900);
+    color: var(--n-900);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -281,7 +305,7 @@ body {
     padding: 24px;
     margin-bottom: 20px;
     box-shadow: var(--sombra-sm);
-    border: 1px solid var(--gris-200);
+    border: 1px solid var(--n-200);
     transition: box-shadow var(--transicion);
 }
 
@@ -295,7 +319,7 @@ body {
     justify-content: space-between;
     margin-bottom: 20px;
     padding-bottom: 14px;
-    border-bottom: 1px solid var(--gris-100);
+    border-bottom: 1px solid var(--n-100);
 }
 
 .card-title {
@@ -310,24 +334,25 @@ body {
     border-radius: 50%;
 }
 
-.dot-blue   { background: var(--azul-500);    box-shadow: 0 0 0 4px var(--azul-100); }
-.dot-green  { background: var(--verde-500);   box-shadow: 0 0 0 4px var(--verde-100); }
-.dot-orange { background: var(--naranja-500); box-shadow: 0 0 0 4px var(--naranja-100); }
-.dot-purple { background: var(--purple-500);  box-shadow: 0 0 0 4px var(--purple-100); }
-.dot-gray   { background: var(--gris-500);    box-shadow: 0 0 0 4px var(--gris-100); }
+/* Los puntos de leyenda sí tienen que distinguirse entre sí: navy y aguamarina son las dos
+   tinta de la marca, así que cada familia toma una. Verde y ámbar fuera: aquí eran adorno,
+   no estado, y un tráfico de colores ajenos a la guía en los títulos de tarjeta. */
+.dot-navy   { background: var(--navy-600);    box-shadow: 0 0 0 4px var(--navy-50); }
+.dot-teal   { background: var(--teal-500);    box-shadow: 0 0 0 4px var(--teal-100); }
+.dot-gray   { background: var(--n-600);       box-shadow: 0 0 0 4px var(--n-100); }
 
 .card-title h2 {
     font-size: 1rem;
     font-weight: 600;
-    color: var(--gris-900);
+    color: var(--n-900);
     letter-spacing: -0.01em;
 }
 
 .card-tag {
     font-size: 0.7rem;
     font-weight: 700;
-    color: var(--gris-700);
-    background: var(--gris-100);
+    color: var(--n-700);
+    background: var(--n-100);
     padding: 4px 10px;
     border-radius: 999px;
     text-transform: uppercase;
@@ -335,8 +360,8 @@ body {
 }
 
 .tag-required {
-    color: var(--azul-700);
-    background: var(--azul-100);
+    color: var(--navy-600);
+    background: var(--navy-50);
 }
 
 /* ============================================
@@ -356,7 +381,7 @@ body {
 .campo label {
     font-size: 0.8rem;
     font-weight: 600;
-    color: var(--gris-700);
+    color: var(--n-700);
     margin-bottom: 6px;
     letter-spacing: 0.01em;
 }
@@ -365,43 +390,43 @@ body {
 .campo select,
 textarea {
     padding: 11px 14px;
-    border: 1.5px solid var(--gris-200);
+    border: 1.5px solid var(--n-200);
     border-radius: var(--radio-sm);
     font-size: 0.9rem;
     font-family: inherit;
-    color: var(--gris-900);
+    color: var(--n-900);
     background: #fff;
     transition: all var(--transicion);
 }
 
 .campo input::placeholder,
 textarea::placeholder {
-    color: var(--gris-300);
+    color: var(--n-300);
 }
 
 .campo input:hover,
 .campo select:hover,
 textarea:hover {
-    border-color: var(--gris-300);
+    border-color: var(--n-300);
 }
 
 .campo input:focus,
 .campo select:focus,
 textarea:focus {
     outline: none;
-    border-color: var(--azul-500);
-    box-shadow: 0 0 0 4px rgba(30, 136, 229, 0.12);
+    border-color: var(--teal-600);
+    box-shadow: 0 0 0 4px rgba(14, 124, 124, 0.12);
 }
 
 .campo input[readonly] {
-    background: var(--gris-50);
-    color: var(--gris-700);
+    background: var(--n-50);
+    color: var(--n-700);
     cursor: not-allowed;
-    border-color: var(--gris-100);
+    border-color: var(--n-100);
 }
 
 .campo small {
-    color: var(--gris-500);
+    color: var(--n-600);
     font-size: 0.72rem;
     margin-top: 4px;
 }
@@ -415,7 +440,7 @@ textarea:focus {
        absolute escapa del recorte y ensancha la página en móvil. */
     position: relative;
     border-radius: var(--radio-sm);
-    border: 1px solid var(--gris-200);
+    border: 1px solid var(--n-200);
     margin-bottom: 16px;
 }
 
@@ -425,20 +450,20 @@ table {
 }
 
 table th {
-    background: var(--gris-50);
-    color: var(--gris-700);
+    background: var(--n-50);
+    color: var(--n-700);
     font-size: 0.75rem;
     font-weight: 600;
     text-align: left;
     padding: 12px 14px;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    border-bottom: 1px solid var(--gris-200);
+    border-bottom: 1px solid var(--n-200);
 }
 
 table td {
     padding: 10px 12px;
-    border-bottom: 1px solid var(--gris-100);
+    border-bottom: 1px solid var(--n-100);
     vertical-align: middle;
 }
 
@@ -447,7 +472,7 @@ table tr:last-child td {
 }
 
 table tr:hover td {
-    background: var(--gris-50);
+    background: var(--n-50);
 }
 
 @media (hover: none), (pointer: coarse) {
@@ -467,19 +492,19 @@ table td input {
 
 table td input:hover {
     background: #fff;
-    border-color: var(--gris-200);
+    border-color: var(--n-200);
 }
 
 table td input:focus {
     outline: none;
     background: #fff;
-    border-color: var(--azul-500);
-    box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.1);
+    border-color: var(--teal-600);
+    box-shadow: 0 0 0 3px rgba(14, 124, 124, 0.1);
 }
 
 .total-linea {
     font-weight: 700;
-    color: var(--gris-900);
+    color: var(--n-900);
     text-align: right;
     font-size: 0.9rem;
     white-space: nowrap;
@@ -487,7 +512,7 @@ table td input:focus {
 
 .btn-eliminar {
     background: transparent;
-    color: var(--gris-300);
+    color: var(--n-300);
     border: none;
     border-radius: 6px;
     width: 30px;
@@ -503,7 +528,7 @@ table td input:focus {
 
 .btn-eliminar:hover {
     background: var(--rojo-100);
-    color: var(--rojo-500);
+    color: var(--rojo-700);
     transform: rotate(90deg);
 }
 
@@ -511,9 +536,9 @@ table td input:focus {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: var(--azul-100);
-    color: var(--azul-700);
-    border: 1.5px dashed var(--azul-300);
+    background: var(--navy-50);
+    color: var(--navy-600);
+    border: 1.5px dashed var(--teal-300);
     border-radius: var(--radio-sm);
     padding: 10px 18px;
     cursor: pointer;
@@ -524,19 +549,19 @@ table td input:focus {
 }
 
 .btn-agregar:hover {
-    background: var(--azul-500);
+    background: var(--teal-600);
     color: #fff;
     border-style: solid;
-    border-color: var(--azul-500);
+    border-color: var(--teal-600);
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(30, 136, 229, 0.25);
+    box-shadow: 0 4px 12px rgba(14, 124, 124, 0.25);
 }
 
 /* ============================================
    TOTALES
    ============================================ */
 .card-totales {
-    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #F5F7FA 100%);
 }
 
 .totales-grid {
@@ -558,16 +583,16 @@ table td input:focus {
     align-items: center;
     padding: 8px 0;
     font-size: 0.92rem;
-    color: var(--gris-700);
+    color: var(--n-700);
 }
 
 .fila-total span:last-child {
     font-weight: 600;
-    color: var(--gris-900);
+    color: var(--n-900);
 }
 
 .totales-final {
-    background: linear-gradient(135deg, var(--azul-900) 0%, var(--azul-700) 100%);
+    background: linear-gradient(135deg, var(--navy-900) 0%, var(--navy-600) 100%);
     border-radius: var(--radio-md);
     padding: 22px 24px;
     color: #fff;
@@ -619,7 +644,7 @@ textarea {
     gap: 12px;
     margin-top: 8px;
     padding-top: 20px;
-    border-top: 1px solid var(--gris-200);
+    border-top: 1px solid var(--n-200);
 }
 
 .btn-primario,
@@ -639,14 +664,14 @@ textarea {
 }
 
 .btn-primario {
-    background: linear-gradient(135deg, var(--azul-700) 0%, var(--azul-500) 100%);
+    background: linear-gradient(135deg, var(--navy-600) 0%, var(--teal-600) 100%);
     color: #fff;
-    box-shadow: 0 4px 12px rgba(30, 136, 229, 0.3);
+    box-shadow: 0 4px 12px rgba(14, 124, 124, 0.3);
 }
 
 .btn-primario:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(30, 136, 229, 0.4);
+    box-shadow: 0 8px 20px rgba(14, 124, 124, 0.4);
 }
 
 .btn-primario:active {
@@ -655,13 +680,13 @@ textarea {
 
 .btn-secundario {
     background: #fff;
-    color: var(--gris-700);
-    border: 1.5px solid var(--gris-200);
+    color: var(--n-700);
+    border: 1.5px solid var(--n-200);
 }
 
 .btn-secundario:hover {
-    background: var(--gris-50);
-    border-color: var(--gris-300);
+    background: var(--n-50);
+    border-color: var(--n-300);
 }
 
 /* ============================================
@@ -673,7 +698,7 @@ textarea {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(10, 37, 64, 0.6);
+    background: rgba(10, 24, 40, 0.6);
     backdrop-filter: blur(4px);
     display: flex;
     align-items: center;
@@ -696,7 +721,7 @@ textarea {
     padding: 28px;
     max-width: 440px;
     width: 100%;
-    box-shadow: 0 24px 60px rgba(10, 37, 64, 0.3);
+    box-shadow: 0 24px 60px rgba(10, 24, 40, 0.3);
     transform: scale(0.95);
     transition: transform 0.2s;
 }
@@ -708,7 +733,7 @@ textarea {
 .modal-box h3 {
     font-size: 1.15rem;
     font-weight: 700;
-    color: var(--gris-900);
+    color: var(--n-900);
     margin-bottom: 12px;
     display: flex;
     align-items: center;
@@ -728,24 +753,24 @@ textarea {
 }
 
 .modal-box p {
-    color: var(--gris-700);
+    color: var(--n-700);
     font-size: 0.92rem;
     line-height: 1.55;
     margin-bottom: 18px;
 }
 
 .modal-box .modal-info {
-    background: var(--gris-50);
-    border: 1px solid var(--gris-200);
+    background: var(--n-50);
+    border: 1px solid var(--n-200);
     border-radius: var(--radio-sm);
     padding: 12px 16px;
     margin-bottom: 20px;
     font-size: 0.85rem;
-    color: var(--gris-700);
+    color: var(--n-700);
 }
 
 .modal-box .modal-info strong {
-    color: var(--gris-900);
+    color: var(--n-900);
 }
 
 .modal-actions {
@@ -766,23 +791,26 @@ textarea {
 }
 
 .modal-actions .btn-cancelar {
-    background: var(--gris-100);
-    color: var(--gris-700);
+    background: var(--n-100);
+    color: var(--n-700);
 }
 
 .modal-actions .btn-cancelar:hover {
-    background: var(--gris-200);
+    background: var(--n-200);
 }
 
+/* Confirmar genérico = acción primaria del módulo, misma tinta que el resto (navy→teal).
+   El degradado ámbar que había aquí era un cuarto acento fuera de guía y, además, blanco
+   sobre #f59e06 da 2,2:1: el rótulo no pasaba AA. Lo destructivo sigue rojo abajo. */
 .modal-actions .btn-confirmar {
-    background: linear-gradient(135deg, var(--naranja-500) 0%, #d97706 100%);
+    background: linear-gradient(135deg, var(--navy-900) 0%, var(--teal-600) 100%);
     color: #fff;
-    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+    box-shadow: 0 4px 12px rgba(14, 124, 124, 0.28);
 }
 
 .modal-actions .btn-confirmar:hover {
     transform: translateY(-1px);
-    box-shadow: 0 6px 16px rgba(245, 158, 11, 0.4);
+    box-shadow: 0 6px 16px rgba(14, 124, 124, 0.34);
 }
 
 /* ============================================
@@ -914,9 +942,9 @@ textarea {
 
 .vista-tab {
     appearance: none;
-    border: 1px solid var(--gris-200);
+    border: 1px solid var(--n-200);
     background: #fff;
-    color: var(--gris-700);
+    color: var(--n-700);
     font: inherit;
     font-size: 0.85rem;
     font-weight: 600;
@@ -929,13 +957,13 @@ textarea {
 }
 
 .vista-tab.is-active {
-    background: var(--azul-900);
-    border-color: var(--azul-900);
+    background: var(--navy-900);
+    border-color: var(--navy-900);
     color: #fff;
 }
 
 @media (hover: hover) and (pointer: fine) {
-    .vista-tab:hover { border-color: var(--azul-300); }
+    .vista-tab:hover { border-color: var(--teal-300); }
 }
 
 .vista-tab:active { transform: scale(0.985); transition-duration: 140ms; }
@@ -956,7 +984,7 @@ textarea {
     align-items: center;
     column-gap: 10px;
     padding: 14px 16px;
-    border: 1.5px solid var(--gris-200);
+    border: 1.5px solid var(--n-200);
     border-radius: var(--radio-sm);
     cursor: pointer;
     min-height: 60px;
@@ -965,23 +993,23 @@ textarea {
 }
 
 .tipo-opcion input { grid-row: span 2; width: 18px; height: 18px; margin: 0; flex-shrink: 0; }
-.tipo-opcion span { font-weight: 600; color: var(--gris-900); }
-.tipo-opcion small { color: var(--gris-700); font-variant-numeric: tabular-nums; }
+.tipo-opcion span { font-weight: 600; color: var(--n-900); }
+.tipo-opcion small { color: var(--n-700); font-variant-numeric: tabular-nums; }
 
 @media (hover: hover) and (pointer: fine) {
-    .tipo-opcion:hover { border-color: var(--azul-300); }
+    .tipo-opcion:hover { border-color: var(--teal-300); }
 }
 
 .tipo-opcion:has(input:checked) {
-    border-color: var(--azul-500);
-    background: var(--azul-100);
+    border-color: var(--teal-600);
+    background: var(--navy-50);
 }
 
 .campo-ayuda {
     display: block;
     margin-top: 4px;
     font-size: 0.72rem;
-    color: var(--gris-500);
+    color: var(--n-600);
 }
 
 /* ============================================
@@ -991,8 +1019,8 @@ textarea {
 .equipos-cliente:not(:empty) {
     margin-top: 16px;
     padding: 14px;
-    background: var(--gris-50);
-    border: 1px solid var(--gris-200);
+    background: var(--n-50);
+    border: 1px solid var(--n-200);
     border-radius: var(--radio-sm);
 }
 
@@ -1000,10 +1028,10 @@ textarea {
 .ficha-empty,
 .ficha-error {
     font-size: 0.82rem;
-    color: var(--gris-500);
+    color: var(--n-600);
 }
 
-.ficha-error { color: var(--rojo-500); }
+.ficha-error { color: var(--rojo-700); }
 
 .ficha-head {
     display: flex;
@@ -1013,8 +1041,8 @@ textarea {
     margin-bottom: 10px;
 }
 
-.ficha-head strong { color: var(--gris-900); font-size: 0.95rem; overflow-wrap: anywhere; }
-.ficha-head span { color: var(--gris-500); font-size: 0.8rem; font-variant-numeric: tabular-nums; }
+.ficha-head strong { color: var(--n-900); font-size: 0.95rem; overflow-wrap: anywhere; }
+.ficha-head span { color: var(--n-600); font-size: 0.8rem; font-variant-numeric: tabular-nums; }
 
 .ficha-chips { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
 
@@ -1026,8 +1054,8 @@ textarea {
     border-radius: 999px;
     font-size: 0.75rem;
     font-weight: 600;
-    background: var(--gris-100);
-    color: var(--gris-700);
+    background: var(--n-100);
+    color: var(--n-700);
     font-variant-numeric: tabular-nums;
     max-width: 100%;
     overflow-wrap: anywhere;
@@ -1039,8 +1067,8 @@ textarea {
 .chip-anulada,
 .chip-rechazada { background: var(--rojo-100); color: #991b1b; }
 .chip-convertida,
-.chip-aceptada  { background: var(--azul-100); color: var(--azul-700); }
-.chip-fecha     { background: transparent; border: 1px solid var(--gris-200); }
+.chip-aceptada  { background: var(--navy-50); color: var(--navy-600); }
+.chip-fecha     { background: transparent; border: 1px solid var(--n-200); }
 
 .btn-enlace {
     appearance: none;
@@ -1051,7 +1079,7 @@ textarea {
     font: inherit;
     font-size: 0.8rem;
     font-weight: 600;
-    color: var(--azul-700);
+    color: var(--navy-600);
     cursor: pointer;
     touch-action: manipulation;
 }
@@ -1063,7 +1091,7 @@ textarea {
 .equipos-titulo {
     font-size: 0.78rem;
     font-weight: 700;
-    color: var(--gris-500);
+    color: var(--n-600);
     text-transform: uppercase;
     letter-spacing: 0.04em;
     margin-bottom: 8px;
@@ -1075,20 +1103,20 @@ textarea {
     gap: 4px 10px;
     align-items: center;
     padding: 10px 8px;
-    border-top: 1px solid var(--gris-200);
+    border-top: 1px solid var(--n-200);
     cursor: pointer;
     touch-action: manipulation;
 }
 
 .equipo-fila input { width: 18px; height: 18px; margin: 0; flex-shrink: 0; }
-.equipo-nombre { font-size: 0.85rem; font-weight: 600; color: var(--gris-900); overflow-wrap: anywhere; }
-.equipo-meta { grid-column: 2; font-size: 0.75rem; color: var(--gris-500); overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+.equipo-nombre { font-size: 0.85rem; font-weight: 600; color: var(--n-900); overflow-wrap: anywhere; }
+.equipo-meta { grid-column: 2; font-size: 0.75rem; color: var(--n-600); overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
 .equipo-fila .chip { grid-row: 1; }
 
 .form-equipo {
     margin-top: 16px;
     padding-top: 16px;
-    border-top: 1px dashed var(--gris-300);
+    border-top: 1px dashed var(--n-300);
 }
 
 .campo-ancho { grid-column: 1 / -1; }
@@ -1101,13 +1129,13 @@ textarea {
 
 .pago-dato {
     padding: 12px 14px;
-    background: var(--azul-100);
+    background: var(--navy-50);
     border-radius: var(--radio-sm);
     min-width: 0;
 }
 
-.pago-dato strong { display: block; color: var(--azul-700); font-size: 0.85rem; }
-.pago-dato span { display: block; color: var(--gris-700); font-size: 0.8rem; overflow-wrap: anywhere; }
+.pago-dato strong { display: block; color: var(--navy-600); font-size: 0.85rem; }
+.pago-dato span { display: block; color: var(--n-700); font-size: 0.8rem; overflow-wrap: anywhere; }
 
 /* ============================================
    TABLAS DE ADMINISTRACIÓN
@@ -1123,7 +1151,7 @@ textarea {
 
 .ayuda-vista {
     font-size: 0.82rem;
-    color: var(--gris-500);
+    color: var(--n-600);
     line-height: 1.55;
     margin: 4px 0 0;
 }
@@ -1140,7 +1168,7 @@ textarea {
 .tabla-admin td {
     padding: 10px 8px;
     text-align: left;
-    border-bottom: 1px solid var(--gris-100);
+    border-bottom: 1px solid var(--n-100);
     vertical-align: top;
 }
 
@@ -1148,22 +1176,22 @@ textarea {
     font-size: 0.72rem;
     text-transform: uppercase;
     letter-spacing: 0.04em;
-    color: var(--gris-500);
-    background: var(--gris-50);
+    color: var(--n-600);
+    background: var(--n-50);
     white-space: nowrap;
 }
 
 .tabla-admin tbody th[scope="row"] {
     font-weight: 700;
-    color: var(--azul-700);
+    color: var(--navy-600);
     white-space: nowrap;
     font-variant-numeric: tabular-nums;
 }
 
 .celda-monto { white-space: nowrap; font-variant-numeric: tabular-nums; font-weight: 600; }
-.celda-cliente { color: var(--gris-900); overflow-wrap: anywhere; }
-.celda-sub { font-size: 0.74rem; color: var(--gris-500); overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
-.tabla-esperando { color: var(--gris-500); font-style: italic; }
+.celda-cliente { color: var(--n-900); overflow-wrap: anywhere; }
+.celda-sub { font-size: 0.74rem; color: var(--n-600); overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+.tabla-esperando { color: var(--n-600); font-style: italic; }
 .col-acciones { width: 240px; }
 
 .btn-mini {
@@ -1174,9 +1202,9 @@ textarea {
     padding: 7px 12px;
     min-height: 36px;
     border-radius: var(--radio-sm);
-    border: 1px solid var(--gris-200);
+    border: 1px solid var(--n-200);
     background: #fff;
-    color: var(--gris-700);
+    color: var(--n-700);
     cursor: pointer;
     touch-action: manipulation;
     transition: background-color var(--transicion), border-color var(--transicion);
@@ -1185,7 +1213,7 @@ textarea {
 .btn-mini:active { transform: scale(0.97); transition-duration: 140ms; }
 
 @media (hover: hover) and (pointer: fine) {
-    .btn-mini:hover { border-color: var(--gris-300); background: var(--gris-50); }
+    .btn-mini:hover { border-color: var(--n-300); background: var(--n-50); }
     .btn-mini-pago:hover { border-color: var(--verde-500); background: var(--verde-100); }
     .btn-mini-peligro:hover { border-color: var(--rojo-500); background: var(--rojo-100); }
 }
@@ -1214,10 +1242,12 @@ textarea {
     border: 0;
 }
 
-.btn-peligro { background: var(--rojo-500); }
+/* Con la misma especificidad que .modal-actions .btn-confirmar esta regla perdía, así que
+   el modal destructivo salía con el degradado primario y no en rojo. Se sube un nivel. */
+.modal-actions .btn-confirmar.btn-peligro { background: var(--rojo-700); }
 
 @media (prefers-reduced-transparency: reduce) {
-    .modal-overlay { backdrop-filter: none; background: rgba(10, 37, 64, 0.9); }
+    .modal-overlay { backdrop-filter: none; background: rgba(10, 24, 40, 0.9); }
 }
 
 @media (max-width: 640px) {
@@ -1229,7 +1259,7 @@ textarea {
        columnas en 390 px los inputs quedaban cortados a la mitad. */
     table td input {
         background: #fff;
-        border-color: var(--gris-200);
+        border-color: var(--n-200);
     }
 
     #tablaServicios thead,
@@ -1240,7 +1270,7 @@ textarea {
         display: grid;
         gap: 10px 12px;
         padding: 14px 12px;
-        border-bottom: 1px solid var(--gris-200);
+        border-bottom: 1px solid var(--n-200);
     }
 
     #tablaServicios tbody td,
@@ -1266,7 +1296,7 @@ textarea {
         font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.04em;
-        color: var(--gris-600);
+        color: var(--n-600);
         margin-bottom: 4px;
     }
 
@@ -1292,7 +1322,7 @@ textarea {
         font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.04em;
-        color: var(--gris-600);
+        color: var(--n-600);
         margin-bottom: 2px;
     }
     .tabla-admin .celda-monto { font-size: 0.9rem; }

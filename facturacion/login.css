@@ -10,7 +10,7 @@
 
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, #0a2540 0%, #1565c0 100%);
+    background: linear-gradient(135deg, #0A1828 0%, #142B4A 100%);
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -28,7 +28,7 @@ body {
     background: #fff;
     border-radius: 16px;
     padding: 40px 32px;
-    box-shadow: 0 24px 60px rgba(10, 37, 64, 0.4);
+    box-shadow: 0 24px 60px rgba(10, 24, 40, 0.4);
     animation: fadeInUp 0.4s ease-out;
 }
 
@@ -42,34 +42,32 @@ body {
     margin-bottom: 32px;
 }
 
+/* Sin losa: el isótipo completo (60 px) va directo sobre la tarjeta blanca, en sus dos
+   tintas. El tile degradado que había aquí mezclaba un degradado con el logo plano,
+   que es justo lo que prohíbe la regla 6 de la guía. */
 .login-logo {
     width: 60px;
     height: 60px;
-    background: linear-gradient(135deg, #1565c0, #1e88e5);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: block;
     margin: 0 auto 16px;
-    color: #fff;
-    box-shadow: 0 8px 20px rgba(30, 136, 229, 0.35);
 }
 
 .login-logo svg {
-    width: 32px;
-    height: 32px;
+    width: 60px;
+    height: 60px;
+    display: block;
 }
 
 .login-header h1 {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #0f172a;
+    color: #142B4A;
     margin-bottom: 6px;
     letter-spacing: -0.02em;
 }
 
 .login-header p {
-    color: #64748b;
+    color: #5A6472;
     font-size: 0.88rem;
 }
 
@@ -82,29 +80,29 @@ body {
 .campo label {
     font-size: 0.82rem;
     font-weight: 600;
-    color: #334155;
+    color: #33455A;
     margin-bottom: 8px;
 }
 
 .campo input {
     padding: 12px 14px;
-    border: 1.5px solid #e2e8f0;
+    border: 1.5px solid #DDE3EA;
     border-radius: 8px;
     font-size: 0.95rem;
     font-family: inherit;
-    color: #0f172a;
+    color: #142B4A;
     background: #fff;
     transition: all 0.2s;
 }
 
 .campo input:hover {
-    border-color: #cbd5e1;
+    border-color: #C3CCD6;
 }
 
 .campo input:focus {
     outline: none;
-    border-color: #1e88e5;
-    box-shadow: 0 0 0 4px rgba(30, 136, 229, 0.12);
+    border-color: #0E7C7C;
+    box-shadow: 0 0 0 4px rgba(14, 124, 124, 0.12);
 }
 
 .mensaje-error {
@@ -127,7 +125,7 @@ body {
 .btn-login {
     width: 100%;
     padding: 13px;
-    background: linear-gradient(135deg, #1565c0, #1e88e5);
+    background: linear-gradient(135deg, #142B4A, #0E7C7C);
     color: #fff;
     border: none;
     border-radius: 8px;
@@ -136,13 +134,13 @@ body {
     font-family: inherit;
     cursor: pointer;
     transition: all 0.2s;
-    box-shadow: 0 4px 12px rgba(30, 136, 229, 0.35);
+    box-shadow: 0 4px 12px rgba(14, 124, 124, 0.35);
     letter-spacing: 0.01em;
 }
 
 .btn-login:hover:not(:disabled) {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(30, 136, 229, 0.45);
+    box-shadow: 0 8px 20px rgba(14, 124, 124, 0.45);
 }
 
 .btn-login:disabled {
@@ -153,7 +151,7 @@ body {
 .link-volver {
     display: block;
     text-align: center;
-    color: #64748b;
+    color: #5A6472;
     text-decoration: none;
     font-size: 0.85rem;
     margin-top: 24px;
@@ -161,5 +159,5 @@ body {
 }
 
 .link-volver:hover {
-    color: #1e88e5;
+    color: #0E7C7C;
 }
