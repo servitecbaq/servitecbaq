@@ -722,6 +722,10 @@ textarea {
     padding: 28px;
     max-width: 440px;
     width: 100%;
+    /* El overlay es fixed y centrado: sin tope, un modal con muchos campos se estira
+       por encima y por debajo del viewport y el botón de confirmar queda inalcanzable. */
+    max-height: calc(100dvh - 40px);
+    overflow-y: auto;
     box-shadow: 0 24px 60px rgba(10, 24, 40, 0.3);
     transform: scale(0.95);
     transition: transform 0.2s;
@@ -746,6 +750,23 @@ textarea {
     font-size: 0.92rem;
     line-height: 1.55;
     margin-bottom: 18px;
+}
+
+/* El cuerpo lo arma abrirModal() en facturacion-admin.js: un <p> de contexto y N div.campo.
+   La clase no tenía ninguna regla, así que los campos salían pegados (0 px medidos entre la
+   fecha y el medio de pago) y el último quedaba encima del botón. Grid porque el conteo de
+   campos cambia según la acción (anular = 0, pedir pago = 2, registrar equipo = varios). */
+.modal-cuerpo {
+    display: grid;
+    gap: 14px;
+    margin-bottom: 20px;
+    color: var(--n-700);
+    font-size: 0.92rem;
+    line-height: 1.55;
+}
+
+.modal-cuerpo p {
+    margin-bottom: 0;
 }
 
 .modal-actions {
@@ -899,6 +920,9 @@ textarea {
     }
     .modal-actions button {
         width: 100%;
+        /* El módulo ya usa 44 px en .btn-mini y en el botón de quitar fila; los del modal
+           se quedaban en 37 px medidos a 412 px de ancho. */
+        min-height: 44px;
     }
 }
 
