@@ -54,13 +54,17 @@
     footer { margin-top: 32px; color: var(--fg-muted); font-size: 14px; }
     footer a { color: var(--brand); }
     /* El isótipo completo (dos colores) exige 48px y va sobre fondo claro; sobre el
-       navy del tema oscuro la variante obligatoria es la inversa. El navegador no
-       descarga el <img> que está en display:none, así que cada tema carga uno solo. */
+       navy del tema oscuro la variante obligatoria es la inversa.
+       Las reglas van con img. delante: .marca img pesa (0,1,1) y le ganaba a
+       .marca--rev (0,1,0), así que en claro se veían las dos y la inversa —cuyo cuerpo
+       es blanco frío— salía como un cuerpo invisible con los acentos flotando.
+       Medido: el navegador igual pide los dos SVG (el explorador de precarga dispara la
+       petición antes de resolver el estilo), así que esto ahorra pintura, no 704 bytes. */
     .marca { display: inline-block; margin: 0 0 22px; }
     .marca img { display: block; width: 96px; height: 96px; }
-    .marca--rev { display: none; }
-    [data-theme="dark"] .marca--full { display: none; }
-    [data-theme="dark"] .marca--rev { display: block; }
+    .marca img.marca--rev { display: none; }
+    [data-theme="dark"] .marca img.marca--full { display: none; }
+    [data-theme="dark"] .marca img.marca--rev { display: block; }
   </style>
 </head>
 <body>

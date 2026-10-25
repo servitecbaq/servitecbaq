@@ -140,7 +140,7 @@ function agregarFila(descripcion = '', cantidad = 1, valor = 0, iva = 0) {
         <td class="total-linea" data-etiqueta="Total de la línea">$0</td>
         <td>
             <button type="button" class="btn-eliminar" aria-label="Quitar este servicio"
-                    onclick="eliminarFila(this)">✖</button>
+                    onclick="eliminarFila(this)"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button>
         </td>
     `;
 
@@ -537,9 +537,9 @@ async function manejarEnvio(evento) {
     try {
         await generarPDF(datos, numeroDocumento, tipo);
         if (guardado.ok) {
-            alert(`✅ ${TIPOS[tipo].etiqueta === 'COTIZACIÓN' ? 'Cotización' : 'Cuenta de cobro'} generada correctamente.\n\nNúmero: ${numeroDocumento}\nTotal: ${formatearMoneda(datos.totales.total)}`);
+            alert(`${TIPOS[tipo].etiqueta === 'COTIZACIÓN' ? 'Cotización' : 'Cuenta de cobro'} generada correctamente.\n\nNúmero: ${numeroDocumento}\nTotal: ${formatearMoneda(datos.totales.total)}`);
         } else {
-            alert(`⚠️ El PDF se generó, pero NO se pudo guardar en Google Sheets.\n\nRevisa tu conexión o vuelve a iniciar sesión.\n\nNúmero previsto: ${numeroDocumento}\n\nEl documento NO quedó en el registro: vuelve a generarlo después de reconectar.`);
+            alert(`El PDF se generó, pero NO se pudo guardar en Google Sheets.\n\nRevisa tu conexión o vuelve a iniciar sesión.\n\nNúmero previsto: ${numeroDocumento}\n\nEl documento NO quedó en el registro: vuelve a generarlo después de reconectar.`);
         }
     } catch (error) {
         console.error('Error al generar el PDF:', error);
@@ -588,7 +588,7 @@ async function enviarDatosAGoogle(datos, tipo) {
     try {
         const data = await api('guardar', { payload: JSON.stringify(payload) });
         if (data.result !== 'success') throw new Error(data.message || 'Respuesta inesperada del servidor');
-        console.log('✅ Guardado en Google Sheets:', data.numero);
+        console.log('Guardado en Google Sheets:', data.numero);
         return { ok: true, numero: data.numero };
     } catch (error) {
         console.error('Error al guardar en Google Sheets:', error);
@@ -643,7 +643,7 @@ async function generarPDF(datos, numeroDocumento, tipo = 'Cuenta') {
     try {
         logoBase64 = await cargarLogo();
     } catch (error) {
-        console.warn('⚠️ No se pudo cargar el logo:', error);
+        console.warn('No se pudo cargar el logo:', error);
     }
 
     // ===== ENCABEZADO =====
@@ -1160,7 +1160,7 @@ async function guardarEquipo() {
             .forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
 
         await cargarFichaCliente();
-        alert('✅ Equipo registrado.');
+        alert('Equipo registrado.');
     } catch (error) {
         console.error('Error al registrar el equipo:', error);
         alert('No se pudo registrar el equipo. Revisa la consola.');
