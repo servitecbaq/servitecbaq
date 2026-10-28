@@ -5,7 +5,7 @@
    ============================================ */
 
 // Reemplaza esta URL con la de tu Apps Script de service desk
-const GOOGLE_SCRIPT_URL = '';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwlh96hxzmjdGZjFPIoVt15RWuDiNp7jirgTc226cgL-Ictf8V8De5gKH_ICfhnFzNR9Q/exec';
 
 const ESTADOS = ['Nuevo', 'En curso', 'En espera', 'Resuelto', 'Cerrado'];
 

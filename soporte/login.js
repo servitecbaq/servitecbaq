@@ -5,7 +5,7 @@
    ============================================ */
 
 // Reemplaza esta URL con la de tu Apps Script de service desk
-const GOOGLE_SCRIPT_URL = '';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwlh96hxzmjdGZjFPIoVt15RWuDiNp7jirgTc226cgL-Ictf8V8De5gKH_ICfhnFzNR9Q/exec';
 
 function apiBase() {
     if ((location.hostname === 'localhost' || location.hostname === '127.0.0.1')) {
