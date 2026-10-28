@@ -359,7 +359,7 @@ body.cursor-leaving .cursor-dot { opacity: 0; }
 /* ============================================
    BOTONES FLOTANTES (con safe-area en móvil)
    ============================================ */
-.whatsapp-float, .calc-float, .device-float, .jira-float {
+.whatsapp-float, .calc-float, .device-float, .soporte-float {
   position: fixed;
   right: max(24px, env(safe-area-inset-right, 24px));
   width: 60px; height: 60px;
@@ -379,7 +379,7 @@ body.cursor-leaving .cursor-dot { opacity: 0; }
 body:not(.cursor-ready) .whatsapp-float,
 body:not(.cursor-ready) .calc-float,
 body:not(.cursor-ready) .device-float,
-body:not(.cursor-ready) .jira-float { cursor: pointer; }
+body:not(.cursor-ready) .soporte-float { cursor: pointer; }
 
 .whatsapp-float {
   bottom: max(24px, env(safe-area-inset-bottom, 24px));
@@ -389,7 +389,7 @@ body:not(.cursor-ready) .jira-float { cursor: pointer; }
 }
 .calc-float,
 .device-float,
-.jira-float {
+.soporte-float {
   /* Mismo relleno de accion del sitio (--btn-fill, navy->aguamarina, ya validado con
      icono blanco): los tres se leen como un grupo y como parte de la pagina. WhatsApp
      guarda su verde porque ese color identifica el canal, no la marca. */
@@ -399,13 +399,13 @@ body:not(.cursor-ready) .jira-float { cursor: pointer; }
 }
 .calc-float { bottom: calc(max(24px, env(safe-area-inset-bottom, 24px)) + 72px); }
 .device-float { bottom: calc(max(24px, env(safe-area-inset-bottom, 24px)) + 144px); }
-.jira-float { bottom: calc(max(24px, env(safe-area-inset-bottom, 24px)) + 216px); }
+.soporte-float { bottom: calc(max(24px, env(safe-area-inset-bottom, 24px)) + 216px); }
 [data-theme="dark"] .calc-float,
 [data-theme="dark"] .device-float,
-[data-theme="dark"] .jira-float { box-shadow: 0 8px 24px rgba(0,0,0,0.55), 0 4px 8px rgba(0,0,0,0.2); }
+[data-theme="dark"] .soporte-float { box-shadow: 0 8px 24px rgba(0,0,0,0.55), 0 4px 8px rgba(0,0,0,0.2); }
 .whatsapp-float svg { width: 32px; height: 32px; }
 .calc-float svg, .device-float svg { width: 26px; height: 26px; pointer-events: none; }
-.jira-float svg { width: 30px; height: 30px; pointer-events: none; }
+.soporte-float svg { width: 30px; height: 30px; pointer-events: none; }
 
 /* ============================================
    WIDGET PANELS
@@ -2626,8 +2626,8 @@ body:not(.cursor-ready) .bento { cursor: pointer; }
   .calc-float svg { width: 24px; height: 24px; }
   .device-float { width: 54px; height: 54px; bottom: calc(max(18px, env(safe-area-inset-bottom, 18px)) + 132px); right: max(18px, env(safe-area-inset-right, 18px)); }
   .device-float svg { width: 24px; height: 24px; }
-  .jira-float { width: 54px; height: 54px; bottom: calc(max(18px, env(safe-area-inset-bottom, 18px)) + 198px); right: max(18px, env(safe-area-inset-right, 18px)); }
-  .jira-float svg { width: 26px; height: 26px; }
+  .soporte-float { width: 54px; height: 54px; bottom: calc(max(18px, env(safe-area-inset-bottom, 18px)) + 198px); right: max(18px, env(safe-area-inset-right, 18px)); }
+  .soporte-float svg { width: 26px; height: 26px; }
 
   .widget-panel {
     right: 12px;
@@ -2775,7 +2775,7 @@ body:not(.cursor-ready) .bento { cursor: pointer; }
   .whatsapp-float,
   .calc-float,
   .device-float,
-  .jira-float,
+  .soporte-float,
   .widget-panel,
   .widget-overlay,
   .modal,
@@ -2811,7 +2811,7 @@ body:not(.cursor-ready) .bento { cursor: pointer; }
    Un :hover sin gate se queda pegado tras un tap en móvil.
    ============================================ */
 @media (hover: hover) and (pointer: fine) {
-.whatsapp-float:hover, .calc-float:hover, .device-float:hover, .jira-float:hover {transform: translateZ(0) scale(1.08);}
+.whatsapp-float:hover, .calc-float:hover, .device-float:hover, .soporte-float:hover {transform: translateZ(0) scale(1.08);}
 .widget-close:hover {background: var(--bg-subtle); color: var(--fg); transform: rotate(90deg);}
 .widget-refresh:hover {background: var(--brand-soft); border-color: var(--brand); color: var(--brand); transform: translateY(-2px);}
 .calc-btn:hover {background: var(--brand-soft); border-color: var(--brand);}
@@ -2853,7 +2853,7 @@ body:not(.cursor-ready) .bento { cursor: pointer; }
 }
 
 /* Pulsación: viene después del bloque de hover para que gane en escritorio */
-.whatsapp-float:active, .calc-float:active, .device-float:active, .jira-float:active {transform: translateZ(0) scale(0.95);}
+.whatsapp-float:active, .calc-float:active, .device-float:active, .soporte-float:active {transform: translateZ(0) scale(0.95);}
 .calc-btn:active {transform: scale(0.94);}
 .btn:active {transform: translateY(0) scale(0.97);}
 .bento:active,

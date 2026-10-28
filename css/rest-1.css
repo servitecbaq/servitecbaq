@@ -30,7 +30,7 @@ body.cursor-leaving .cursor-ring, body.cursor-leaving .cursor-dot { opacity: 0; 
 .reveal-delay-6 { transition-delay: 0.36s; }
 .reveal-delay-7 { transition-delay: 0.42s; }
 .reveal-delay-8 { transition-delay: 0.48s; }
-[data-theme="dark"] .calc-float, [data-theme="dark"] .device-float, [data-theme="dark"] .jira-float { box-shadow: rgba(0, 0, 0, 0.55) 0px 8px 24px, rgba(0, 0, 0, 0.2) 0px 4px 8px; }
+[data-theme="dark"] .calc-float, [data-theme="dark"] .device-float, [data-theme="dark"] .soporte-float { box-shadow: rgba(0, 0, 0, 0.55) 0px 8px 24px, rgba(0, 0, 0, 0.2) 0px 4px 8px; }
 .widget-panel.open { opacity: 1; visibility: visible; transform: translateY(0px) scale(1); }
 [data-theme="dark"] .calc-fn { background: rgba(255, 255, 255, 0.08); }
 .widget-overlay.open { opacity: 1; visibility: visible; }

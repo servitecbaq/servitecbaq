@@ -13,7 +13,6 @@
      ============================================ */
   const CONFIG = {
     whatsappNumber: '573158505020',
-    jiraUrl: 'https://servitecbaq.atlassian.net/servicedesk/customer/portal/3',
     grWidgetSrc: 'https://grwidget.com/v1/grwidget.js',
     clarityProjectId: 'z0y013ihgd',
     ipApiUrl: 'https://ipapi.co/json/',

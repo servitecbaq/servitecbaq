@@ -81,7 +81,7 @@
 ::-webkit-scrollbar-thumb:hover { background: var(--brand); }
 .founder-split__loc { color: var(--fg-muted); }
 [data-theme="dark"] .app-link, [data-theme="dark"] .tip-category, [data-theme="dark"] .app-badge, [data-theme="dark"] .featured-app-badge, [data-theme="dark"] .founder-split__role { color: var(--brand); }
-.whatsapp-float:active, .calc-float:active, .device-float:active, .jira-float:active { transform: translateZ(0px) scale(0.95); }
+.whatsapp-float:active, .calc-float:active, .device-float:active, .soporte-float:active { transform: translateZ(0px) scale(0.95); }
 .calc-btn:active { transform: scale(0.94); }
 .btn:active { transform: translateY(0px) scale(0.97); }
 .bento:active, .svc:active, .app-card:active, .tip-mini:active, .contact-card:active, .cert-badge:active, .zone-chip:active, .apps-filter:active, .about-feature:active, .founder-skills span:active, .footer-social a:active, .theme-toggle:active, .tip-nav:active, .logo:active, .widget-close:active, .widget-refresh:active, .faq-item > summary:active { transform: scale(0.985); transition-duration: 140ms; }
@@ -166,7 +166,7 @@ body::before { background: none; }
 .svc:focus-visible, .bento:focus-visible, .app-card:focus-visible { outline: highlight solid 2px; }
 }
 @media (hover: hover) and (pointer: fine) {
-.whatsapp-float:hover, .calc-float:hover, .device-float:hover, .jira-float:hover { transform: translateZ(0px) scale(1.08); }
+.whatsapp-float:hover, .calc-float:hover, .device-float:hover, .soporte-float:hover { transform: translateZ(0px) scale(1.08); }
 .widget-close:hover { background: var(--bg-subtle); color: var(--fg); transform: rotate(90deg); }
 .widget-refresh:hover { background: var(--brand-soft); border-color: var(--brand); color: var(--brand); transform: translateY(-2px); }
 .calc-btn:hover { background: var(--brand-soft); border-color: var(--brand); }

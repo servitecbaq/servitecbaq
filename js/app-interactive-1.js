@@ -1,5 +1,5 @@
 /* ============================================
-   SERVITECBAQ — app-interactive-1.js — contacto + jira + radar + cursor
+   SERVITECBAQ — app-interactive-1.js — contacto + radar + cursor
    ============================================ */
 (function () {
   'use strict';
@@ -77,22 +77,7 @@
   })();
 
   /* ============================================
-     12. BOTÓN JIRA
-     ============================================ */
-  (function initJira() {
-    const btn = $('#jiraFloatBtn');
-    if (!btn) return;
-    btn.addEventListener('click', function () {
-      const win = window.open(CONFIG.jiraUrl, '_blank', 'noopener,noreferrer');
-      if (!win) {
-        // Popup bloqueado → fallback
-        window.location.href = CONFIG.jiraUrl;
-      }
-    });
-  })();
-
-  /* ============================================
-     13. RADAR CANVAS
+     12. RADAR CANVAS
      ============================================ */
   (function initHeroRadar() {
     const canvas = $('#heroRadar');
@@ -326,7 +311,7 @@
   })();
 
   /* ============================================
-     14. CURSOR PERSONALIZADO (robusto)
+     13. CURSOR PERSONALIZADO (robusto)
      ============================================ */
   (function initCustomCursor() {
     const ring = $('#cursorRing');

@@ -9,6 +9,7 @@ Disallow: /.git/
 
 # Bloquear herramientas internas (no deben indexarse)
 Disallow: /facturacion/
+Disallow: /soporte/
 
 # Sitemap oficial
 Sitemap: https://servitecbaq.com/sitemap.xml

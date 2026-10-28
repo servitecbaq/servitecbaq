@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso · Service Desk · ServitecBAQ</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" href="../img/favicon.svg" type="image/svg+xml">
+    <link rel="icon" type="image/vnd.microsoft.icon" href="../favicon.ico">
+    <link rel="apple-touch-icon" href="../img/icons/apple-touch-icon.png">
+    <link rel="stylesheet" href="soporte.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="login-wrapper">
+    <img class="login-illus" src="../img/illustrations/login.svg" alt="" width="396" height="276" decoding="async">
+    <div class="login-card">
+        <div class="login-header">
+            <div class="login-logo">
+                <svg viewBox="0 0 208 208" width="60" height="60" role="img" aria-label="Servitecbaq">
+                    <g fill="#142B4A">
+                        <polygon points="8,70 128,10 164,28 60,80 96,98 96,134 8,90"/>
+                        <polygon points="200,138 80,198 44,180 148,128 112,110 112,74 200,118"/>
+                    </g>
+                    <g fill="none" stroke="#19AFAF" stroke-width="5" stroke-linecap="round">
+                        <path d="M34 176 128 129"/><circle cx="34" cy="176" r="8" stroke-width="4"/>
+                    </g>
+                    <polygon points="139,126 126.5,121.5 130.5,112.5" fill="#19AFAF"/>
+                    <circle cx="172" cy="62" r="10" fill="none" stroke="#19AFAF" stroke-width="6"/>
+                </svg>
+            </div>
+            <h1>Service Desk</h1>
+            <p>Acceso al panel de tickets de ServitecBAQ</p>
+        </div>
+
+        <form id="loginForm" autocomplete="off">
+            <div class="campo">
+                <label for="usuario">Usuario</label>
+                <input type="text" id="usuario" name="usuario" required autofocus>
+            </div>
+            <div class="campo">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="mensaje-error" id="mensajeError" role="alert" style="margin-top:12px;"></div>
+            <button type="submit" class="btn-login" id="btnLogin">
+                <span class="btn-text">Ingresar</span>
+                <span class="btn-loading" style="display:none;">Validando...</span>
+            </button>
+        </form>
+
+        <div class="login-enlaces">
+            <a href="index.html" class="link-volver">
+                <svg class="hic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.25 8.51104C21.1341 8.79549 21.75 9.6392 21.75 10.6082V14.8938C21.75 16.0304 20.9026 16.9943 19.7697 17.0867C19.4308 17.1144 19.0909 17.1386 18.75 17.1592V20.25L15.75 17.25C14.3963 17.25 13.0556 17.1948 11.7302 17.0866C11.4319 17.0623 11.1534 16.9775 10.9049 16.8451M20.25 8.51104C20.0986 8.46232 19.9393 8.43 19.7739 8.41628C18.4472 8.30616 17.1051 8.25 15.75 8.25C14.3948 8.25 13.0528 8.30616 11.7261 8.41627C10.595 8.51015 9.75 9.47323 9.75 10.6082V14.8937C9.75 15.731 10.2099 16.4746 10.9049 16.8451M20.25 8.51104V6.63731C20.25 5.01589 19.0983 3.61065 17.4903 3.40191C15.4478 3.13676 13.365 3 11.2503 3C9.13533 3 7.05233 3.13678 5.00963 3.40199C3.40173 3.61074 2.25 5.01598 2.25 6.63738V12.8626C2.25 14.484 3.40173 15.8893 5.00964 16.098C5.58661 16.1729 6.16679 16.2376 6.75 16.2918V21L10.9049 16.8451"/></svg>
+                Ir al portal de tickets
+            </a>
+            <a href="../index.html" class="link-volver">
+                <svg viewBox="0 0 24 24" fill="none" width="15" height="15" aria-hidden="true"><path d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Volver al sitio
+            </a>
+        </div>
+    </div>
+</div>
+
+<script src="login.js"></script>
+</body>
+</html>
