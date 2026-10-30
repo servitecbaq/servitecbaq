@@ -10,9 +10,7 @@
     <link rel="icon" type="image/vnd.microsoft.icon" href="../favicon.ico">
     <link rel="apple-touch-icon" href="../img/icons/apple-touch-icon.png">
     <link rel="stylesheet" href="soporte.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preload" as="font" type="font/woff2" href="../fonts/outfit-latin.woff2" crossorigin>
 </head>
 <body>
 
@@ -103,7 +101,7 @@
             Volver
         </a>
 
-        <section class="card">
+        <section class="card card-centrada">
             <div class="card-header">
                 <div class="card-title">
                     <span class="card-dot dot-navy"></span>
@@ -142,8 +140,12 @@
                         </select>
                     </div>
                     <div class="campo campo-ancho">
-                        <label>Prioridad</label>
-                        <div class="prioridad-opciones">
+                        <label for="tAsunto">Asunto *</label>
+                        <input type="text" id="tAsunto" name="asunto" required maxlength="120" placeholder="Ej: El computador no enciende después de la tormenta">
+                    </div>
+                    <div class="campo campo-ancho">
+                        <span class="etiqueta-campo" id="etiquetaPrioridad">Prioridad</span>
+                        <div class="prioridad-opciones" role="radiogroup" aria-labelledby="etiquetaPrioridad">
                             <label class="prioridad-opcion">
                                 <input type="radio" name="prioridad" value="Alta">
                                 Alta
@@ -157,10 +159,6 @@
                                 Baja
                             </label>
                         </div>
-                    </div>
-                    <div class="campo campo-ancho">
-                        <label for="tAsunto">Asunto *</label>
-                        <input type="text" id="tAsunto" name="asunto" required maxlength="120" placeholder="Ej: El computador no enciende después de la tormenta">
                     </div>
                     <div class="campo campo-ancho">
                         <label for="tDescripcion">Cuéntanos qué pasa *</label>
@@ -178,7 +176,7 @@
                 <button type="submit" class="btn-primario" id="btnEnviarTicket">
                     <svg class="hic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.99972 12L3.2688 3.12451C9.88393 5.04617 16.0276 8.07601 21.4855 11.9997C16.0276 15.9235 9.884 18.9535 3.26889 20.8752L5.99972 12ZM5.99972 12L13.5 12"/></svg>
                     <span class="btn-texto">Enviar ticket</span>
-                    <span class="cargando" style="display:none;" aria-hidden="true"></span>
+                    <span class="cargando" aria-hidden="true"></span>
                 </button>
             </form>
         </section>
@@ -193,22 +191,24 @@
             <h2>Ticket creado</h2>
             <p class="aviso">Guarda estos datos: son la llave para consultar el estado de tu ticket y responder.</p>
 
-            <div class="dato-grande">
-                <label for="exitoNumero">Número de ticket</label>
-                <div class="valor" id="exitoNumero">SD-0000</div>
-                <button type="button" class="btn-copiar" data-copia="exitoNumero">
+            <div class="datos-credenciales">
+                <div class="dato-grande">
+                    <p class="dato-etiqueta">Número de ticket</p>
+                    <div class="valor" id="exitoNumero">SD-0000</div>
+                    <button type="button" class="btn-copiar" data-copia="exitoNumero">
                     <svg class="hic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.6657 3.88789C15.3991 2.94272 14.5305 2.25 13.5 2.25H10.5C9.46954 2.25 8.60087 2.94272 8.33426 3.88789M15.6657 3.88789C15.7206 4.0825 15.75 4.28782 15.75 4.5V4.5C15.75 4.91421 15.4142 5.25 15 5.25H9C8.58579 5.25 8.25 4.91421 8.25 4.5V4.5C8.25 4.28782 8.27937 4.0825 8.33426 3.88789M15.6657 3.88789C16.3119 3.93668 16.9545 3.99828 17.5933 4.07241C18.6939 4.20014 19.5 5.149 19.5 6.25699V19.5C19.5 20.7426 18.4926 21.75 17.25 21.75H6.75C5.50736 21.75 4.5 20.7426 4.5 19.5V6.25699C4.5 5.149 5.30608 4.20014 6.40668 4.07241C7.04547 3.99828 7.68808 3.93668 8.33426 3.88789"/></svg>
-                    Copiar número
-                </button>
-            </div>
+                        <span class="btn-etiqueta">Copiar número</span>
+                    </button>
+                </div>
 
-            <div class="dato-grande">
-                <label for="exitoCodigo">Código de acceso</label>
-                <div class="valor" id="exitoCodigo">000000</div>
-                <button type="button" class="btn-copiar" data-copia="exitoCodigo">
+                <div class="dato-grande">
+                    <p class="dato-etiqueta">Código de acceso</p>
+                    <div class="valor" id="exitoCodigo">000000</div>
+                    <button type="button" class="btn-copiar" data-copia="exitoCodigo">
                     <svg class="hic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.6657 3.88789C15.3991 2.94272 14.5305 2.25 13.5 2.25H10.5C9.46954 2.25 8.60087 2.94272 8.33426 3.88789M15.6657 3.88789C15.7206 4.0825 15.75 4.28782 15.75 4.5V4.5C15.75 4.91421 15.4142 5.25 15 5.25H9C8.58579 5.25 8.25 4.91421 8.25 4.5V4.5C8.25 4.28782 8.27937 4.0825 8.33426 3.88789M15.6657 3.88789C16.3119 3.93668 16.9545 3.99828 17.5933 4.07241C18.6939 4.20014 19.5 5.149 19.5 6.25699V19.5C19.5 20.7426 18.4926 21.75 17.25 21.75H6.75C5.50736 21.75 4.5 20.7426 4.5 19.5V6.25699C4.5 5.149 5.30608 4.20014 6.40668 4.07241C7.04547 3.99828 7.68808 3.93668 8.33426 3.88789"/></svg>
-                    Copiar código
-                </button>
+                        <span class="btn-etiqueta">Copiar código</span>
+                    </button>
+                </div>
             </div>
 
             <div class="exito-acciones">
@@ -240,7 +240,7 @@
             <div class="grid-2">
                 <div class="campo">
                     <label for="cNumero">Número de ticket</label>
-                    <input type="text" id="cNumero" name="numero" autocomplete="off" placeholder="SD-0000" style="text-transform:uppercase;">
+                    <input type="text" id="cNumero" name="numero" class="numero-mayus" autocomplete="off" placeholder="SD-0000">
                 </div>
                 <div class="campo">
                     <label for="cCodigo">Código de acceso</label>
@@ -253,7 +253,7 @@
             <button type="button" class="btn-primario" id="btnConsultar">
                 <svg class="hic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 21L15.8033 15.8033M15.8033 15.8033C17.1605 14.4461 18 12.5711 18 10.5C18 6.35786 14.6421 3 10.5 3C6.35786 3 3 6.35786 3 10.5C3 14.6421 6.35786 18 10.5 18C12.5711 18 14.4461 17.1605 15.8033 15.8033Z"/></svg>
                 <span class="btn-texto">Consultar</span>
-                <span class="cargando" style="display:none;" aria-hidden="true"></span>
+                <span class="cargando" aria-hidden="true"></span>
             </button>
 
             <div class="mis-tickets" id="misTicketsBloque" hidden>
@@ -262,7 +262,7 @@
             </div>
         </section>
 
-        <section class="card" id="resultadoConsulta" aria-live="polite" hidden>
+        <section class="card consulta-resultado" id="resultadoConsulta" aria-live="polite" hidden>
             <div class="ticket-encabezado">
                 <span class="numero" id="resNumero">SD-0000</span>
                 <span class="badge badge-navy" id="resEstado">Nuevo</span>
@@ -278,7 +278,7 @@
                     —
                 </span>
             </div>
-            <p class="asunto-ticket" id="resAsunto" style="font-size:0.98rem;font-weight:700;"></p>
+            <p class="asunto-ticket" id="resAsunto"></p>
 
             <div class="timeline" id="resTimeline"></div>
 
@@ -295,9 +295,10 @@
                     <button type="button" class="btn-primario" id="btnResponder">
                         <svg class="hic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.99972 12L3.2688 3.12451C9.88393 5.04617 16.0276 8.07601 21.4855 11.9997C16.0276 15.9235 9.884 18.9535 3.26889 20.8752L5.99972 12ZM5.99972 12L13.5 12"/></svg>
                         <span class="btn-texto">Enviar respuesta</span>
-                        <span class="cargando" style="display:none;" aria-hidden="true"></span>
+                        <span class="cargando" aria-hidden="true"></span>
                     </button>
-                    <div class="mensaje-ok" id="respuestaOk" role="status" style="margin:0;"></div>
+                    <div class="mensaje-error" id="respuestaError" role="alert"></div>
+                    <div class="mensaje-ok" id="respuestaOk" role="status"></div>
                 </div>
             </div>
         </section>

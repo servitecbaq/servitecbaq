@@ -67,7 +67,7 @@ function claseEstado(estado) {
         'En curso': 'badge-teal',
         'En espera': 'badge-gris',
         'Resuelto': 'badge-verde',
-        'Cerrado': 'badge-hueco'
+        'Cerrado': 'badge-cerrado'
     }[estado] || 'badge-gris';
 }
 
@@ -82,21 +82,30 @@ function clasePrioridad(prioridad) {
 function mostrarError(id, mensaje) {
     const caja = document.getElementById(id);
     caja.textContent = mensaje;
-    caja.style.display = 'block';
+    caja.classList.add('is-visible');
 }
 
 function ocultarError(id) {
-    document.getElementById(id).style.display = 'none';
+    document.getElementById(id).classList.remove('is-visible');
 }
 
 function cargando(boton, activo) {
     const btn = document.getElementById(boton);
     if (!btn) return;
     btn.disabled = activo;
-    const texto = btn.querySelector('.btn-texto');
-    const rueda = btn.querySelector('.cargando');
-    if (texto) texto.style.display = activo ? 'none' : 'inline';
-    if (rueda) rueda.style.display = activo ? 'inline-block' : 'none';
+    btn.classList.toggle('is-cargando', activo);
+}
+
+/* Marca el campo del error y devuelve el primero marcado, para llevar
+   el foco alli en vez de dejar solo el texto en la caja de avisos. */
+function marcarInvalidos(campoId) {
+    const campo = document.getElementById(campoId).closest('.campo');
+    if (campo) campo.classList.add('is-invalido');
+    return campo ? campo.querySelector(':scope input, :scope select, :scope textarea') : null;
+}
+
+function limpiarInvalidos() {
+    document.querySelectorAll('.campo.is-invalido').forEach(c => c.classList.remove('is-invalido'));
 }
 
 async function copiarTexto(texto, boton) {
@@ -110,20 +119,41 @@ async function copiarTexto(texto, boton) {
         document.execCommand('copy');
         aux.remove();
     }
-    const original = boton.textContent;
-    boton.textContent = 'Copiado';
-    setTimeout(() => { boton.textContent = original; }, 1500);
+    /* Se cambia solo el span de la etiqueta: escribir sobre el botón
+       borraba el SVG y el icono no volvia. */
+    const etiqueta = boton.querySelector('.btn-etiqueta');
+    if (!etiqueta) return;
+    const original = etiqueta.textContent;
+    etiqueta.textContent = 'Copiado';
+    boton.classList.add('is-copiado');
+    setTimeout(() => {
+        etiqueta.textContent = original;
+        boton.classList.remove('is-copiado');
+    }, 1600);
 }
 
 /* ===== VISTAS ===== */
 
 function mostrarVista(nombre) {
-    document.querySelectorAll('.vista').forEach(v => { v.hidden = true; });
-    const vista = document.getElementById('vista' + nombre.charAt(0).toUpperCase() + nombre.slice(1));
-    if (vista) vista.hidden = false;
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const id = 'vista' + nombre.charAt(0).toUpperCase() + nombre.slice(1);
+    document.querySelectorAll('.vista').forEach(v => { v.hidden = v.id !== id; });
+    const vista = document.getElementById(id);
+    if (!vista) return;
+    vista.hidden = false;
+
+    limpiarInvalidos();
     ocultarError('crearError');
     ocultarError('consultaError');
+    ocultarError('respuestaError');
+    window.scrollTo({ top: 0 });
+
+    /* El foco acompaña a la vista: si no, quien navega con teclado se
+       queda sobre un botón que acaba de desaparecer. */
+    const titulo = vista.querySelector('h1, h2');
+    if (titulo) {
+        titulo.setAttribute('tabindex', '-1');
+        titulo.focus({ preventScroll: true });
+    }
 }
 
 /* ===== MIS TICKETS (localStorage) ===== */
@@ -187,13 +217,22 @@ async function crearTicket(evento) {
     const descripcion = document.getElementById('tDescripcion').value.trim();
     const sitio = document.getElementById('tSitio').value.trim();
 
+    limpiarInvalidos();
     ocultarError('crearError');
 
-    if (nombre.length < 3) return mostrarError('crearError', 'Escribe tu nombre completo.');
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return mostrarError('crearError', 'Escribe un correo válido.');
-    if (!categoria) return mostrarError('crearError', 'Elige una categoría.');
-    if (asunto.length < 8) return mostrarError('crearError', 'El asunto debe tener al menos 8 caracteres.');
-    if (descripcion.length < 20) return mostrarError('crearError', 'Describe el problema con más detalle (mínimo 20 caracteres).');
+    const reglas = [
+        ['tNombre', nombre.length >= 3, 'Escribe tu nombre completo.'],
+        ['tEmail', /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email), 'Escribe un correo válido.'],
+        ['tCategoria', Boolean(categoria), 'Elige una categoría.'],
+        ['tAsunto', asunto.length >= 8, 'El asunto debe tener al menos 8 caracteres.'],
+        ['tDescripcion', descripcion.length >= 20, 'Describe el problema con más detalle (mínimo 20 caracteres).']
+    ];
+    const mala = reglas.find(regla => !regla[1]);
+    if (mala) {
+        const campo = marcarInvalidos(mala[0]);
+        if (campo) campo.focus();
+        return mostrarError('crearError', mala[2]);
+    }
 
     cargando('btnEnviarTicket', true);
     try {
@@ -205,6 +244,7 @@ async function crearTicket(evento) {
         ultimoTicket = { numero: data.numero, codigo: data.codigo };
         recordarTicket(data.numero, data.codigo);
         document.getElementById('formTicket').reset();
+        document.getElementById('tCategoria').classList.add('sin-eleccion');
         mostrarVista('exito');
     } catch (error) {
         mostrarError('crearError', error.message);
@@ -220,7 +260,12 @@ async function consultar() {
     const codigo = document.getElementById('cCodigo').value.trim();
 
     ocultarError('consultaError');
-    if (!numero || !codigo) return mostrarError('consultaError', 'Ingresa el número y el código de tu ticket.');
+    limpiarInvalidos();
+    if (!numero || !codigo) {
+        const campo = marcarInvalidos(numero ? 'cCodigo' : 'cNumero');
+        if (campo) campo.focus();
+        return mostrarError('consultaError', 'Ingresa el número y el código de tu ticket.');
+    }
 
     cargando('btnConsultar', true);
     try {
@@ -257,19 +302,26 @@ function pintarResultado(data) {
     document.getElementById('resAsunto').textContent = t.asunto;
 
     const timeline = document.getElementById('resTimeline');
-    timeline.innerHTML = (data.mensajes || []).map(m => {
+    const mensajes = data.mensajes || [];
+    /* --i es el desfase de entrada: tope en 6 para que un ticket largo
+       no anime la conversacion entera en cola. */
+    timeline.innerHTML = mensajes.length ? mensajes.map((m, i) => {
         const esAgente = m.autor === 'Agente';
-        return '<div class="burbuja ' + (esAgente ? 'burbuja-agente' : 'burbuja-cliente') + '">' +
+        return '<div class="burbuja ' + (esAgente ? 'burbuja-agente' : 'burbuja-cliente') + '" style="--i:' + Math.min(i, 6) + '">' +
             '<span class="meta">' + esc(esAgente ? 'Servitecbaq' : m.nombre) + ' · ' + esc(formatearFecha(m.fecha)) + '</span>' +
             esc(m.mensaje) + '</div>';
-    }).join('');
+    }).join('') : '<p class="estado-vacio">Aún no hay mensajes en este ticket.</p>';
 
     const cerrado = t.estado === 'Cerrado';
     document.getElementById('resCerrado').hidden = !cerrado;
     document.getElementById('resResponder').hidden = cerrado;
 
-    document.getElementById('resultadoConsulta').hidden = false;
-    document.getElementById('resultadoConsulta').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    /* Solo se baja al resultado la primera vez: al refrescar despues de
+       responder, el usuario esta abajo escribiendo y se le arrebatava. */
+    const resultado = document.getElementById('resultadoConsulta');
+    const eraNueva = resultado.hidden;
+    resultado.hidden = false;
+    if (eraNueva) resultado.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 async function responder() {
@@ -278,8 +330,14 @@ async function responder() {
     const mensaje = document.getElementById('respuestaMensaje').value.trim();
     const ok = document.getElementById('respuestaOk');
 
-    ok.style.display = 'none';
-    if (mensaje.length < 3) return mostrarError('consultaError', 'Escribe tu respuesta antes de enviarla.');
+    ocultarError('respuestaError');
+    ocultarError('respuestaOk');
+    limpiarInvalidos();
+    if (mensaje.length < 3) {
+        const campo = marcarInvalidos('respuestaMensaje');
+        if (campo) campo.focus();
+        return mostrarError('respuestaError', 'Escribe tu respuesta antes de enviarla.');
+    }
 
     cargando('btnResponder', true);
     try {
@@ -287,11 +345,11 @@ async function responder() {
         if (data.result !== 'success') throw new Error(data.message || 'No se pudo enviar la respuesta.');
         document.getElementById('respuestaMensaje').value = '';
         ok.textContent = 'Respuesta enviada.';
-        ok.style.display = 'block';
-        setTimeout(() => { ok.style.display = 'none'; }, 3000);
+        ok.classList.add('is-visible');
+        setTimeout(() => { ok.classList.remove('is-visible'); }, 3000);
         await consultar();
     } catch (error) {
-        mostrarError('consultaError', error.message);
+        mostrarError('respuestaError', error.message);
     } finally {
         cargando('btnResponder', false);
     }
@@ -308,12 +366,16 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('btnConsultar').addEventListener('click', consultar);
     document.getElementById('btnResponder').addEventListener('click', responder);
     document.getElementById('btnVerMiTicket').addEventListener('click', () => {
+        const numero = document.getElementById('cNumero');
+        const codigo = document.getElementById('cCodigo');
         if (ultimoTicket) {
-            document.getElementById('cNumero').value = ultimoTicket.numero;
-            document.getElementById('cCodigo').value = ultimoTicket.codigo;
+            numero.value = ultimoTicket.numero;
+            codigo.value = ultimoTicket.codigo;
         }
         mostrarVista('consulta');
-        consultar();
+        /* Sin credenciales en el formulario no hay nada que pedir:
+           antes se lanzaba la consulta vacia y devolvia un error. */
+        if (numero.value.trim() && codigo.value.trim()) consultar();
     });
     document.getElementById('btnOtroTicket').addEventListener('click', () => mostrarVista('crear'));
 
@@ -334,6 +396,28 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('cNumero').addEventListener('input', e => {
         e.target.value = e.target.value.toUpperCase();
     });
+
+    /* Enter en los dos campos de consulta: es un buscador, se espera. */
+    ['cNumero', 'cCodigo'].forEach(id => {
+        document.getElementById(id).addEventListener('keydown', e => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                consultar();
+            }
+        });
+    });
+
+    /* Al escribir en un campo marcado, la marca se va con el caracter. */
+    document.addEventListener('input', e => {
+        const campo = e.target.closest('.campo');
+        if (campo) campo.classList.remove('is-invalido');
+    });
+
+    /* El select sin opcion se pinta como placeholder, no como texto negro. */
+    const categoria = document.getElementById('tCategoria');
+    const pintaCategoria = () => categoria.classList.toggle('sin-eleccion', !categoria.value);
+    categoria.addEventListener('change', pintaCategoria);
+    pintaCategoria();
 
     pintarMisTickets();
 });

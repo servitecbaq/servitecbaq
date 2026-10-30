@@ -9,9 +9,7 @@
     <link rel="icon" type="image/vnd.microsoft.icon" href="../favicon.ico">
     <link rel="apple-touch-icon" href="../img/icons/apple-touch-icon.png">
     <link rel="stylesheet" href="soporte.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preload" as="font" type="font/woff2" href="../fonts/outfit-latin.woff2" crossorigin>
 </head>
 <body>
 
@@ -47,7 +45,7 @@
             </button>
             <div class="user-chip">
                 <div class="user-avatar" id="userAvatar">?</div>
-                <span id="userNombre">Agente</span>
+                <span class="user-nombre" id="userNombre">Agente</span>
             </div>
         </div>
     </div>
@@ -170,7 +168,12 @@
                 </thead>
                 <tbody id="cuerpoTickets"></tbody>
             </table>
-            <div class="estado-vacio" id="estadoVacio" hidden>No hay tickets con esos filtros.</div>
+            <div class="estado-vacio" id="estadoVacio" hidden>
+                <span class="estado-icono" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" width="20" height="20" aria-hidden="true"><path d="M2.25 13.5h3.86a2.25 2.25 0 0 1 2.012 1.244l.256.512a2.25 2.25 0 0 0 2.013 1.244h3.218a2.25 2.25 0 0 0 2.013-1.244l.256-.512a2.25 2.25 0 0 1 2.013-1.244h3.859m-19.5.338V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18v-4.162c0-.224-.034-.447-.1-.661L19.24 5.338a2.25 2.25 0 0 0-2.15-1.588H6.911a2.25 2.25 0 0 0-2.15 1.588L2.35 13.177a2.25 2.25 0 0 0-.1.661Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+                <span id="estadoVacioTexto">No hay tickets con esos filtros.</span>
+            </div>
         </div>
     </section>
 

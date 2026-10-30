@@ -22,6 +22,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     const form = document.getElementById('loginForm');
     if (form) form.addEventListener('submit', manejarLogin);
+
+    /* Al escribir, el aviso y el marcaje en rojo ya perdieron sentido. */
+    ['usuario', 'password'].forEach(id => {
+        const campo = document.getElementById(id);
+        if (!campo) return;
+        campo.addEventListener('input', () => {
+            const contenedor = campo.closest('.campo');
+            if (contenedor) contenedor.classList.remove('is-invalido');
+            ocultarError();
+        });
+    });
 });
 
 async function manejarLogin(evento) {
@@ -29,21 +40,18 @@ async function manejarLogin(evento) {
 
     const usuario = document.getElementById('usuario').value.trim();
     const password = document.getElementById('password').value.trim();
-    const btnLogin = document.getElementById('btnLogin');
-    const btnText = btnLogin.querySelector('.btn-text');
-    const btnLoading = btnLogin.querySelector('.btn-loading');
-    const mensajeError = document.getElementById('mensajeError');
 
-    mensajeError.style.display = 'none';
+    ocultarError();
+    limpiarInvalidos();
 
     if (!usuario || !password) {
-        mostrarError('Por favor completa usuario y contraseña.');
+        const destino = marcarInvalidos(!usuario ? 'usuario' : 'password');
+        mostrarError('Completa ' + (!usuario ? 'el usuario' : 'la contraseña') + '.');
+        if (destino) destino.focus();
         return;
     }
 
-    btnLogin.disabled = true;
-    btnText.style.display = 'none';
-    btnLoading.style.display = 'inline';
+    cargandoLogin(true);
 
     try {
         const base = apiBase();
@@ -64,9 +72,7 @@ async function manejarLogin(evento) {
         if (data.result === 'success') {
             if (!data.token) {
                 mostrarError('El servidor no devolvió un token de sesión. Revisa el Apps Script.');
-                btnLogin.disabled = false;
-                btnText.style.display = 'inline';
-                btnLoading.style.display = 'none';
+                cargandoLogin(false);
                 return;
             }
 
@@ -76,31 +82,50 @@ async function manejarLogin(evento) {
             sessionStorage.setItem('sb_sd_token', data.token);
             sessionStorage.setItem('sb_sd_login_time', Date.now().toString());
 
+            /* Sin recargar: el botón sigue en carga hasta que el panel
+               toma el control, así no se puede reintentar a medias. */
             window.location.href = 'panel.html' + location.search;
-        } else {
-            mostrarError(data.message || 'Usuario o contraseña incorrectos.');
-            btnLogin.disabled = false;
-            btnText.style.display = 'inline';
-            btnLoading.style.display = 'none';
+            return;
         }
+
+        mostrarError(data.message || 'Usuario o contraseña incorrectos.');
+        cargandoLogin(false);
+        const campoPassword = document.getElementById('password');
+        campoPassword.focus();
+        campoPassword.select();
     } catch (error) {
         console.error('Error al validar login:', error);
-        // TypeError = la peticion ni siquiera salio (URL vacia o sin red).
+        // TypeError = la petición ni siquiera salió (URL vacía o sin red).
         mostrarError(error instanceof TypeError
             ? 'No se pudo conectar con el servidor. Intenta de nuevo.'
             : error.message);
-        btnLogin.disabled = false;
-        btnText.style.display = 'inline';
-        btnLoading.style.display = 'none';
+        cargandoLogin(false);
     }
+}
+
+function cargandoLogin(activo) {
+    const btn = document.getElementById('btnLogin');
+    if (!btn) return;
+    btn.disabled = activo;
+    btn.classList.toggle('is-cargando', activo);
+}
+
+function marcarInvalidos(campoId) {
+    const campo = document.getElementById(campoId).closest('.campo');
+    if (campo) campo.classList.add('is-invalido');
+    return document.getElementById(campoId);
+}
+
+function limpiarInvalidos() {
+    document.querySelectorAll('.campo.is-invalido').forEach(c => c.classList.remove('is-invalido'));
 }
 
 function mostrarError(texto) {
     const mensajeError = document.getElementById('mensajeError');
     mensajeError.textContent = texto;
-    mensajeError.style.display = 'block';
+    mensajeError.classList.add('is-visible');
+}
 
-    const passwordInput = document.getElementById('password');
-    passwordInput.focus();
-    passwordInput.select();
+function ocultarError() {
+    document.getElementById('mensajeError').classList.remove('is-visible');
 }
