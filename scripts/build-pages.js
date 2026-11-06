@@ -64,7 +64,9 @@ function validarEnlaces() {
 const urlDe = s => NEG.url + '/servicios/' + s.slug + '/';
 const wa = txt => 'https://wa.me/' + NEG.whatsapp + '?text=' + encodeURIComponent(txt);
 
-function headBase({ title, meta, h1, url, ld }) {
+/* ogType: solo los tips son articles. Una pagina de servicio anunciada como article
+   contradice al tipo Service del JSON-LD de esa misma pagina. */
+function headBase({ title, meta, h1, url, ld, ogType = 'website' }) {
   return `  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <!-- Mismo arranque de tema que index.html: data-theme="light" es solo el valor previo. -->
@@ -79,7 +81,7 @@ function headBase({ title, meta, h1, url, ld }) {
 
   <meta property="og:title" content="${esc(h1)}">
   <meta property="og:description" content="${esc(meta)}">
-  <meta property="og:type" content="article">
+  <meta property="og:type" content="${ogType}">
   <meta property="og:url" content="${url}">
   <meta property="og:locale" content="es_CO">
   <meta property="og:site_name" content="${esc(NEG.nombre)}">
@@ -455,7 +457,7 @@ function tipPage(c) {
 <!-- Generado por scripts/build-pages.js a partir de tips.json + scripts/tips-content.js. No editar a mano. -->
 <html lang="es" data-theme="light">
 <head>
-${headBase({ title: c.h1, meta: c.meta, h1: c.h1, url: urlTip(c.idx), ld: tipLd(c) })}
+${headBase({ title: c.h1 + ' | Servitecbaq', meta: c.meta, h1: c.h1, url: urlTip(c.idx), ld: tipLd(c), ogType: 'article' })}
 </head>
 <body class="svc-page-body">
 ${header()}
