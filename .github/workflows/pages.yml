@@ -1,0 +1,52 @@
+# Despliegue de servitecbaq.com por GitHub Actions.
+#
+# Sustituye al build "legacy" (Jekyll) que GitHub hacia por dentro. El sitio es HTML
+# estatico y no usa front matter ni _config.yml, asi que Jekyll solo aportaba cola y
+# un log inexistente cuando el despliegue fallaba.
+#
+# Revertir: borrar este fichero y volver Pages a "From a branch"
+#   gh api -X PUT repos/servitecbaq/servitecbaq/pages -f build_type=legacy
+name: pages build and deployment
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # El artefacto se arma a mano en site/ en vez de publicar el checkout entero:
+      # asi la superficie servida sigue siendo la de antes (Jekyll nunca publicaba
+      # los dotfiles ni .git, y aqui tampoco deben salir).
+      - name: Preparar el artefacto
+        run: |
+          rsync -a --exclude='.git*' --exclude='site' ./ site/
+          echo "Ficheros en el artefacto: $(find site -type f | wc -l)"
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: https://servitecbaq.com/
+    steps:
+      - uses: actions/deploy-pages@v4
