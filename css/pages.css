@@ -1,6 +1,6 @@
 /* ============================================
    PAGES.CSS — componentes de las páginas generadas
-   Solo se enlaza desde /servicios/, /tips/ y /apps/. Los tokens (--bg, --fg, --brand, --s-*,
+   Solo se enlaza desde /servicios/, /tips/, /apps/ y /soluciones/. Los tokens (--bg, --fg, --brand, --s-*,
    --tx-*) vienen de styles.css, así que el tema claro/oscuro funciona solo.
    ============================================ */
 
@@ -89,6 +89,38 @@
 .app-plan__note { margin: var(--s-1) 0 0; font-family: var(--font-mono); font-size: var(--tx-xs); color: var(--fg-muted); }
 .app-plan ul { list-style: none; margin: var(--s-5) 0 0; padding: 0; display: grid; gap: var(--s-2); font-size: var(--tx-sm); color: var(--fg); }
 .app-plan ul li::before { content: '·'; margin-right: var(--s-2); color: var(--accent-ink); }
+
+/* Soluciones (pagina /soluciones/kioskcast/) */
+/* Las capturas del panel son panorámicas: una por fila, no en mosaico. */
+.sol-shots { display: grid; gap: var(--s-6); }
+.sol-shot { margin: 0; }
+.sol-shot img {
+  display: block; width: 100%; height: auto;
+  background: var(--bg-subtle); border: 1px solid var(--line); border-radius: var(--r-md);
+}
+.sol-shot figcaption { margin-top: var(--s-2); font-size: var(--tx-xs); line-height: 1.5; color: var(--fg-muted); }
+.sol-shots + .tip-prose { margin-top: var(--s-6); }
+
+.sol-parts { display: grid; gap: var(--s-4); grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.sol-part {
+  margin: 0; padding: var(--s-6);
+  background: var(--bg-elev); border: 1px solid var(--line); border-radius: var(--r-md);
+  box-shadow: var(--shadow-1);
+}
+.sol-part__icon { display: block; margin-bottom: var(--s-4); color: var(--accent-ink); font-size: 26px; }
+.sol-part__icon .hic { width: 1em; height: 1em; }
+.sol-part h3 { margin: 0 0 var(--s-2); font-size: var(--tx-base); font-weight: 600; }
+.sol-part p { margin: 0; font-size: var(--tx-sm); line-height: 1.6; color: var(--fg-muted); }
+
+/* La ficha técnica son datos, no promesas: se lee como una tabla, sin viñetas de adorno. */
+.svc-facts--sol { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+
+/* Lo que el producto todavía no hace. */
+.sol-notyet li::before { background: var(--teal-500); }
+.tip-index--one { grid-template-columns: minmax(0, 640px); }
+@media (max-width: 640px) {
+  .tip-index--one { grid-template-columns: 1fr; }
+}
 
 /* Pasos */
 .svc-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-5); counter-reset: paso; }

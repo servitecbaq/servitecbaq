@@ -148,7 +148,7 @@ function head(s) {
 }
 
 function header() {
-  const nav = [['Servicios', '/#servicios'], ['Nosotros', '/#nosotros'], ['Fundador', '/#fundador'], ['Tips', '/tips/'], ['Apps', '/#apps'], ['App Saldo', '/apps/saldo/'], ['FAQ', '/#faq'], ['Reseñas', '/#resenas'], ['Contacto', '/#contacto']];
+  const nav = [['Servicios', '/#servicios'], ['Nosotros', '/#nosotros'], ['Fundador', '/#fundador'], ['Tips', '/tips/'], ['Apps', '/#apps'], ['App Saldo', '/apps/saldo/'], ['Soluciones', '/soluciones/'], ['FAQ', '/#faq'], ['Reseñas', '/#resenas'], ['Contacto', '/#contacto']];
   return `  <header class="header" id="siteHeader">
     <div class="header__shell">
       <div class="header__inner">
@@ -199,6 +199,7 @@ ${SERVICIOS.map(s => '            <li><a href="/servicios/' + s.slug + '/">' + e
             <li><a href="/tips/">Tips</a></li>
             <li><a href="/#apps">Aplicativos</a></li>
             <li><a href="/apps/saldo/">App Saldo</a></li>
+            <li><a href="/soluciones/">Soluciones</a></li>
             <li><a href="/marca/">Kit de marca</a></li>
           </ul>
         </div>
@@ -737,11 +738,256 @@ ${footer()}
 `;
 }
 
+/* ============================================
+   SOLUCIONES — pagina /soluciones/kioskcast/ y el hub /soluciones/
+   A diferencia de /apps/saldo/, que describe un producto ajeno, aquí el
+   desarrollador somos nosotros: el contenido sale de scripts/kioskcast-content.js
+   y cada afirmación tiene que poder señalarse en el repositorio del producto.
+   ============================================ */
+const SOLUCIONES = [require('./kioskcast-content.js')];
+const urlSol = s => NEG.url + '/soluciones/' + s.slug + '/';
+
+function validarSoluciones() {
+  SOLUCIONES.forEach(s => {
+    if (s.slug !== s.slug.toLowerCase() || /[^a-z0-9-]/.test(s.slug)) warnings.push(s.slug + ': slug no es ascii minusculo con guiones');
+    if (s.title.length > 65) warnings.push(s.slug + ': title de ' + s.title.length + ' caracteres (max 65)');
+    if (s.h1.length > 65) warnings.push(s.slug + ': h1 de ' + s.h1.length + ' caracteres (max 65)');
+    if (s.meta.length > 165) warnings.push(s.slug + ': meta de ' + s.meta.length + ' caracteres (max 165)');
+    if (!s.intro || s.intro.length !== 2) warnings.push(s.slug + ': «intro» debe tener 2 parrafos');
+    if (!s.pasos || s.pasos.length !== 4) warnings.push(s.slug + ': «pasos» debe tener 4 entradas');
+    if (!s.noHace || s.noHace.length < 3) warnings.push(s.slug + ': «noHace» debe listar al menos 3 limitaciones reales');
+    s.related.forEach(r => { if (!byKey[r]) warnings.push(s.slug + ': related apunta a «' + r + '», que no es un servicio'); });
+    if (s.servicioUrl && !/\/servicios\/[a-z0-9-]+\//.test(s.servicioUrl)) warnings.push(s.slug + ': servicioUrl «' + s.servicioUrl + '» no es una pagina de servicio');
+    if (s.servicioUrl && !fs.existsSync(path.join(ROOT, s.servicioUrl.replace(/^\//, ''), 'index.html'))) warnings.push(s.slug + ': no existe la pagina ' + s.servicioUrl);
+    s.capturas.forEach(x => {
+      if (!x.w || !x.h) warnings.push(s.slug + ': «' + x.src + '» sin width/height, da CLS');
+      if (!fs.existsSync(path.join(ROOT, x.src.replace(/^\//, '')))) warnings.push(s.slug + ': falta el archivo ' + x.src);
+    });
+  });
+}
+
+function solLd(s) {
+  return [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      name: 'KioskCast',
+      applicationCategory: 'MultimediaApplication',
+      operatingSystem: 'Android 8.0 o superior, y Windows o Linux para el hub',
+      description: s.meta,
+      url: urlSol(s),
+      image: NEG.url + s.capturas[0].src,
+      screenshot: s.capturas.map(c => NEG.url + c.src),
+      featureList: s.capacidades,
+      softwareVersion: '2.17',
+      developer: { '@type': 'Organization', name: NEG.nombre, url: NEG.url + '/' },
+      publisher: { '@type': 'Organization', name: NEG.nombre, url: NEG.url + '/' }
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Inicio', item: NEG.url + '/' },
+        { '@type': 'ListItem', position: 2, name: 'Soluciones', item: NEG.url + '/soluciones/' },
+        { '@type': 'ListItem', position: 3, name: s.h1.split(',')[0], item: urlSol(s) }
+      ]
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: s.faq.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } }))
+    }
+  ];
+}
+
+function solMain(s) {
+  return `  <main id="contenido" class="svc-page">
+    <div class="container">
+${crumbs([['Inicio', '/'], ['Soluciones', '/soluciones/'], [s.h1, null]])}
+
+      <header class="svc-hero">
+        <span class="section-kicker">${hic('h-circle-stack')} ${esc(s.kicker)}</span>
+        <h1 class="section-title section-title--left">${esc(s.h1)}</h1>
+${s.intro.map(t => '        <p class="svc-hero__lead">' + esc(t) + '</p>').join('\n')}
+        <div class="svc-hero__actions">
+          <a class="btn btn--accent btn--lg" href="${wa('Hola, me interesa KioskCast para las pantallas de mi negocio')}" target="_blank" rel="noopener">${hic('h-chat-bubble-left-right')} Pedir por WhatsApp</a>
+          <a class="btn btn--ghost btn--lg" href="${s.servicioUrl}">Ver el servicio de montaje</a>
+        </div>
+        <ul class="svc-facts">
+          <li><span class="svc-facts__k">Dónde</span>${esc(NEG.cobertura.join(' · '))}</li>
+          <li><span class="svc-facts__k">Pantallas</span>TVs y monitores con Android 8.0 o superior</li>
+          <li><span class="svc-facts__k">Desarrollador</span>${esc(NEG.nombre)}</li>
+        </ul>
+      </header>
+
+      <section class="svc-block">
+        <h2 class="section-title section-title--left">Qué hace</h2>
+        <ul class="svc-includes">
+${s.capacidades.map(i => '          <li>' + esc(i) + '</li>').join('\n')}
+        </ul>
+      </section>
+
+      <section class="svc-block">
+        <h2 class="section-title section-title--left">Así se ve el panel</h2>
+        <div class="sol-shots">
+${s.capturas.map(c => '          <figure class="sol-shot"><img src="' + c.src + '" width="' + c.w + '" height="' + c.h + '" alt="' + esc(c.alt) + '" loading="lazy" decoding="async"><figcaption>' + esc(c.cap) + '</figcaption></figure>').join('\n')}
+        </div>
+        <p class="tip-prose">${esc(s.avisoCapturas)}</p>
+      </section>
+
+      <section class="svc-block">
+        <h2 class="section-title section-title--left">¿Te suena alguna de estas situaciones?</h2>
+        <div class="svc-symptoms">
+${s.sintomas.map(x => '          <article class="svc-symptom"><h3>' + esc(x.q) + '</h3><p>' + esc(x.a) + '</p></article>').join('\n')}
+        </div>
+      </section>
+
+      <section class="svc-block">
+        <h2 class="section-title section-title--left">De qué se compone</h2>
+        <div class="sol-parts">
+${s.partes.map(p => '          <article class="sol-part"><span class="sol-part__icon" aria-hidden="true">' + hic(p.icon) + '</span><h3>' + esc(p.t) + '</h3><p>' + esc(p.d) + '</p></article>').join('\n')}
+        </div>
+      </section>
+
+      <section class="svc-block">
+        <h2 class="section-title section-title--left">Cómo lo montamos</h2>
+        <ol class="svc-steps">
+${s.pasos.map((x, i) => '          <li><span class="svc-steps__n" aria-hidden="true">' + String(i + 1).padStart(2, '0') + '</span><div><h3>' + esc(x.t) + '</h3><p>' + esc(x.d) + '</p></div></li>').join('\n')}
+        </ol>
+      </section>
+
+      <section class="svc-block">
+        <h2 class="section-title section-title--left">Ficha técnica</h2>
+        <ul class="svc-facts svc-facts--sol">
+${s.ficha.map(([k, v]) => '          <li><span class="svc-facts__k">' + esc(k) + '</span>' + esc(v) + '</li>').join('\n')}
+        </ul>
+      </section>
+
+      <section class="svc-block">
+        <h2 class="section-title section-title--left">Qué no hace hoy</h2>
+        <p class="tip-prose">Lo publicamos para que nadie contrate esto esperando algo que no está. Son limitaciones del producto tal como corre hoy, no promesas de hoja de ruta.</p>
+        <ul class="svc-includes sol-notyet">
+${s.noHace.map(i => '          <li>' + esc(i) + '</li>').join('\n')}
+        </ul>
+      </section>
+
+      <section class="svc-block">
+        <div class="faq-split">
+          <div class="faq-split__head">
+            <span class="section-kicker">${hic('h-question-mark-circle')} Preguntas frecuentes</span>
+            <h2 class="section-title section-title--left">Dudas sobre KioskCast</h2>
+            <a class="btn btn--accent" href="${wa('Hola, tengo una duda sobre KioskCast')}" target="_blank" rel="noopener">${hic('h-chat-bubble-left-right')} Pregúntanos directamente</a>
+          </div>
+          <div class="faq-list">
+${s.faq.map(f => '            <details class="faq-item"><summary><span>' + esc(f.q) + '</span><span class="faq-icon" aria-hidden="true">+</span></summary><div class="faq-answer">' + esc(f.a) + '</div></details>').join('\n')}
+          </div>
+        </div>
+      </section>
+
+      <section class="svc-block">
+        <h2 class="section-title section-title--left">Servicios relacionados</h2>
+        <div class="svc-related">
+${s.related.map(r => { const o = byKey[r]; return '          <a class="svc-related__card" href="/servicios/' + o.slug + '/"><span class="svc-related__icon" aria-hidden="true">' + hic(o.icon) + '</span><span class="svc-related__label">' + esc(o.label) + '</span></a>'; }).join('\n')}
+        </div>
+      </section>
+
+      <section class="svc-cta">
+        <div class="svc-cta__panel">
+        <h2 class="section-title">${esc(s.ctaTitle)}</h2>
+        <p class="svc-cta__text">${esc(s.ctaText)}</p>
+        <a class="btn btn--accent btn--lg" href="${wa('Hola, quiero cotizar KioskCast para mi negocio')}" target="_blank" rel="noopener">${hic('h-chat-bubble-left-right')} Escribir por WhatsApp</a>
+        </div>
+      </section>
+    </div>
+  </main>`;
+}
+
+function solPage(s) {
+  return `<!DOCTYPE html>
+<!-- Generado por scripts/build-pages.js a partir de scripts/kioskcast-content.js. No editar a mano. -->
+<html lang="es" data-theme="light">
+<head>
+${headBase({ title: s.title, meta: s.meta, h1: s.h1, url: urlSol(s), ld: solLd(s) })}
+</head>
+<body class="svc-page-body">
+${header()}
+
+${solMain(s)}
+
+${footer()}
+  <script src="/js/app-core.js" defer></script>
+</body>
+</html>
+`;
+}
+
+function solHub() {
+  const ld = [{
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'Soluciones tecnológicas de Servitecbaq',
+    description: 'Productos que Servitecbaq desarrolla e instalan en Barranquilla, en su propia red y sin suscripciones de terceros.',
+    url: NEG.url + '/soluciones/',
+    inLanguage: 'es'
+  }];
+  return `<!DOCTYPE html>
+<!-- Generado por scripts/build-pages.js. No editar a mano. -->
+<html lang="es" data-theme="light">
+<head>
+${headBase({
+    title: 'Soluciones tecnológicas desarrolladas por Servitecbaq',
+    meta: 'Los productos que Servitecbaq desarrolla e instala en Barranquilla: señalización digital para TVs, en tu propia red y sin suscripción de terceros.',
+    h1: 'Soluciones desarrolladas por Servitecbaq',
+    url: NEG.url + '/soluciones/', ld: ld
+  })}
+</head>
+<body class="svc-page-body">
+${header()}
+
+  <main id="contenido" class="svc-page">
+    <div class="container">
+${crumbs([['Inicio', '/'], ['Soluciones', null]])}
+      <header class="svc-hero">
+        <span class="section-kicker">${hic('h-circle-stack')} Soluciones</span>
+        <h1 class="section-title section-title--left">Soluciones desarrolladas por Servitecbaq</h1>
+        <p class="svc-hero__lead">Además del servicio técnico, construimos software propio cuando el problema del cliente pide algo que no se compra hecho. Aquí están esos productos: los escribimos nosotros, los instalamos nosotros y respondemos nosotros.</p>
+        <p class="svc-hero__lead">No son servicios sueltos ni apps de terceros que recomendamos. Cada uno corre en la red del cliente y se entrega montado, con su soporte en Barranquilla, Soledad y Puerto Colombia.</p>
+      </header>
+      <section class="svc-block">
+${SOLUCIONES.map(s => `      <div class="tip-cat">
+        <div class="tip-index tip-index--one">
+          <a class="tip-index__card" href="/soluciones/${s.slug}/"><span class="tip-index__icon" aria-hidden="true">${hic('h-circle-stack')}</span><h3>${esc(s.h1)}</h3><p>${esc(s.meta)}</p><span class="tip-index__k">${hic('h-sparkles')} Señalización digital en TVs Android</span></a>
+        </div>
+      </div>`).join('\n')}
+      </section>
+      <section class="svc-cta">
+        <div class="svc-cta__panel">
+        <h2 class="section-title">¿Necesitas algo que no está en la lista?</h2>
+        <p class="svc-cta__text">Buena parte de lo que desarrollamos empezó como el problema de un cliente. Cuéntanos el tuyo.</p>
+        <a class="btn btn--accent btn--lg" href="${wa('Hola, quiero hablar de una solución a la medida')}" target="_blank" rel="noopener">${hic('h-chat-bubble-left-right')} Escribir por WhatsApp</a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+${footer()}
+  <script src="/js/app-core.js" defer></script>
+</body>
+</html>
+`;
+}
+
+/* Las URLs del sitemap, en el orden en que se publican. */
+function urlsDelSitemap() {
+  return [NEG.url + '/'].concat(SERVICIOS.map(urlDe), [NEG.url + '/tips/'], tipIdx.map(urlTip), [urlApp],
+    [NEG.url + '/soluciones/'], SOLUCIONES.map(urlSol));
+}
+
 function sitemap() {  // Fecha local del contenido: toISOString() trae la hora UTC, que en Colombia
   // (+0 respecto a -5) deja un <lastmod> en el futuro.
   const d = new Date(fs.statSync(path.join(ROOT, 'services.json')).mtimeMs);
   const today = [d.getFullYear(), String(d.getMonth() + 1).padStart(2, '0'), String(d.getDate()).padStart(2, '0')].join('-');
-  const urls = [NEG.url + '/'].concat(SERVICIOS.map(urlDe), [NEG.url + '/tips/'], tipIdx.map(urlTip), [urlApp]);
+  const urls = urlsDelSitemap();
   return `<?xml version="1.0" encoding="UTF-8"?>
 <!-- Generado por scripts/build-pages.js -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -754,6 +1000,7 @@ validarConModal();
 validarEnlaces();
 validarTips();
 validarApp();
+validarSoluciones();
 
 if (warnings.length) {
   console.log('Avisos:');
@@ -791,4 +1038,13 @@ const dirApp = path.join(ROOT, 'apps', APP.slug);
 fs.mkdirSync(dirApp, { recursive: true });
 escribir(path.join(dirApp, 'index.html'), appPage());
 
-console.log(escritas + ' paginas de servicio, ' + tipsEscritas + ' de tips y 1 de app generadas; sitemap.xml reescrito (' + (SERVICIOS.length + tipIdx.length + 3) + ' URLs).');
+SOLUCIONES.forEach(s => {
+  const dir = path.join(ROOT, 'soluciones', s.slug);
+  fs.mkdirSync(dir, { recursive: true });
+  escribir(path.join(dir, 'index.html'), solPage(s));
+});
+fs.mkdirSync(path.join(ROOT, 'soluciones'), { recursive: true });
+escribir(path.join(ROOT, 'soluciones', 'index.html'), solHub());
+
+console.log(escritas + ' paginas de servicio, ' + tipsEscritas + ' de tips, 1 de app y ' + SOLUCIONES.length +
+  ' de soluciones generadas; sitemap.xml reescrito (' + urlsDelSitemap().length + ' URLs).');
