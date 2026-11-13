@@ -72,8 +72,8 @@ module.exports = {
 
   capturas: [
     { src: '/img/soluciones/kioskcast/pantallas.webp', w: 1600, h: 1000,
-      alt: 'Panel del hub de KioskCast con tres pantallas: dos en línea, una sin señal, con sus grupos y botones de emisión',
-      cap: 'Pantallas: estado en tiempo real, grupos y controles de cada televisor' },
+      alt: 'Panel del hub de KioskCast con tres pantallas agrupadas por zona y los botones de emisión de cada televisor',
+      cap: 'Pantallas: grupos, permisos y controles de cada televisor' },
     { src: '/img/soluciones/kioskcast/medios.webp', w: 1600, h: 1000,
       alt: 'Vista de medios del panel con archivos de video e imagen, su ficha técnica, tamaño y huella',
       cap: 'Medios: la ficha de cada video se analiza al cargarlo y advierte si un televisor no puede reproducirlo' },
