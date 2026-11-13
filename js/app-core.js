@@ -171,7 +171,10 @@
 
     document.addEventListener('click', function (e) {
       if (!nav.classList.contains('open')) return;
-      if (nav.contains(e.target) || toggle.contains(e.target)) return;
+      // composedPath conserva el boton aunque el handler anterior haya
+      // reemplazado su innerHTML y despegado el nodo donde cayo el clic.
+      var path = e.composedPath ? e.composedPath() : [];
+      if (nav.contains(e.target) || path.indexOf(toggle) !== -1) return;
       close();
     });
 
