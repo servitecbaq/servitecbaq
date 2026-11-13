@@ -101,6 +101,21 @@
 .sol-shot figcaption { margin-top: var(--s-2); font-size: var(--tx-xs); line-height: 1.5; color: var(--fg-muted); }
 .sol-shots + .tip-prose { margin-top: var(--s-6); }
 
+/* Video de presentación: póster visible y descarga solo al pulsar reproducir. */
+.sol-video { margin: 0; }
+.sol-video video {
+  display: block; width: 100%; height: auto;
+  background: var(--bg-subtle); border: 1px solid var(--line); border-radius: var(--r-md);
+}
+.sol-video figcaption { margin-top: var(--s-2); font-size: var(--tx-xs); line-height: 1.5; color: var(--fg-muted); }
+
+/* El video no lleva locución: la transcripción hace de subtítulo. */
+.sol-transcript { margin-top: var(--s-5); border-top: 1px solid var(--line); padding-top: var(--s-4); }
+.sol-transcript summary { cursor: pointer; font-size: var(--tx-sm); font-weight: 600; color: var(--accent-ink); }
+.sol-transcript summary::marker { color: var(--accent-ink); }
+.sol-transcript ol { margin: var(--s-4) 0 0; padding-left: var(--s-6); display: grid; gap: var(--s-2); font-size: var(--tx-sm); line-height: 1.6; color: var(--fg-muted); }
+.sol-transcript .tip-prose { margin-top: var(--s-3); }
+
 .sol-parts { display: grid; gap: var(--s-4); grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
 .sol-part {
   margin: 0; padding: var(--s-6);

@@ -22,6 +22,24 @@ module.exports = {
     'No es una aplicación descargada de una tienda ni un servicio en la nube con suscripción mensual. El software es de desarrollo propio, se instala en tu propia red y opera sin salida a internet: el panel de control se ejecuta en un equipo dentro del local y las pantallas se vinculan automáticamente. Si falla el proveedor de internet, las pantallas continúan emitiendo el último contenido cargado.'
   ],
 
+  video: {
+    src: '/img/soluciones/kioskcast/kioskcast-60s.mp4',
+    poster: '/img/soluciones/kioskcast/kioskcast-60s.webp',
+    w: 1920, h: 1080,
+    title: 'KioskCast en 60 segundos',
+    desc: 'Recorrido de un minuto por el panel del hub: medios, grupos, listas y la infraestructura local que mantiene la emisión dentro de la red del negocio.',
+    nota: 'El video no lleva locución: estos son los textos que aparecen en pantalla.',
+    guion: [
+      '0–7 s · ¿Actualizar tus pantallas todavía significa recorrerlas una por una? Un pendrive, cuatro recorridos y versiones que nunca coinciden.',
+      '7–15 s · KioskCast. Todas tus pantallas. Un solo panel. Administra contenido, listas y reproducción desde un hub dentro de tu propia red.',
+      '15–24 s · Medios. Sube una vez. Emite cuando quieras.',
+      '24–33 s · Grupos. Cada zona, su mensaje.',
+      '33–42 s · Listas. Arma la secuencia. Pulsa emitir.',
+      '42–51 s · Tu contenido viaja por tu red. No por internet. El hub sirve el panel y los medios; los televisores Android se conectan dentro de la red local.',
+      '51–60 s · Convierte tus TVs en un canal de tu marca. Menos recorridos. Más control. Una experiencia consistente en cada pantalla. Hablemos de tus pantallas.'
+    ]
+  },
+
   sintomas: [
     { q: 'La pantalla se queda en el canal de televisión o en negro', a: 'Un televisor sin gestión muestra lo último que alguien dejó configurado. KioskCast fija el modo kiosco: la aplicación vuelve a primer plano si alguien la interrumpe y la pantalla permanece bajo control hasta que se libere desde el panel.' },
     { q: 'El menú o la promoción se actualizan con una memoria USB', a: 'Cada actualización exige desplazarse con la memoria y disponer de tiempo. Con KioskCast se carga el archivo en el panel y se emite a la pantalla seleccionada desde un único lugar.' },

@@ -764,11 +764,19 @@ function validarSoluciones() {
       if (!x.w || !x.h) warnings.push(s.slug + ': «' + x.src + '» sin width/height, da CLS');
       if (!fs.existsSync(path.join(ROOT, x.src.replace(/^\//, '')))) warnings.push(s.slug + ': falta el archivo ' + x.src);
     });
+    if (s.video) {
+      if (!s.video.w || !s.video.h) warnings.push(s.slug + ': video sin width/height, da CLS');
+      ['src', 'poster'].forEach(k => {
+        if (!s.video[k]) warnings.push(s.slug + ': video sin «' + k + '»');
+        else if (!fs.existsSync(path.join(ROOT, s.video[k].replace(/^\//, '')))) warnings.push(s.slug + ': falta el archivo ' + s.video[k]);
+      });
+      if (!s.video.guion || s.video.guion.length < 5) warnings.push(s.slug + ': el video necesita transcripción (minimo 5 lineas de guion)');
+    }
   });
 }
 
 function solLd(s) {
-  return [
+  const ld = [
     {
       '@context': 'https://schema.org',
       '@type': 'SoftwareApplication',
@@ -799,6 +807,45 @@ function solLd(s) {
       mainEntity: s.faq.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } }))
     }
   ];
+  if (s.video) {
+    ld.push({
+      '@context': 'https://schema.org',
+      '@type': 'VideoObject',
+      name: s.video.title,
+      description: s.video.desc,
+      thumbnailUrl: NEG.url + s.video.poster,
+      uploadDate: '2026-11-12',
+      duration: 'PT1M',
+      contentUrl: NEG.url + s.video.src,
+      inLanguage: 'es',
+      publisher: { '@type': 'Organization', name: NEG.nombre, url: NEG.url + '/' }
+    });
+  }
+  return ld;
+}
+
+function solVideo(s) {
+  if (!s.video) return '';
+  const v = s.video;
+  return `      <section class="svc-block">
+        <h2 class="section-title section-title--left">${esc(v.title)}</h2>
+        <figure class="sol-video">
+          <video controls playsinline preload="none" width="${v.w}" height="${v.h}" poster="${v.poster}" aria-label="${esc(v.title)}">
+            <source src="${v.src}" type="video/mp4">
+            <p>Tu navegador no reproduce el video. <a href="${v.src}">Descárgalo en MP4</a>.</p>
+          </video>
+          <figcaption>${esc(v.desc)}</figcaption>
+        </figure>
+        <details class="sol-transcript">
+          <summary>Transcripción del video</summary>
+          <p class="tip-prose">${esc(v.nota)}</p>
+          <ol>
+${v.guion.map(g => '            <li>' + esc(g) + '</li>').join('\n')}
+          </ol>
+        </details>
+      </section>
+
+`;
 }
 
 function solMain(s) {
@@ -821,7 +868,7 @@ ${s.intro.map(t => '        <p class="svc-hero__lead">' + esc(t) + '</p>').join(
         </ul>
       </header>
 
-      <section class="svc-block">
+${solVideo(s)}      <section class="svc-block">
         <h2 class="section-title section-title--left">Qué hace</h2>
         <ul class="svc-includes">
 ${s.capacidades.map(i => '          <li>' + esc(i) + '</li>').join('\n')}
