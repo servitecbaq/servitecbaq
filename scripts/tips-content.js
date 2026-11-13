@@ -2,8 +2,9 @@
    tips-content.js — contenido de las páginas /tips/<slug>/
    Consumido solo por scripts/build-pages.js en el build; el sitio no lo carga.
    Las claves son los índices de tips.json (orden del archivo tal cual).
-   Por tip: slug, service (clave de services.json), h1, meta, intro[2],
-   pasos[3-5], cuando, error, relacionados[3 índices].
+   Por tip: slug, service (clave de services.json), h1, seoTitle opcional (title de
+   la pagina, max 60 caracteres; sin el se usa h1 + ' | Servitecbaq'), meta,
+   intro[2], pasos[3-5], cuando, error, relacionados[3 índices].
    ============================================ */
 module.exports = {
 
@@ -12,6 +13,7 @@ module.exports = {
     slug: 'bitlocker-cifrar-disco-completo',
     service: 'seguridad',
     h1: 'BitLocker: cifrar el disco completo del portátil',
+    seoTitle: 'BitLocker: cifrar el disco del portátil | Servitecbaq',
     meta: 'BitLocker viene en Windows Pro y cifra el disco entero. Si roban un portátil, los documentos quedan ilegibles sin la clave. Cómo lo activamos bien.',
     intro: [
       'Windows Pro y Enterprise traen BitLocker incluido. Cifra el disco sector por sector, así que un equipo apagado y robado no es una fuente de datos: es un ladrillo hasta que alguien introduzca la clave correcta.',
@@ -32,6 +34,7 @@ module.exports = {
     slug: 'laps-contrasena-unica-por-equipo',
     service: 'seguridad',
     h1: 'LAPS: una contraseña de administrador distinta en cada PC',
+    seoTitle: 'LAPS: una contraseña de administrador por equipo',
     meta: 'LAPS asigna y rota una contraseña de administrador local única por equipo y la guarda en Active Directory. Elimina la clave compartida de toda la red.',
     intro: [
       'En la mayoría de oficinas pequeñas la contraseña del administrador local es la misma en todos los equipos, porque es lo más cómodo de instalar. Ese único secreto compartido convierte cualquier PC comprometido en la puerta hacia los demás.',
@@ -52,6 +55,7 @@ module.exports = {
     slug: 'windows-defender-application-control',
     service: 'seguridad',
     h1: 'Application Control: que solo corra lo firmado y aprobado',
+    seoTitle: 'Application Control: solo se ejecuta lo aprobado',
     meta: 'Windows Defender Application Control bloquea ejecutables no aprobados. Es de lo más eficaz contra ransomware, pero exige una fase de prueba.',
     intro: [
       'Application Control (WDAC) funciona al revés que un antivirus: no busca lo malo, sino que bloquea todo lo que no esté en la lista de lo permitido. Un archivo descargado de un anuncio falso, una macro que suelta un ejecutable o un .exe suelto en Descargas no llegan a ejecutarse.',
@@ -72,6 +76,7 @@ module.exports = {
     slug: 'autenticacion-multiplicador-mfa',
     service: 'seguridad',
     h1: 'MFA: el segundo factor en correo, banca y acceso remoto',
+    seoTitle: 'MFA: el segundo factor en correo y acceso remoto',
     meta: 'El segundo factor bloquea más del 99 % de los accesos con contraseña robada. Dónde activar MFA primero y qué usar cuando no hay Microsoft 365.',
     intro: [
       'La mayor parte de las cuentas comprometidas no se rompen: se inician con una contraseña válida obtenida en un robo masivo, en un correo de phishing o en una filtración de otro servicio. Un segundo factor convierte esa contraseña en información insuficiente.',
@@ -112,6 +117,7 @@ module.exports = {
     slug: 'auditoria-de-eventos-en-windows',
     service: 'seguridad',
     h1: 'Auditoría de eventos: saber quién entró y qué se borró',
+    seoTitle: 'Auditoría de eventos: quién entró y qué se borró',
     meta: 'Habilitar la auditoría de eventos de Windows deja rastro de inicios de sesión, cambios de permisos y borrados. Qué eventos activar y dónde se ven.',
     intro: [
       'Cuando algo sale mal en una red, la pregunta es siempre la misma: quién lo hizo y a qué hora. Sin auditoría activada, la respuesta es imposible, porque Windows no guarda ese detalle por defecto.',
@@ -153,6 +159,7 @@ module.exports = {
     slug: 'task-scheduler-con-powershell',
     service: 'empresariales',
     h1: 'Task Scheduler con PowerShell: lo repetitivo solo',
+    seoTitle: 'Task Scheduler con PowerShell: lo repetitivo solo',
     meta: 'Limpieza de temporales, respaldo nocturno o reporte de discos: Task Scheduler ejecuta un script de PowerShell a una hora fija y se acabó la rutina.',
     intro: [
       'Hay tareas que se hacen «de vez en cuando» y nunca se hacen: limpiar la carpeta de temporales, sacar un listado de equipos con poco disco, comprimir los archivos del mes. Un script de veinte líneas y una tarea programada los convierten en algo que ocurre solo.',
@@ -213,6 +220,7 @@ module.exports = {
     slug: 'powertoys-microsoft-utilidades',
     service: 'mantenimiento',
     h1: 'PowerToys: cuatro utilidades que valen la instalación',
+    seoTitle: 'PowerToys: cuatro utilidades que vale instalar | Servitecbaq',
     meta: 'PowerToys trae FancyZones, PowerRename, el selector de colores y Awake. Gratis, de Microsoft, y sin tocar el registro del equipo.',
     intro: [
       'PowerToys es un paquete oficial de Microsoft con herramientas que Windows debió traer siempre. Se instala sin tocar el registro ni desactivar nada del sistema, y se puede quitar limpio.',
@@ -274,6 +282,7 @@ module.exports = {
     slug: 'escritorio-remoto-sobre-vpn',
     service: 'redes',
     h1: 'Escritorio remoto sobre VPN, nunca con el puerto abierto',
+    seoTitle: 'Escritorio remoto sobre VPN, nunca con el puerto abierto',
     meta: 'Abrir el 3389 a Internet es la puerta que barren los ransomware. El acceso remoto correcto es un túnel VPN y RDP solo dentro de la red.',
     intro: [
       'Publicar el puerto de escritorio remoto en el router es la forma rápida de poder entrar desde fuera, y es también lo primero que escanean los bots que buscan equipos expuestos. Los intentos de fuerza bruta sobre RDP público se cuentan por miles al día.',
@@ -294,6 +303,7 @@ module.exports = {
     slug: 'directivas-de-grupo-gpo',
     service: 'empresariales',
     h1: 'Group Policy: configurar todos los PCs a la vez',
+    seoTitle: 'Group Policy: configurar todos los PCs | Servitecbaq',
     meta: 'Con Active Directory, una GPO aplica pantalla de bloqueo, fondo, unidades de red y permisos en todos los equipos. Sin entrar uno por uno.',
     intro: [
       'En una red con dominio, configurar equipo por equipo no escala: a los tres meses cada PC tiene una política distinta y nadie sabe por qué. Las directivas de grupo aplican el mismo criterio a todos y dejan registro de quién lo cambió.',
@@ -314,6 +324,7 @@ module.exports = {
     slug: 'reservas-dhcp-por-direccion-mac',
     service: 'redes',
     h1: 'Reservas DHCP: que la impresora no cambie de IP',
+    seoTitle: 'Reservas DHCP: IP fija para impresoras y DVR | Servitecbaq',
     meta: 'Reservar la IP por dirección MAC en el router o el servidor DHCP evita que la impresora, el DVR o un equipo dejen de responder de forma repentina.',
     intro: [
       'Muchos fallos «de la impresora» o «de las cámaras» no son de la impresora ni de las cámaras: el servidor DHCP entregó una IP nueva después de un reinicio y el equipo que apuntaba a la vieja quedó buscando en el aire.',
@@ -334,6 +345,7 @@ module.exports = {
     slug: 'vlans-para-separar-trafico',
     service: 'redes',
     h1: 'VLAN: que las cámaras no compartan red con la oficina',
+    seoTitle: 'VLAN: separar las cámaras de la red de la oficina',
     meta: 'Separar CCTV, invitados y equipos de trabajo en VLAN distintas limita el daño de un compromiso y ordena el tráfico de la red de la oficina.',
     intro: [
       'En la mayoría de las redes pequeñas todo está en la misma red: celulares personales, la cámara del local, la impresora y el computador donde está la contabilidad. Cualquiera de esos dispositivos, si se compromete, ve a todos los demás.',
@@ -354,6 +366,7 @@ module.exports = {
     slug: 'dns-con-filtrado-contenido',
     service: 'redes',
     h1: 'DNS con filtrado: Quad9 y Cloudflare for Families',
+    seoTitle: 'DNS filtrado: Quad9 y Cloudflare for Families | Servitecbaq',
     meta: 'Cambiar el DNS de la red por uno con filtrado bloquea dominios de malware y contenido para adultos sin instalar nada en cada equipo.',
     intro: [
       'Antes de que un equipo descargue nada, resuelve un nombre. Si ese paso se hace contra un DNS que ya conoce los dominios de malware, de phishing o de contenido para adultos, la conexión ni siquiera se intenta.',
@@ -374,6 +387,7 @@ module.exports = {
     slug: 'analisis-de-canales-wifi',
     service: 'redes',
     h1: 'Análisis de canales Wi-Fi antes de cambiar el router',
+    seoTitle: 'Análisis de canales Wi-Fi antes de cambiar el router',
     meta: 'Antes de comprar un router nuevo: ver qué canales están ocupados, medir la señal real y mover el punto de acceso. Casi siempre hay una causa física.',
     intro: [
       'El diagnóstico más caro es el que se hace sin medir. «El internet va lento» puede ser el plan contratado, el canal saturado del vecindario, un microondas, o el punto de acceso metido detrás de un tablero metálico.',
@@ -415,6 +429,7 @@ module.exports = {
     slug: 'file-history-onedrive-kfm',
     service: 'seguridad',
     h1: 'File History y OneDrive KFM: dos capas de versión',
+    seoTitle: 'File History y OneDrive KFM: dos capas de versión',
     meta: 'File History guarda versiones locales y OneDrive KFM respalda Escritorio, Documentos e Imágenes en la nube. Así se combinan sin duplicar espacio.',
     intro: [
       'Perder un archivo por un disco averiado es un contratiempo grave; perderlo porque alguien lo sobrescribió hace tres semanas y no existe una versión anterior es un error evitable. Las dos capas que cubren eso en Windows ya vienen incluidas.',
@@ -435,6 +450,7 @@ module.exports = {
     slug: 'storage-sense-limpieza-automatica',
     service: 'mantenimiento',
     h1: 'Storage Sense: que Windows limpie solo el disco',
+    seoTitle: 'Storage Sense: que Windows limpie el disco solo',
     meta: 'Storage Sense borra temporales, vacía la papelera y limpia Descargas según reglas. Recupera gigas en discos pequeños sin instalar nada.',
     intro: [
       'Los discos de 128 y 256 GB se llenan con lo que nadie usa: actualizaciones viejas de Windows, archivos temporales, instaladores que quedaron en Descargas y una papelera con meses. Storage Sense barre eso con reglas que se definen una vez.',
@@ -455,6 +471,7 @@ module.exports = {
     slug: 'versiones-anteriores-shadow-copies',
     service: 'seguridad',
     h1: 'Versiones anteriores de un archivo (Shadow Copies)',
+    seoTitle: 'Versiones anteriores de un archivo (Shadow Copies)',
     meta: 'Las copias de volumen de Windows permiten abrir un archivo de ayer desde sus propiedades. Cómo activarlas en una carpeta compartida y en un PC.',
     intro: [
       'El punto de restauración más rápido del mundo es poder abrir el archivo que se dañó ayer sin tocar un respaldo. Eso son las shadow copies: Windows toma instantáneas de un volumen y las expone en el menú «Versiones anteriores».',
@@ -475,6 +492,7 @@ module.exports = {
     slug: 'regla-3-2-1-de-respaldo',
     service: 'seguridad',
     h1: 'La regla 3-2-1 de respaldo, en una oficina pequeña',
+    seoTitle: 'La regla 3-2-1 de respaldo en una oficina pequeña',
     meta: 'Tres copias, dos medios distintos, una fuera del sitio. Cómo aplicarla de verdad en una PYME sin gastar en infraestructura de respaldo.',
     intro: [
       'La regla es vieja y sigue siendo el mejor resumen: tres copias de lo importante, en dos tipos de medio distintos, con una fuera del sitio. No es un producto que se compra, es una decisión sobre dónde queda cada copia.',
@@ -556,6 +574,7 @@ module.exports = {
     slug: 'windows-update-for-business',
     service: 'empresariales',
     h1: 'Windows Update for Business: mandar tú las actualizaciones',
+    seoTitle: 'Windows Update for Business: controlar las actualizaciones',
     meta: 'Diferir características, forzar parches de seguridad y evitar que diez equipos se actualicen a la vez en plena facturación.',
     intro: [
       'Sin control, Windows decide cuándo actualiza. En una oficina eso significa equipos reiniciándose durante la caja del día o una versión nueva cayendo el mismo día en todos los puestos a la vez.',
@@ -596,6 +615,7 @@ module.exports = {
     slug: 'sandbox-de-windows-para-probar',
     service: 'mantenimiento',
     h1: 'Sandbox de Windows: probar sin arriesgar el equipo',
+    seoTitle: 'Sandbox de Windows: probar sin arriesgar el PC | Servitecbaq',
     meta: 'Windows Sandbox levanta un Windows limpio y desechable en segundos para abrir un archivo sospechoso o probar un instalador sin tocar nada.',
     intro: [
       'Hay momentos en que hace falta abrir un archivo que llegó por correo o instalar un programa que nadie conoce. Hacerlo en el equipo de trabajo es un riesgo; hacerlo en una máquina virtual configurada manualmente toma media hora.',
@@ -616,6 +636,7 @@ module.exports = {
     slug: 'sysinternals-suite-diagnostico',
     service: 'mantenimiento',
     h1: 'Sysinternals: Process Explorer, Autoruns y Procmon',
+    seoTitle: 'Sysinternals: Process Explorer, Autoruns y Procmon',
     meta: 'La suite de Sysinternals muestra qué proceso abre un archivo, qué arranca con Windows y qué está tocando un programa. Diagnóstico sin conjeturas.',
     intro: [
       'El Administrador de tareas dice qué se ve. Cuando el problema es un proceso que no aparece, un servicio que se levanta solo o un archivo bloqueado por alguien, hace falta mirar más abajo.',
@@ -636,6 +657,7 @@ module.exports = {
     slug: 'performance-monitor-en-windows',
     service: 'mantenimiento',
     h1: 'Performance Monitor: medir antes de cambiar el disco',
+    seoTitle: 'Performance Monitor: medir antes de cambiar el disco',
     meta: 'Contadores de disco, memoria y procesador para saber si la lentitud es de hardware o de software, con datos y no con impresiones.',
     intro: [
       '«Ese equipo está lento» puede significar cinco cosas distintas: disco al 100 %, memoria agotada con archivo de paginación de por medio, un proceso comiendo CPU, red saturada o un programa esperando algo que nunca llega.',

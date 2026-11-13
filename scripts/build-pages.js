@@ -349,6 +349,7 @@ function validarTips() {
     slugs[c.slug] = true;
     if (!byKey[c.service]) warnings.push(c.slug + ': service «' + c.service + '» no existe en services.json');
     if (c.h1.length > 65) warnings.push(c.slug + ': h1 de ' + c.h1.length + ' caracteres (max 65)');
+    if (c.seoTitle && c.seoTitle.length > 60) warnings.push(c.slug + ': seoTitle de ' + c.seoTitle.length + ' caracteres (max 60)');
     if (c.meta.length > 165) warnings.push(c.slug + ': meta de ' + c.meta.length + ' caracteres (max 165)');
     if (!c.pasos || c.pasos.length < 3 || c.pasos.length > 5) warnings.push(c.slug + ': «pasos» debe tener entre 3 y 5');
     if (!c.intro || c.intro.length !== 2) warnings.push(c.slug + ': «intro» debe tener 2 parrafos');
@@ -458,7 +459,7 @@ function tipPage(c) {
 <!-- Generado por scripts/build-pages.js a partir de tips.json + scripts/tips-content.js. No editar a mano. -->
 <html lang="es" data-theme="light">
 <head>
-${headBase({ title: c.h1 + ' | Servitecbaq', meta: c.meta, h1: c.h1, url: urlTip(c.idx), ld: tipLd(c), ogType: 'article' })}
+${headBase({ title: c.seoTitle || (c.h1 + ' | Servitecbaq'), meta: c.meta, h1: c.h1, url: urlTip(c.idx), ld: tipLd(c), ogType: 'article' })}
 </head>
 <body class="svc-page-body">
 ${header()}
