@@ -55,7 +55,7 @@ module.exports = {
     meta: 'Windows Defender Application Control bloquea ejecutables no aprobados. Es de lo más eficaz contra ransomware, pero exige una fase de prueba.',
     intro: [
       'Application Control (WDAC) funciona al revés que un antivirus: no busca lo malo, sino que bloquea todo lo que no esté en la lista de lo permitido. Un archivo descargado de un anuncio falso, una macro que suelta un ejecutable o un .exe suelto en Descargas no llegan a ejecutarse.',
-      'Es el control con mejor relación eficacia-esfuerzo contra ransomware en equipos con software estable, y por eso se configura siempre en dos fases y nunca de golpe.'
+      'Es el control con mejor relación eficacia-esfuerzo contra ransomware en equipos con software estable, y por eso se configura siempre en dos fases y nunca en una sola etapa.'
     ],
     pasos: [
       'Levantar un inventario de lo que realmente se ejecuta en el equipo o el perfil de puesto.',
@@ -244,7 +244,7 @@ module.exports = {
       'Aprender los filtros por extensión y por carpeta, que es donde se gana tiempo real.',
       'Revisar las opciones de privacidad si el equipo tiene documentos sensibles compartidos en red.'
     ],
-    cuando: 'Cualquier equipo con mucho archivo local: contabilidad, ingeniería, fotografía, oficinas con carpetas compartidas montadas como unidad. En un portátil con dos carpetas, no aporta nada.',
+    cuando: 'Cualquier equipo con mucho archivo local: contabilidad, ingeniería, fotografía, oficinas con carpetas compartidas asignadas como unidad de red. En un portátil con dos carpetas, no aporta nada.',
     error: 'Compartir el índice por red sin restringirlo. Cualquier equipo de la red puede buscar en los nombres de archivo del tuyo, y ahí aparecen cosas como «nómina noviembre.xlsx».',
     relacionados: [10, 12, 4]
   },
@@ -280,7 +280,7 @@ module.exports = {
       'La alternativa no es más cara: una VPN en el router o en un equipo de la red deja al usuario dentro de la red local, y desde ahí el escritorio remoto funciona como funciona siempre, sin exponer nada a Internet.'
     ],
     pasos: [
-      'Activar la VPN del router (WireGuard o IPsec) o montar un servidor VPN aparte, y crear un usuario por persona.',
+      'Activar la VPN del router (WireGuard o IPsec) o instalar un servidor VPN independiente, y crear un usuario por persona.',
       'Cerrar cualquier redirección de puerto 3389 que ya exista en el módem.',
       'Restringir RDP al grupo de usuarios que debe entrar y, si hay dominio, protegerlo por directiva de grupo.',
       'Probar el flujo completo desde una red externa y documentar qué equipo se puede tocar desde fuera.'
@@ -314,7 +314,7 @@ module.exports = {
     slug: 'reservas-dhcp-por-direccion-mac',
     service: 'redes',
     h1: 'Reservas DHCP: que la impresora no cambie de IP',
-    meta: 'Reservar la IP por dirección MAC en el router o el servidor DHCP evita que la impresora, el DVR o un equipo dejen de responder de pronto.',
+    meta: 'Reservar la IP por dirección MAC en el router o el servidor DHCP evita que la impresora, el DVR o un equipo dejen de responder de forma repentina.',
     intro: [
       'Muchos fallos «de la impresora» o «de las cámaras» no son de la impresora ni de las cámaras: el servidor DHCP entregó una IP nueva después de un reinicio y el equipo que apuntaba a la vieja quedó buscando en el aire.',
       'Una reserva DHCP ata la dirección MAC del dispositivo a una IP fija dentro del rango. El dispositivo sigue obteniendo su dirección automáticamente, pero siempre la misma, sin configurar nada en cada equipo.'
@@ -342,7 +342,7 @@ module.exports = {
     pasos: [
       'Definir los segmentos: trabajo, servidores, CCTV e invitados, con un rango y una puerta de enlace por segmento.',
       'Configurar el router o el switch gestionado y verificar que los puertos pertenezcan a la VLAN correcta.',
-      'Montar las reglas de paso entre VLAN: se permite lo necesario, no todo.',
+      'Definir las reglas de tránsito entre VLAN: se permite lo necesario, no todo.',
       'Probar desde cada segmento que lo que no debe verse no se ve, y documentar la matriz.'
     ],
     cuando: 'Cuando hay cámaras IP, red de invitados o más de un tipo de dispositivo con intereses distintos. Requiere equipo que soporte VLAN; con el módem del proveedor no se puede.',
@@ -385,8 +385,8 @@ module.exports = {
       'Mover el canal o el ancho de banda: 20 MHz en 2.4 GHz y 40/80 en 5 GHz según el caso.',
       'Repetir la medición después del cambio para poder decir si mejoró, y recién ahí evaluar un repetidor o un sistema mesh.'
     ],
-    cuando: 'Cortes que aparecen a ciertas horas, video que se traba en una punta del local, o una oficina donde el Wi-Fi funciona en unas sillas y en otras no.',
-    error: 'Subir la potencia del router al máximo creyendo que así llega más lejos. Aumenta la interferencia propia y la de todos los vecinos, y la batería de los celulares se pega.',
+    cuando: 'Cortes que aparecen a ciertas horas, video que se interrumpe en una zona del local, o una oficina donde el Wi-Fi funciona en unas zonas y en otras no.',
+    error: 'Subir la potencia del router al máximo creyendo que así llega más lejos. Aumenta la interferencia propia y la de todos los vecinos, y la batería de los celulares se agota más rápido.',
     relacionados: [16, 19, 15]
   },
 
@@ -417,7 +417,7 @@ module.exports = {
     h1: 'File History y OneDrive KFM: dos capas de versión',
     meta: 'File History guarda versiones locales y OneDrive KFM respalda Escritorio, Documentos e Imágenes en la nube. Así se combinan sin duplicar espacio.',
     intro: [
-      'Perder un archivo por un disco dañado es una desgracia; perderlo porque alguien lo sobrescribió hace tres semanas y no hay versión anterior es una tontería evitable. Las dos capas que cubren eso en Windows ya vienen incluidas.',
+      'Perder un archivo por un disco averiado es un contratiempo grave; perderlo porque alguien lo sobrescribió hace tres semanas y no existe una versión anterior es un error evitable. Las dos capas que cubren eso en Windows ya vienen incluidas.',
       'File History guarda versiones locales en un disco externo. Known Folder Move redirectiona Escritorio, Documentos e Imágenes a OneDrive, que conserva versiones propias del archivo. Juntas cubren el sobrescribir y el perder el equipo.'
     ],
     pasos: [
@@ -444,7 +444,7 @@ module.exports = {
       'Activarlo en Configuración > Sistema > Almacenamiento y elegir cada cuánto corre.',
       'Definir la regla de la papelera y de la carpeta de Descargas, que es donde más espacio se recupera.',
       'Revisar primero con «Archivos que no se abren hace mucho» en modo sugerencia antes de borrar automático.',
-      'Dejar limpio temporal para actualizaciones: un disco al 95 % no instala parches y Windows empieza a fallar raro.'
+      'Dejar limpio temporal para actualizaciones: un disco al 95 % no instala parches y Windows comienza a presentar fallos intermitentes.'
     ],
     cuando: 'Portátiles con SSD pequeño y equipos de uso general. En estaciones de trabajo con proyectos grandes, la limpieza automática de Descargas puede molestar más de lo que ayuda.',
     error: 'Configurar limpieza automática de Descargas en un equipo donde esa carpeta se usa como archivo. Lo borrado no está en la papelera: se fue.',
@@ -598,8 +598,8 @@ module.exports = {
     h1: 'Sandbox de Windows: probar sin arriesgar el equipo',
     meta: 'Windows Sandbox levanta un Windows limpio y desechable en segundos para abrir un archivo sospechoso o probar un instalador sin tocar nada.',
     intro: [
-      'Hay momentos en que hace falta abrir un archivo que llegó por correo o instalar un programa que nadie conoce. Hacerlo en el equipo de trabajo es un riesgo; hacerlo en una máquina virtual armada a mano toma media hora.',
-      'Windows Sandbox es la versión rápida: un Windows limpio en una ventana, que se levanta en segundos y se descarta al cerrarla. Lo que pase ahí no toca el equipo real.'
+      'Hay momentos en que hace falta abrir un archivo que llegó por correo o instalar un programa que nadie conoce. Hacerlo en el equipo de trabajo es un riesgo; hacerlo en una máquina virtual configurada manualmente toma media hora.',
+      'Windows Sandbox es la versión rápida: un Windows limpio en una ventana, que se levanta en segundos y se descarta al cerrarla. Lo que ocurra allí no afecta al equipo real.'
     ],
     pasos: [
       'Activar la funcionalidad en Programas y características y verificar que la virtualización venga de la UEFI.',
@@ -628,7 +628,7 @@ module.exports = {
       'Grabar una sesión de Procmon cuando el problema es intermitente y filtrar por el proceso sospechoso.'
     ],
     cuando: 'Equipos lentos sin causa visible, programas que no cierran, archivos que quedan bloqueados o una sospecha de malware que el antivirus no reporta.',
-    error: 'Desactivar en Autoruns entradas que no se entienden. Ahí están los controladores de audio, el panel de la placa y el antivirus, y el equipo queda raro sin que nadie sepa por qué.',
+    error: 'Desactivar en Autoruns entradas que no se entienden. Ahí están los controladores de audio, el panel de la placa y el antivirus, y el equipo presenta un comportamiento anómalo sin que nadie identifique la causa.',
     relacionados: [31, 29, 5]
   },
 

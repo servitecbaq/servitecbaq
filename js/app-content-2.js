@@ -25,7 +25,7 @@
 
     const controller = new AbortController();
     const state = { all: [], activeCategory: 'all', term: '' };
-    let primerMontaje = true;
+    let primerRender = true;
 
     // La rejilla se monta por lotes, así que crece ~1900px despues de que el navegador
     // ya resolvio la ancla: quien entra por #resenas, #faq o #contacto se queda corto.
@@ -150,8 +150,8 @@
         frag.appendChild(card);
       });
       mountInChunks(appsGrid, Array.prototype.slice.call(frag.children), 6,
-        primerMontaje && reasentarAncla);
-      primerMontaje = false;
+        primerRender && reasentarAncla);
+      primerRender = false;
     }
   })();
 

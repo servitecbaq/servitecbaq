@@ -8,18 +8,18 @@ module.exports = {
   slug: 'saldo',
   kicker: 'App destacada',
   title: 'App Saldo: controla quién te debe en tu negocio',
-  h1: 'Saldo, la app para llevar el fiado sin cuaderno',
-  meta: 'Qué hace la app Saldo, cuánto cuesta, qué trae el plan gratuito y cómo te la montamos: control del fiado, deudas y abonos desde un Android en Barranquilla.',
+  h1: 'Saldo, la aplicación para controlar las ventas a crédito',
+  meta: 'App Saldo: qué hace, cuánto cuesta, qué incluye el plan gratuito y cómo la instalamos. Control de ventas a crédito, deudas y abonos desde Android en Barranquilla.',
 
   intro: [
-    'Saldo es una aplicación Android para registrar las ventas a crédito —el fiado— de un negocio: quién te debe, cuánto te debe, qué abono hizo y desde cuándo no paga. Sustituye el cuaderno donde se anotaba todo a mano.',
-    'La desarrolla Alejandro Fragozo y se descarga de Google Play. Nosotros no vendemos la app ni cobramos la suscripción: damos el soporte local en Barranquilla, Soledad y Puerto Colombia para montarla, cargar tus clientes y que el registro no se pierda cuando cambia el teléfono.'
+    'Saldo es una aplicación Android para registrar las ventas a crédito de un negocio: quién te debe, cuánto, qué abonos ha realizado y desde cuándo está pendiente el pago. Sustituye el cuaderno donde se anotaba todo a mano.',
+    'La desarrolla Alejandro Fragozo y se descarga de Google Play. Nosotros no vendemos la aplicación ni cobramos la suscripción: prestamos el soporte local en Barranquilla, Soledad y Puerto Colombia para instalarla, cargar tus clientes y garantizar que el registro no se pierda al cambiar de teléfono.'
   ],
 
   sintomas: [
-    { q: 'No sé cuánto le debe cada cliente', a: 'Las cuentas están repartidas entre el cuaderno, la cabeza y dos chats de WhatsApp. Cuando el cliente pregunta, nadie tiene el número a mano y se pierde venta por duda.' },
-    { q: 'El cuaderno se pierde o se vuelve ilegible', a: 'Un cuaderno mojado, quemado o extraviado borra de golpe el histórico de meses. Sin copia, la deuda que no puedes probar simplemente deja de existir.' },
-    { q: 'Cobro tarde y ya gastó', a: 'Sin recordatorio, el abono se acuerda cuando el cliente vuelve, que suele ser cuando ya agotó su cupo. El cobro oportuno vale más que cualquier lista de precios.' }
+    { q: 'No sé cuánto le debe cada cliente', a: 'Las cuentas están repartidas entre el cuaderno, la memoria y conversaciones de WhatsApp. Cuando el cliente consulta, nadie tiene el dato a la mano y se pierde una venta por falta de información.' },
+    { q: 'El cuaderno se pierde o se vuelve ilegible', a: 'Un cuaderno extraviado o deteriorado elimina de una vez el historial de meses. Sin respaldo, la deuda que no se puede demostrar deja de ser exigible.' },
+    { q: 'El cobro se realiza tarde, cuando el cliente ya dispuso del dinero', a: 'Sin recordatorios, el abono se acuerda cuando el cliente regresa, momento en que suele haber agotado el cupo. El cobro oportuno incide más en la utilidad que cualquier ajuste de precios.' }
   ],
 
   funciones: [
@@ -31,7 +31,7 @@ module.exports = {
     'Recordatorios por notificación para no dejar pasar un cobro',
     'Funciona sin internet y sincroniza con la nube al reconectar',
     'Respaldo en infraestructura de Firebase y acceso desde varios dispositivos',
-    'Entrada con correo o cuenta de Google',
+    'Inicio de sesión con correo o cuenta de Google',
     'Disponible en español, inglés y portugués'
   ],
 
@@ -44,7 +44,7 @@ module.exports = {
       cap: 'Deuda total, saldo a favor y cuántos clientes están al día' },
     { src: '/img/apps/saldo-02.webp', w: 320, h: 641,
       alt: 'Pantalla Seguimiento de Saldo con el cobro sugerido para cada cliente',
-      cap: 'Seguimiento: la app sugiere cuánto cobrarle a cada cliente' },
+      cap: 'Seguimiento: la aplicación sugiere cuánto cobrarle a cada cliente' },
     { src: '/img/apps/saldo-03.webp', w: 320, h: 641,
       alt: 'Ficha de un cliente en Saldo con sus deudas, pagos y botón para compartir el detalle',
       cap: 'Ficha por cliente con deudas, pagos y opción de compartir' },
@@ -62,25 +62,25 @@ module.exports = {
   avisoPrecios: 'Precios publicados por el desarrollador en su sitio. Google Play puede mostrar otro valor según el país y la tasa del momento: confírmalo en la tienda antes de suscribirte.',
 
   pasos: [
-    { t: 'Miramos cómo anotas hoy', d: 'En el local o por WhatsApp: cuántos clientes deben, quién atiende, si hay un teléfono o varios. De eso sale si te alcanza el plan gratuito o no.' },
-    { t: 'Instalamos y respaldamos antes', d: 'Montamos la app, dejamos creado el acceso con correo o Google y le sacamos copia al registro que ya tengas, sea cuaderno, Excel o fotos.' },
-    { t: 'Cargamos clientes y límites', d: 'Digitamos los clientes con su saldo inicial, ajustamos el límite de crédito de cada uno y configuramos los recordatorios de cobro.' },
-    { t: 'Te dejamos operando', d: 'Diez minutos de entrenamiento para ti y quien atiende, más un canal directo por WhatsApp para las dudas de la primera semana.' }
+    { t: 'Revisamos tu registro actual', d: 'En el local o por WhatsApp: cantidad de clientes con saldo pendiente, quién administra el registro y cuántos dispositivos intervienen. De ese diagnóstico depende si el plan gratuito es suficiente.' },
+    { t: 'Instalamos y respaldamos primero', d: 'Instalamos la aplicación, configuramos el acceso con correo o cuenta de Google y respaldamos el registro existente, sea cuaderno, Excel o fotografías.' },
+    { t: 'Registramos clientes y límites', d: 'Cargamos los clientes con su saldo inicial, definimos el límite de crédito de cada uno y configuramos los recordatorios de cobro.' },
+    { t: 'Entregamos en operación', d: 'Una capacitación breve para ti y el personal de atención, más un canal directo por WhatsApp para resolver dudas durante la primera semana.' }
   ],
 
-  cuando: 'Si es una tienda o un puesto con pocos clientes que deben, el plan gratuito alcanza: registras, consultas y listo. La cosa cambia cuando atienden dos o tres personas desde distintos teléfonos, porque ahí la sincronización automática es lo que evita el doble apunte y el saldo que no cuadra.',
+  cuando: 'En una tienda o un local con pocos clientes con saldo pendiente, el plan gratuito es suficiente: se registra, se consulta y la operación queda al día. La situación cambia cuando dos o tres personas atienden desde dispositivos distintos, ya que la sincronización automática evita registros duplicados y diferencias de saldo.',
 
-  error: 'El error que más vemos: instalar la app y no respaldar. En el plan gratuito el respaldo es manual, así que si se daña el teléfono sin haber exportado, el cuaderno digital se pierde igual que el de papel. Antes de seguir, configura el correo de recuperación y comprueba que la copia existe de verdad.',
+  error: 'El error más frecuente consiste en instalar la aplicación sin configurar el respaldo. En el plan gratuito el respaldo es manual: si el teléfono se avería sin haber exportado el registro, la información se pierde igual que en el cuaderno de papel. Antes de continuar, configura el correo de recuperación y verifica que la copia existe realmente.',
 
   faq: [
-    { q: '¿Saldo sirve para iPhone?', a: 'La app se publica para Android en Google Play, que es donde se descarga. El sitio del desarrollador no anuncia versión para iPhone.' },
-    { q: '¿Cuánto cuesta Saldo?', a: 'Hay un plan gratuito con respaldo manual y dos de pago publicados por el desarrollador: $11.500 al mes u $89.000 al año, en pesos colombianos con IVA incluido. El valor final lo muestra Google Play según tu país.' },
-    { q: '¿Puedo pasar la información de mi cuaderno o de un Excel?', a: 'Sí, y es justamente la parte que hacemos nosotros: cargamos los clientes con el saldo que ya tienen registrado para que no empieces desde cero ni pierdas antigüedad.' },
-    { q: '¿Qué pasa si se daña el teléfono?', a: 'Con plan de pago la información se sincroniza en la nube, así que instalas en otro equipo y recuperas. Con plan gratuito el respaldo es manual: si no lo hiciste, el registro se va con el aparato.' },
-    { q: '¿Ustedes son los dueños de la aplicación?', a: 'No. Saldo la desarrolla Alejandro Fragozo y la venta la maneja él por Google Play. Servitecbaq cobra únicamente el montaje, la carga de datos y el soporte presencial.' }
+    { q: '¿Saldo sirve para iPhone?', a: 'La aplicación se publica para Android en Google Play, que es donde se descarga. El sitio del desarrollador no anuncia versión para iPhone.' },
+    { q: '¿Cuánto cuesta Saldo?', a: 'Existe un plan gratuito con respaldo manual y dos de pago publicados por el desarrollador: $11.500 al mes u $89.000 al año, en pesos colombianos con IVA incluido. El valor final lo muestra Google Play según tu país.' },
+    { q: '¿Puedo trasladar la información de mi cuaderno o de un Excel?', a: 'Sí, y es la parte que asumimos nosotros: registramos los clientes con el saldo vigente para que no empieces desde cero ni pierdas el historial.' },
+    { q: '¿Qué ocurre si el teléfono se avería?', a: 'Con plan de pago la información se sincroniza en la nube: se instala en otro equipo y se recupera. Con el plan gratuito el respaldo es manual; si no se realizó, el registro se pierde con el dispositivo.' },
+    { q: '¿Ustedes son los propietarios de la aplicación?', a: 'No. Saldo la desarrolla Alejandro Fragozo y la comercializa él a través de Google Play. Servitecbaq cobra únicamente la instalación, la carga de datos y el soporte presencial.' }
   ],
 
-  avisoCapturas: 'Las cuatro capturas salen de la ficha pública de Saldo en Google Play; el icono, las pantallas y el nombre de la app pertenecen a su desarrollador.',
+  avisoCapturas: 'Las cuatro capturas provienen de la ficha pública de Saldo en Google Play; el icono, las pantallas y el nombre de la aplicación pertenecen a su desarrollador.',
 
   related: ['instalacion', 'desarrollo', 'empresariales'],
 
@@ -88,8 +88,8 @@ module.exports = {
   devUrl: 'https://alejandrofragozo.github.io/saldo-web/',
   desarrollador: 'Alejandro Fragozo',
   paquete: 'com.fragozo.saldo',
-  avisoMarca: 'Saldo es un producto de su desarrollador, Alejandro Fragozo. Esta página es de Servitecbaq y describe la app desde el lado del soporte local; nombres y precios citados pertenecen a él.',
+  avisoMarca: 'Saldo es un producto de su desarrollador, Alejandro Fragozo. Esta página es de Servitecbaq y describe la aplicación desde el soporte local; nombres y precios citados pertenecen a él.',
 
-  ctaTitle: '¿Te lo montamos hoy?',
-  ctaText: 'Dime cuántos clientes tienes anotados en el cuaderno y agendamos el montaje en el local. La app la descargas del desarrollador; nosotros nos encargamos de que termine usándose.'
+  ctaTitle: '¿Instalamos Saldo en tu negocio?',
+  ctaText: 'Indícanos cuántos clientes tienes registrados en el cuaderno y agendamos la instalación en el local. La aplicación se descarga del desarrollador; nosotros nos encargamos de dejarla en operación.'
 };

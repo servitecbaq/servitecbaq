@@ -35,7 +35,7 @@
     },
     instalacion: {
       icon: 'svc-instalacion', title: 'Instalación, configuración y soporte de aplicativos',
-      description: 'Dejamos tus equipos listos para trabajar, estudiar o disfrutar, y te ayudamos con los programas que usas a diario.',
+      description: 'Dejamos tus equipos operativos para trabajar, estudiar o uso personal, y damos soporte a los programas de uso diario.',
       items: ['Instalación de computadores nuevos','Configuración inicial de Windows, macOS o Linux','Instalación de programas esenciales','Configuración de cuentas y correo','Instalación y configuración de programas','Solución de errores en Office, sistemas contables y navegadores','Configuración de correo y aplicaciones corporativas','Actualización o reinstalación de aplicaciones']
     },
     seguridad: {

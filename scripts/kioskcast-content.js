@@ -14,60 +14,60 @@ module.exports = {
   slug: 'kioskcast',
   kicker: 'Solución desarrollada por Servitecbaq',
   title: 'KioskCast: pantallas digitales en Barranquilla | Servitecbaq',
-  h1: 'KioskCast, la pantalla del negocio funcionando sola',
-  meta: 'KioskCast convierte TVs Android en pantallas digitales gestionadas desde un hub local: bucles, grupos, caché sin internet y registro de lo emitido.',
+  h1: 'KioskCast, pantallas digitales que operan sin supervisión',
+  meta: 'KioskCast convierte televisores Android en pantallas digitales gestionadas desde un hub local: bucles, grupos, caché sin internet y registro de lo emitido.',
 
   intro: [
-    'KioskCast es la solución de señalización digital que desarrollamos en Servitecbaq para que un televisor corriente haga de pantalla del negocio: reproduce los videos y las imágenes que le mandas, en bucle, sin mando a distancia y sin que nadie tenga que estar pendiente de él. Una recepción que promociona servicios, una cafetería que cambia el menú cuando cambia la hora, paradas que muestran lo mismo en varios puntos a la vez.',
-    'No es una app descargada de una tienda ni un servicio en la nube al que se paga suscripción mes a mes. El software lo escribimos nosotros, se instala en tu propia red y funciona sin salir a internet: el panel de control corre en un equipo dentro del local y las pantallas se le conectan solas. Si se cae el proveedor de internet, las pantallas siguen emitiendo lo último que cargaste.'
+    'KioskCast es la solución de señalización digital desarrollada por Servitecbaq para convertir un televisor comercial en la pantalla del negocio: reproduce en bucle los videos e imágenes que se le asignan, sin mando a distancia y sin supervisión permanente. Sirve para una recepción que promociona servicios, una cafetería que actualiza el menú según la franja horaria o varias sedes que muestran el mismo contenido al mismo tiempo.',
+    'No es una aplicación descargada de una tienda ni un servicio en la nube con suscripción mensual. El software es de desarrollo propio, se instala en tu propia red y opera sin salida a internet: el panel de control se ejecuta en un equipo dentro del local y las pantallas se vinculan automáticamente. Si falla el proveedor de internet, las pantallas continúan emitiendo el último contenido cargado.'
   ],
 
   sintomas: [
-    { q: 'La pantalla se queda en el canal de TV o en negro', a: 'Un televisor sin dirección hace lo último que alguien dejó puesto. KioskCast sujeta el kiosco: la app vuelve a su sitio si alguien la saca y la pantalla es nuestra hasta que tú la sueltes.' },
-    { q: 'El menú o la promoción se cambian a mano con un USB', a: 'Cada cambio obliga a alguien con el pendrive y con tiempo. Aquí subes el archivo al panel y lo emites a la pantalla que elijas, desde el mismo sitio donde lo cargaste.' },
-    { q: 'Varias pantallas y ninguna dice lo mismo a la vez', a: 'Los TVs se agrupan y el grupo emite junto una misma lista. Cada grupo puede estar con contenido distinto sin que se estorben entre sí.' },
-    { q: 'No hay forma de probar qué se emitió', a: 'El hub deja registro de cada comando con su hora y de quién lo mandó, y puede pedir una captura de la pantalla para ver qué tiene delante.' },
-    { q: 'Un video pesa 400 MB y el TV no lo mueve', a: 'Al subirlo se analiza la ficha del contenedor y el panel te dice si un TV Android corriente lo decodifica; si no, se recodifica a 1080p en el propio hub.' }
+    { q: 'La pantalla se queda en el canal de televisión o en negro', a: 'Un televisor sin gestión muestra lo último que alguien dejó configurado. KioskCast fija el modo kiosco: la aplicación vuelve a primer plano si alguien la interrumpe y la pantalla permanece bajo control hasta que se libere desde el panel.' },
+    { q: 'El menú o la promoción se actualizan con una memoria USB', a: 'Cada actualización exige desplazarse con la memoria y disponer de tiempo. Con KioskCast se carga el archivo en el panel y se emite a la pantalla seleccionada desde un único lugar.' },
+    { q: 'Varias pantallas y ninguna muestra lo mismo al mismo tiempo', a: 'Los televisores se organizan en grupos y cada grupo emite una misma lista de forma simultánea. Distintos grupos pueden operar con contenidos diferentes sin interferencias.' },
+    { q: 'No hay forma de comprobar qué se emitió', a: 'El hub registra cada comando con su hora y el usuario que lo ejecutó, y permite solicitar una captura de pantalla para verificar el contenido en emisión.' },
+    { q: 'Un video de gran tamaño que el televisor no reproduce', a: 'Al cargarlo se analiza la ficha técnica del contenedor y el panel indica si un televisor Android estándar lo decodifica; cuando no, el hub lo recodifica a 1080p.' }
   ],
 
   capacidades: [
-    'Bucle de videos MP4 e imágenes PNG/JPG, con hueco fijo entre piezas',
-    'Grupos de pantallas: una emisión simultánea a varios TVs a la vez',
-    'Listas con nombre que se emiten con un botón',
-    'Descubrimiento en la red: el TV se anuncia solo al abrir la app',
-    'Caché offline por huella SHA-256: la pantalla sigue emitiendo sin red',
-    'Modo kiosco con pantalla siempre encendida y en horizontal',
-    'Sujeción del kiosco: la app recupera la pantalla si alguien la interrumpe',
-    'Emisión superpuesta sobre lo que esté abierto en el TV',
-    'Volumen, pausa, parada y arranque de apps desde el panel',
-    'Captura de lo que hay en cada pantalla para verificar sin desplazarte',
-    'Cuentas con rol administrador, permiso de gestión de contenido y mando por pantalla',
+    'Bucle de videos MP4 e imágenes PNG/JPG, con intervalo fijo entre piezas',
+    'Grupos de pantallas: una misma emisión a varios televisores al mismo tiempo',
+    'Listas con nombre que se emiten con un clic',
+    'Descubrimiento automático en la red: el televisor se registra al abrir la aplicación',
+    'Caché local por huella SHA-256: la pantalla continúa emitiendo sin red',
+    'Modo kiosco con pantalla siempre activa y en horizontal',
+    'Bloqueo de modo kiosco: la aplicación recupera la pantalla si alguien la interrumpe',
+    'Emisión superpuesta sobre lo que esté abierto en el televisor',
+    'Control de volumen, pausa, detención y apertura de aplicaciones desde el panel',
+    'Captura de lo que se muestra en cada pantalla para verificar sin desplazamiento',
+    'Cuentas con rol administrador, permiso de gestión de contenido y control por pantalla',
     'Registro de comandos con usuario, hora y respuesta de cada pantalla'
   ],
 
   partes: [
-    { icon: 'h-device-phone-mobile', t: 'App del TV', d: 'Android 8.0 o superior, escrita en Kotlin con Media3 ExoPlayer. Reproduce en bucle, guarda caché y se conecta al hub por WebSocket.' },
-    { icon: 'h-server', t: 'Hub', d: 'Node.js con API REST, WebSocket y descubrimiento por UDP. Guarda medios, listas y registro en SQLite. Se instala como servicio de Windows o con systemd en Linux y Raspberry Pi.' },
-    { icon: 'h-computer-desktop', t: 'Panel web', d: 'Una sola página servida por el propio hub, sin CDNs ni dependencias externas. Desde ahí se suben los archivos, se forman grupos y listas y se emite.' },
-    { icon: 'h-video-camera', t: 'Análisis y recodificación', d: 'Al subir un video se lee su ficha y se decide si un TV corriente lo decodifica. Cuando no, el hub lo recodifica a 1080p con ffmpeg.' }
+    { icon: 'h-device-phone-mobile', t: 'Aplicación del televisor', d: 'Android 8.0 o superior, escrita en Kotlin con Media3 ExoPlayer. Reproduce en bucle, mantiene la caché local y se conecta al hub mediante WebSocket.' },
+    { icon: 'h-server', t: 'Hub de gestión', d: 'Node.js con API REST, WebSocket y descubrimiento por UDP. Almacena medios, listas y registro en SQLite. Se instala como servicio de Windows o con systemd en Linux y Raspberry Pi.' },
+    { icon: 'h-computer-desktop', t: 'Panel web', d: 'Una sola página servida por el propio hub, sin CDNs ni dependencias externas. Desde allí se cargan los archivos, se conforman grupos y listas y se emite.' },
+    { icon: 'h-video-camera', t: 'Análisis y recodificación', d: 'Al cargar un video se analiza su ficha técnica y se determina si un televisor estándar lo decodifica. Cuando no, el hub lo recodifica a 1080p mediante ffmpeg.' }
   ],
 
   capturas: [
     { src: '/img/soluciones/kioskcast/pantallas.webp', w: 1600, h: 1000,
       alt: 'Panel del hub de KioskCast con tres pantallas: dos en línea, una sin señal, con sus grupos y botones de emisión',
-      cap: 'Pantallas: estado en vivo, grupos y los botones de mando de cada TV' },
+      cap: 'Pantallas: estado en tiempo real, grupos y controles de cada televisor' },
     { src: '/img/soluciones/kioskcast/medios.webp', w: 1600, h: 1000,
       alt: 'Vista de medios del panel con archivos de video e imagen, su ficha técnica, tamaño y huella',
-      cap: 'Medios: la ficha de cada video se analiza al subirlo y avisa si un TV no lo mueve' },
+      cap: 'Medios: la ficha de cada video se analiza al cargarlo y advierte si un televisor no puede reproducirlo' },
     { src: '/img/soluciones/kioskcast/listas.webp', w: 1600, h: 1000,
       alt: 'Vista de listas del panel con varias listas guardadas y sus piezas',
-      cap: 'Listas: juntas las piezas con nombre y las emites con un botón' },
+      cap: 'Listas: agrupa las piezas bajo un nombre y las emite con un clic' },
     { src: '/img/soluciones/kioskcast/registro.webp', w: 1600, h: 1000,
-      alt: 'Vista de registro del panel con los últimos sucesos, su hora y quién los mandó',
-      cap: 'Registro: cada comando queda con su hora, su emisor y la respuesta del TV' }
+      alt: 'Vista de registro del panel con los últimos sucesos, su hora y quién los ejecutó',
+      cap: 'Registro: cada comando queda con su hora, su emisor y la respuesta del televisor' }
   ],
 
-  avisoCapturas: 'Las cuatro imágenes son el panel de KioskCast con datos de ejemplo: no son instalaciones de clientes. Las IPs corresponden a la reserva 192.0.2.0/24, que está reservada para documentación y no pertenece a ninguna red real.',
+  avisoCapturas: 'Las cuatro imágenes corresponden al panel de KioskCast con datos de ejemplo: no son instalaciones de clientes. Las IPs pertenecen a la reserva 192.0.2.0/24, destinada a documentación y ajena a cualquier red real.',
 
   ficha: [
     ['Versión publicada del APK', '2.17 (code 21)'],
@@ -77,39 +77,39 @@ module.exports = {
     ['Datos del hub', 'SQLite: 7 tablas entre pantallas, medios, listas, grupos, cuentas y registro'],
     ['Archivo máximo por subida', '2 GB'],
     ['Requisitos del hub', 'Node.js 18 o superior, en el mismo equipo que la red del local'],
-    ['Idioma del panel y de la app', 'Español'],
+    ['Idioma del panel y de la aplicación', 'Español'],
     ['Distribución', 'Entrega directa: instalación y alta de las pantallas a cargo de Servitecbaq'],
     ['Autor', 'Servitecbaq, Barranquilla']
   ],
 
   pasos: [
-    { t: 'Vemos qué pantallas hacen falta', d: 'Dónde, cuántas, qué se quiere mostrar y con qué TVs o monitores cuentas ya. Muchas veces el aparato que está en la pared sirve tal cual.' },
-    { t: 'Montamos el hub en tu red', d: 'Se instala en un equipo del local, con su servicio de arranque automático y el cortafuegos abierto en los dos puertos. No sale a internet.' },
-    { t: 'Preparamos las pantallas', d: 'Instalamos la app en cada TV, lo ponemos en modo kiosco y le damos los permisos que necesita. Aquí es donde cada modelo de TV se comporta distinto y donde hay que estar.' },
-    { t: 'Cargamos el contenido y enseñamos', d: 'Subimos tus piezas, armamos las listas y los grupos, y te dejamos emitiendo. La última parte es enseñarte a hacerlo tú sin nosotros.' }
+    { t: 'Definimos las pantallas necesarias', d: 'Ubicación, cantidad, contenido previsto y televisores o monitores disponibles. En muchos casos el equipo ya instalado es suficiente.' },
+    { t: 'Instalamos el hub en la red del local', d: 'Se instala en un equipo del local, con inicio automático como servicio y las reglas de cortafuegos para los dos puertos. No requiere salida a internet.' },
+    { t: 'Configuramos las pantallas', d: 'Se instala la aplicación en cada televisor, se configura el modo kiosco y se conceden los permisos requeridos. Cada modelo presenta particularidades que se resuelven en sitio.' },
+    { t: 'Cargamos el contenido y capacitamos al personal', d: 'Se cargan las piezas, se configuran listas y grupos y el sistema queda en emisión. La etapa final es la capacitación para que el manejo sea autónomo.' }
   ],
 
   noHace: [
-    'No tiene planificador por hora ni calendario: se emite la lista que tú mandas, no una programación que se activa sola según la hora.',
-    'No funciona por internet ni con cuentas remotas: el hub vive en la red local del local, que es justamente lo que lo hace independiente del proveedor.',
-    'No está en Google Play. Se instala directamente en el TV, y esa instalación la hacemos nosotros.',
-    'La emisión superpuesta sobre otras apps necesita que se le conceda el permiso de mostrar encima de otras aplicaciones; sin ese permiso, el video suena pero no se ve.',
-    'El arranque automático al encender el TV depende del firmware del aparato: hay modelos que no permiten que una app se quede de lanzadora, y eso se resuelve en sitio o se descarta.',
-    'No es un muro de vídeo con regiones: una pantalla, un contenido a la vez, no varias ventanas simultáneas con clima y noticias.'
+    'No incluye programación por franja horaria ni calendario: se emite la lista seleccionada, no una parrilla que se active automáticamente según la hora.',
+    'No opera a través de internet ni con cuentas remotas: el hub reside en la red local del establecimiento, lo que garantiza independencia del proveedor de internet.',
+    'No está en Google Play. Se instala directamente en el televisor y la instalación la realiza Servitecbaq.',
+    'La emisión superpuesta requiere el permiso del sistema para mostrarse sobre otras aplicaciones; sin ese permiso, el audio se reproduce pero la imagen no se visualiza.',
+    'El inicio automático al encender el televisor depende del firmware del equipo: algunos modelos no permiten asignar una aplicación como lanzador, situación que se resuelve en sitio o se descarta durante el levantamiento.',
+    'No es un muro de video por regiones: cada pantalla muestra un contenido a la vez, no varias ventanas simultáneas con información y noticias.'
   ],
 
   faq: [
-    { q: '¿Necesita internet?', a: 'No para emitir. El hub y las pantallas se hablan dentro de tu red, y cada TV guarda en caché lo último que recibió: si se cae el internet, la pantalla sigue con su bucle.' },
-    { q: '¿Sirve con el TV que ya tengo?', a: 'Casi siempre, si es Android TV con Android 8.0 o más nuevo. Los que no corren Android se quedan fuera, y hay modelos cuyo firmware no deja sujetar el kiosco: eso se revisa antes de instalar, no después.' },
-    { q: '¿Por qué no está en Google Play?', a: 'Porque no es una app de consumo: va paired con un hub instalado en el local, con su dirección y sus permisos. Publicarlo en la tienda no serviría de nada y obligaría a mantener una revisión de tienda en cada cambio.' },
-    { q: '¿Cuántas pantallas aguanta un hub?', a: 'El límite no lo pone el software sino tu red: cada pantalla mantiene una conexión con el hub y emite en paralelo. Para un local con pocas decenas de TVs va sobrado; para una cadena con sedes en ciudades distintas hace falta un hub por sede.' },
-    { q: '¿Quién es el dueño del software?', a: 'Servitecbaq. El código del hub, el panel y la app del TV es nuestro, y el montaje se contrata con nosotros: no hay suscripción de terceros que pagar ni una tienda en el medio.' },
-    { q: '¿Cuánto cuesta?', a: 'No se cobra el software por separado: se cotiza el montaje junto con las pantallas que hacen falta, que va por el mismo camino que nuestras soluciones empresariales. Escríbenos con cuántos TVs y dónde, y te damos el alcance.' }
+    { q: '¿Necesita internet?', a: 'No para emitir. El hub y las pantallas se comunican dentro de la red local, y cada televisor conserva en caché el último contenido recibido: si falla el internet, la pantalla continúa con su bucle.' },
+    { q: '¿Sirve con el televisor que ya tengo?', a: 'En la mayoría de los casos, si es un Android TV con Android 8.0 o superior. Los equipos que no ejecutan Android no son compatibles, y los modelos cuyo firmware no permite fijar el modo kiosco se identifican durante la revisión previa.' },
+    { q: '¿Por qué no está en Google Play?', a: 'Porque no es una aplicación de consumo: funciona vinculada a un hub instalado en el local, con su dirección y sus permisos definidos. Publicarla en la tienda no aportaría valor y exigiría un proceso de revisión en cada actualización.' },
+    { q: '¿Cuántas pantallas admite un hub?', a: 'El límite lo determina la red, no el software: cada pantalla mantiene una conexión con el hub y emite en paralelo. Un solo hub es suficiente para un local con decenas de televisores; una cadena con sedes en distintas ciudades requiere un hub por sede.' },
+    { q: '¿Quién es el dueño del software?', a: 'Servitecbaq. El código del hub, del panel y de la aplicación del televisor es de desarrollo propio, y la implementación se contrata directamente con nosotros: sin suscripciones de terceros ni intermediarios.' },
+    { q: '¿Cuánto cuesta?', a: 'El software no se cobra por separado: la implementación se cotiza junto con las pantallas requeridas, dentro del mismo esquema de soluciones empresariales. Con la cantidad de televisores y su ubicación definimos el alcance.' }
   ],
 
   related: ['empresariales', 'redes', 'desarrollo'],
   servicioUrl: '/servicios/soporte-tecnico-empresarial-barranquilla/',
 
-  ctaTitle: '¿Montamos las pantallas de tu negocio?',
-  ctaText: 'Cuéntanos cuántos televisores tienes y qué quieres que muestren. El software es nuestro, el montaje lo hacemos en Barranquilla, Soledad y Puerto Colombia, y la cotización va por el servicio de soluciones empresariales.'
+  ctaTitle: '¿Implementamos las pantallas de tu negocio?',
+  ctaText: 'Indícanos cuántos televisores dispones y qué contenido deseas mostrar. El software es de desarrollo propio, la implementación se realiza en Barranquilla, Soledad y Puerto Colombia, y la cotización se gestiona a través del servicio de soluciones empresariales.'
 };

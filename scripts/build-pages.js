@@ -505,8 +505,8 @@ ${crumbs([['Inicio', '/'], ['Tips', null]])}
       <header class="svc-hero">
         <span class="section-kicker">${hic('h-light-bulb')} Tips</span>
         <h1 class="section-title section-title--left">Tips de Windows para casa y oficina</h1>
-        <p class="svc-hero__lead">Lo que aprendemos cada día arreglando equipos en Barranquilla: qué control sirve de verdad, cómo lo montamos y en qué se equivocan los manuales genéricos.</p>
-        <p class="svc-hero__lead">Cada guía es corta y termina diciendo cuándo conviene hacerlo uno mismo y cuándo sale más barato llamar.</p>
+        <p class="svc-hero__lead">Lo que aprendemos cada día atendiendo equipos en Barranquilla: qué configuración funciona en la práctica, cómo la implementamos y qué omiten los manuales genéricos.</p>
+        <p class="svc-hero__lead">Cada guía es breve y concluye cuándo conviene resolverlo internamente y cuándo resulta más económico contar con soporte profesional.</p>
       </header>
       <section class="svc-block">
 ${cats.map(cat => `      <div class="tip-cat">
@@ -607,7 +607,7 @@ ${crumbs([['Inicio', '/'], ['App destacada', '/#saldo'], ['Saldo', null]])}
 ${APP.intro.map(t => '        <p class="svc-hero__lead">' + esc(t) + '</p>').join('\n')}
         <div class="svc-hero__actions">
           <a class="btn btn--accent btn--lg" href="${APP.playUrl}" target="_blank" rel="noopener">${hic('h-play-circle')} Descargar en Google Play</a>
-          <a class="btn btn--ghost btn--lg" href="${wa('Hola, necesito que me monten la app Saldo en el negocio')}" target="_blank" rel="noopener">${hic('h-chat-bubble-left-right')} Pedir el montaje</a>
+          <a class="btn btn--ghost btn--lg" href="${wa('Hola, necesito que instalen la app Saldo en el negocio')}" target="_blank" rel="noopener">${hic('h-chat-bubble-left-right')} Solicitar la instalación</a>
         </div>
         <ul class="svc-facts">
           <li><span class="svc-facts__k">Plataforma</span>Android (Google Play)</li>
@@ -654,7 +654,7 @@ ${p.items.map(i => '              <li>' + esc(i) + '</li>').join('\n')}
       </section>
 
       <section class="svc-block">
-        <h2 class="section-title section-title--left">Cómo te lo montamos</h2>
+        <h2 class="section-title section-title--left">Cómo lo implementamos</h2>
         <ol class="svc-steps">
 ${APP.pasos.map((x, i) => '          <li><span class="svc-steps__n" aria-hidden="true">' + String(i + 1).padStart(2, '0') + '</span><div><h3>' + esc(x.t) + '</h3><p>' + esc(x.d) + '</p></div></li>').join('\n')}
         </ol>
@@ -811,7 +811,7 @@ ${crumbs([['Inicio', '/'], ['Soluciones', '/soluciones/'], [s.h1, null]])}
 ${s.intro.map(t => '        <p class="svc-hero__lead">' + esc(t) + '</p>').join('\n')}
         <div class="svc-hero__actions">
           <a class="btn btn--accent btn--lg" href="${wa('Hola, me interesa KioskCast para las pantallas de mi negocio')}" target="_blank" rel="noopener">${hic('h-chat-bubble-left-right')} Pedir por WhatsApp</a>
-          <a class="btn btn--ghost btn--lg" href="${s.servicioUrl}">Ver el servicio de montaje</a>
+          <a class="btn btn--ghost btn--lg" href="${s.servicioUrl}">Ver el servicio de implementación</a>
         </div>
         <ul class="svc-facts">
           <li><span class="svc-facts__k">Dónde</span>${esc(NEG.cobertura.join(' · '))}</li>
@@ -850,7 +850,7 @@ ${s.partes.map(p => '          <article class="sol-part"><span class="sol-part__
       </section>
 
       <section class="svc-block">
-        <h2 class="section-title section-title--left">Cómo lo montamos</h2>
+        <h2 class="section-title section-title--left">Cómo lo implementamos</h2>
         <ol class="svc-steps">
 ${s.pasos.map((x, i) => '          <li><span class="svc-steps__n" aria-hidden="true">' + String(i + 1).padStart(2, '0') + '</span><div><h3>' + esc(x.t) + '</h3><p>' + esc(x.d) + '</p></div></li>').join('\n')}
         </ol>
@@ -951,7 +951,7 @@ ${crumbs([['Inicio', '/'], ['Soluciones', null]])}
         <span class="section-kicker">${hic('h-circle-stack')} Soluciones</span>
         <h1 class="section-title section-title--left">Soluciones desarrolladas por Servitecbaq</h1>
         <p class="svc-hero__lead">Además del servicio técnico, construimos software propio cuando el problema del cliente pide algo que no se compra hecho. Aquí están esos productos: los escribimos nosotros, los instalamos nosotros y respondemos nosotros.</p>
-        <p class="svc-hero__lead">No son servicios sueltos ni apps de terceros que recomendamos. Cada uno corre en la red del cliente y se entrega montado, con su soporte en Barranquilla, Soledad y Puerto Colombia.</p>
+        <p class="svc-hero__lead">No son servicios aislados ni aplicaciones de terceros que recomendamos. Cada producto opera en la red del cliente y se entrega implementado y en operación, con soporte en Barranquilla, Soledad y Puerto Colombia.</p>
       </header>
       <section class="svc-block">
 ${SOLUCIONES.map(s => `      <div class="tip-cat">

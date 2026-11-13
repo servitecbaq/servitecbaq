@@ -25,8 +25,8 @@
       "h1": "Reparación y mantenimiento de computadores en Barranquilla",
       "meta": "Reparación y mantenimiento a domicilio en Barranquilla: limpieza, SSD, RAM, virus y reinstalación de Windows. Diagnóstico y precio antes de empezar.",
       "intro": [
-        "Un computador que tarda cinco minutos en abrir Windows, se apaga solo o suena como un avión no está roto: casi siempre está sucio, con la pasta térmica seca, un disco mecánico al final de su vida o un sistema lleno de programas que nadie revisa. Ese es el trabajo que hacemos todos los días, en tu casa o en tu oficina, sin que tengas que desarmar el equipo para llevarlo a un taller.",
-        "Prolongamos la vida útil de tus equipos y solucionamos fallas de hardware y software, tanto en computadores de escritorio como portátiles. Antes de tocar nada te decimos qué encontramos y qué incluye el servicio; si la reparación no vale la pena, también te lo decimos."
+        "Un computador que tarda varios minutos en iniciar Windows, se apaga sin intervención o genera un ruido excesivo de ventilación no necesariamente está averiado: en la mayoría de los casos presenta acumulación de polvo, pasta térmica seca, un disco mecánico al final de su vida útil o un sistema con programas innecesarios. Ese es el trabajo que realizamos a diario, en tu domicilio u oficina, sin necesidad de trasladar el equipo a un taller.",
+        "Prolongamos la vida útil de tus equipos y solucionamos fallas de hardware y software, tanto en computadores de escritorio como portátiles. Antes de intervenir el equipo informamos qué encontramos y qué incluye el servicio; si la reparación no resulta conveniente frente al costo de reemplazo, también lo indicamos."
       ],
       "items": [
         "Limpieza interna de polvo y ventiladores",
@@ -71,7 +71,7 @@
         },
         {
           "t": "Presupuesto claro",
-          "d": "Qué se va a hacer, qué pieza entra y cuánto cuesta. Si la reparación no vale la pena, también te lo decimos."
+          "d": "Qué se va a realizar, qué repuesto se instala y cuánto cuesta. Si la reparación no resulta conveniente frente al costo de reemplazo, también lo indicamos."
         },
         {
           "t": "Reparación en sitio o taller",
@@ -116,7 +116,7 @@
       "h1": "Redes e Internet para casas y PYMES en Barranquilla",
       "meta": "Configuramos y reparamos tu red en Barranquilla: routers, mesh, VLAN para CCTV o invitados, IPs fijas y cortes de internet.",
       "intro": [
-        "Casi ninguna red falla por el proveedor: falla por un router mal ubicado, un canal saturado en el edificio, dos puntos de acceso que se pisan entre sí o una impresora que quedó en la red de invitados. Ordenamos eso sin obra y sin cambiar el equipo que ya compraste, salvo que de verdad no dé más.",
+        "La mayoría de las fallas de red no provienen del proveedor: se originan en un router mal ubicado, un canal saturado en el edificio, dos puntos de acceso con interferencia mutua o una impresora configurada en la red de invitados. Corregimos esos aspectos sin obra y conservando el equipo existente, salvo que su capacidad ya no cubra la demanda.",
         "Configuramos y solucionamos problemas de conectividad en hogares, oficinas y pequeñas empresas. Cuando hace falta infraestructura, dejamos la red documentada: qué equipo hace qué, qué IPs están reservadas y dónde queda cada cable."
       ],
       "pasos": [
@@ -152,16 +152,16 @@
           "a": "Repetidores, mesh o cableado al punto donde realmente se necesita."
         },
         {
-          "q": "Se corta o se cae en horas pico",
-          "a": "Revisión de canal, interferencia y capacidad del router del proveedor."
+          "q": "La conexión se interrumpe en horas pico",
+          "a": "Revisión de canal, interferencia y capacidad del router suministrado por el proveedor."
         },
         {
-          "q": "La oficina creció y la red no da",
+          "q": "La oficina creció y la red no cubre la demanda",
           "a": "Switch, direccionamiento y VLAN para separar áreas y dispositivos."
         },
         {
-          "q": "Cámaras y dispositivos IoT conviviendo con los computadores",
-          "a": "Red separada para que un dispositivo viejo no exponga todo."
+          "q": "Cámaras y dispositivos IoT compartiendo red con los computadores",
+          "a": "Red separada para que un dispositivo desactualizado no comprometa el resto."
         },
         {
           "q": "No sabes qué equipo está conectado",
@@ -170,12 +170,12 @@
       ],
       "faq": [
         {
-          "q": "¿Hay que romper paredes para cablear?",
-          "a": "Buscamos rutas existentes y canaletas. Si una opción requiere obra, te la planteamos aparte para que decidas."
+          "q": "¿Es necesario romper paredes para cablear?",
+          "a": "Buscamos rutas existentes y canaletas. Si una opción requiere obra, se presenta por separado para que decidas."
         },
         {
-          "q": "¿Sirve cambiar el router que puso el proveedor?",
-          "a": "Depende del caso: a veces se arregla con configuración y ubicación; lo probamos antes de sugerirte comprar algo."
+          "q": "¿Conviene cambiar el router instalado por el proveedor?",
+          "a": "Depende del caso: en ocasiones se resuelve con configuración y reubicación. Lo verificamos antes de recomendar una compra."
         },
         {
           "q": "¿Atienden oficinas con varios pisos?",
@@ -198,7 +198,7 @@
       "h1": "Cámaras de seguridad CCTV con acceso desde el celular",
       "meta": "Instalación y configuración de cámaras IP y análogas con DVR/NVR, grabación por movimiento y acceso remoto desde el celular.",
       "intro": [
-        "Un sistema de cámaras solo sirve si graba lo que pasó, guarda los días que hacen falta y lo puedes abrir desde el celular cuando estás fuera. Todo lo demás —la marca, los megapíxeles— es secundario, y es la parte que casi nadie revisa después de la instalación.",
+        "Un sistema de cámaras solo cumple su función si registra los hechos, conserva el video durante los días necesarios y permite consultarlo desde el celular fuera del sitio. Los demás aspectos —marca y resolución— son secundarios frente a esos tres criterios.",
         "Instalamos, configuramos y administramos sistemas de cámaras de seguridad para hogares y negocios, integrados a la red que ya tienes y con el respaldo de video configurado desde el primer día."
       ],
       "items": [
@@ -212,15 +212,15 @@
       ],
       "sintomas": [
         {
-          "q": "Vas a montar cámaras desde cero",
+          "q": "Vas a instalar cámaras desde cero",
           "a": "Definimos puntos, tipo de cámara interior/exterior y tamaño del disco según los días de retención que necesites."
         },
         {
-          "q": "Ya tienes DVR pero no ves nada del celular",
+          "q": "Ya tienes DVR pero no puedes ver las cámaras desde el celular",
           "a": "Configuramos el acceso remoto y dejamos tus credenciales bajo tu control."
         },
         {
-          "q": "Las cámaras se caen o la grabación tiene huecos",
+          "q": "Las cámaras se desconectan o la grabación presenta interrupciones",
           "a": "Revisión de fuente, cableado, disco y horarios de grabación."
         },
         {
@@ -235,7 +235,7 @@
       "pasos": [
         {
           "t": "Recorrido y puntos de cámara",
-          "d": "Definimos accesos, puntos ciegos e iluminación para saber cuántas cámaras van y dónde, en interior o exterior."
+          "d": "Definimos accesos, puntos ciegos e iluminación para determinar cuántas cámaras se requieren y su ubicación, en interior o exterior."
         },
         {
           "t": "Cableado y grabador protegido",
@@ -252,20 +252,20 @@
       ],
       "faq": [
         {
-          "q": "¿Cuántos días se graba?",
-          "a": "Depende del tamaño del disco, la resolución y si grabas continuo o solo por movimiento. Con eso calculamos la retención antes de instalar."
+          "q": "¿Cuántos días de grabación conserva el sistema?",
+          "a": "Depende del tamaño del disco, la resolución y si la grabación es continua o por movimiento. Con esos datos calculamos la retención antes de instalar."
         },
         {
           "q": "¿Puedo verlas desde fuera?",
-          "a": "Sí, desde la app o el navegador del celular. La cuenta queda a tu nombre, no a la nuestra."
+          "a": "Sí, desde la aplicación o el navegador del celular. La cuenta queda a tu nombre, no a la nuestra."
         },
         {
-          "q": "¿Instalan cámaras que ya compré?",
-          "a": "Sí. Revisamos compatibilidad con el grabador antes de montar para no descubrir problemas en el techo."
+          "q": "¿Instalan cámaras adquiridas previamente?",
+          "a": "Sí. Revisamos la compatibilidad con el grabador antes de instalar para evitar contratiempos durante la instalación."
         },
         {
-          "q": "¿Hacen mantenimiento de una instalación antigua?",
-          "a": "Sí: limpieza de lentes, revisión de cableado y fuentes, estado del disco y verificación de que esté grabando de verdad."
+          "q": "¿Realizan mantenimiento de una instalación antigua?",
+          "a": "Sí: limpieza de lentes, revisión de cableado y fuentes, estado del disco y verificación de que la grabación se esté produciendo."
         }
       ],
       "related": [
@@ -282,11 +282,11 @@
       "phrase": "soporte e instalación de impresoras",
       "icon": "svc-impresoras",
       "title": "Reparación de Impresoras en Barranquilla | Servitecbaq",
-      "h1": "Impresoras que imprimen, desde el computador y el celular",
+      "h1": "Impresoras que funcionan desde el computador y el celular",
       "meta": "Instalamos y reparamos impresoras en Barranquilla: red o Wi-Fi, impresión desde el celular, atascos, controladores y tóner.",
       "intro": [
-        "La impresora es el dispositivo que todo el mundo cree roto cuando lo que falta es un controlador, una IP que cambió o un equipo que quedó apuntando a la red de invitados. Lo resolvemos en el sitio, con la impresora que ya tienes.",
-        "Instalamos, configuramos y reparamos impresoras de todas las marcas, en hogares y oficinas, y dejamos la impresión compartida funcionando para que no dependa del computador de uno solo."
+        "La impresora suele considerarse averiada cuando en realidad falta un controlador, cambió su dirección IP o el equipo quedó apuntando a la red de invitados. Lo resolvemos en el sitio, con la impresora que ya tienes.",
+        "Instalamos, configuramos y reparamos impresoras de todas las marcas, en hogares y oficinas, y dejamos la impresión compartida en funcionamiento para que no dependa de un único computador."
       ],
       "items": [
         "Instalación en Windows y Mac",
@@ -299,7 +299,7 @@
       "sintomas": [
         {
           "q": "No imprime aunque aparece instalada",
-          "a": "Puerto, controlador y cola de impresión: casi siempre está ahí."
+          "a": "Puerto, controlador y cola de impresión: en la mayoría de los casos el origen está en uno de esos tres elementos."
         },
         {
           "q": "Solo imprime desde un computador",
@@ -321,25 +321,25 @@
       "pasos": [
         {
           "t": "Identificamos modelo y conexión",
-          "d": "Marca, controlador y si va por USB, red o Wi-Fi: casi siempre el problema está ahí."
+          "d": "Marca, controlador y tipo de conexión (USB, red o Wi-Fi): en la mayoría de los casos el origen del problema está en alguno de esos puntos."
         },
         {
           "t": "Instalación y uso compartido",
-          "d": "La impresora visible en cada equipo de la casa u oficina, incluidos celular y tablet."
+          "d": "La impresora disponible en cada equipo de la casa u oficina, incluidos celular y tablet."
         },
         {
           "t": "Ajuste de cola y perfiles",
-          "d": "Puerto correcto, controlador adecuado y cola limpia para que no vuelva a quedarse trabada."
+          "d": "Puerto correcto, controlador adecuado y cola limpia para evitar nuevas interrupciones."
         },
         {
           "t": "Prueba con un trabajo real",
-          "d": "Imprimimos juntos, verificamos la calidad y te dejamos claro qué hacer si falla de nuevo."
+          "d": "Realizamos la impresión de prueba, verificamos la calidad y dejamos indicaciones claras para actuar si el problema se repite."
         }
       ],
       "faq": [
         {
           "q": "¿Trabajan con cualquier marca?",
-          "a": "Sí, en instalación y configuración. Si una reparación requiere repuesto costoso, te decimos si conviene más el reemplazo."
+          "a": "Sí, en instalación y configuración. Si una reparación exige un repuesto de costo elevado, te indicamos si conviene el reemplazo."
         },
         {
           "q": "¿Sirve para la oficina con varios equipos?",
@@ -364,10 +364,10 @@
       "icon": "svc-instalacion",
       "title": "Instalación de Programas en Barranquilla | Servitecbaq",
       "h1": "Instalación, configuración y soporte de aplicativos",
-      "meta": "Dejamos tu equipo listo: Windows, macOS o Linux, Office, correo, sistemas contables y los programas que usas cada día.",
+      "meta": "Dejamos tu equipo operativo: Windows, macOS o Linux, Office, correo, sistemas contables y los programas que utilizas cada día.",
       "intro": [
-        "Un equipo nuevo mal configurado es peor que uno viejo conocido: sin respaldo, con el antivirus de prueba que caduca en 30 días, el correo a medio configurar y el sistema contable que no imprime. Esa parte del trabajo casi nadie la hace bien y es la que genera los problemas de los primeros meses.",
-        "Dejamos tus equipos listos para trabajar, estudiar o disfrutar, y te ayudamos con los programas que usas a diario, incluyendo los que dan guerra: Office, sistemas contables y clientes de correo."
+        "Un equipo nuevo mal configurado genera más problemas que uno antiguo ya conocido: sin respaldo, con el antivirus de prueba que vence a los 30 días, el correo a medio configurar y el sistema contable sin impresión. Esa etapa inicial suele realizarse de forma incompleta y es la que origina los inconvenientes de los primeros meses.",
+        "Dejamos tus equipos operativos para trabajar, estudiar o uso personal, y damos soporte a los programas de uso diario, incluidos los de mayor complejidad: Office, sistemas contables y clientes de correo."
       ],
       "items": [
         "Instalación de computadores nuevos",
@@ -386,7 +386,7 @@
         },
         {
           "q": "Office pide licencia o falla al abrir archivos",
-          "a": "Reinstalación limpia y activación con tu cuenta, sin dejar versiones viejas chocando."
+          "a": "Reinstalación limpia y activación con tu cuenta, sin versiones anteriores en conflicto."
         },
         {
           "q": "El sistema contable no deja facturar",
@@ -403,34 +403,34 @@
       ],
       "pasos": [
         {
-          "t": "Inventario de lo que usas",
-          "d": "Office, sistema contable, correo, antivirus y los programas propios de tu trabajo; ninguno se queda fuera."
+          "t": "Inventario de aplicaciones",
+          "d": "Office, sistema contable, correo, antivirus y los programas propios de tu actividad: ninguno queda excluido."
         },
         {
           "t": "Instalación y licencias",
           "d": "Programas actualizados, licencias activadas y cuentas de correo configuradas en cada equipo."
         },
         {
-          "t": "Migración de lo que ya tenías",
-          "d": "Pasamos archivos, favoritos y perfiles del equipo viejo al nuevo sin que pierdas nada."
+          "t": "Migración de la información existente",
+          "d": "Trasladamos archivos, favoritos y perfiles del equipo anterior al nuevo sin pérdida de información."
         },
         {
-          "t": "Primer uso acompañado",
-          "d": "Te mostramos dónde quedó cada cosa y dejamos el equipo listo para trabajar ese mismo día."
+          "t": "Acompañamiento en el primer uso",
+          "d": "Indicamos dónde quedó cada elemento y dejamos el equipo operativo para trabajar ese mismo día."
         }
       ],
       "faq": [
         {
           "q": "¿Instalan programas sin licencia?",
-          "a": "No. Trabajamos con las licencias que tengas y te decimos qué opción legal conviene para tu caso."
+          "a": "No. Trabajamos con las licencias que tengas y te indicamos qué opción legal conviene para tu caso."
         },
         {
-          "q": "¿Pasan los datos del equipo viejo al nuevo?",
-          "a": "Sí, pasamos archivos, cuentas y favoritos cuando el equipo de origen sigue leyendo."
+          "q": "¿Trasladan los datos del equipo anterior al nuevo?",
+          "a": "Sí, trasladamos archivos, cuentas y favoritos cuando el equipo de origen permite leerlos."
         },
         {
           "q": "¿Atienden sistemas contables y facturación electrónica?",
-          "a": "Sí, soporte de instalación y errores comunes. Si el problema es del proveedor del software, te decimos qué pedirles exactamente."
+          "a": "Sí, soporte de instalación y errores frecuentes. Si el problema es del proveedor del software, te indicamos qué solicitarle exactamente."
         }
       ],
       "related": [
@@ -450,7 +450,7 @@
       "h1": "Seguridad, respaldos y administración de usuarios",
       "meta": "Copias de seguridad automatizadas y probadas, antivirus, protección ransomware, usuarios y permisos con Active Directory y MFA.",
       "intro": [
-        "El ransomware no avisa y el disco que falla tampoco. La diferencia entre un susto de dos horas y cerrar el negocio una semana suele ser una copia que nadie revisa si estaba funcionando. Por eso montamos el respaldo y probamos que se pueda restaurar, que es la parte que casi nadie hace.",
+        "El ransomware no advierte y la falla de un disco tampoco. La diferencia entre una interrupción de dos horas y el cierre del negocio durante una semana suele ser una copia de seguridad que nunca se verificó. Por eso implementamos el respaldo y comprobamos que sea restaurable, que es la parte que con menor frecuencia se atiende.",
         "Protegemos tu información, configuramos copias de seguridad y gestionamos cuentas, permisos y accesos, con políticas que se sostienen cuando se va una persona."
       ],
       "items": [
@@ -467,23 +467,23 @@
       ],
       "sintomas": [
         {
-          "q": "Nunca has probado restaurar un respaldo",
-          "a": "Montamos la copia automática y hacemos una restauración de prueba contigo viendo."
+          "q": "Nunca se ha probado la restauración de un respaldo",
+          "a": "Implementamos la copia automática y ejecutamos una restauración de prueba con tu presencia."
         },
         {
-          "q": "Salió un aviso de ransomware o archivos cifrados",
+          "q": "Apareció un aviso de ransomware o archivos cifrados",
           "a": "Contención, limpieza y evaluación de qué se puede recuperar."
         },
         {
-          "q": "Se fue un empleado y sus accesos siguen activos",
-          "a": "Baja real de cuentas, correo, licencias y dispositivos."
+          "q": "Se retiró un empleado y sus accesos siguen activos",
+          "a": "Baja efectiva de cuentas, correo, licencias y dispositivos."
         },
         {
           "q": "Todos comparten la misma contraseña de administrador",
           "a": "Cuentas individuales con permisos por rol y MFA activado."
         },
         {
-          "q": "No sabes quién entró a qué",
+          "q": "No hay registro de quién accedió a qué",
           "a": "Auditoría de accesos y registro de eventos."
         }
       ],
@@ -494,7 +494,7 @@
         },
         {
           "t": "Respaldo automático",
-          "d": "Discos externos y nube con copias programadas, no con la promesa de acordarse."
+          "d": "Discos externos y nube con copias programadas, sin depender de la gestión manual."
         },
         {
           "t": "Cuentas y permisos por área",
@@ -519,8 +519,8 @@
           "a": "Sí: altas, bajas, grupos, permisos, políticas de contraseña y MFA, tanto en dominio local como en 365."
         },
         {
-          "q": "Si ya me infectaron, ¿se soluciona?",
-          "a": "Depende del daño. Primero contenemos para que no siga avanzando y después te decimos qué es recuperable."
+          "q": "Si ya se produjo una infección, ¿se puede resolver?",
+          "a": "Depende del alcance del daño. Primero contenemos la propagación y después indicamos qué información es recuperable."
         }
       ],
       "related": [
@@ -540,8 +540,8 @@
       "h1": "Soluciones empresariales: servidores, nube y soporte continuo",
       "meta": "Servidores Windows y Linux, VMware, Microsoft 365 y Azure, Active Directory, respaldos y monitoreo para PYMES.",
       "intro": [
-        "Una PYME no necesita un departamento de sistemas, necesita que alguien responda cuando el servidor se cae, cuando entra un empleado nuevo o cuando el respaldo lleva tres meses sin salir. Ahí es donde un contrato suelto de hora por evento sale caro.",
-        "Administración de infraestructura para pequeñas y medianas empresas: servidores, virtualización, nube, usuarios y respaldos, con monitoreo y automatización para que los problemas se vean antes de que los vea tu equipo."
+        "Una PYME no requiere un departamento de sistemas propio, sino una respuesta oportuna cuando el servidor falla, cuando ingresa un empleado nuevo o cuando el respaldo lleva tres meses sin ejecutarse. En esos casos, el soporte contratado por evento resulta más costoso que un esquema continuo.",
+        "Administración de infraestructura para pequeñas y medianas empresas: servidores, virtualización, nube, usuarios y respaldos, con monitoreo y automatización para detectar las incidencias antes de que afecten a tu equipo."
       ],
       "items": [
         "Administración de servidores Windows y Linux",
@@ -556,11 +556,11 @@
       "pasos": [
         {
           "t": "Levantamos el inventario",
-          "d": "Qué equipos, servicios, licencias y accesos existen hoy, y dónde están las deudas."
+          "d": "Qué equipos, servicios, licencias y accesos existen hoy y cuáles presentan deficiencias."
         },
         {
           "t": "Ordenamos usuarios y permisos",
-          "d": "Active Directory, grupos por área y políticas que se apliquen solas."
+          "d": "Active Directory, grupos por área y políticas de aplicación automática."
         },
         {
           "t": "Aseguramos el respaldo",
@@ -568,21 +568,21 @@
         },
         {
           "t": "Monitoreamos y respondemos",
-          "d": "Alertas sobre servicios y espacio, con soporte por WhatsApp cuando algo se sale."
+          "d": "Alertas sobre servicios y espacio en disco, con soporte por WhatsApp ante incidencias."
         }
       ],
       "sintomas": [
         {
-          "q": "El servidor se cae o llena el disco sin aviso",
+          "q": "El servidor falla o llena el disco sin previo aviso",
           "a": "Monitoreo con alertas y limpieza programada."
         },
         {
-          "q": "Cada nuevo empleado toma medio día de soporte",
+          "q": "Cada nuevo empleado demanda medio día de soporte",
           "a": "Plantillas de usuario, permisos por rol y alta en minutos."
         },
         {
-          "q": "Microsoft 365 mal aprovechado",
-          "a": "Licencias, correo, OneDrive, SharePoint y seguridad base configurados como corresponde."
+          "q": "Microsoft 365 subutilizado",
+          "a": "Licencias, correo, OneDrive, SharePoint y seguridad base configurados según las buenas prácticas."
         },
         {
           "q": "No existe plan si se pierde el equipo",
@@ -596,15 +596,15 @@
       "faq": [
         {
           "q": "¿Trabajan por contrato o por evento?",
-          "a": "Ambas formas. Escríbenos con cuántos equipos eres y qué te está costando hoy, y te proponemos la modalidad que salga más barata."
+          "a": "Ambas modalidades. Indícanos cuántos equipos administras y cuál es el costo actual de las incidencias, y te proponemos la alternativa más conveniente."
         },
         {
-          "q": "¿Pueden hacerse cargo de lo que dejó otro proveedor?",
-          "a": "Sí. Empezamos con un inventario para saber qué hay antes de tocar producción."
+          "q": "¿Pueden asumir la administración que dejó otro proveedor?",
+          "a": "Sí. Iniciamos con un inventario para determinar el estado actual antes de intervenir los sistemas en producción."
         },
         {
-          "q": "¿Manejan servidores propios y nube al tiempo?",
-          "a": "Sí, incluido VMware, migraciones a 365 o Azure y escenarios híbridos."
+          "q": "¿Administran servidores propios y nube al mismo tiempo?",
+          "a": "Sí, incluidos VMware, migraciones a 365 o Azure y escenarios híbridos."
         },
         {
           "q": "¿Atienden urgencias fuera del horario?",
@@ -627,8 +627,8 @@
       "h1": "Desarrollo de software y automatización para tu operación",
       "meta": "Automatización de tareas, integración de sistemas y APIs, reportes SQL y páginas web a la medida para negocios en Barranquilla.",
       "intro": [
-        "Antes de escribir una línea de código vale la pena preguntarse si eso que se hace a mano cuatro horas al día no se resuelve con una plantilla y una tarea programada. Buena parte de los encargos que nos llegan se arreglan con automatización pequeña, y eso es más barato que un sistema nuevo.",
-        "Cuando sí hace falta software, lo hacemos a la medida: webs y landing pages, automatización de tareas repetitivas, integración entre sistemas y reportes sobre tus propias bases de datos."
+        "Antes de escribir una línea de código conviene evaluar si una tarea que se realiza manualmente durante cuatro horas al día puede resolverse con una plantilla y una tarea programada. Buena parte de los requerimientos que recibimos se resuelven con automatización de bajo alcance, a un costo menor que el de un sistema nuevo.",
+        "Cuando el software sí es necesario, lo desarrollamos a la medida: sitios web y landing pages, automatización de tareas repetitivas, integración entre sistemas y reportes sobre tus propias bases de datos."
       ],
       "items": [
         "Páginas web y landing pages",
@@ -640,38 +640,38 @@
       ],
       "sintomas": [
         {
-          "q": "Copias datos de un sistema a otro a mano",
+          "q": "Se copian datos de un sistema a otro de forma manual",
           "a": "Integración por API o archivo, con registro de lo que se movió."
         },
         {
-          "q": "El mismo reporte se arma cada lunes",
-          "a": "Script que lo genera y lo entrega solo."
+          "q": "El mismo reporte se elabora cada lunes",
+          "a": "Script que lo genera y lo entrega automáticamente."
         },
         {
           "q": "Necesitas presencia web para el negocio",
           "a": "Página o landing rápida, con formulario y contacto por WhatsApp."
         },
         {
-          "q": "Los procesos de la oficina viven en Excel",
-          "a": "Evaluamos si conviene una app web simple o basta con ordenar el archivo y sus permisos."
+          "q": "Los procesos de la oficina dependen de Excel",
+          "a": "Evaluamos si conviene una aplicación web simple o basta con ordenar el archivo y sus permisos."
         },
         {
-          "q": "Varios computadores de la empresa hacen lo mismo",
+          "q": "Varios computadores de la empresa realizan la misma tarea",
           "a": "Automatización con PowerShell y tareas programadas."
         }
       ],
       "pasos": [
         {
           "t": "Entendemos el proceso",
-          "d": "Qué se hace hoy, cuánto toma y dónde se pierde tiempo o información en el camino."
+          "d": "Qué se hace hoy, cuánto tiempo toma y en qué punto se pierde tiempo o información."
         },
         {
           "t": "Alcance cerrado antes de programar",
           "d": "Pantallas, datos y reglas por escrito, con lo que queda explícitamente fuera de esta fase."
         },
         {
-          "t": "Entregas cortas y visibles",
-          "d": "Versiones de prueba que puedes usar desde temprano, en lugar de esperar hasta el final."
+          "t": "Entregas parciales y verificables",
+          "d": "Versiones de prueba utilizables desde las primeras etapas, en lugar de esperar al cierre del proyecto."
         },
         {
           "t": "Puesta en marcha y soporte",
@@ -685,11 +685,11 @@
         },
         {
           "q": "¿Se quedan con el código?",
-          "a": "El trabajo es tuyo: repositorio, accesos y documentación de cómo se despliega."
+          "a": "El código es tuyo: repositorio, accesos y documentación del despliegue."
         },
         {
           "q": "¿Mantienen lo que desarrollan?",
-          "a": "Sí, con soporte aparte. También dejamos el proyecto documentado por si prefieres que lo tome otro."
+          "a": "Sí, con soporte aparte. También dejamos el proyecto documentado por si prefieres que lo asuma otro proveedor."
         }
       ],
       "related": [
