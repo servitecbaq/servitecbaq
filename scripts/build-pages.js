@@ -794,6 +794,16 @@ function solLd(s) {
     },
     {
       '@context': 'https://schema.org',
+      '@type': 'Service',
+      name: 'Implementación de ' + s.h1.split(',')[0],
+      serviceType: 'Señalización digital para televisores',
+      description: s.meta,
+      url: urlSol(s),
+      provider: { '@type': 'Organization', name: NEG.nombre, url: NEG.url + '/' },
+      areaServed: NEG.cobertura.map(c => ({ '@type': 'City', name: c }))
+    },
+    {
+      '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
       itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'Inicio', item: NEG.url + '/' },
@@ -1028,7 +1038,7 @@ ${footer()}
 /* Las URLs del sitemap, en el orden en que se publican. */
 function urlsDelSitemap() {
   return [NEG.url + '/'].concat(SERVICIOS.map(urlDe), [NEG.url + '/tips/'], tipIdx.map(urlTip), [urlApp],
-    [NEG.url + '/soluciones/'], SOLUCIONES.map(urlSol));
+    [NEG.url + '/soluciones/'], SOLUCIONES.map(urlSol), [NEG.url + '/marca/']);
 }
 
 function sitemap() {  // Fecha local del contenido: toISOString() trae la hora UTC, que en Colombia

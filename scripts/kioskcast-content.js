@@ -14,12 +14,12 @@ module.exports = {
   slug: 'kioskcast',
   kicker: 'Solución desarrollada por Servitecbaq',
   title: 'KioskCast: pantallas digitales en Barranquilla | Servitecbaq',
-  h1: 'KioskCast, pantallas digitales que operan sin supervisión',
-  meta: 'KioskCast convierte televisores Android en pantallas digitales gestionadas desde un hub local: bucles, grupos, caché sin internet y registro de lo emitido.',
+  h1: 'KioskCast, pantallas digitales en Barranquilla',
+  meta: 'KioskCast: pantallas digitales en Barranquilla y su área metropolitana. Hub local sin internet, bucles, grupos y registro de lo emitido.',
 
   intro: [
     'KioskCast es la solución de señalización digital desarrollada por Servitecbaq para convertir un televisor comercial en la pantalla del negocio: reproduce en bucle los videos e imágenes que se le asignan, sin mando a distancia y sin supervisión permanente. Sirve para una recepción que promociona servicios, una cafetería que actualiza el menú según la franja horaria o varias sedes que muestran el mismo contenido al mismo tiempo.',
-    'No es una aplicación descargada de una tienda ni un servicio en la nube con suscripción mensual. El software es de desarrollo propio, se instala en tu propia red y opera sin salida a internet: el panel de control se ejecuta en un equipo dentro del local y las pantallas se vinculan automáticamente. Si falla el proveedor de internet, las pantallas continúan emitiendo el último contenido cargado.'
+    'No es una aplicación descargada de una tienda ni un servicio en la nube con suscripción mensual. El software es de desarrollo propio, se instala en tu propia red y opera sin salida a internet: el panel de control se ejecuta en un equipo dentro del local y las pantallas se vinculan automáticamente. Si falla el proveedor de internet, las pantallas continúan emitiendo el último contenido cargado. La implementación se realiza en Barranquilla, Soledad y Puerto Colombia: el equipo se desplaza al local, deja el hub en operación y capacita al personal.'
   ],
 
   video: {
@@ -97,6 +97,7 @@ module.exports = {
     ['Requisitos del hub', 'Node.js 18 o superior, en el mismo equipo que la red del local'],
     ['Idioma del panel y de la aplicación', 'Español'],
     ['Distribución', 'Entrega directa: instalación y alta de las pantallas a cargo de Servitecbaq'],
+    ['Zona de implementación', 'Barranquilla, Soledad y Puerto Colombia'],
     ['Autor', 'Servitecbaq, Barranquilla']
   ],
 
@@ -121,6 +122,7 @@ module.exports = {
     { q: '¿Sirve con el televisor que ya tengo?', a: 'En la mayoría de los casos, si es un Android TV con Android 8.0 o superior. Los equipos que no ejecutan Android no son compatibles, y los modelos cuyo firmware no permite fijar el modo kiosco se identifican durante la revisión previa.' },
     { q: '¿Por qué no está en Google Play?', a: 'Porque no es una aplicación de consumo: funciona vinculada a un hub instalado en el local, con su dirección y sus permisos definidos. Publicarla en la tienda no aportaría valor y exigiría un proceso de revisión en cada actualización.' },
     { q: '¿Cuántas pantallas admite un hub?', a: 'El límite lo determina la red, no el software: cada pantalla mantiene una conexión con el hub y emite en paralelo. Un solo hub es suficiente para un local con decenas de televisores; una cadena con sedes en distintas ciudades requiere un hub por sede.' },
+    { q: '¿Dónde se instala KioskCast?', a: 'En Barranquilla, Soledad y Puerto Colombia. La implementación es presencial: revisamos el local, instalamos el hub dentro de su red, configuramos cada televisor y capacitamos al personal que operará el panel.' },
     { q: '¿Quién es el dueño del software?', a: 'Servitecbaq. El código del hub, del panel y de la aplicación del televisor es de desarrollo propio, y la implementación se contrata directamente con nosotros: sin suscripciones de terceros ni intermediarios.' },
     { q: '¿Cuánto cuesta?', a: 'El software no se cobra por separado: la implementación se cotiza junto con las pantallas requeridas, dentro del mismo esquema de soluciones empresariales. Con la cantidad de televisores y su ubicación definimos el alcance.' }
   ],
