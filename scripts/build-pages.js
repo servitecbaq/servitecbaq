@@ -601,20 +601,22 @@ function appMain() {
     <div class="container">
 ${crumbs([['Inicio', '/'], ['App destacada', '/#saldo'], ['Saldo', null]])}
 
-      <header class="svc-hero">
-        <img class="app-icon" src="${APP.icono.src}" width="${APP.icono.w}" height="${APP.icono.h}" alt="${esc(APP.icono.alt)}" decoding="async">
-        <span class="section-kicker">${esc(APP.kicker)}</span>
-        <h1 class="section-title section-title--left">${esc(APP.h1)}</h1>
-${APP.intro.map(t => '        <p class="svc-hero__lead">' + esc(t) + '</p>').join('\n')}
-        <div class="svc-hero__actions">
-          <a class="btn btn--accent btn--lg" href="${APP.playUrl}" target="_blank" rel="noopener">${hic('h-play-circle')} Descargar en Google Play</a>
-          <a class="btn btn--ghost btn--lg" href="${wa('Hola, necesito que instalen la app Saldo en el negocio')}" target="_blank" rel="noopener">${hic('h-chat-bubble-left-right')} Solicitar la instalación</a>
+      <header class="svc-hero svc-hero--app">
+        <div class="svc-hero--app__inner">
+          <img class="app-icon" src="${APP.icono.src}" width="${APP.icono.w}" height="${APP.icono.h}" alt="${esc(APP.icono.alt)}" decoding="async">
+          <span class="section-kicker">${esc(APP.kicker)}</span>
+          <h1 class="section-title section-title--left">${esc(APP.h1)}</h1>
+${APP.intro.map(t => '          <p class="svc-hero__lead">' + esc(t) + '</p>').join('\n')}
+          <div class="svc-hero__actions">
+            <a class="btn btn--accent btn--lg" href="${APP.playUrl}" target="_blank" rel="noopener">${hic('h-play-circle')} Descargar en Google Play</a>
+            <a class="btn btn--ghost btn--lg" href="${wa('Hola, necesito que instalen la app Saldo en el negocio')}" target="_blank" rel="noopener">${hic('h-chat-bubble-left-right')} Solicitar la instalación</a>
+          </div>
+          <ul class="svc-facts">
+            <li><span class="svc-facts__k">Plataforma</span>Android (Google Play)</li>
+            <li><span class="svc-facts__k">Soporte local</span>${esc(NEG.cobertura.join(' · '))}</li>
+            <li><span class="svc-facts__k">Desarrollador</span>${esc(APP.desarrollador)}</li>
+          </ul>
         </div>
-        <ul class="svc-facts">
-          <li><span class="svc-facts__k">Plataforma</span>Android (Google Play)</li>
-          <li><span class="svc-facts__k">Soporte local</span>${esc(NEG.cobertura.join(' · '))}</li>
-          <li><span class="svc-facts__k">Desarrollador</span>${esc(APP.desarrollador)}</li>
-        </ul>
       </header>
 
       <section class="svc-block">

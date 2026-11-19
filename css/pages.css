@@ -90,6 +90,33 @@
 .app-plan ul { list-style: none; margin: var(--s-5) 0 0; padding: 0; display: grid; gap: var(--s-2); font-size: var(--tx-sm); color: var(--fg); }
 .app-plan ul li::before { content: '·'; margin-right: var(--s-2); color: var(--accent-ink); }
 
+/* Hero de /apps/saldo/: panel navy con el BG de la app. Como los tiles navy del
+   kit de marca, el panel no sigue al tema claro/oscuro y el texto se fija a blanco. */
+.svc-hero--app {
+  position: relative;
+  max-width: none;
+  margin-top: var(--s-4);
+  padding: var(--s-10) var(--s-8);
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, rgba(6,16,28,0.94) 0%, rgba(6,16,28,0.78) 42%, rgba(6,16,28,0.38) 100%),
+    url('/img/apps/saldo-bg.webp') right center / cover no-repeat,
+    linear-gradient(135deg, var(--navy-700), var(--navy-600));
+}
+.svc-hero--app__inner { position: relative; max-width: 62ch; }
+.svc-hero--app .app-icon { border-color: rgba(255, 255, 255, 0.22); }
+.svc-hero--app .section-kicker { color: var(--teal-300); background: rgba(143, 166, 192, 0.16); }
+.svc-hero--app .section-title { color: #fff; }
+.svc-hero--app .svc-hero__lead { color: rgba(255, 255, 255, 0.78); }
+.svc-hero--app .svc-facts { border-top-color: rgba(255, 255, 255, 0.18); color: #fff; }
+.svc-hero--app .svc-facts__k { color: rgba(255, 255, 255, 0.6); }
+.svc-hero--app .btn--ghost { background: rgba(255, 255, 255, 0.08); color: #fff; border-color: rgba(255, 255, 255, 0.35); box-shadow: none; }
+.svc-hero--app .btn--ghost:hover { background: rgba(255, 255, 255, 0.14); }
+@media (max-width: 640px) {
+  .svc-hero--app { padding: var(--s-8) var(--s-5); }
+}
+
 /* Soluciones (pagina /soluciones/kioskcast/) */
 /* Las capturas del panel son panorámicas: una por fila, no en mosaico. */
 .sol-shots { display: grid; gap: var(--s-6); }
